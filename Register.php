@@ -2,11 +2,9 @@
 <html>
 
 <head>
-    <title>Slide Navbar</title>
-    <link rel="stylesheet" type="text/css" href="slide navbar style.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
     <style>
-        body#register {
+        span#register {
             margin: 0;
             padding: 0;
             display: flex;
@@ -111,33 +109,37 @@
     </style>
 </head>
 
-<?php
-include("Includes/navbar.php")
-?>
 
-<body id="register">
-    <div class="main" id="register">
-        <input type="checkbox" id="chk" aria-hidden="true">
 
-        <div class="signup" id="register">
-            <form>
-                <label for="chk" aria-hidden="true" id="register">Sign up</label>
-                <input type="text" name="txt" placeholder="User name" required="" id="register">
-                <input type="email" name="email" placeholder="Email" required="" id="register">
-                <input type="password" name="pswd" placeholder="Password" required="" id="register">
-                <button id="register">Sign up</button>
-            </form>
+<body>
+
+    <?php
+    include("Includes/navbar.php")
+    ?>
+    <span id="register">
+        <div class="main" id="register">
+            <input type="checkbox" id="chk" aria-hidden="true">
+
+            <div class="signup" id="register">
+                <form>
+                    <label for="chk" aria-hidden="true" id="register">Sign up</label>
+                    <input type="text" name="txt" placeholder="User name" required="" id="register">
+                    <input type="email" name="email" placeholder="Email" required="" id="register">
+                    <input type="password" name="pswd" placeholder="Password" required="" id="register">
+                    <button id="register">Sign up</button>
+                </form>
+            </div>
+
+            <div class="login" id="register">
+                <form>
+                    <label for="chk" aria-hidden="true" id="register">Login</label>
+                    <input type="email" name="email" placeholder="Email" required="" id="register">
+                    <input type="password" name="pswd" placeholder="Password" required="" id="register">
+                    <button id="register">Login</button>
+                </form>
+            </div>
         </div>
-
-        <div class="login" id="register">
-            <form>
-                <label for="chk" aria-hidden="true" id="register">Login</label>
-                <input type="email" name="email" placeholder="Email" required="" id="register">
-                <input type="password" name="pswd" placeholder="Password" required="" id="register">
-                <button id="register">Login</button>
-            </form>
-        </div>
-    </div>
+    </span>
 </body>
 
 </html>

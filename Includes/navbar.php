@@ -13,7 +13,7 @@
 
     <!--navbar-->
     <header>
-        <nav class="navbar fixed-top navbar-expand-sm navbar-dark fs-3 bg-success">
+        <nav class="navbar navbar-expand-sm navbar-dark fs-3 bg-success">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#" style="width:80px;">
                     <img src="img/logo.png" alt="" class="img-fluid">
