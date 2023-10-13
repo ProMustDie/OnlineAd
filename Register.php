@@ -13,6 +13,7 @@
     <?php
     include("Includes/navbar.php")
     ?>
+
     <span id="register">
         <div class="main" id="register">
             <input type="checkbox" id="chk" aria-hidden="true">
@@ -40,3 +41,5 @@
 </body>
 
 </html>
+
+<script src="JS/loginPreference.js"></script>
