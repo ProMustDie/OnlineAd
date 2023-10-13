@@ -129,3 +129,55 @@
             transform: scale(0.9);
         }
     }
+
+
+
+    p#TextSub{
+        font-size: clamp(1rem, 2.1vw, 1.2rem); 
+    }
+
+    p#TextTime{
+        font-size: clamp(1rem, 2.1vw, 1.2rem); 
+    }
+
+
+    .checkbox-wrapper-4#CateText{
+        font-size: clamp(1rem, 1.8vw, 1.2rem); 
+        word-wrap: break-word;
+    }
+
+    
+/* CSS */
+.button-31 {
+    background-color: #222;
+    border-radius: 4px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Farfetch Basis","Helvetica Neue",Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0;
+    max-width: none;
+    min-height: 44px;
+    min-width: 10px;
+    outline: none;
+    overflow: hidden;
+    padding: 9px 15px 6px;
+    position: relative;
+    text-align: center;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 80%;
+  }
+  
+  .button-31:hover,
+  .button-31:focus {
+    opacity: .75;
+  }
+  
