@@ -13,9 +13,9 @@
 
     <!--navbar-->
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark fs-3 bg-success">
+        <nav class="navbar navbar-expand-md navbar-dark fs-3 position-top bg-success">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#" style="width:80px;">
+                <a class="navbar-brand" href="main.php" style="width:80px;">
                     <img src="img/logo.png" alt="" class="img-fluid">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="burger">
