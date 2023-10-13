@@ -33,43 +33,46 @@
 
 
             <div class="col-sm-4 col-md-3 col-lg-3 col-xl-2">
-                <div class="text-center mt-5">
-                    <b class="fs-3">Categories</b>
-                    <hr>
-                    <div class="text-start">
-                        <!--TODO: Can try to loop this-->
-                        <div class="checkbox-wrapper-4 " id="CateText">
-                            <input class="inp-cbx" id="morning" type="checkbox" />
-                            <label class="cbx" for="morning"><span>
-                                    <svg width="12px" height="10px">
-                                        <use xlink:href="#check-4"></use>
-                                    </svg></span><span>Morning</span></label>
-                            <svg class="inline-svg">
-                                <symbol id="check-4" viewbox="0 0 12 10">
-                                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                                </symbol>
-                            </svg>
+
+                <form action="#" method="GET">
+                    <div class="text-center mt-5">
+                        <b class="fs-3">Categories</b>
+                        <hr>
+                        <div class="text-start">
+
+                            <!--//TODO: Can try to loop this-->
+                            <div class="checkbox-wrapper-4 " id="CateText">
+                                <input class="inp-cbx" id="morning" type="checkbox" />
+                                <label class="cbx" for="morning"><span>
+                                        <svg width="12px" height="10px">
+                                            <use xlink:href="#check-4"></use>
+                                        </svg></span><span>Morning</span></label>
+                                <svg class="inline-svg">
+                                    <symbol id="check-4" viewbox="0 0 12 10">
+                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                    </symbol>
+                                </svg>
+                            </div>
+
+                            <div class="checkbox-wrapper-4" id="CateText">
+                                <input class="inp-cbx" id="Afternoon" type="checkbox" />
+                                <label class="cbx" for="Afternoon"><span>
+                                        <svg width="12px" height="10px">
+                                            <use xlink:href="#check-4"></use>
+                                        </svg></span><span>Afternoon</span></label>
+                                <svg class="inline-svg">
+                                    <symbol id="check-4" viewbox="0 0 12 10">
+                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                    </symbol>
+                                </svg>
+                            </div>
+
                         </div>
 
-                        <div class="checkbox-wrapper-4" id="CateText">
-                            <input class="inp-cbx" id="Afternoon" type="checkbox" />
-                            <label class="cbx" for="Afternoon"><span>
-                                    <svg width="12px" height="10px">
-                                        <use xlink:href="#check-4"></use>
-                                    </svg></span><span>Afternoon</span></label>
-                            <svg class="inline-svg">
-                                <symbol id="check-4" viewbox="0 0 12 10">
-                                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                                </symbol>
-                            </svg>
-                        </div>
+                        <input type="submit" class="button-31 mt-5" value="Search">
+
                     </div>
-
-
-
-                    <input type="submit" class="button-31 mt-5" value="Search">
-
-                </div>
+                </form>
             </div>
             <!--//!Category-->
 
@@ -97,6 +100,20 @@
                     <div class="card m-3" style="width: 30rem;">
                         <div class="ImgContainer m-3">
                             <img src="img/TheSun.jpeg" class="imgSize card-img-top img-fluid" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title fs-3 fw-bold" id="TextHeader">Card title</h5>
+                            <p class="card-text" id="TextSub">This is a wider card with supporting text below as a
+                                natural lead-in to
+                                additional content. This content is a little bit longer.</p>
+                            <p class="card-text" id="TextTime"><small class="text-muted">Last updated 3 mins ago</small>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card m-3" style="width: 30rem;">
+                        <div class="ImgContainer m-3">
+                            <img src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png" class="imgSize card-img-top img-fluid" alt="...">
                         </div>
                         <div class="card-body">
                             <h5 class="card-title fs-3 fw-bold" id="TextHeader">Card title</h5>
