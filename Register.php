@@ -18,22 +18,42 @@
         <div class="main" id="register">
             <input type="checkbox" id="chk" aria-hidden="true">
 
-            <div class="signup" id="register">
-                <form>
+            <div class="signup m-auto" id="register">
+                <form action="#" method="POST" class="needs-validation" novalidate>
                     <label for="chk" aria-hidden="true" id="register">Sign up</label>
-                    <input type="text" name="txt" placeholder="User name" required="" id="register">
-                    <input type="email" name="email" placeholder="Email" required="" id="register">
-                    <input type="password" name="pswd" placeholder="Password" required="" id="register">
-                    <button id="register">Sign up</button>
+
+
+                    <input type="text" class="form-control m-auto mb-2" id="validationCustom01" placeholder="Username" name="Username" required style="width:75%;">
+
+
+                    <input type="text" class="form-control m-auto mb-2" id="validationCustom02" placeholder="Email" name="Email" required style="width:75%;">
+
+                    <input type="password" class="form-control m-auto mb-2" id="validationCustom03" placeholder="Password" name="Password" required style="width:75%;">
+
+
+                    <input type="password" class="form-control m-auto" id="validationCustom04" placeholder="Repeat_Password" name="Repeat_Password" required style="width:75%;">
+
+                    <label for="error" class="ms-5" style="color:#dc3545;"> sdfsdf<!--//TODO: FOR ERROR VALIDATE--> </label>
+
+
+                    <input type="submit" name="SignUpSubmit" value="Sign Up" id="register">
+
                 </form>
             </div>
 
             <div class="login" id="register">
-                <form>
+                <form action="#" method="POST" class="needs-validation" novalidate>
                     <label for="chk" aria-hidden="true" id="register">Login</label>
-                    <input type="email" name="email" placeholder="Email" required="" id="register">
-                    <input type="password" name="pswd" placeholder="Password" required="" id="register">
-                    <button id="register">Login</button>
+
+
+                    <input type="text" class="form-control m-auto mb-2" id="validationCustom05" placeholder="Email" name="EmailLogin" required style="width:75%;">
+
+                    <input type="password" class="form-control m-auto mb-2" id="validationCustom06" placeholder="Password" name="PasswordLogin" required style="width:75%;">
+
+                    <label for="error" class="ms-5" style="color:#dc3545;"> sdfsdf<!--//TODO: FOR ERROR VALIDATE--> </label>
+
+
+                    <input type="submit" name="LogInSubmit" value="Login" id="register">
                 </form>
             </div>
         </div>
