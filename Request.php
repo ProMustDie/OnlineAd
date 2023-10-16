@@ -28,7 +28,7 @@
 
                     <input type="text" class="form-control m-auto mb-2" id="validationCustom02" placeholder="Title" name="title" required style="width:75%;">
 
-                    <textarea class="form-control is-invalid m-auto mb-2" id="validationTextarea01" placeholder="Description" style="width:75%;" rows="2" name="description" required></textarea>
+                    <textarea class="form-control  m-auto mb-2" id="validationTextarea01" placeholder="Description" style="width:75%;" rows="2" name="description" required></textarea>
 
                     <div class="container text-start p-0" style="width:75%;">
 
@@ -63,7 +63,7 @@
 
                     </div>
 
-                    <textarea class="form-control is-invalid m-auto mb-2" id="validationTextarea02" placeholder="Additional Info" style="width:75%;" rows="2" name="ExtraInfo" required></textarea>
+                    <textarea class="form-control  m-auto mb-2" id="validationTextarea02" placeholder="Additional Info" style="width:75%;" rows="2" name="ExtraInfo" required></textarea>
 
 
 

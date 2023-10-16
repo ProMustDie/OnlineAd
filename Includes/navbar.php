@@ -5,9 +5,9 @@ $logIn = new LoginController;
 if (isset($_POST['logout_btn'])) {
     $checkLoggedOut = $logIn->logout();
     if ($checkLoggedOut) {
-      header("Location: main.php");
+        header("Location: main.php");
     }
-  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,24 +49,24 @@ if (isset($_POST['logout_btn'])) {
                             </li>
                         <?php endif;
 
-                        if(isset($_SESSION["authenticated"]) && $_SESSION['authenticated'] ==  true ):?>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <?= $_SESSION['auth_user']["user_name"]?>
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li>
-                                    <form action="" method="POST">
-                                    <button type="submit" name="logout_btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
+                        if (isset($_SESSION["authenticated"]) && $_SESSION['authenticated'] ==  true) : ?>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?= $_SESSION['auth_user']["user_name"] ?>
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <form action="" method="POST" class="text-center">
+                                            <button type="submit" name="logout_btn" class="btn btn-outline-primary "><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
                         <?php else : ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
