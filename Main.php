@@ -1,4 +1,4 @@
-<?php include('includes/app.php');?>
+<?php include('includes/app.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -86,7 +86,7 @@
 
                     <div class="card m-3" style="width: 30rem;">
                         <div class="ImgContainer m-3">
-                            <img src="img/logo.png" class="imgSize card-img-top img-fluid" alt="...">
+                            <img src="img/logo.png" class="imgSize card-img-top img-fluid" alt="..." id="myImg" onclick="openModal('img/logo.png', 'Lorem4000')">
                         </div>
                         <div class="card-body">
                             <h5 class="card-title fs-3 fw-bold" id="TextHeader">Card title</h5>
@@ -100,35 +100,7 @@
 
                     <div class="card m-3" style="width: 30rem;">
                         <div class="ImgContainer m-3">
-                            <img src="img/TheSun.jpeg" class="imgSize card-img-top img-fluid" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title fs-3 fw-bold" id="TextHeader">Card title</h5>
-                            <p class="card-text" id="TextSub">This is a wider card with supporting text below as a
-                                natural lead-in to
-                                additional content. This content is a little bit longer.</p>
-                            <p class="card-text" id="TextTime"><small class="text-muted">Last updated 3 mins ago</small>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="card m-3" style="width: 30rem;">
-                        <div class="ImgContainer m-3">
-                            <img src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png" class="imgSize card-img-top img-fluid" alt="...">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title fs-3 fw-bold" id="TextHeader">Card title</h5>
-                            <p class="card-text" id="TextSub">This is a wider card with supporting text below as a
-                                natural lead-in to
-                                additional content. This content is a little bit longer.</p>
-                            <p class="card-text" id="TextTime"><small class="text-muted">Last updated 3 mins ago</small>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="card m-3" style="width: 30rem;">
-                        <div class="ImgContainer m-3">
-                            <img src="https://htmlcolorcodes.com/assets/images/colors/red-color-solid-background-1920x1080.png" class="imgSize card-img-top img-fluid" alt="...">
+                            <img src="img/TheSun.jpeg" class="imgSize card-img-top img-fluid" alt="..." id="myImg" onclick="openModal('img/TheSun.jpeg', 'Snow')">
                         </div>
                         <div class="card-body">
                             <h5 class="card-title fs-3 fw-bold" id="TextHeader">Card title</h5>
@@ -199,6 +171,14 @@
 
 
 
+    <!--//!MODAL FOR IMAGES -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImg">
+        <div class="container text-break" id="caption"></div>
+    </div>
+
+    <script src="JS/MainModal.js"></script>
 </body>
 
 </html>
