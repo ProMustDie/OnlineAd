@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="CSS/history.css" rel="stylesheet">
-    <title>Modal History</title>
+    <title>Modal Histor</title>
 </head>
 
 <body>
@@ -26,6 +26,8 @@
 
                     <div class="col bg-light">
                         <div class="row d-flex justify-content-center">
+
+
                             <div class="card m-3" style="width: 30rem;">
                                 <div class="ImgContainer m-2">
                                     <img src="img/logo.png" class="imgSize card-img-top img-fluid" alt="..." id="myImg"
@@ -58,8 +60,43 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div class="card m-3" style="width: 30rem;">
+                                <div class="ImgContainer m-2">
+                                    <img src="img/logo.png" class="imgSize card-img-top img-fluid" alt="..." id="myImg"
+                                        onclick="openModal('img/logo.png', 'Lorem4000')">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title fs-3 fw-bold" id="TextHeader">Card title</h5>
+                                    <p class="card-text" id="TextSub">This is a wider card with supporting text below as
+                                        a
+                                        natural lead-in to
+                                        additional content. This content is a little bit longer.</p>
+
+
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"></li>
+                                        <li class="list-group-item">
+
+                                            <div class="d-flex  m-2">
+                                                Status:Pending
+                                                <div class="container text-end">
+                                                    <button class="btn btn-outline-success"
+                                                        data-bs-target="#exampleModalToggle2"
+                                                        data-bs-toggle="modal">Payment</button>
+                                                    <button class="btn btn-outline-danger"
+                                                        data-bs-target="#exampleModalToggle3"
+                                                        data-bs-toggle="modal">Delete</button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
+
 
 
                 </div>
