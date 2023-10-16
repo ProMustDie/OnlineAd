@@ -1,3 +1,4 @@
+<?php include('includes/app.php');?>
 <!DOCTYPE html>
 <html lang="en">
 
