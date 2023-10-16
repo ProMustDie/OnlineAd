@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="CSS/request.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
     <title>Request</title>
 </head>
 
@@ -17,6 +16,8 @@
     include("Includes/navbar.php");
     ?>
 
+
+    <!--Request -->
     <div class="container mt-5 p-5 bg-light ">
         <div class="row ">
             <div class="col ">
@@ -74,7 +75,65 @@
         </div>
     </div>
 
+    <!--Request -->
 
+
+    <!--ADMIN -->
+
+    <div class="col bg-light">
+
+        <div class="row d-flex m-3 justify-content-center">
+
+            <div class="card m-3" style="width: 30rem;">
+                <div class="ImgContainer m-3">
+                    <img src="img/logo.png" class="imgSize card-img-top img-fluid" alt="..." id="myImg" onclick="openModal('img/logo.png', 'Lorem4000')">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title fs-3 fw-bold" id="TextHeader">Card title</h5>
+                    <p class="card-text" id="TextSub">This is a wider card with supporting text below as a
+                        natural lead-in to
+                        additional content. This content is a little bit longer.</p>
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            ID: 0<br>
+                            By: Name<br>
+                            Categories:<br>
+                            Additional Info:
+                        </li>
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-end m-2">
+                                <form action="#" method="#">
+                                    <a href="#" class="btn btn-outline-primary mx-2">Accept</a>
+                                    <a href="#" class="btn btn-outline-danger">Reject</a>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+
+
+                    <p class="card-text" id="TextTime"><small class="text-muted">Last updated 3 mins ago</small>
+                    </p>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+    <!--ADMIN -->
+
+
+    <!--//!MODAL FOR IMAGES -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImg">
+        <div class="container text-break mt-3" id="caption"></div>
+    </div>
+
+    <script src="JS/MainModal.js"></script>
     <script src="JS/request.js"></script>
 
 </body>
