@@ -1,3 +1,14 @@
+<?php
+include_once('includes/RegisterController.php');
+$logIn = new LoginController;
+
+if (isset($_POST['logout_btn'])) {
+    $checkLoggedOut = $logIn->logout();
+    if ($checkLoggedOut) {
+      header("Location: main.php");
+    }
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,7 +60,11 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="#">Log Out</a></li>
+                                <li>
+                                    <form action="" method="POST">
+                                    <button type="submit" name="logout_btn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
+                                    </form>
+                                </li>
                             </ul>
                         </li>
                         <?php else:?>
