@@ -18,7 +18,7 @@ if (isset($_POST["LogInSubmit"])) {
 
     $login_query = $logIn->login($loginEmail, $password);
     if ($login_query) {
-        header("Location: home.php");
+        header("Location: Main.php");
     } else {
         $loginErr = "Invalid Email or Password";
     }
