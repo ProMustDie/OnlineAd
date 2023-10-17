@@ -148,11 +148,11 @@ $classified = new Classified;
 
     <!--//!SPECIFIC ID FOR EACH ITEM-->
     <!--*DELETE MODAL-->
-    <div class="modal fade" id="DeleteModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal fade" id="DeleteModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
         <div class="modal-dialog modal-sm modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Delete Request</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel5">Delete Request</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">

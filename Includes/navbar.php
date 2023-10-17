@@ -9,15 +9,15 @@ if (isset($_POST['logout_btn'])) {
     }
 }
 
-$key=NULL;
-$filter=NULL;
-if(isset($_GET['search'])){
-$key=$_GET['search'];
+$key = NULL;
+$filter = NULL;
+if (isset($_GET['search'])) {
+    $key = $_GET['search'];
 }
 if (isset($_GET['category'])) {
     $cat = $_GET['category'];
     $filter = implode(" ", $cat);
-}   
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,6 +52,10 @@ if (isset($_GET['category'])) {
                         <li class="nav-item">
                             <a class="nav-link" href="Request.php">Request</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">History</a>
+                        </li>
+
 
                         <?php if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] == "Admin") : ?>
                             <li class="nav-item">
@@ -94,8 +98,8 @@ if (isset($_GET['category'])) {
                         <?php endif; ?>
                     </ul>
                     <form class="d-flex" action="" method="GET">
-                        <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search" value="<?=$key?>">
-                        <input type="hidden" name="category[]" value="<?=$filter?>">
+                        <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search" value="<?= $key ?>">
+                        <input type="hidden" name="category[]" value="<?= $filter ?>">
                         <button class="btn btn-outline-light" type="submit" style="box-shadow:none;">Search</button>
                     </form>
                 </div>
@@ -104,7 +108,154 @@ if (isset($_GET['category'])) {
     </header>
     <!--navbar-->
 
-    
+
+
+    <!--//!HISTORY MODAL-->
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" style="padding-top:10px">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content modal-xl">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">History</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="col bg-light">
+                        <div class="row d-flex justify-content-center">
+
+
+                            <div class="card m-3" style="width: 30rem;">
+                                <div class="ImgContainer m-2">
+                                    <img src="img/logo.png" class="imgSize card-img-top img-fluid" alt="..." id="myImg" onclick="openModal('img/logo.png', 'Lorem4000')">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title fs-3 fw-bold" id="TextHeader">Card title</h5>
+                                    <p class="card-text" id="TextSub">This is a wider card with supporting text below as
+                                        a
+                                        natural lead-in to
+                                        additional content. This content is a little bit longer.</p>
+
+
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"></li>
+                                        <li class="list-group-item">
+
+                                            <div class="d-flex  m-2">
+                                                Status:Pending
+                                                <div class="container text-end">
+                                                    <button class="btn btn-outline-success" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Payment</button>
+                                                    <button class="btn btn-outline-danger" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal">Delete</button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="card m-3" style="width: 30rem;">
+                                <div class="ImgContainer m-2">
+                                    <img src="img/logo.png" class="imgSize card-img-top img-fluid" alt="..." id="myImg" onclick="openModal('img/logo.png', 'Lorem4000')">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title fs-3 fw-bold" id="TextHeader">Card title</h5>
+                                    <p class="card-text" id="TextSub">This is a wider card with supporting text below as
+                                        a
+                                        natural lead-in to
+                                        additional content. This content is a little bit longer.</p>
+
+
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"></li>
+                                        <li class="list-group-item">
+
+                                            <div class="d-flex  m-2">
+                                                Status:Pending
+                                                <div class="container text-end">
+                                                    <button class="btn btn-outline-success" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Payment</button>
+                                                    <button class="btn btn-outline-danger" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal">Delete</button>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--*PAYMENT MODAL-->
+    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Payment</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    Title:
+                    <form action="#" method="#">
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Upload Image</label>
+                            <input class="form-control" type="file" id="formFile">
+                        </div>
+                        <input type="submit" class="btn btn-outline-success float-end" value="Submit">
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to
+                        History</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--*PAYMENT MODAL-->
+
+
+
+    <!--*DELETE MODAL-->
+    <div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Delete Request</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    Title:
+                    <form action="#" method="#">
+                        <label for="formFile" class="form-label">Are you sure?</label>
+                        <div class="container-fluid d-flex justify-content-end">
+                            <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
+                            <input type="submit" class="btn btn-outline-warning px-4" value="No">
+                        </div>
+                    </form>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to
+                        History</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--*DELETE MODAL-->
+
+    <!--//!HISTORY MODAL-->
+
 </body>
 
 </html>
