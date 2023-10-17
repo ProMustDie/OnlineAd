@@ -132,11 +132,12 @@ $classified = new Classified;
                                                         <div class="modal-body">
 
                                                             Delete: <?=$ads['AdName']?>
-                                                            <form action="#" method="#">
+                                                            <form action="Includes/authActions.php?request=deleteAd" method="POST">
                                                                 <label for="formFile" class="form-label">Are you sure?</label>
                                                                 <div class="container-fluid d-flex justify-content-end">
+                                                                    <input type="hidden" value="<?=$ads['AdID']?>" name="AdID">
                                                                     <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
-                                                                    <input type="submit" class="btn btn-outline-warning px-4" value="No">
+                                                                    <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
                                                                 </div>
                                                             </form>
                                                         </div>
