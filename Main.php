@@ -91,33 +91,6 @@ $classified = new Classified;
                       
                 ?>
 
-
-                    <div class="card m-3" style="width: 30rem;">
-                        <div class="ImgContainer m-2">
-                            <img src="img/logo.png" class="imgSize card-img-top img-fluid" alt="..." id="myImg" onclick="openModal('img/logo.png', 'Lorem4000')">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title fs-3 fw-bold" id="TextHeader">Card title</h5>
-                            <p class="card-text" id="TextSub">This is a wider card with supporting text below as a
-                                natural lead-in to
-                                additional content. This content is a little bit longer.</p>
-
-
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"></li>
-                                <li class="list-group-item">
-                                    <div class="d-flex justify-content-end m-2">
-                                        <a href="#" class="btn btn-outline-danger">Delete</a>
-                                    </div>
-                                </li>
-                            </ul>
-
-
-                            <p class="card-text" id="TextTime"><small class="text-muted">Last updated 3 mins ago</small>
-                            </p>
-                        </div>
-                    </div>
-
                     <div class="card m-3" style="width: 30rem;">
                         <div class="ImgContainer m-2">
                             <img src="<?= $ads['AdPicture']?>" class="imgSize card-img-top img-fluid" id="myImg" onclick="openModal('<?= $ads['AdPicture']?>', '<?= $ads['AdDescription']?>')">

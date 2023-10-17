@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2023 at 02:59 AM
+-- Generation Time: Oct 17, 2023 at 03:39 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,8 +33,18 @@ CREATE TABLE `ads` (
   `AdDescription` varchar(255) NOT NULL,
   `AdAuthorID` int(11) NOT NULL,
   `AdStatus` varchar(255) NOT NULL,
-  `AdPicture` longtext NOT NULL
+  `AdPicture` longtext NOT NULL,
+  `AdCategory` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ads`
+--
+
+INSERT INTO `ads` (`AdID`, `AdName`, `AdDescription`, `AdAuthorID`, `AdStatus`, `AdPicture`, `AdCategory`) VALUES
+(1, 'Testing 1', 'No clue but testing', 7, 'Approved', 'img/logo.png', 'morning'),
+(2, 'Testing 2', 'Idk but another test', 7, 'Approved', 'img/TheSun.jpeg', 'morning afternoon'),
+(5, 'Testing 3', 'I am giving up', 7, 'Approved', 'img/logo.png', 'afternoon');
 
 -- --------------------------------------------------------
 
@@ -81,7 +91,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `ads`
 --
 ALTER TABLE `ads`
-  MODIFY `AdID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `AdID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
