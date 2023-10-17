@@ -69,7 +69,13 @@
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
             $result = $stmt->get_result();
-            return $result;
+
+            $selectedCategories = array();
+            if (isset($_GET['category'])) {
+                $selectedCategories = $_GET['category'];
+            }
+        
+            return array('result' => $result, 'selectedCategories' => $selectedCategories);
         }
         
     }

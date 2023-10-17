@@ -94,7 +94,7 @@ if (isset($_GET['category'])) {
                         <?php endif; ?>
                     </ul>
                     <form class="d-flex" action="" method="GET">
-                        <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
+                        <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search" value="<?=$key?>">
                         <input type="hidden" name="category[]" value="<?=$filter?>">
                         <button class="btn btn-outline-light" type="submit" style="box-shadow:none;">Search</button>
                     </form>

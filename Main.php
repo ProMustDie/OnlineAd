@@ -43,24 +43,31 @@ $classified = new Classified;
                         <div class="text-start">
 
                         <?php
-                        $result = $classified->getCategories();
-                        if(mysqli_num_rows($result) > 0):
-                        while ($categories = $result->fetch_assoc()) {
+                        $categoriesData = $classified->getCategories();
+                        $result = $categoriesData['result'];
+                        $selectedCategories = $categoriesData['selectedCategories'];
+                        
+                        if (mysqli_num_rows($result) > 0):
+                            while ($categories = $result->fetch_assoc()) {
+                                $categoryName = $categories["Category"];
+                                $isChecked = in_array($categoryName, $selectedCategories) ? 'checked' : '';
                         ?>
-                            <div class="checkbox-wrapper-4 " id="CateText">
-                                <input class="inp-cbx" id="<?=$categories["Category"]?>" type="checkbox" name="category[]" value="<?=$categories["Category"]?>" />
-                                <label class="cbx" for="<?=$categories["Category"]?>"><span>
-                                        <svg width="12px" height="10px">
-                                            <use xlink:href="#check-4"></use>
-                                        </svg></span><span><?=$categories["Category"]?></span></label>
-                                <svg class="inline-svg">
-                                    <symbol id="check-4" viewbox="0 0 12 10">
-                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                                    </symbol>
-                                </svg>
-                            </div>
-                        <?php }endif; ?>
-
+                        <div class="checkbox-wrapper-4 " id="CateText">
+                            <input class="inp-cbx" id="<?= $categoryName ?>" type="checkbox" name="category[]" value="<?= $categoryName ?>" <?= $isChecked ?> />
+                            <label class="cbx" for="<?= $categoryName ?>"><span>
+                                <svg width="12px" height="10px">
+                                    <use xlink:href="#check-4"></use>
+                                </svg></span><span><?= $categoryName ?></span></label>
+                            <svg class="inline-svg">
+                                <symbol id="check-4" viewbox="0 0 12 10">
+                                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                </symbol>
+                            </svg>
+                        </div>
+                        <?php
+                            }
+                        endif;
+                        ?>
                         </div>
                         <input type="hidden" name="search" value="<?=$key?>">
                         <input type="submit" class="button-31 mt-5" value="Search">
