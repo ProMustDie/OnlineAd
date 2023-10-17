@@ -98,7 +98,14 @@ $classified = new Classified;
                                     <h5 class="card-title fs-3 fw-bold" id="TextHeader"><?= $ads['AdName'] ?></h5>
                                     <p class="card-text" id="TextSub"><?= $ads['AdDescription'] ?></p>
                                     <p class="card-text" id="TextCate">Category:
-                                        <span class="rounded-pill bg-success text-light p-1"><?= $ads['AdCategory'] ?></span>
+                                        <?php
+                                            $categoriesArray = explode(' ', $ads['AdCategory']);
+                                            foreach ($categoriesArray as $category){
+                                            
+                                        ?>
+                                        <span class="rounded-pill bg-success text-light p-1"><?= $category?></span>
+
+                                        <?php }?>
                                     </p>
 
 
@@ -108,13 +115,35 @@ $classified = new Classified;
                                         <p class="card-text" id="TextTime"><small class="text-muted"><?= $ads['UserName'] . " posted at " . $formattedDatetime ?></small></p>
                                         <?php
                                         if (isset($_SESSION['auth_user']) && $_SESSION['auth_user']['user_type'] === "Admin") :
-                                            // ### CHANGE BELOW THE PHP FOR THE DELETE BUTTON TO MODAL BUTTON ###
+                                            
                                         ?>
-
-                                            <!--//!DATA-BS-TARGET NEED SPECIFIC ID FOR EACH DELETE MODAL-->
                                             <div class="d-flex justify-content-end m-2">
-                                                <button class="btn btn-outline-danger" data-bs-target="#DeleteModal" data-bs-toggle="modal">Delete</button>
+                                                <button class="btn btn-outline-danger" data-bs-target="#DeleteModal-<?=$ads['AdID']?>" data-bs-toggle="modal">Delete</button>
                                             </div>
+
+                                            <!--*DELETE MODAL-->
+                                            <div class="modal fade" id="DeleteModal-<?=$ads['AdID']?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                                <div class="modal-dialog modal-sm modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel5">Delete Request</h1>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            Delete: <?=$ads['AdName']?>
+                                                            <form action="#" method="#">
+                                                                <label for="formFile" class="form-label">Are you sure?</label>
+                                                                <div class="container-fluid d-flex justify-content-end">
+                                                                    <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
+                                                                    <input type="submit" class="btn btn-outline-warning px-4" value="No">
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--*DELETE MODAL-->
 
                                         <?php endif; ?>
                                     </ul>
@@ -144,32 +173,6 @@ $classified = new Classified;
     include("Includes/footer.php");
     ?>
     <!--footer-->
-
-
-    <!--//!SPECIFIC ID FOR EACH ITEM-->
-    <!--*DELETE MODAL-->
-    <div class="modal fade" id="DeleteModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel5">Delete Request</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                    Title:
-                    <form action="#" method="#">
-                        <label for="formFile" class="form-label">Are you sure?</label>
-                        <div class="container-fluid d-flex justify-content-end">
-                            <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
-                            <input type="submit" class="btn btn-outline-warning px-4" value="No">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--*DELETE MODAL-->
 
     <!--//!MODAL FOR IMAGES -->
     <div id="myModal" class="modal">
