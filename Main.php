@@ -42,34 +42,34 @@ $classified = new Classified;
                         <hr>
                         <div class="text-start">
 
-                        <?php
-                        $categoriesData = $classified->getCategories();
-                        $result = $categoriesData['result'];
-                        $selectedCategories = $categoriesData['selectedCategories'];
-                        
-                        if (mysqli_num_rows($result) > 0):
-                            while ($categories = $result->fetch_assoc()) {
-                                $categoryName = $categories["Category"];
-                                $isChecked = in_array($categoryName, $selectedCategories) ? 'checked' : '';
-                        ?>
-                        <div class="checkbox-wrapper-4 " id="CateText">
-                            <input class="inp-cbx" id="<?= $categoryName ?>" type="checkbox" name="category[]" value="<?= $categoryName ?>" <?= $isChecked ?> />
-                            <label class="cbx" for="<?= $categoryName ?>"><span>
-                                <svg width="12px" height="10px">
-                                    <use xlink:href="#check-4"></use>
-                                </svg></span><span><?= $categoryName ?></span></label>
-                            <svg class="inline-svg">
-                                <symbol id="check-4" viewbox="0 0 12 10">
-                                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                                </symbol>
-                            </svg>
+                            <?php
+                            $categoriesData = $classified->getCategories();
+                            $result = $categoriesData['result'];
+                            $selectedCategories = $categoriesData['selectedCategories'];
+
+                            if (mysqli_num_rows($result) > 0) :
+                                while ($categories = $result->fetch_assoc()) {
+                                    $categoryName = $categories["Category"];
+                                    $isChecked = in_array($categoryName, $selectedCategories) ? 'checked' : '';
+                            ?>
+                                    <div class="checkbox-wrapper-4 " id="CateText">
+                                        <input class="inp-cbx" id="<?= $categoryName ?>" type="checkbox" name="category[]" value="<?= $categoryName ?>" <?= $isChecked ?> />
+                                        <label class="cbx" for="<?= $categoryName ?>"><span>
+                                                <svg width="12px" height="10px">
+                                                    <use xlink:href="#check-4"></use>
+                                                </svg></span><span><?= $categoryName ?></span></label>
+                                        <svg class="inline-svg">
+                                            <symbol id="check-4" viewbox="0 0 12 10">
+                                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                            </symbol>
+                                        </svg>
+                                    </div>
+                            <?php
+                                }
+                            endif;
+                            ?>
                         </div>
-                        <?php
-                            }
-                        endif;
-                        ?>
-                        </div>
-                        <input type="hidden" name="search" value="<?=$key?>">
+                        <input type="hidden" name="search" value="<?= $key ?>">
                         <input type="submit" class="button-31 mt-5" value="Search">
 
                     </div>
@@ -82,39 +82,47 @@ $classified = new Classified;
             <div class="col-sm-8 col-md-8 col-lg-9 col-xl-10 bg-light">
 
                 <div class="row d-flex m-3 justify-content-center">
-                <?php
+                    <?php
                     $result = $classified->getAds($key, $filter);
-                    if(mysqli_num_rows($result) > 0):
-                    while ($ads = $result->fetch_assoc()) {
-                        $datetime = new DateTime($ads['AdPostedDateTime']);
-                        $formattedDatetime = $datetime->format('h:iA d/m/Y');
-                ?>
+                    if (mysqli_num_rows($result) > 0) :
+                        while ($ads = $result->fetch_assoc()) {
+                            $datetime = new DateTime($ads['AdPostedDateTime']);
+                            $formattedDatetime = $datetime->format('h:iA d/m/Y');
+                    ?>
 
-                    <div class="card m-3" style="width: 30rem;">
-                        <div class="ImgContainer m-2">
-                            <img src="<?= $ads['AdPicture']?>" class="imgSize card-img-top img-fluid" id="myImg" onclick="openModal('<?= $ads['AdPicture']?>', '<?= $ads['AdDescription']?>')">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title fs-3 fw-bold" id="TextHeader"><?= $ads['AdName']?></h5>
-                            <p class="card-text" id="TextSub"><?= $ads['AdDescription']?></p>
+                            <div class="card m-3" style="width: 30rem;">
+                                <div class="ImgContainer m-2">
+                                    <img src="<?= $ads['AdPicture'] ?>" class="imgSize card-img-top img-fluid" id="myImg" onclick="openModal('<?= $ads['AdPicture'] ?>', '<?= $ads['AdDescription'] ?>')">
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title fs-3 fw-bold" id="TextHeader"><?= $ads['AdName'] ?></h5>
+                                    <p class="card-text" id="TextSub"><?= $ads['AdDescription'] ?></p>
+                                    <p class="card-text" id="TextCate">Category:
+                                        <span class="rounded-pill bg-success text-light p-1"><?= $ads['AdCategory'] ?></span>
+                                    </p>
 
 
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"></li>
-                                    <p class="card-text" id="TextTime"><small class="text-muted"><?= $ads['UserName']." posted at ".$formattedDatetime ?></small></p>    
-                                <?php
-                                if(isset($_SESSION['auth_user']) && $_SESSION['auth_user']['user_type'] === "Admin"):
-                                // ### CHANGE BELOW THE PHP FOR THE DELETE BUTTON TO MODAL BUTTON ###
-                                ?>
-                                    <div class="d-flex justify-content-end m-2">
-                                        <a href="#" class="btn btn-outline-danger">Delete</a>
-                                    </div>
-                                <?php endif;?>
-                            </ul>
-                        </div>
-                    </div>
 
-                <?php }endif; ?>    
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item"></li>
+                                        <p class="card-text" id="TextTime"><small class="text-muted"><?= $ads['UserName'] . " posted at " . $formattedDatetime ?></small></p>
+                                        <?php
+                                        if (isset($_SESSION['auth_user']) && $_SESSION['auth_user']['user_type'] === "Admin") :
+                                            // ### CHANGE BELOW THE PHP FOR THE DELETE BUTTON TO MODAL BUTTON ###
+                                        ?>
+
+                                            <!--//!DATA-BS-TARGET NEED SPECIFIC ID FOR EACH DELETE MODAL-->
+                                            <div class="d-flex justify-content-end m-2">
+                                                <button class="btn btn-outline-danger" data-bs-target="#DeleteModal" data-bs-toggle="modal">Delete</button>
+                                            </div>
+
+                                        <?php endif; ?>
+                                    </ul>
+                                </div>
+                            </div>
+
+                    <?php }
+                    endif; ?>
 
 
 
@@ -137,6 +145,32 @@ $classified = new Classified;
     ?>
     <!--footer-->
 
+
+    <!--//!SPECIFIC ID FOR EACH ITEM-->
+    <!--*DELETE MODAL-->
+    <div class="modal fade" id="DeleteModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Delete Request</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    Title:
+                    <form action="#" method="#">
+                        <label for="formFile" class="form-label">Are you sure?</label>
+                        <div class="container-fluid d-flex justify-content-end">
+                            <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
+                            <input type="submit" class="btn btn-outline-warning px-4" value="No">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--*DELETE MODAL-->
+
     <!--//!MODAL FOR IMAGES -->
     <div id="myModal" class="modal">
         <span class="close" onclick="closeModal()">&times;</span>
@@ -145,6 +179,10 @@ $classified = new Classified;
     </div>
 
     <script src="JS/MainModal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
+
 </body>
 
 </html>
