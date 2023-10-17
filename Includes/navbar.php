@@ -8,6 +8,16 @@ if (isset($_POST['logout_btn'])) {
         header("Location: main.php");
     }
 }
+
+$key=NULL;
+$filter=NULL;
+if(isset($_GET['search'])){
+$key=$_GET['search'];
+}
+if (isset($_GET['category'])) {
+    $cat = $_GET['category'];
+    $filter = implode(" ", $cat);
+}   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,8 +93,9 @@ if (isset($_POST['logout_btn'])) {
                             </li>
                         <?php endif; ?>
                     </ul>
-                    <form class="d-flex" action="#" method="POST">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="d-flex" action="" method="GET">
+                        <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
+                        <input type="hidden" name="category[]" value="<?=$filter?>">
                         <button class="btn btn-outline-light" type="submit" style="box-shadow:none;">Search</button>
                     </form>
                 </div>

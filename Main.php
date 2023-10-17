@@ -1,4 +1,7 @@
-<?php include('includes/app.php'); ?>
+<?php include('includes/app.php');
+include_once('includes/Classified.php');
+$classified = new Classified;
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,7 +38,7 @@
 
             <div class="col-sm-4 col-md-3 col-lg-3 col-xl-2">
 
-                <form action="#" method="GET">
+                <form action="" method="GET">
                     <div class="text-center mt-5">
                         <b class="fs-3">Categories</b>
                         <hr>
@@ -43,7 +46,7 @@
 
                             <!--//TODO: Can try to loop this-->
                             <div class="checkbox-wrapper-4 " id="CateText">
-                                <input class="inp-cbx" id="morning" type="checkbox" />
+                                <input class="inp-cbx" id="morning" type="checkbox" name="category[]" value="morning" />
                                 <label class="cbx" for="morning"><span>
                                         <svg width="12px" height="10px">
                                             <use xlink:href="#check-4"></use>
@@ -56,7 +59,7 @@
                             </div>
 
                             <div class="checkbox-wrapper-4" id="CateText">
-                                <input class="inp-cbx" id="Afternoon" type="checkbox" />
+                                <input class="inp-cbx" id="Afternoon" type="checkbox" name="category[]" value="afternoon"/>
                                 <label class="cbx" for="Afternoon"><span>
                                         <svg width="12px" height="10px">
                                             <use xlink:href="#check-4"></use>
@@ -69,7 +72,7 @@
                             </div>
 
                         </div>
-
+                        <input type="hidden" name="search" value="<?=$key?>">
                         <input type="submit" class="button-31 mt-5" value="Search">
 
                     </div>
@@ -82,36 +85,27 @@
             <div class="col-sm-8 col-md-8 col-lg-9 col-xl-10 bg-light">
 
                 <div class="row d-flex m-3 justify-content-center">
+                <?php
+                    $result = $classified->getAds($key, $filter);
+                    if(mysqli_num_rows($result) > 0):
+                    while ($ads = $result->fetch_assoc()) {
 
+                      
+                ?>
 
                     <div class="card m-3" style="width: 30rem;">
                         <div class="ImgContainer m-3">
-                            <img src="img/logo.png" class="imgSize card-img-top img-fluid" alt="..." id="myImg" onclick="openModal('img/logo.png', 'Lorem4000')">
+                            <img src="<?= $ads['AdPicture']?>" class="imgSize card-img-top img-fluid" id="myImg" onclick="openModal('<?= $ads['AdPicture']?>', '<?= $ads['AdDescription']?>')">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title fs-3 fw-bold" id="TextHeader">Card title</h5>
-                            <p class="card-text" id="TextSub">This is a wider card with supporting text below as a
-                                natural lead-in to
-                                additional content. This content is a little bit longer.</p>
-                            <p class="card-text" id="TextTime"><small class="text-muted">Last updated 3 mins ago</small>
+                            <h5 class="card-title fs-3 fw-bold" id="TextHeader"><?= $ads['AdName']?></h5>
+                            <p class="card-text" id="TextSub"><?= $ads['AdDescription']?></p>
+                            <p class="card-text" id="TextTime"><small class="text-muted"><?= $ads['UserName']?> DATE HERE</small>
                             </p>
                         </div>
                     </div>
 
-                    <div class="card m-3" style="width: 30rem;">
-                        <div class="ImgContainer m-3">
-                            <img src="img/TheSun.jpeg" class="imgSize card-img-top img-fluid" alt="..." id="myImg" onclick="openModal('img/TheSun.jpeg', 'Snow')">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title fs-3 fw-bold" id="TextHeader">Card title</h5>
-                            <p class="card-text" id="TextSub">This is a wider card with supporting text below as a
-                                natural lead-in to
-                                additional content. This content is a little bit longer.</p>
-                            <p class="card-text" id="TextTime"><small class="text-muted">Last updated 3 mins ago</small>
-                            </p>
-                        </div>
-                    </div>
-
+                <?php }endif; ?>    
 
 
 
