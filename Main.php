@@ -42,32 +42,24 @@ $classified = new Classified;
                         <hr>
                         <div class="text-start">
 
-                            <!--//TODO: Can try to loop this-->
+                        <?php
+                        $result = $classified->getCategories();
+                        if(mysqli_num_rows($result) > 0):
+                        while ($categories = $result->fetch_assoc()) {
+                        ?>
                             <div class="checkbox-wrapper-4 " id="CateText">
-                                <input class="inp-cbx" id="morning" type="checkbox" name="category[]" value="morning" />
-                                <label class="cbx" for="morning"><span>
+                                <input class="inp-cbx" id="<?=$categories["Category"]?>" type="checkbox" name="category[]" value="<?=$categories["Category"]?>" />
+                                <label class="cbx" for="<?=$categories["Category"]?>"><span>
                                         <svg width="12px" height="10px">
                                             <use xlink:href="#check-4"></use>
-                                        </svg></span><span>Morning</span></label>
+                                        </svg></span><span><?=$categories["Category"]?></span></label>
                                 <svg class="inline-svg">
                                     <symbol id="check-4" viewbox="0 0 12 10">
                                         <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
                                     </symbol>
                                 </svg>
                             </div>
-
-                            <div class="checkbox-wrapper-4" id="CateText">
-                                <input class="inp-cbx" id="Afternoon" type="checkbox" name="category[]" value="afternoon"/>
-                                <label class="cbx" for="Afternoon"><span>
-                                        <svg width="12px" height="10px">
-                                            <use xlink:href="#check-4"></use>
-                                        </svg></span><span>Afternoon</span></label>
-                                <svg class="inline-svg">
-                                    <symbol id="check-4" viewbox="0 0 12 10">
-                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                                    </symbol>
-                                </svg>
-                            </div>
+                        <?php }endif; ?>
 
                         </div>
                         <input type="hidden" name="search" value="<?=$key?>">
@@ -87,8 +79,8 @@ $classified = new Classified;
                     $result = $classified->getAds($key, $filter);
                     if(mysqli_num_rows($result) > 0):
                     while ($ads = $result->fetch_assoc()) {
-
-                      
+                        $datetime = new DateTime($ads['AdPostedDateTime']);
+                        $formattedDatetime = $datetime->format('h:iA d/m/Y');
                 ?>
 
                     <div class="card m-3" style="width: 30rem;">
@@ -102,16 +94,16 @@ $classified = new Classified;
 
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"></li>
-                                <li class="list-group-item">
+                                    <p class="card-text" id="TextTime"><small class="text-muted"><?= $ads['UserName']." posted at ".$formattedDatetime ?></small></p>    
+                                <?php
+                                if(isset($_SESSION['auth_user']) && $_SESSION['auth_user']['user_type'] === "Admin"):
+                                // ### CHANGE BELOW THE PHP FOR THE DELETE BUTTON TO MODAL BUTTON ###
+                                ?>
                                     <div class="d-flex justify-content-end m-2">
                                         <a href="#" class="btn btn-outline-danger">Delete</a>
                                     </div>
-                                </li>
+                                <?php endif;?>
                             </ul>
-
-
-                            <p class="card-text" id="TextTime"><small class="text-muted"><?= $ads['UserName']?> DATE HERE</small>
-                            </p>
                         </div>
                     </div>
 

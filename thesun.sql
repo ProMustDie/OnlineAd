@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2023 at 03:39 AM
+-- Generation Time: Oct 17, 2023 at 04:44 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -34,17 +34,18 @@ CREATE TABLE `ads` (
   `AdAuthorID` int(11) NOT NULL,
   `AdStatus` varchar(255) NOT NULL,
   `AdPicture` longtext NOT NULL,
-  `AdCategory` varchar(255) NOT NULL
+  `AdCategory` varchar(255) NOT NULL,
+  `AdPostedDateTime` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `ads`
 --
 
-INSERT INTO `ads` (`AdID`, `AdName`, `AdDescription`, `AdAuthorID`, `AdStatus`, `AdPicture`, `AdCategory`) VALUES
-(1, 'Testing 1', 'No clue but testing', 7, 'Approved', 'img/logo.png', 'morning'),
-(2, 'Testing 2', 'Idk but another test', 7, 'Approved', 'img/TheSun.jpeg', 'morning afternoon'),
-(5, 'Testing 3', 'I am giving up', 7, 'Approved', 'img/logo.png', 'afternoon');
+INSERT INTO `ads` (`AdID`, `AdName`, `AdDescription`, `AdAuthorID`, `AdStatus`, `AdPicture`, `AdCategory`, `AdPostedDateTime`) VALUES
+(1, 'Testing 1', 'No clue but testing', 7, 'Approved', 'img/logo.png', 'morning', '2023-10-16 10:00:00'),
+(2, 'Testing 2', 'Idk but another test', 7, 'Approved', 'img/TheSun.jpeg', 'morning afternoon evening night', '2023-10-14 14:00:00'),
+(5, 'Testing 3', 'I am giving up', 7, 'Approved', 'img/logo.png', 'afternoon', '2023-10-15 16:00:00');
 
 -- --------------------------------------------------------
 
