@@ -104,7 +104,7 @@ if (isset($_GET['category'])) {
 
 
     <!--//!HISTORY MODAL-->
-    <div class="modal " id="historyModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" style="padding-top:10px">
+    <div class="modal fade" id="historyModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" style="padding-top:10px">
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content modal-xl">
                 <div class="modal-header">

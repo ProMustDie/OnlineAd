@@ -151,7 +151,7 @@ input[type="submit"]#request {
 }
 
 /* Modal Content (image) */
-.modal-content {
+.modal-content#modalImg {
   margin: auto;
   display: block;
   width: 80%;
