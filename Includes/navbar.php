@@ -117,7 +117,7 @@ if (isset($_GET['category'])) {
                     <div class="col bg-light">
                         <div class="row d-flex justify-content-center">
                             <?php
-                            $result = $classified->getAds(NULL, NULL, NULL); //Pending Request Approval, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled
+                            $result = $classified->getAds(NULL, NULL, NULL); //Pending Review, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
                             if (mysqli_num_rows($result) > 0) :
                                 while ($ads = $result->fetch_assoc()) {
                             ?>
@@ -134,10 +134,30 @@ if (isset($_GET['category'])) {
                                                 <li class="list-group-item">
 
                                                     <div class="d-flex  m-2">
-                                                        Status: <?= $ads['AdStatus'] ?>
+                                                        Status: <?php  switch($ads['AdStatus']){
+                                                                        case "Pending Review":
+                                                                        case "Pending Payment":
+                                                                            echo '<p class="text-warning">';
+                                                                            break;
+                                                                        case "Rejected Request":
+                                                                        case "Rejected Payment":
+                                                                        case "Cancelled":
+                                                                        case "Expired":
+                                                                            echo '<p class="text-danger">';
+                                                                            break;
+                                                                        case "Approved":
+                                                                            echo '<p class="text-success">';
+                                                                            break;
+                                                                        }
+                                                                        echo $ads['AdStatus'];
+                                                                        ?> </p>
                                                         <div class="container text-end">
-                                                            <button class="btn btn-outline-success" data-bs-target="#payment-<?= $ads['AdID'] ?>" data-bs-toggle="modal" aria-labelledby="exampleModalToggleLabel2">Payment</button>
+                                                            <?php if(($ads['AdStatus'] == "Pending Payment" || $ads['AdStatus'] == "Rejected Payment") && $ads['AdStatus'] != "Approved" && $ads['AdStatus'] != "Cancelled"): ?>
+                                                            <button class="btn btn-outline-success" data-bs-target="#payment-<?= $ads['AdID'] ?>" data-bs-toggle="modal" aria-labelledby="exampleModalToggleLabel2"><?php echo ($ads['AdStatus'] == "Pending Payment") ? "Payment" : "Resubmit"; ?></button>
+                                                            <?php endif;?>
+                                                            <?php if($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
                                                             <button class="btn btn-outline-danger" data-bs-target="#cancel-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Cancel Ad</button>
+                                                            <?php endif;?>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -154,17 +174,18 @@ if (isset($_GET['category'])) {
     </div>
 
     <?php
-    $result = $classified->getAds(NULL, NULL, NULL); //Pending Request Approval, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled
+    $result = $classified->getAds(NULL, NULL, NULL); //Pending Review, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
     if (mysqli_num_rows($result) > 0) :
         while ($ads = $result->fetch_assoc()) {
     ?>
 
+            <?php if(($ads['AdStatus'] == "Pending Payment" || $ads['AdStatus'] == "Rejected Payment") && $ads['AdStatus'] != "Approved" && $ads['AdStatus'] != "Cancelled"): ?>
             <!--*PAYMENT MODAL-->
             <div class="modal fade" id="payment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="payment-<?= $ads['AdID'] ?>" tabindex="-1">
                 <div class="modal-dialog modal-md modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="payment-<?= $ads['AdID'] ?>">Payment</h1>
+                            <h1 class="modal-title fs-5" id="payment-<?= $ads['AdID'] ?>"><?php echo ($ads['AdStatus'] == "Pending Payment") ? "Payment" : "Resubmit Payment"; ?></h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -181,20 +202,22 @@ if (isset($_GET['category'])) {
 
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-primary" data-bs-target="#historyModal" data-bs-toggle="modal">Back to
-                                History</button>
+                            <button class="btn btn-primary" data-bs-target="#historyModal" data-bs-toggle="modal">Back to History</button>
                         </div>
                     </div>
                 </div>
             </div>
             <!--*PAYMENT MODAL-->
 
-            <!--*DELETE MODAL-->
+            <?php endif; ?>
+
+            <?php if($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
+            <!--*CANCEL MODAL-->
             <div class="modal fade" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
                 <div class="modal-dialog modal-sm modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Delete Request</h1>
+                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Cancel Ad</h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -211,13 +234,13 @@ if (isset($_GET['category'])) {
 
                         </div>
                         <div class="modal-footer">
-                            <button class="btn btn-primary" data-bs-target="#historyModal" data-bs-toggle="modal">Back to
-                                History</button>
+                            <button class="btn btn-primary" data-bs-target="#historyModal" data-bs-toggle="modal">Back to History</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--*DELETE MODAL-->
+            <!--*CANCEL MODAL-->
+            <?php endif;?>
 
 
     <?php }
