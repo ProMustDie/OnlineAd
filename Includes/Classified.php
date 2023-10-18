@@ -77,6 +77,13 @@
         
             return array('result' => $result, 'selectedCategories' => $selectedCategories);
         }
+
+        public function deleteAd($AdID){
+            $sqlQuery = "DELETE FROM " . $this->adsTable . " WHERE AdID = ?";
+		    $stmt = $this->conn->prepare($sqlQuery);
+		    $stmt->bind_param("i", $AdID);
+		    $stmt->execute();
+        }
         
     }
 
