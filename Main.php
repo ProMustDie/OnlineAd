@@ -99,13 +99,13 @@ $classified = new Classified;
                                     <p class="card-text" id="TextSub"><?= $ads['AdDescription'] ?></p>
                                     <p class="card-text" id="TextCate">Category:
                                         <?php
-                                            $categoriesArray = explode(' ', $ads['AdCategory']);
-                                            foreach ($categoriesArray as $category){
-                                            
-                                        ?>
-                                        <span class="rounded-pill bg-success text-light p-1"><?= $category?></span>
+                                        $categoriesArray = explode(' ', $ads['AdCategory']);
+                                        foreach ($categoriesArray as $category) {
 
-                                        <?php }?>
+                                        ?>
+                                            <span class="rounded-pill bg-success text-light p-1"><?= $category ?></span>
+
+                                        <?php } ?>
                                     </p>
 
 
@@ -115,14 +115,14 @@ $classified = new Classified;
                                         <p class="card-text" id="TextTime"><small class="text-muted"><?= $ads['UserName'] . " posted at " . $formattedDatetime ?></small></p>
                                         <?php
                                         if (isset($_SESSION['auth_user']) && $_SESSION['auth_user']['user_type'] === "Admin") :
-                                            
+
                                         ?>
                                             <div class="d-flex justify-content-end m-2">
-                                                <button class="btn btn-outline-danger" data-bs-target="#DeleteModal-<?=$ads['AdID']?>" data-bs-toggle="modal">Delete</button>
+                                                <button class="btn btn-outline-danger" data-bs-target="#DeleteModal-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Delete</button>
                                             </div>
 
                                             <!--*DELETE MODAL-->
-                                            <div class="modal fade" id="DeleteModal-<?=$ads['AdID']?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                            <div class="modal fade" id="DeleteModal-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
                                                 <div class="modal-dialog modal-sm modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -131,12 +131,12 @@ $classified = new Classified;
                                                         </div>
                                                         <div class="modal-body">
 
-                                                            Delete: <?=$ads['AdName']?>
+                                                            Delete: <?= $ads['AdName'] ?>
                                                             <form action="#" method="#">
                                                                 <label for="formFile" class="form-label">Are you sure?</label>
                                                                 <div class="container-fluid d-flex justify-content-end">
                                                                     <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
-                                                                    <input type="submit" class="btn btn-outline-warning px-4" value="No">
+                                                                    <input type="submit" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close" value="No">
                                                                 </div>
                                                             </form>
                                                         </div>
