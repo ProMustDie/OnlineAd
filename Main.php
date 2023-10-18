@@ -97,13 +97,15 @@ $classified = new Classified;
                                 <div class="card-body">
                                     <h5 class="card-title fs-3 fw-bold" id="TextHeader"><?= $ads['AdName'] ?></h5>
                                     <p class="card-text" id="TextSub"><?= $ads['AdDescription'] ?></p>
-                                    <p class="card-text" id="TextCate">Category:
+                                    <p class="card-text lh-lg" id="TextCate">Category:
                                         <?php
                                         $categoriesArray = explode(' ', $ads['AdCategory']);
                                         foreach ($categoriesArray as $category) {
 
                                         ?>
-                                            <span class="rounded-pill bg-success text-light p-1"><?= $category ?></span>
+
+                                            <span class="rounded-3 bg-success text-light px-2 py-1"><?= $category ?></span>
+
 
                                         <?php } ?>
                                     </p>
