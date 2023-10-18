@@ -28,7 +28,7 @@ if (isset($_GET['category'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="CSS/index.css" rel="stylesheet">
 
@@ -125,105 +125,112 @@ if (isset($_GET['category'])) {
 
                     <div class="col bg-light">
                         <div class="row d-flex justify-content-center">
-                        <?php
-                        $result = $classified->getAds(NULL, NULL, NULL); //Pending Request Approval, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled
-                        if (mysqli_num_rows($result) > 0) :
-                            while ($ads = $result->fetch_assoc()) {
-                        ?>
+                            <?php
+                            $result = $classified->getAds(NULL, NULL, NULL); //Pending Request Approval, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled
+                            if (mysqli_num_rows($result) > 0) :
+                                while ($ads = $result->fetch_assoc()) {
+                            ?>
 
-                            <div class="card m-3" style="width: 30rem;">
-                                <div class="ImgContainer m-2">
-                                    <img src="<?= $ads['AdPicture']?>" class="imgSize card-img-top img-fluid" alt="..." id="myImg" onclick="openModal('<?= $ads['AdPicture']?>', '<?= $ads['AdDescription']?>')">
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title fs-3 fw-bold" id="TextHeader"><?= $ads['AdName']?></h5>
-                                    <p class="card-text" id="TextSub"><?= $ads['AdDescription']?></p>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item">
+                                    <div class="card m-3" style="width: 30rem;">
+                                        <div class="ImgContainer m-2">
+                                            <img src="<?= $ads['AdPicture'] ?>" class="imgSize card-img-top img-fluid" alt="..." id="myImg" onclick="openModal('<?= $ads['AdPicture'] ?>', '<?= $ads['AdDescription'] ?>')">
+                                        </div>
+                                        <div class="card-body">
+                                            <h5 class="card-title fs-3 fw-bold" id="TextHeader"><?= $ads['AdName'] ?></h5>
+                                            <p class="card-text" id="TextSub"><?= $ads['AdDescription'] ?></p>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item"></li>
+                                                <li class="list-group-item">
 
-                                            <div class="d-flex  m-2">
-                                                Status: <?= $ads['AdStatus']?>
-                                                <div class="container text-end">
-                                                    <button class="btn btn-outline-success" data-bs-target="#payment-<?= $ads['AdID']?>" data-bs-toggle="modal">Payment</button>
-                                                    <button class="btn btn-outline-danger" data-bs-target="#cancel-<?= $ads['AdID']?>" data-bs-toggle="modal">Cancel Ad</button>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                                <!--*PAYMENT MODAL-->
-                                <div class="modal fade" id="payment-<?= $ads['AdID']?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-                                    <div class="modal-dialog modal-md modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Payment</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-
-                                                Pay for: <?= $ads['AdName']?>
-                                                <form action="#" method="#">
-                                                    <div class="mb-3">
-                                                        <label for="formFile" class="form-label">Upload Image</label>
-                                                        <input class="form-control" type="file" id="formFile">
+                                                    <div class="d-flex  m-2">
+                                                        Status: <?= $ads['AdStatus'] ?>
+                                                        <div class="container text-end">
+                                                            <button class="btn btn-outline-success" data-bs-target="#payment-<?= $ads['AdID'] ?>" data-bs-toggle="modal" aria-labelledby="exampleModalToggleLabel2">Payment</button>
+                                                            <button class="btn btn-outline-danger" data-bs-target="#cancel-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Cancel Ad</button>
+                                                        </div>
                                                     </div>
-                                                    <input type="submit" class="btn btn-outline-success float-end" value="Submit">
-                                                </form>
-
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-primary" data-bs-target="#historyModal" data-bs-toggle="modal">Back to
-                                                    History</button>
-                                            </div>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
-                                </div>
-                                <!--*PAYMENT MODAL-->
-
-                                <!--*DELETE MODAL-->
-                                <div class="modal fade" id="cancel-<?= $ads['AdID']?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-                                    <div class="modal-dialog modal-sm modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Delete Request</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-
-                                                Cancel: <?= $ads['AdName']?>
-                                                <form action="#" method="#">
-                                                    <label for="formFile" class="form-label">Are you sure you want to cancel? <br>No refunds will be provided!</label>
-                                                    <div class="container-fluid d-flex justify-content-end">
-                                                        <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
-                                                        <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
-                                                    </div>
-                                                </form>
-
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-primary" data-bs-target="#historyModal" data-bs-toggle="modal">Back to
-                                                    History</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-    <!--*DELETE MODAL-->
-                        <?php }endif; ?>
-
+                            <?php }
+                            endif; ?>
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
         </div>
     </div>
+
+    <?php
+    $result = $classified->getAds(NULL, NULL, NULL); //Pending Request Approval, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled
+    if (mysqli_num_rows($result) > 0) :
+        while ($ads = $result->fetch_assoc()) {
+    ?>
+
+            <!--*PAYMENT MODAL-->
+            <div class="modal fade" id="payment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="payment-<?= $ads['AdID'] ?>" tabindex="-1">
+                <div class="modal-dialog modal-md modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="payment-<?= $ads['AdID'] ?>">Payment</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            Pay for: <?= $ads['AdName'] ?>
+                            <form action="#" method="#">
+                                <div class="mb-3">
+                                    <label for="formFile" class="form-label">Upload Image</label>
+                                    <input class="form-control" type="file" id="formFile">
+                                </div>
+                                <input type="submit" class="btn btn-outline-success float-end" value="Submit">
+                            </form>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-bs-target="#historyModal" data-bs-toggle="modal">Back to
+                                History</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--*PAYMENT MODAL-->
+
+            <!--*DELETE MODAL-->
+            <div class="modal fade" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                <div class="modal-dialog modal-sm modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Delete Request</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+
+                            Cancel: <?= $ads['AdName'] ?>
+                            <form action="#" method="#">
+                                <label for="formFile" class="form-label">Are you sure you want to cancel? <br>No refunds will be provided!</label>
+                                <div class="container-fluid d-flex justify-content-end">
+                                    <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
+                                    <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
+                                </div>
+                            </form>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-bs-target="#historyModal" data-bs-toggle="modal">Back to
+                                History</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--*DELETE MODAL-->
+
+
+    <?php }
+    endif; ?>
 
     <!--//!HISTORY MODAL-->
 
