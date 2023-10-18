@@ -114,7 +114,7 @@ $classified = new Classified;
 
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item"></li>
-                                        <p class="card-text" id="TextTime"><small class="text-muted"><?= $ads['UserName'] . " posted at " . $formattedDatetime ?></small></p>
+                                        <p class="card-text m-2" id="TextTime"><small class="text-muted"><?= $ads['UserName'] . " posted at " . $formattedDatetime ?></small></p>
                                         <?php
                                         if (isset($_SESSION['auth_user']) && $_SESSION['auth_user']['user_type'] === "Admin") :
 

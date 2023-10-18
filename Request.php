@@ -25,14 +25,15 @@
 
 
 
-                    <input type="file" class="form-control m-auto mb-2" id="validationCustom01" name="image" style="width:75%;">
+                    <input type="file" class="form-control m-auto mb-2" id="validationCustom01" name="image" style="width:75%;" required>
 
                     <input type="text" class="form-control m-auto mb-2" id="validationCustom02" placeholder="Title" name="title" required style="width:75%;">
 
                     <textarea class="form-control  m-auto mb-2" id="validationTextarea01" placeholder="Description" style="width:75%;" rows="2" name="description" required></textarea>
 
-                    <div class="container text-start p-0" style="width:75%;">
 
+                    <!--//! Need to use php to validate atleast 1 category is chosen -->
+                    <div class="container text-start p-0" style="width:75%;">
 
                         <label>Categories</label>
                         <div class="checkbox-wrapper-4">
@@ -61,8 +62,10 @@
                             </svg>
                         </div>
 
-
                     </div>
+                    <!--//! Need to use php to validate atleast 1 category is chosen -->
+
+
 
                     <textarea class="form-control  m-auto mb-2" id="validationTextarea02" placeholder="Additional Info" style="width:75%;" rows="2" name="ExtraInfo" required></textarea>
 
