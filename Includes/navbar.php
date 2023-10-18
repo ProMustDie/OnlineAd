@@ -1,5 +1,7 @@
 <?php
 include_once('includes/RegisterController.php');
+include_once('includes/Classified.php');
+$classified = new Classified;
 $logIn = new LoginController;
 
 if (isset($_POST['logout_btn'])) {
@@ -54,7 +56,7 @@ if (isset($_GET['category'])) {
                             <a class="nav-link" href="Request.php">Request</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">History</a>
+                            <a class="nav-link" href="#" data-bs-target="#historyModal" data-bs-toggle="modal">History</a>
                         </li>
 
 
@@ -111,7 +113,7 @@ if (isset($_GET['category'])) {
 
 
     <!--//!HISTORY MODAL-->
-    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" style="padding-top:10px">
+    <div class="modal fade" id="historyModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" style="padding-top:10px">
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content modal-xl">
                 <div class="modal-header">
@@ -123,56 +125,28 @@ if (isset($_GET['category'])) {
 
                     <div class="col bg-light">
                         <div class="row d-flex justify-content-center">
-
+                        <?php
+                        $result = $classified->getAds(NULL, NULL, NULL); //Pending Request Approval, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled
+                        if (mysqli_num_rows($result) > 0) :
+                            while ($ads = $result->fetch_assoc()) {
+                        ?>
 
                             <div class="card m-3" style="width: 30rem;">
                                 <div class="ImgContainer m-2">
-                                    <img src="img/logo.png" class="imgSize card-img-top img-fluid" alt="..." id="myImg" onclick="openModal('img/logo.png', 'Lorem4000')">
+                                    <img src="<?= $ads['AdPicture']?>" class="imgSize card-img-top img-fluid" alt="..." id="myImg" onclick="openModal('<?= $ads['AdPicture']?>', '<?= $ads['AdDescription']?>')">
                                 </div>
                                 <div class="card-body">
-                                    <h5 class="card-title fs-3 fw-bold" id="TextHeader">Card title</h5>
-                                    <p class="card-text" id="TextSub">This is a wider card with supporting text below as
-                                        a
-                                        natural lead-in to
-                                        additional content. This content is a little bit longer.</p>
-
-
+                                    <h5 class="card-title fs-3 fw-bold" id="TextHeader"><?= $ads['AdName']?></h5>
+                                    <p class="card-text" id="TextSub"><?= $ads['AdDescription']?></p>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item"></li>
                                         <li class="list-group-item">
 
                                             <div class="d-flex  m-2">
-                                                Status:Pending
+                                                Status: <?= $ads['AdStatus']?>
                                                 <div class="container text-end">
-                                                    <button class="btn btn-outline-success" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Payment</button>
-                                                    <button class="btn btn-outline-danger" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal">Delete</button>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card m-3" style="width: 30rem;">
-                                <div class="ImgContainer m-2">
-                                    <img src="img/logo.png" class="imgSize card-img-top img-fluid" alt="..." id="myImg" onclick="openModal('img/logo.png', 'Lorem4000')">
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title fs-3 fw-bold" id="TextHeader">Card title</h5>
-                                    <p class="card-text" id="TextSub">This is a wider card with supporting text below as
-                                        a
-                                        natural lead-in to
-                                        additional content. This content is a little bit longer.</p>
-
-
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item"></li>
-                                        <li class="list-group-item">
-
-                                            <div class="d-flex  m-2">
-                                                Status:Pending
-                                                <div class="container text-end">
-                                                    <button class="btn btn-outline-success" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">Payment</button>
-                                                    <button class="btn btn-outline-danger" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal">Delete</button>
+                                                    <button class="btn btn-outline-success" data-bs-target="#payment-<?= $ads['AdID']?>" data-bs-toggle="modal">Payment</button>
+                                                    <button class="btn btn-outline-danger" data-bs-target="#cancel-<?= $ads['AdID']?>" data-bs-toggle="modal">Cancel Ad</button>
                                                 </div>
                                             </div>
                                         </li>
@@ -180,6 +154,66 @@ if (isset($_GET['category'])) {
                                 </div>
                             </div>
 
+                                <!--*PAYMENT MODAL-->
+                                <div class="modal fade" id="payment-<?= $ads['AdID']?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                                    <div class="modal-dialog modal-md modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Payment</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                Pay for: <?= $ads['AdName']?>
+                                                <form action="#" method="#">
+                                                    <div class="mb-3">
+                                                        <label for="formFile" class="form-label">Upload Image</label>
+                                                        <input class="form-control" type="file" id="formFile">
+                                                    </div>
+                                                    <input type="submit" class="btn btn-outline-success float-end" value="Submit">
+                                                </form>
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-primary" data-bs-target="#historyModal" data-bs-toggle="modal">Back to
+                                                    History</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--*PAYMENT MODAL-->
+
+                                <!--*DELETE MODAL-->
+                                <div class="modal fade" id="cancel-<?= $ads['AdID']?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Delete Request</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                Cancel: <?= $ads['AdName']?>
+                                                <form action="#" method="#">
+                                                    <label for="formFile" class="form-label">Are you sure you want to cancel? <br>No refunds will be provided!</label>
+                                                    <div class="container-fluid d-flex justify-content-end">
+                                                        <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
+                                                        <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
+                                                    </div>
+                                                </form>
+
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-primary" data-bs-target="#historyModal" data-bs-toggle="modal">Back to
+                                                    History</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+    <!--*DELETE MODAL-->
+                        <?php }endif; ?>
 
                         </div>
                     </div>
@@ -190,69 +224,6 @@ if (isset($_GET['category'])) {
             </div>
         </div>
     </div>
-
-
-    <!--*PAYMENT MODAL-->
-    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-        <div class="modal-dialog modal-md modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Payment</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                    Title:
-                    <form action="#" method="#">
-                        <div class="mb-3">
-                            <label for="formFile" class="form-label">Upload Image</label>
-                            <input class="form-control" type="file" id="formFile">
-                        </div>
-                        <input type="submit" class="btn btn-outline-success float-end" value="Submit">
-                    </form>
-
-
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to
-                        History</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--*PAYMENT MODAL-->
-
-
-
-    <!--*DELETE MODAL-->
-    <div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-        <div class="modal-dialog modal-sm modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Delete Request</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                    Title:
-                    <form action="#" method="#">
-                        <label for="formFile" class="form-label">Are you sure?</label>
-                        <div class="container-fluid d-flex justify-content-end">
-                            <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
-                            <input type="submit" class="btn btn-outline-warning px-4" value="No">
-                        </div>
-                    </form>
-
-
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to
-                        History</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--*DELETE MODAL-->
 
     <!--//!HISTORY MODAL-->
 

@@ -10,32 +10,35 @@
             $this->conn = $db->conn;
         }
 
-        public function getAds($key, $filter){
+        public function getAds($key, $filter, $stat){
             $key = $this->conn->real_escape_string($key);
             $filter = $this->conn->real_escape_string($filter);
+            $status = "%$stat%";
 
             if($key == NULL && $filter == NULL){
-                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, u.UserID, u.UserName
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
                         WHERE a.AdAuthorID = u.UserID
+                        AND a.AdStatus LIKE ?
                         ORDER BY a.AdID DESC ";
                 $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("s", $status);
                 $stmt->execute();
                 $result = $stmt->get_result();
                 return $result;
             }else{
-                $sql = "SELECT DISTINCT a.AdID, a.AdName, a.AdDescription, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, u.UserID, u.UserName
+                $sql = "SELECT DISTINCT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
                 FROM " . $this->adsTable . " as a, " . $this->userTable . " as u
                 WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
                 AND a.AdCategory LIKE ?
+                AND a.AdStatus LIKE ?
                 AND a.AdAuthorID = u.UserID
                 ORDER BY a.AdID DESC ";
 
                     $stmt = $this->conn->prepare($sql);
                     $param = "%$key%";
                     $category = "%$filter%";
-                    $stmt->bind_param("ssss", $param, $param, $param, $category);
-                    
+                    $stmt->bind_param("sssss", $param, $param, $param, $category, $status);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     return $result;

@@ -83,7 +83,7 @@ $classified = new Classified;
 
                 <div class="row d-flex m-3 justify-content-center">
                     <?php
-                    $result = $classified->getAds($key, $filter);
+                    $result = $classified->getAds($key, $filter, "Approved");
                     if (mysqli_num_rows($result) > 0) :
                         while ($ads = $result->fetch_assoc()) {
                             $datetime = new DateTime($ads['AdPostedDateTime']);
@@ -133,7 +133,7 @@ $classified = new Classified;
 
                                                             Delete: <?= $ads['AdName'] ?>
                                                             <form action="Includes/authActions.php?request=deleteAd" method="POST">
-                                                                <label for="formFile" class="form-label">Are you sure?</label>
+                                                                <label for="formFile" class="form-label">Are you sure you want to delete?</label>
                                                                 <div class="container-fluid d-flex justify-content-end">
                                                                     <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                     <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
