@@ -22,6 +22,7 @@ if (isset($_GET['category'])) {
 }
 ?>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <link href="CSS/index.css" rel="stylesheet">
 
@@ -48,7 +49,7 @@ if (isset($_GET['category'])) {
                         </li>
                         <?php if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] != "Admin") : ?>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" data-bs-target="#historyModal" data-bs-toggle="modal">History</a>
+                            <a class="nav-link" href="#" data-bs-target="#historyModal" data-bs-toggle="modal" id="History">History</a>
                         </li>
                     
                         <?php
@@ -100,12 +101,12 @@ if (isset($_GET['category'])) {
 
     <?php if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] != "Admin") : ?>
     <!--//!HISTORY MODAL-->
-    <div class="modal fade" id="historyModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" style="padding-top:10px">
+    <div class="modal fade" id="historyModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-fullscreen modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content modal-fullscreen">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalToggleLabel">History</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="CloseModal"></button>
                 </div>
                 <div class="modal-body">
 
@@ -179,12 +180,12 @@ if (isset($_GET['category'])) {
 
             <?php if (($ads['AdStatus'] == "Pending Payment" || $ads['AdStatus'] == "Rejected Payment") && $ads['AdStatus'] != "Approved" && $ads['AdStatus'] != "Cancelled") : ?>
                 <!--*PAYMENT MODAL-->
-                <div class="modal fade" id="payment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="payment-<?= $ads['AdID'] ?>" tabindex="-1">
+                <div class="modal fade" id="payment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="payment-<?= $ads['AdID'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
                     <div class="modal-dialog modal-md modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="payment-<?= $ads['AdID'] ?>"><?php echo ($ads['AdStatus'] == "Pending Payment") ? "Payment" : "Resubmit Payment"; ?></h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="CloseModalPayment"></button>
                             </div>
                             <div class="modal-body">
 
@@ -211,12 +212,12 @@ if (isset($_GET['category'])) {
 
             <?php if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
                 <!--*CANCEL MODAL-->
-                <div class="modal fade" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                <div class="modal fade" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
                     <div class="modal-dialog modal-sm modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Cancel Ad</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="CloseModalCancel"></button>
                             </div>
                             <div class="modal-body">
 
