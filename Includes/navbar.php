@@ -124,11 +124,11 @@ if (isset($_GET['category'])) {
 
                                     <div class="card m-3" style="width: 30rem;">
                                         <div class="ImgContainer m-2">
-                                            <img src="<?= $ads['AdPicture'] ?>" class="imgSize card-img-top img-fluid" alt="..." id="myImg" onclick="openModal('<?= $ads['AdPicture'] ?>', '<?= $ads['AdDescription'] ?>')">
+                                            <img src="<?= $ads['AdPicture'] ?>" class="imgSize card-img-top img-fluid" id="myImg" data-bs-toggle="modal" data-bs-target="#modalImg-<?= $ads['AdID'] ?>">
                                         </div>
                                         <div class="card-body">
                                             <h5 class="card-title fs-3 fw-bold" id="TextHeader"><?= $ads['AdName'] ?></h5>
-                                            <p class="card-text" id="TextSub"><?= $ads['AdDescription'] ?></p>
+                                            <p class="card-text text-truncate" id="TextSub"><?= $ads['AdDescription'] ?></p>
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item"></li>
                                                 <li class="list-group-item p-0">

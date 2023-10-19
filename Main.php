@@ -92,11 +92,11 @@ $classified = new Classified;
 
                             <div class="card m-2" style="width: 24rem;">
                                 <div class="ImgContainer m-2">
-                                    <img src="<?= $ads['AdPicture'] ?>" class="imgSize card-img-top img-fluid" id="myImg" onclick="openModal('<?= $ads['AdPicture'] ?>', '<?= $ads['AdDescription'] ?>')">
+                                    <img src="<?= $ads['AdPicture'] ?>" class="imgSize card-img-top img-fluid" id="myImg" data-bs-toggle="modal" data-bs-target="#modalImg-<?= $ads['AdID'] ?>">
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title fs-3 fw-bold" id="TextHeader"><?= $ads['AdName'] ?></h5>
-                                    <p class="card-text" id="TextSub"><?= $ads['AdDescription'] ?></p>
+                                    <p class="card-text text-truncate" id="TextSub"><?= $ads['AdDescription'] ?></p>
                                     <p class="card-text lh-lg" id="TextCate">Category:
                                         <?php
                                         $categoriesArray = explode(' ', $ads['AdCategory']);
@@ -153,6 +153,29 @@ $classified = new Classified;
                                 </div>
                             </div>
 
+
+
+
+                            <!--//!MODAL FOR IMAGES POPUP-->
+
+                            <div class="modal fade p-0" id="modalImg-<?= $ads['AdID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content modal-xl">
+                                        <div class="modal-header p-3">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body" style="max-height: 80vh; overflow-y: auto;">
+                                            <img class="modal-content" id="modalImg" src="<?= $ads['AdPicture'] ?>">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <div class="container text-center text-break m-auto" id="caption"><?= $ads['AdDescription'] ?></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                     <?php }
                     endif; ?>
 
@@ -177,12 +200,7 @@ $classified = new Classified;
     ?>
     <!--footer-->
 
-    <!--//!MODAL FOR IMAGES -->
-    <div id="myModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImg">
-        <div class="container text-break mt-3" id="caption"></div>
-    </div>
+
 
     <script src="JS/MainModal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
