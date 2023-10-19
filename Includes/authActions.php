@@ -42,6 +42,7 @@ if($_SESSION['auth_user']['user_id'] == $AuthorID || $_SESSION['auth_user']['use
     }
     echo $status;
     $classified->changeStatus($AdID, $status);
+    header('Location: ../history.php');
     endif;
 }
 ?>
