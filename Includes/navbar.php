@@ -46,17 +46,13 @@ if (isset($_GET['category'])) {
                         <li class="nav-item">
                             <a class="nav-link" href="Request.php">Request</a>
                         </li>
+                        <?php if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] != "Admin") : ?>
                         <li class="nav-item">
                             <a class="nav-link" href="#" data-bs-target="#historyModal" data-bs-toggle="modal">History</a>
                         </li>
-
-
-                        <?php if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] == "Admin") : ?>
-                            <li class="nav-item">
-                                <a class="nav-link" href="admin.php">Admin</a>
-                            </li>
-                        <?php endif;
-
+                    
+                        <?php
+                        endif;
                         if (isset($_SESSION["authenticated"]) && $_SESSION['authenticated'] ==  true) : ?>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -102,7 +98,7 @@ if (isset($_GET['category'])) {
     </header>
     <!--navbar-->
 
-
+    <?php if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] != "Admin") : ?>
     <!--//!HISTORY MODAL-->
     <div class="modal fade" id="historyModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" style="padding-top:10px">
         <div class="modal-dialog modal-fullscreen modal-dialog-centered modal-dialog-scrollable">
@@ -117,7 +113,7 @@ if (isset($_GET['category'])) {
                     <div class="col bg-light">
                         <div class="row d-flex justify-content-center">
                             <?php
-                            $result = $classified->getAds(NULL, NULL, NULL); //Pending Review, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
+                            $result = $classified->getAds(NULL, NULL, NULL, isset($_SESSION['auth_user'])?$_SESSION['auth_user']['user_id']:NULL); //Pending Review, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
                             if (mysqli_num_rows($result) > 0) :
                                 while ($ads = $result->fetch_assoc()) {
                             ?>
@@ -176,7 +172,7 @@ if (isset($_GET['category'])) {
     </div>
 
     <?php
-    $result = $classified->getAds(NULL, NULL, NULL); //Pending Review, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
+    $result = $classified->getAds(NULL, NULL, NULL, isset($_SESSION['auth_user'])?$_SESSION['auth_user']['user_id']:NULL); //Pending Review, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
     if (mysqli_num_rows($result) > 0) :
         while ($ads = $result->fetch_assoc()) {
     ?>
@@ -225,11 +221,13 @@ if (isset($_GET['category'])) {
                             <div class="modal-body">
 
                                 Cancel: <?= $ads['AdName'] ?>
-                                <form action="#" method="#">
+                                <form action="Includes/authActions.php?request=CancelAd" method="POST">
+                                    <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
+                                    <input type="hidden" value="<?= $ads['AdAuthorID'] ?>" name="AdAuthorID">
                                     <label for="formFile" class="form-label">Are you sure you want to cancel? <br>No refunds will be provided!</label>
                                     <div class="container-fluid d-flex justify-content-end">
                                         <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
-                                        <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
+                                        <button type="button" class="btn btn-outline-warning px-4" data-bs-target="#historyModal" data-bs-toggle="modal">No</button>
                                     </div>
                                 </form>
 
@@ -249,5 +247,7 @@ if (isset($_GET['category'])) {
     endif; ?>
 
     <!--//!HISTORY MODAL-->
+
+    <?php endif;?>
 
 </body>
