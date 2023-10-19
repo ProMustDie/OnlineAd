@@ -128,14 +128,6 @@
 
     <!--ADMIN -->
 
-
-    <!--//!MODAL FOR IMAGES -->
-    <div id="myModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImg">
-        <div class="container text-break mt-3" id="caption"></div>
-    </div>
-
     <script src="JS/MainModal.js"></script>
     <script src="JS/request.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
