@@ -28,7 +28,7 @@ $classified = new Classified;
 
 
 
-    <div class="container">
+    <div class="container-fluid">
 
         <!--//!Category-->
         <div class="row">
@@ -81,7 +81,7 @@ $classified = new Classified;
             <!--//!Images-->
             <div class="col-sm-8 col-md-8 col-lg-9 col-xl-10 bg-light">
 
-                <div class="row d-flex m-3 justify-content-center">
+                <div class="row d-flex m-2 justify-content-center">
                     <?php
                     $result = $classified->getAds($key, $filter, "Approved");
                     if (mysqli_num_rows($result) > 0) :
@@ -90,7 +90,7 @@ $classified = new Classified;
                             $formattedDatetime = $datetime->format('h:iA d/m/Y');
                     ?>
 
-                            <div class="card m-3" style="width: 30rem;">
+                            <div class="card m-2" style="width: 24rem;">
                                 <div class="ImgContainer m-2">
                                     <img src="<?= $ads['AdPicture'] ?>" class="imgSize card-img-top img-fluid" id="myImg" onclick="openModal('<?= $ads['AdPicture'] ?>', '<?= $ads['AdDescription'] ?>')">
                                 </div>

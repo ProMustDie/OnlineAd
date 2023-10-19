@@ -105,8 +105,8 @@ if (isset($_GET['category'])) {
 
     <!--//!HISTORY MODAL-->
     <div class="modal fade" id="historyModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" style="padding-top:10px">
-        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content modal-xl">
+        <div class="modal-dialog modal-fullscreen modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content modal-fullscreen">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalToggleLabel">History</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -131,10 +131,11 @@ if (isset($_GET['category'])) {
                                             <p class="card-text" id="TextSub"><?= $ads['AdDescription'] ?></p>
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item"></li>
-                                                <li class="list-group-item">
+                                                <li class="list-group-item p-0">
 
                                                     <div class="d-flex  m-2">
-                                                        Status: <?php  switch($ads['AdStatus']){
+                                                        <div class="container-fluid p-0 d-inline-flex">
+                                                            Status: <?php switch ($ads['AdStatus']) {
                                                                         case "Pending Review":
                                                                         case "Pending Payment":
                                                                             echo '<p class="text-warning">';
@@ -148,16 +149,17 @@ if (isset($_GET['category'])) {
                                                                         case "Approved":
                                                                             echo '<p class="text-success">';
                                                                             break;
-                                                                        }
-                                                                        echo $ads['AdStatus'];
-                                                                        ?> </p>
+                                                                    }
+                                                                    echo $ads['AdStatus'];
+                                                                    ?> </p>
+                                                        </div>
                                                         <div class="container text-end">
-                                                            <?php if(($ads['AdStatus'] == "Pending Payment" || $ads['AdStatus'] == "Rejected Payment") && $ads['AdStatus'] != "Approved" && $ads['AdStatus'] != "Cancelled"): ?>
-                                                            <button class="btn btn-outline-success" data-bs-target="#payment-<?= $ads['AdID'] ?>" data-bs-toggle="modal" aria-labelledby="exampleModalToggleLabel2"><?php echo ($ads['AdStatus'] == "Pending Payment") ? "Payment" : "Resubmit"; ?></button>
-                                                            <?php endif;?>
-                                                            <?php if($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
-                                                            <button class="btn btn-outline-danger" data-bs-target="#cancel-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Cancel Ad</button>
-                                                            <?php endif;?>
+                                                            <?php if (($ads['AdStatus'] == "Pending Payment" || $ads['AdStatus'] == "Rejected Payment") && $ads['AdStatus'] != "Approved" && $ads['AdStatus'] != "Cancelled") : ?>
+                                                                <button class="btn btn-outline-success m-1" data-bs-target="#payment-<?= $ads['AdID'] ?>" data-bs-toggle="modal" aria-labelledby="exampleModalToggleLabel2"><?php echo ($ads['AdStatus'] == "Pending Payment") ? "Payment" : "Resubmit"; ?></button>
+                                                            <?php endif; ?>
+                                                            <?php if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
+                                                                <button class="btn btn-outline-danger m-1" data-bs-target="#cancel-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Cancel Ad</button>
+                                                            <?php endif; ?>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -179,68 +181,68 @@ if (isset($_GET['category'])) {
         while ($ads = $result->fetch_assoc()) {
     ?>
 
-            <?php if(($ads['AdStatus'] == "Pending Payment" || $ads['AdStatus'] == "Rejected Payment") && $ads['AdStatus'] != "Approved" && $ads['AdStatus'] != "Cancelled"): ?>
-            <!--*PAYMENT MODAL-->
-            <div class="modal fade" id="payment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="payment-<?= $ads['AdID'] ?>" tabindex="-1">
-                <div class="modal-dialog modal-md modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="payment-<?= $ads['AdID'] ?>"><?php echo ($ads['AdStatus'] == "Pending Payment") ? "Payment" : "Resubmit Payment"; ?></h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
+            <?php if (($ads['AdStatus'] == "Pending Payment" || $ads['AdStatus'] == "Rejected Payment") && $ads['AdStatus'] != "Approved" && $ads['AdStatus'] != "Cancelled") : ?>
+                <!--*PAYMENT MODAL-->
+                <div class="modal fade" id="payment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="payment-<?= $ads['AdID'] ?>" tabindex="-1">
+                    <div class="modal-dialog modal-md modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="payment-<?= $ads['AdID'] ?>"><?php echo ($ads['AdStatus'] == "Pending Payment") ? "Payment" : "Resubmit Payment"; ?></h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
 
-                            Pay for: <?= $ads['AdName'] ?>
-                            <form action="#" method="#">
-                                <div class="mb-3">
-                                    <label for="formFile" class="form-label">Upload Image</label>
-                                    <input class="form-control" type="file" id="formFile">
-                                </div>
-                                <input type="submit" class="btn btn-outline-success float-end" value="Submit">
-                            </form>
+                                Pay for: <?= $ads['AdName'] ?>
+                                <form action="#" method="#">
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Upload Image</label>
+                                        <input class="form-control" type="file" id="formFile">
+                                    </div>
+                                    <input type="submit" class="btn btn-outline-success float-end" value="Submit">
+                                </form>
 
 
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" data-bs-target="#historyModal" data-bs-toggle="modal">Back to History</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" data-bs-target="#historyModal" data-bs-toggle="modal">Back to History</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--*PAYMENT MODAL-->
+                <!--*PAYMENT MODAL-->
 
             <?php endif; ?>
 
-            <?php if($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
-            <!--*CANCEL MODAL-->
-            <div class="modal fade" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-                <div class="modal-dialog modal-sm modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Cancel Ad</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
+            <?php if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
+                <!--*CANCEL MODAL-->
+                <div class="modal fade" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Cancel Ad</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
 
-                            Cancel: <?= $ads['AdName'] ?>
-                            <form action="#" method="#">
-                                <label for="formFile" class="form-label">Are you sure you want to cancel? <br>No refunds will be provided!</label>
-                                <div class="container-fluid d-flex justify-content-end">
-                                    <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
-                                    <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
-                                </div>
-                            </form>
+                                Cancel: <?= $ads['AdName'] ?>
+                                <form action="#" method="#">
+                                    <label for="formFile" class="form-label">Are you sure you want to cancel? <br>No refunds will be provided!</label>
+                                    <div class="container-fluid d-flex justify-content-end">
+                                        <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
+                                        <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
+                                    </div>
+                                </form>
 
 
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-primary" data-bs-target="#historyModal" data-bs-toggle="modal">Back to History</button>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" data-bs-target="#historyModal" data-bs-toggle="modal">Back to History</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--*CANCEL MODAL-->
-            <?php endif;?>
+                <!--*CANCEL MODAL-->
+            <?php endif; ?>
 
 
     <?php }
