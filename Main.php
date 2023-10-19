@@ -83,7 +83,7 @@ $classified = new Classified;
 
                 <div class="row d-flex m-2 justify-content-center">
                     <?php
-                    $result = $classified->getAds($key, $filter, "Approved");
+                    $result = $classified->getAds($key, $filter, "Approved", NULL);
                     if (mysqli_num_rows($result) > 0) :
                         while ($ads = $result->fetch_assoc()) {
                             $datetime = new DateTime($ads['AdPostedDateTime']);
