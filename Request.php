@@ -187,34 +187,38 @@
                                         <li class="list-group-item p-0 m-0 border-bottom-0">
 
                                             <div class="d-flex m-2 ">
-                                                <div class="container-fluid p-0 d-inline-flex align-items-center">
-                                                    Status:
-                                                    <?php switch ($ads['AdStatus']) {
-                                                        case "Pending Review":
-                                                        case "Pending Payment":
-                                                            echo '<span class="text-warning" style:"width:150px;">';
-                                                            break;
-                                                        case "Rejected Request":
-                                                        case "Rejected Payment":
-                                                        case "Cancelled":
-                                                        case "Expired":
-                                                            echo '<span class="text-danger" style:"width:150px;">';
-                                                            break;
-                                                        case "Approved":
-                                                            echo '<span class="text-success" style:"width:150px;">';
-                                                            break;
-                                                    }
-                                                    echo $ads['AdStatus'];
-                                                    ?>
-                                                    </span>
-                                                </div>
+
                                         <li class="list-group-item p-0 m-0 border-0">
-                                            <p class="card-text p-2" id="TextTime"><small class="text-muted">
+                                            <p class="card-text mb-3" id="TextTime"><small class="text-muted">
                                                     <?php if ($ads['AdStatus'] == "Expired" || $ads['AdStatus'] == "Cancelled" || $ads['AdStatus'] == "Approved") : echo "Posted at " . $formattedDatetime;
                                                     else : echo "Requested at " . $formattedDatetime;
                                                     endif; ?>
                                                 </small></p>
                                         </li>
+
+
+                                        <div class="container-fluid p-0 d-inline-flex align-items-center mb-2">
+                                            Status:
+                                            <?php switch ($ads['AdStatus']) {
+                                                case "Pending Review":
+                                                case "Pending Payment":
+                                                    echo '<span class="text-warning" style:"width:150px;">';
+                                                    break;
+                                                case "Rejected Request":
+                                                case "Rejected Payment":
+                                                case "Cancelled":
+                                                case "Expired":
+                                                    echo '<span class="text-danger" style:"width:150px;">';
+                                                    break;
+                                                case "Approved":
+                                                    echo '<span class="text-success" style:"width:150px;">';
+                                                    break;
+                                            }
+                                            echo $ads['AdStatus'];
+                                            ?>
+                                            </span>
+                                        </div>
+
 
                                         <li class="list-group-item p-0 m-0 border-bottom-0">
                                             <div class="container-fluid p-0">

@@ -59,7 +59,7 @@ if (isset($_GET['category'])) {
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <?= $_SESSION['auth_user']["user_name"] ?>
                                 </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i> Profile</a></li>
                                     <li><a class="dropdown-item" href="#">Another action</a></li>
                                     <li>
