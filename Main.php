@@ -51,7 +51,7 @@ $classified = new Classified;
                                     $categoryName = $categories["Category"];
                                     $isChecked = in_array($categoryName, $selectedCategories) ? 'checked' : '';
                             ?>
-                                    <div class="checkbox-wrapper-4 " id="CateText">
+                                    <div class="checkbox-wrapper-4 ms-3" id="CateText">
                                         <input class="inp-cbx" id="<?= $categoryName ?>" type="checkbox" name="category[]" value="<?= $categoryName ?>" <?= $isChecked ?> />
                                         <label class="cbx" for="<?= $categoryName ?>"><span>
                                                 <svg width="12px" height="10px">
