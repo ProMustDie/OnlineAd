@@ -1,7 +1,5 @@
 <?php
 include_once('includes/RegisterController.php');
-include_once('includes/Classified.php');
-$classified = new Classified;
 $logIn = new LoginController;
 
 if (isset($_POST['logout_btn'])) {
