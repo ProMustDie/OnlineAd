@@ -81,15 +81,16 @@ include('includes/app.php');
                                             ?>
                                             </span>
                                         </div>
-
                                 <li class="list-group-item p-0 m-0 border-0">
-                                    <p class="card-text px-2" id="TextTime"><small class="text-muted"><?= $formattedDatetime ?></small></p>
+                                    <p class="card-text p-2" id="TextTime"><small class="text-muted"><?php if ($ads['AdStatus'] == "Expired" || $ads['AdStatus'] == "Cancelled" || $ads['AdStatus'] == "Approved") : echo "Posted at " . $formattedDatetime;
+                                                                                                        else : echo "Requested at " . $formattedDatetime;
+                                                                                                        endif; ?></small></p>
                                 </li>
 
                                 <li class="list-group-item p-0 m-0 border-bottom-0">
                                     <div class="container-fluid p-0">
                                         <?php if (($ads['AdStatus'] == "Pending Payment" || $ads['AdStatus'] == "Rejected Payment") && $ads['AdStatus'] != "Approved" && $ads['AdStatus'] != "Cancelled") : ?>
-                                            <button class=" btn btn-outline-success m-1" data-bs-target="#payment-<?= $ads['AdID'] ?>" data-bs-toggle="modal" aria-labelledby="exampleModalToggleLabel2">
+                                            <button class="btn btn-outline-success m-1" data-bs-target="#payment-<?= $ads['AdID'] ?>" data-bs-toggle="modal" aria-labelledby="exampleModalToggleLabel2">
                                                 <?php echo ($ads['AdStatus'] == "Pending Payment") ? "Payment" : "Resubmit"; ?>
                                             </button>
                                         <?php endif; ?>
@@ -97,7 +98,7 @@ include('includes/app.php');
                                             <button class="btn btn-outline-danger m-1" data-bs-target="#cancel-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Cancel Ad</button>
                                         <?php endif; ?>
                                     </div>
-                                </li>
+
 
 
 
