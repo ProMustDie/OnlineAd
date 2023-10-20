@@ -1,4 +1,6 @@
-<?php include('includes/app.php'); ?>
+<?php include('includes/app.php'); 
+include_once('includes/Classified.php');
+$classified = new Classified;?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,7 +17,7 @@
     include("Includes/navbar.php");
     ?>
 
-
+    <?php if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] != "Admin") : ?>
     <!--Request -->
     <div class="container mt-5 p-5 bg-light ">
         <div class="row ">
@@ -78,6 +80,9 @@
     </div>
 
     <!--Request -->
+
+    <?php else:?>
+
 
 
     <!--//! ADMIN -->
@@ -144,7 +149,7 @@
                 <div class="row d-flex m-3 justify-content-center">
 
                     <?php
-                    $result = $classified->getAds(NULL, NULL, NULL, isset($_SESSION['auth_user']) ? $_SESSION['auth_user']['user_id'] : NULL); //Pending Review, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
+                    $result = $classified->getAds($key, $filter, NULL, NULL);
                     if (mysqli_num_rows($result) > 0) :
                         while ($ads = $result->fetch_assoc()) {
                             $datetime = new DateTime($ads['AdPostedDateTime']);
@@ -300,6 +305,8 @@
     </div>
 
     <!--ADMIN -->
+
+    <?php endif;?>  
 
 
 
