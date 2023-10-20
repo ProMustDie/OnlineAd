@@ -93,7 +93,7 @@ include('includes/app.php');
                                         </div>
 
                                 <li class="list-group-item p-0 m-0">
-                                    <p class="card-text p-2" id="TextTime"><small class="text-muted"><?= $ads['UserName'] . " posted at " . $formattedDatetime ?></small></p>
+                                    <p class="card-text p-2" id="TextTime"><small class="text-muted"><?php if($ads['AdStatus'] == "Expired" || $ads['AdStatus'] == "Cancelled" || $ads['AdStatus'] == "Approved"): echo "Posted at " . $formattedDatetime; else: echo "Requested at " . $formattedDatetime; endif; ?></small></p>
                                 </li>
 
                         </div>
