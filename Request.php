@@ -82,7 +82,7 @@
 
     <!--//! ADMIN -->
 
-    <div class="container">
+    <div class="container-fluid">
 
         <!--//!Category-->
         <div class="row">
