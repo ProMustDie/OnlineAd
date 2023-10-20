@@ -36,6 +36,10 @@ public function isUsernameExist($name)
     $stmt->store_result();
     return $stmt->num_rows > 0;
 }  
+
+public function isMaxChar15($name){
+    return strlen($name) >15;
+}
 }
 
 class LoginController   

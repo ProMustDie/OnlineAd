@@ -38,6 +38,15 @@ if (isset($_POST["SignUpSubmit"])) {
         $ValidSignUp = false;
     }
 
+    if ($ValidSignUp == true && $Register->isMaxChar15($username)) {
+        $registerErr = "Username must not be more than 15 characters";
+        $ValidSignUp = false;
+    } elseif ($ValidSignUp == false) {
+        $ValidSignUp = false;
+    } elseif (!($Register->isMaxChar15($username))) {
+        $ValidSignUp = true;
+    }
+
     if ($ValidSignUp == true && $Register->isUsernameExist($username)) {
         $registerErr = "This Username is taken!";
         $ValidSignUp = false;
