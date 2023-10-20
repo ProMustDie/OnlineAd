@@ -1,5 +1,7 @@
 <?php
 include('includes/app.php');
+include_once('includes/Classified.php');
+$classified = new Classified;
 ?>
 
 
