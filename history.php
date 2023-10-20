@@ -9,6 +9,7 @@ include('includes/app.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="CSS/history.css" rel="stylesheet">
     <title>Document</title>
 </head>
 
@@ -27,6 +28,8 @@ include('includes/app.php');
             $result = $classified->getAds(NULL, NULL, NULL, isset($_SESSION['auth_user']) ? $_SESSION['auth_user']['user_id'] : NULL); //Pending Review, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
             if (mysqli_num_rows($result) > 0) :
                 while ($ads = $result->fetch_assoc()) {
+                    $datetime = new DateTime($ads['AdPostedDateTime']);
+                    $formattedDatetime = $datetime->format('h:iA d/m/Y');
             ?>
 
                     <div class="card m-3" style="width: 24rem;">
@@ -54,31 +57,31 @@ include('includes/app.php');
                             </p>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"></li>
-                                <li class="list-group-item p-0">
+                                <li class="list-group-item p-0 border-bottom-0">
 
-                                    <div class="d-flex  m-2">
-                                        <div class="container-fluid p-0 d-inline-flex">
+                                    <div class="d-flex m-2 ">
+                                        <div class="container-fluid p-0 d-inline-flex align-items-center">
                                             Status:
                                             <?php switch ($ads['AdStatus']) {
                                                 case "Pending Review":
                                                 case "Pending Payment":
-                                                    echo '<p class="text-warning">';
+                                                    echo '<span class="text-warning" style:"width:150px;">';
                                                     break;
                                                 case "Rejected Request":
                                                 case "Rejected Payment":
                                                 case "Cancelled":
                                                 case "Expired":
-                                                    echo '<p class="text-danger">';
+                                                    echo '<span class="text-danger" style:"width:150px;">';
                                                     break;
                                                 case "Approved":
-                                                    echo '<p class="text-success">';
+                                                    echo '<span class="text-success" style:"width:150px;">';
                                                     break;
                                             }
                                             echo $ads['AdStatus'];
                                             ?>
-                                            </p>
+                                            </span>
                                         </div>
-                                        <div class="container text-end">
+                                        <div class="container text-end p-0" style="width:70%;">
                                             <?php if (($ads['AdStatus'] == "Pending Payment" || $ads['AdStatus'] == "Rejected Payment") && $ads['AdStatus'] != "Approved" && $ads['AdStatus'] != "Cancelled") : ?>
                                                 <button class="btn btn-outline-success m-1" data-bs-target="#payment-<?= $ads['AdID'] ?>" data-bs-toggle="modal" aria-labelledby="exampleModalToggleLabel2">
                                                     <?php echo ($ads['AdStatus'] == "Pending Payment") ? "Payment" : "Resubmit"; ?>
@@ -89,11 +92,39 @@ include('includes/app.php');
                                             <?php endif; ?>
                                         </div>
 
-                                    </div>
+                                <li class="list-group-item p-0 m-0">
+                                    <p class="card-text p-2" id="TextTime"><small class="text-muted"><?= $ads['UserName'] . " posted at " . $formattedDatetime ?></small></p>
                                 </li>
-                            </ul>
+
+                        </div>
+                        </li>
+
+                        </ul>
+                    </div>
+
+
+
+                    <!--//!MODAL FOR IMAGES POPUP-->
+
+                    <div class="modal fade p-0" id="modalImg-<?= $ads['AdID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content modal-xl">
+                                <div class="modal-header p-2">
+                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body" style="max-height: 80vh; overflow-y: auto;">
+                                    <img class="modal-content" id="modalImg" src="<?= $ads['AdPicture'] ?>">
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="container text-center text-break m-auto" id="caption"><?= $ads['AdDescription'] ?></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+
+
             <?php }
             endif; ?>
         </div>
