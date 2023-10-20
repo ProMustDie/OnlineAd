@@ -23,7 +23,7 @@ include('includes/app.php');
 
     <!--//!HISTORY MODAL-->
     <div class="col bg-light">
-        <div class="row d-flex justify-content-center">
+        <div class="row d-flex justify-content-center m-0">
             <?php
             $result = $classified->getAds(NULL, NULL, NULL, isset($_SESSION['auth_user']) ? $_SESSION['auth_user']['user_id'] : NULL); //Pending Review, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
             if (mysqli_num_rows($result) > 0) :
@@ -57,7 +57,7 @@ include('includes/app.php');
                             </p>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"></li>
-                                <li class="list-group-item p-0 border-bottom-0">
+                                <li class="list-group-item p-0 m-0 border-bottom-0">
 
                                     <div class="d-flex m-2 ">
                                         <div class="container-fluid p-0 d-inline-flex align-items-center">
@@ -81,20 +81,25 @@ include('includes/app.php');
                                             ?>
                                             </span>
                                         </div>
-                                        <div class="container text-end p-0" style="width:70%;">
-                                            <?php if (($ads['AdStatus'] == "Pending Payment" || $ads['AdStatus'] == "Rejected Payment") && $ads['AdStatus'] != "Approved" && $ads['AdStatus'] != "Cancelled") : ?>
-                                                <button class="btn btn-outline-success m-1" data-bs-target="#payment-<?= $ads['AdID'] ?>" data-bs-toggle="modal" aria-labelledby="exampleModalToggleLabel2">
-                                                    <?php echo ($ads['AdStatus'] == "Pending Payment") ? "Payment" : "Resubmit"; ?>
-                                                </button>
-                                            <?php endif; ?>
-                                            <?php if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
-                                                <button class="btn btn-outline-danger m-1" data-bs-target="#cancel-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Cancel Ad</button>
-                                            <?php endif; ?>
-                                        </div>
 
-                                <li class="list-group-item p-0 m-0">
-                                    <p class="card-text p-2" id="TextTime"><small class="text-muted"><?= $ads['UserName'] . " posted at " . $formattedDatetime ?></small></p>
+                                <li class="list-group-item p-0 m-0 border-0">
+                                    <p class="card-text px-2" id="TextTime"><small class="text-muted"><?= $formattedDatetime ?></small></p>
                                 </li>
+
+                                <li class="list-group-item p-0 m-0 border-bottom-0">
+                                    <div class="container-fluid p-0">
+                                        <?php if (($ads['AdStatus'] == "Pending Payment" || $ads['AdStatus'] == "Rejected Payment") && $ads['AdStatus'] != "Approved" && $ads['AdStatus'] != "Cancelled") : ?>
+                                            <button class=" btn btn-outline-success m-1" data-bs-target="#payment-<?= $ads['AdID'] ?>" data-bs-toggle="modal" aria-labelledby="exampleModalToggleLabel2">
+                                                <?php echo ($ads['AdStatus'] == "Pending Payment") ? "Payment" : "Resubmit"; ?>
+                                            </button>
+                                        <?php endif; ?>
+                                        <?php if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
+                                            <button class="btn btn-outline-danger m-1" data-bs-target="#cancel-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Cancel Ad</button>
+                                        <?php endif; ?>
+                                    </div>
+                                </li>
+
+
 
                         </div>
                         </li>
