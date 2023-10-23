@@ -137,6 +137,8 @@ $classified = new Classified;
 
 
             <?php }
+            else:
+            echo "No Advertisement Request or Post has been made!";
             endif; ?>
         </div>
     </div>
