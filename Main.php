@@ -98,7 +98,7 @@ $classified = new Classified;
                                     <p class="card-text text-truncate text-secondary" id="TextSub"><?= $ads['AdDescription'] ?></p>
                                     <p class="card-text lh-lg" id="TextCate">Category:
                                         <?php
-                                        $categoriesArray = explode(', ', $ads['AdCategory']);
+                                        $categoriesArray = explode(',', $ads['AdCategory']);
                                         foreach ($categoriesArray as $category) {
 
                                         ?>
