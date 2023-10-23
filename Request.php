@@ -26,7 +26,7 @@ $classified = new Classified; ?>
 
 
 
-                        <input type="file" class="form-control m-auto mb-2" id="validationCustom01" name="image" style="width:75%;" required>
+                        <input type="file" class="form-control m-auto mb-2" id="validationCustom01" name="image" style="width:75%;" required accept="image/png, image/jpeg, image/jpg, application/pdf">
 
                         <input type="text" class="form-control m-auto mb-2" id="validationCustom02" placeholder="Title" name="title" required style="width:75%;">
 
