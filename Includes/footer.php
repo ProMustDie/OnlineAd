@@ -1,5 +1,3 @@
-
-
 <footer class="footer bg-dark text-center text-white mt-auto">
     <!-- Grid container -->
     <div class="container p-4 pb-0 mt-auto">
@@ -23,6 +21,9 @@
             <!-- Github -->
             <a class="btn btn-outline-light btn-floating m-1" href="https://t.me/thesuntelegram" role="button"><i class="bi bi-telegram"></i></a>
 
+            <a class="btn btn-outline-light btn-floating m-1" href="https://ipaper.thesundaily.my/epaper/viewer.aspx?publication=The%20Sun%20Daily" role="button">
+                <img src="https://www.thesundaily.my/base-portlet/webrsrc/theme/5d54942b1f61e0b83545fbac4d992dab.png" class="bi" width="24" height="24" alt="Custom Image">
+            </a>
         </section>
         <!-- Section: Social media -->
     </div>
