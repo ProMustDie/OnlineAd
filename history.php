@@ -47,7 +47,7 @@ $classified = new Classified;
                             </p>
                             <p class="card-text lh-lg" id="TextCate">Category:
                                 <?php
-                                $categoriesArray = explode(' ', $ads['AdCategory']);
+                                $categoriesArray = explode(', ', $ads['AdCategory']);
                                 foreach ($categoriesArray as $category) {
 
                                 ?>
