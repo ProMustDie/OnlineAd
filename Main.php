@@ -95,7 +95,7 @@ $classified = new Classified;
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title fs-3 fw-bold" id="TextHeader"><?= $ads['AdName'] ?></h5>
-                                    <p class="card-text text-truncate" id="TextSub"><?= $ads['AdDescription'] ?></p>
+                                    <p class="card-text text-truncate text-secondary" id="TextSub"><?= $ads['AdDescription'] ?></p>
                                     <p class="card-text lh-lg" id="TextCate">Category:
                                         <?php
                                         $categoriesArray = explode(' ', $ads['AdCategory']);
@@ -113,7 +113,7 @@ $classified = new Classified;
 
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item"></li>
-                                        <p class="card-text m-2 text-tertiary" id="TextTime"><small class="text-muted"><?= $ads['UserName'] . " posted on " . $formattedDatetime ?></small></p>
+                                        <p class="card-text m-2 text-tertiary" id="TextTime"><small class="text-secondary"><?= $ads['UserName'] . " posted on " . $formattedDatetime ?></small></p>
                                         <?php
                                         if (isset($_SESSION['auth_user']) && $_SESSION['auth_user']['user_type'] === "Admin") :
 

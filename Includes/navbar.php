@@ -24,6 +24,18 @@ if (isset($_GET['category'])) {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 <link href="CSS/index.css" rel="stylesheet">
 
+<style>
+    body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    footer {
+        margin-top: 100%;
+    }
+</style>
+
 <body>
 
     <!--navbar-->

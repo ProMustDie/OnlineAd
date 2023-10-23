@@ -136,10 +136,14 @@ $classified = new Classified;
 
 
 
-            <?php }
-            else:
-            echo "No Advertisement Request or Post has been made!";
-            endif; ?>
+                <?php }
+            else : ?>
+
+
+                <span class="h2 text-center text-secondary mt-5">No Advertisement Request or Post has been made!</span>
+
+
+            <?php endif; ?>
         </div>
     </div>
 
