@@ -26,7 +26,7 @@ $classified = new Classified; ?>
 
 
 
-                        <input type="file" class="form-control m-auto mb-2" id="validationCustom01" name="image" style="width:75%;" required>
+                        <input type="file" class="form-control m-auto mb-2" id="validationCustom01" name="image" style="width:75%;" required accept="image/png, image/jpeg, image/jpg, application/pdf">
 
                         <input type="text" class="form-control m-auto mb-2" id="validationCustom02" placeholder="Title" name="title" required style="width:75%;">
 
@@ -165,7 +165,7 @@ $classified = new Classified; ?>
 
 
                             <input type="hidden" name="search" value="<?= $key ?>">
-                            <input type="submit" class="button-31 mt-5" value="Search">
+                            <input type="submit" class="button-31 mt-5 mb-5" value="Search">
 
                         </div>
                     </form>

@@ -69,7 +69,7 @@ $classified = new Classified;
                             ?>
                         </div>
                         <input type="hidden" name="search" value="<?= $key ?>">
-                        <input type="submit" class="button-31 mt-5" value="Search">
+                        <input type="submit" class="button-31 mt-5 mb-5" value="Search">
 
                     </div>
                 </form>
