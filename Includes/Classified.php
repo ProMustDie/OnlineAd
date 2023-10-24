@@ -78,6 +78,20 @@
                 $stmt->execute();
                 $result = $stmt->get_result();
                 return $result;
+            }elseif($key!= NULL && $filter == NULL && $stat == NULL ){
+                
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
+                FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
+                WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
+                AND a.AdAuthorID = u.UserID
+                ORDER BY a.AdID DESC ";
+
+                $param = "%$key%";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("sss", $param, $param, $param);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                return $result;
             }else{
                 $filter = explode(" ", $filter);
                 $categoryConditions = [];
