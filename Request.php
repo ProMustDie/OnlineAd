@@ -1,6 +1,9 @@
 <?php include('includes/app.php');
 include_once('includes/Classified.php');
-$classified = new Classified; ?>
+$classified = new Classified; 
+include('Includes/AuthController.php');
+$AuthLogin = new AuthenticatorController();?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -82,7 +85,7 @@ $classified = new Classified; ?>
 
         <!--Request -->
 
-    <?php else : ?>
+    <?php elseif(isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] == "Admin") : ?>
 
 
 

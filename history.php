@@ -2,6 +2,8 @@
 include('includes/app.php');
 include_once('includes/Classified.php');
 $classified = new Classified;
+include('includes/AuthController.php');
+$AuthLogin = new AuthenticatorController();
 ?>
 
 

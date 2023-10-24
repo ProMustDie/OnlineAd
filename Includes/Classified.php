@@ -34,7 +34,6 @@
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bind_param("s", $status);
                 $stmt->execute();
-                echo "3 null";
                 $result = $stmt->get_result();
                 return $result;
             }elseif($key == NULL && $filter == NULL && $UserID != NULL){
@@ -47,7 +46,6 @@
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bind_param("si", $status, $UserID);
                 $stmt->execute();
-                echo "2 NUll 1 not null";
                 $result = $stmt->get_result();
                 return $result;
             }elseif($key!= NULL && $filter == NULL && $UserID != NULL){
@@ -63,7 +61,6 @@
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bind_param("ssssi", $param, $param, $param, $status, $UserID);
                 $stmt->execute();
-                echo "2 not null 1 null";
                 $result = $stmt->get_result();
                 return $result;
             }elseif($key!= NULL && $filter == NULL && $stat != NULL ){
@@ -79,7 +76,6 @@
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bind_param("ssss", $param, $param, $param, $status);
                 $stmt->execute();
-                echo "2 not null 1 null";
                 $result = $stmt->get_result();
                 return $result;
             }else{
