@@ -14,12 +14,13 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-$name = isset($_POST['title']) ? $_POST['title'] : false;
-$description = isset($_POST['description']) ? $_POST['description'] : false;
-$id = isset($_POST['UserID']) ? $_POST['UserID'] : false;
+$name = empty($_POST['title']) ? false :  $_POST['title'];
+$description = empty($_POST['description']) ? false :  $_POST['description'];
+$id = empty($_POST['UserID']) ? false : $_POST['UserID'];
+$category = empty($_POST['category']) ? false : implode(",",$_POST['category']);
 
 
-if (!($name == false || $description == false)) {
+if (!($name == false || $description == false || $category == false)) {
     //means no image uploaded
     if (!($_FILES['fileUpload']['error'] == 4)) {
         if ($_FILES['fileUpload']['error'] === UPLOAD_ERR_OK) {
@@ -54,8 +55,8 @@ if (!($name == false || $description == false)) {
                         die("Connection failed: " . mysqli_connect_error());
                     }
 
-                    $sql = "INSERT INTO ads (AdName, AdDescription, price, AdAuthorID, AdStatus, AdPicture,AdCategory, AdPostedDateTime) VALUES 
-                    ('$name', '$description', 0, '$id', 'Pending Review','$ImageLoc', 0, 0)";
+                    $sql = "INSERT INTO ads (AdName, AdDescription, price, AdAuthorID, AdStatus, AdPicture, AdCategory, AdPostedDateTime) VALUES 
+                    ('$name', '$description', 0, '$id', 'Pending Review','$ImageLoc', '$category', 0)";
 
 
 
@@ -107,7 +108,7 @@ if (!($name == false || $description == false)) {
     }
 } else {
     echo '<script type="text/javascript">';
-    echo 'alert("Please try again");';
+    echo 'alert("Please fill in all the required fields!");';
     echo 'window.location = "../Request.php";';
     echo '</script>';
 }
