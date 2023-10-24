@@ -41,34 +41,31 @@ $AuthLogin = new AuthenticatorController(); ?>
                         <div class="container text-start p-0" style="width:75%;">
 
                             <label>Categories</label>
+
+                            <?php
+                            $categoriesData = $classified->getCategories();
+                            $result = $categoriesData['result'];
+
+                            if (mysqli_num_rows($result) > 0) :
+                                while ($categories = $result->fetch_assoc()) {
+                                    $categoryName = $categories["Category"];
+                            ?>
                             <div class="checkbox-wrapper-4">
-                                <input class="inp-cbx" id="morning" type="checkbox" name="category" />
-                                <label class="cbx m-auto" for="morning"><span>
+                                <input class="inp-cbx" id="<?= $categoryName ?>" type="checkbox" name="category[]" value="<?= $categoryName ?>" />
+                                <label class="cbx m-auto" for="<?= $categoryName ?>"><span>
                                         <svg width="12px" height="10px">
                                             <use xlink:href="#check-4"></use>
-                                        </svg></span><span>Morning</span></label>
+                                        </svg></span><span><?= $categoryName ?></span></label>
                                 <svg class="inline-svg">
                                     <symbol id="check-4" viewbox="0 0 12 10">
                                         <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
                                     </symbol>
                                 </svg>
                             </div>
-
-                            <div class="checkbox-wrapper-4">
-                                <input class="inp-cbx" id="Afternoon" type="checkbox" name="category" />
-                                <label class="cbx m-auto" for="Afternoon"><span>
-                                        <svg width="12px" height="10px">
-                                            <use xlink:href="#check-4"></use>
-                                        </svg></span><span>Afternoon</span></label>
-                                <svg class="inline-svg">
-                                    <symbol id="check-4" viewbox="0 0 12 10">
-                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                                    </symbol>
-                                </svg>
-                            </div>
-
+                            <?php }endif;?>
                         </div>
                         <!--//! Need to use php to validate atleast 1 category is chosen -->
+                        
 
 
 
