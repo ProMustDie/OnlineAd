@@ -254,9 +254,9 @@ $AuthLogin = new AuthenticatorController(); ?>
                                             <li class="list-group-item p-0 m-0 border-bottom-0">
                                                 <div class="container-fluid p-0">
                                                     <form action="#" method="#">
-                                                        <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#AcceptModal-<?= $ads['AdID'] ?>">Accept</a>
-                                                        <a href="#" class="btn btn-outline-danger mx-2" data-bs-toggle="modal" data-bs-target="#RejectModal-<?= $ads['AdID'] ?>">Reject</a>
-                                                        <a href="#" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Receipt-<?= $ads['AdID'] ?>">Check Payment</a>
+                                                        <a href="#" class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#AcceptModal-<?= $ads['AdID'] ?>">Accept</a>
+                                                        <a href="#" class="btn btn-outline-danger mx-2 mb-2" data-bs-toggle="modal" data-bs-target="#RejectModal-<?= $ads['AdID'] ?>">Reject</a>
+                                                        <a href="#" class="btn btn-outline-success mb-2" data-bs-toggle="modal" data-bs-target="#Receipt-<?= $ads['AdID'] ?>">Check Payment</a>
                                                     </form>
 
                                                 </div>
