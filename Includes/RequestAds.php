@@ -19,12 +19,6 @@ $description = $_POST['description'];
 $id = $_POST['UserID'];
 
 
-$sql = "INSERT INTO ads (AdName, AdDescription, price, AdAuthorID, AdStatus, AdCategory, AdPostedDateTime) VALUES ('$name', '$description', 0, '$id', 'Pending Review', 0, 0)";
-
-if (mysqli_query($conn, $sql)) {
-} else {
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
 
 //means no image uploaded
 if (!($_FILES['fileUpload']['error'] == 4)) {
@@ -60,10 +54,8 @@ if (!($_FILES['fileUpload']['error'] == 4)) {
                     die("Connection failed: " . mysqli_connect_error());
                 }
 
-                $sql = "UPDATE ads SET
-                AdPicture = '$allowedfileExtensions'
-                WHERE AdID=$id
-                AND ;";
+                $sql = "INSERT INTO ads (AdName, AdDescription, price, AdAuthorID, AdStatus, AdPicture,AdCategory, AdPostedDateTime) VALUES ('$name', '$description', 0, '$id', 'Pending Review','$ImageLoc', 0, 0)";
+
 
 
                 if (mysqli_query($conn, $sql)) {

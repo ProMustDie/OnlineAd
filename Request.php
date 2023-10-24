@@ -42,7 +42,7 @@ $AuthLogin = new AuthenticatorController(); ?>
 
                             <label>Categories</label>
                             <div class="checkbox-wrapper-4">
-                                <input class="inp-cbx" id="morning" type="checkbox" name="category[]" />
+                                <input class="inp-cbx" id="morning" type="checkbox" name="category" />
                                 <label class="cbx m-auto" for="morning"><span>
                                         <svg width="12px" height="10px">
                                             <use xlink:href="#check-4"></use>
@@ -55,7 +55,7 @@ $AuthLogin = new AuthenticatorController(); ?>
                             </div>
 
                             <div class="checkbox-wrapper-4">
-                                <input class="inp-cbx" id="Afternoon" type="checkbox" name="category[]" />
+                                <input class="inp-cbx" id="Afternoon" type="checkbox" name="category" />
                                 <label class="cbx m-auto" for="Afternoon"><span>
                                         <svg width="12px" height="10px">
                                             <use xlink:href="#check-4"></use>
