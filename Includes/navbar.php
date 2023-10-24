@@ -16,10 +16,12 @@ if (isset($_GET['search'])) {
     $key = $_GET['search'];
 }
 if (isset($_GET['category'])) {
-    $filter = $_GET['category'];
+    $cat = $_GET['category'];
+    $filter = implode(" ", $cat);
 }
 if (isset($_GET['status'])) {
-    $status = $_GET['status'];
+    $stat = $_GET['status'];
+    $status = implode(" ", $stat);
 }
 ?>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -104,7 +106,7 @@ if (isset($_GET['status'])) {
                     <form class="d-flex" action="" method="GET">
                         <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search" value="<?= $key ?>">
                         <input type="hidden" name="category[]" value="<?= $filter ?>">
-                        <input type="hidden" name="status[]" value="<?= $status ?>">
+                        <input type="hidden" name="status[]" value="<?= $status ?>"> <!-- Change this to implode array-->
                         <button class="btn btn-outline-light" type="submit" style="box-shadow:none;">Search</button>
                     </form>
                 </div>

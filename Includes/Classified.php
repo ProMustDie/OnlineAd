@@ -34,6 +34,7 @@
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bind_param("s", $status);
                 $stmt->execute();
+                echo "3 null";
                 $result = $stmt->get_result();
                 return $result;
             }elseif($key == NULL && $filter == NULL && $UserID != NULL){
@@ -46,19 +47,50 @@
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bind_param("si", $status, $UserID);
                 $stmt->execute();
+                echo "2 NUll 1 not null";
+                $result = $stmt->get_result();
+                return $result;
+            }elseif($key!= NULL && $filter == NULL && $UserID != NULL){
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
+                        FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
+                        WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
+                        AND a.AdAuthorID = u.UserID
+                        AND a.AdStatus LIKE ?
+                        AND a.AdAuthorID = ?
+                        ORDER BY a.AdID DESC ";
+
+                $param = "%$key%";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("ssssi", $param, $param, $param, $status, $UserID);
+                $stmt->execute();
+                echo "2 not null 1 null";
+                $result = $stmt->get_result();
+                return $result;
+            }elseif($key!= NULL && $filter == NULL && $stat != NULL ){
+                
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
+                FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
+                WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
+                AND a.AdAuthorID = u.UserID
+                AND a.AdStatus LIKE ?
+                ORDER BY a.AdID DESC ";
+
+                $param = "%$key%";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param("ssss", $param, $param, $param, $status);
+                $stmt->execute();
+                echo "2 not null 1 null";
                 $result = $stmt->get_result();
                 return $result;
             }else{
+                $filter = explode(" ", $filter);
                 $categoryConditions = [];
                 foreach ($filter as $category) {
-                    // Add each category filter condition
                     $categoryConditions[] = "FIND_IN_SET(?, a.AdCategory) > 0";
                 }
             
-                // Combine all category conditions using OR
-                $categoryCondition = implode(' AND ', $categoryConditions);
-            
-                // Include the category filter condition in your SQL
+                $categoryCondition = implode(' OR ', $categoryConditions);
+        
                 $sql = "SELECT DISTINCT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, " . $this->userTable . " as u
                         WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)

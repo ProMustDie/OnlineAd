@@ -27,7 +27,7 @@ $classified = new Classified;
     <div class="col bg-light">
         <div class="row d-flex justify-content-center m-0">
             <?php
-            $result = $classified->getAds(NULL, NULL, NULL, isset($_SESSION['auth_user']) ? $_SESSION['auth_user']['user_id'] : NULL); //Pending Review, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
+            $result = $classified->getAds($key, NULL, NULL, isset($_SESSION['auth_user']) ? $_SESSION['auth_user']['user_id'] : NULL); //Pending Review, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
             if (mysqli_num_rows($result) > 0) :
                 while ($ads = $result->fetch_assoc()) {
                     $datetime = new DateTime($ads['AdPostedDateTime']);
@@ -140,7 +140,7 @@ $classified = new Classified;
             else : ?>
 
 
-                <span class="h2 text-center text-secondary mt-5">No Advertisement Request or Post has been made!</span>
+                <span class="h2 text-center text-secondary mt-5">No Advertisement Request or Post was found!</span>
 
 
             <?php endif; ?>
