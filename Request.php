@@ -254,8 +254,8 @@ $AuthLogin = new AuthenticatorController(); ?>
                                             <li class="list-group-item p-0 m-0 border-bottom-0">
                                                 <div class="container-fluid p-0">
                                                     <form action="#" method="#">
-                                                        <a href="#" class="btn btn-outline-primary">Accept</a>
-                                                        <a href="#" class="btn btn-outline-danger mx-2">Reject</a>
+                                                        <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#AcceptModal-<?= $ads['AdID'] ?>">Accept</a>
+                                                        <a href="#" class="btn btn-outline-danger mx-2" data-bs-toggle="modal" data-bs-target="#RejectModal-<?= $ads['AdID'] ?>">Reject</a>
                                                         <a href="#" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Receipt-<?= $ads['AdID'] ?>">Check Payment</a>
                                                     </form>
 
@@ -318,6 +318,57 @@ $AuthLogin = new AuthenticatorController(); ?>
                                         </div>
                                     </div>
                                 </div>
+
+
+                                <!--//!REJECT MODAL-->
+                                <div class="modal fade" id="RejectModal-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalToggleLabel5">Reject Ad</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                Reject: <?= $ads['AdName'] ?>
+                                                <form action="Includes/authActions.php?request=deleteAd" method="POST">
+                                                    <label for="formFile" class="form-label">Are you sure you want to reject?</label>
+                                                    <div class="container-fluid d-flex justify-content-end">
+                                                        <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
+                                                        <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
+                                                        <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!--//!Accept MODAL-->
+                                <div class="modal fade" id="AcceptModal-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalToggleLabel5">Accept Ad</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                Accept: <?= $ads['AdName'] ?>
+                                                <form action="Includes/authActions.php?request=deleteAd" method="POST">
+                                                    <label for="formFile" class="form-label">Are you sure you want to Accept?</label>
+                                                    <div class="container-fluid d-flex justify-content-end">
+                                                        <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
+                                                        <input type="submit" class="btn btn-outline-success mx-2 px-4" value="Yes">
+                                                        <button type="button" class="btn btn-outline-danger px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
 
 
                         <?php }
