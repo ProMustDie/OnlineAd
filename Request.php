@@ -22,11 +22,12 @@ $classified = new Classified; ?>
         <div class="container mt-5 p-5 bg-light ">
             <div class="row ">
                 <div class="col ">
-                    <form action="#" method="#" class="needs-validation " novalidate>
+                    <form action="Includes/RequestAds.php" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
 
 
+                        <input type="hidden" name="UserID" value="<?= $_SESSION['auth_user']['user_id'] ?>">
 
-                        <input type="file" class="form-control m-auto mb-2" id="validationCustom01" name="image" style="width:75%;" required accept="image/png, image/jpeg, image/jpg, application/pdf">
+                        <input type="file" class="form-control m-auto mb-2" id="validationCustom01" name="fileUpload" style="width:75%;" required accept="image/png, image/jpeg, image/jpg, application/pdf">
 
                         <input type="text" class="form-control m-auto mb-2" id="validationCustom02" placeholder="Title" name="title" required style="width:75%;">
 
@@ -38,7 +39,7 @@ $classified = new Classified; ?>
 
                             <label>Categories</label>
                             <div class="checkbox-wrapper-4">
-                                <input class="inp-cbx" id="morning" type="checkbox" />
+                                <input class="inp-cbx" id="morning" type="checkbox" name="category[]" />
                                 <label class="cbx m-auto" for="morning"><span>
                                         <svg width="12px" height="10px">
                                             <use xlink:href="#check-4"></use>
@@ -51,7 +52,7 @@ $classified = new Classified; ?>
                             </div>
 
                             <div class="checkbox-wrapper-4">
-                                <input class="inp-cbx" id="Afternoon" type="checkbox" />
+                                <input class="inp-cbx" id="Afternoon" type="checkbox" name="category[]" />
                                 <label class="cbx m-auto" for="Afternoon"><span>
                                         <svg width="12px" height="10px">
                                             <use xlink:href="#check-4"></use>
