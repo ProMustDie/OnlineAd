@@ -102,18 +102,32 @@ $classified = new Classified; ?>
                             <hr>
                             <div class="text-start">
 
-                                <div class="checkbox-wrapper-4 ms-3" id="CateText">
-                                    <input class="inp-cbx" id="Evening" type="checkbox" />
-                                    <label class="cbx" for="Evening"><span>
-                                            <svg width="12px" height="10px">
-                                                <use xlink:href="#check-4"></use>
-                                            </svg></span><span>Evening</span></label>
-                                    <svg class="inline-svg">
-                                        <symbol id="check-4" viewbox="0 0 12 10">
-                                            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                                        </symbol>
-                                    </svg>
-                                </div>
+                            <?php
+                            $categoriesData = $classified->getCategories();
+                            $result = $categoriesData['result'];
+                            $selectedCategories = $categoriesData['selectedCategories'];
+
+                            if (mysqli_num_rows($result) > 0) :
+                                while ($categories = $result->fetch_assoc()) {
+                                    $categoryName = $categories["Category"];
+                                    $isChecked = in_array($categoryName, $selectedCategories) ? 'checked' : '';
+                            ?>
+                                    <div class="checkbox-wrapper-4 ms-3" id="CateText">
+                                        <input class="inp-cbx" id="<?= $categoryName ?>" type="checkbox" name="category[]" value="<?= $categoryName ?>" <?= $isChecked ?> />
+                                        <label class="cbx" for="<?= $categoryName ?>"><span>
+                                                <svg width="12px" height="10px">
+                                                    <use xlink:href="#check-4"></use>
+                                                </svg></span><span><?= $categoryName ?></span></label>
+                                        <svg class="inline-svg">
+                                            <symbol id="check-4" viewbox="0 0 12 10">
+                                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                            </symbol>
+                                        </svg>
+                                    </div>
+                            <?php
+                                }
+                            endif;
+                            ?>
 
                             </div>
 
@@ -121,18 +135,32 @@ $classified = new Classified; ?>
                             <hr>
                             <div class="text-start">
 
-                                <div class="checkbox-wrapper-4 ms-3" id="CateText">
-                                    <input class="inp-cbx" id="Paid" type="checkbox" />
-                                    <label class="cbx" for="Paid"><span>
-                                            <svg width="12px" height="10px">
-                                                <use xlink:href="#check-4"></use>
-                                            </svg></span><span>Paid</span></label>
-                                    <svg class="inline-svg">
-                                        <symbol id="check-4" viewbox="0 0 12 10">
-                                            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                                        </symbol>
-                                    </svg>
-                                </div>
+                            <?php
+                            $statusData = $classified->getStatus();
+                            $result = $statusData['result'];
+                            $selectedStatus = $statusData['selectedStatus'];
+
+                            if (mysqli_num_rows($result) > 0) :
+                                while ($stat = $result->fetch_assoc()) {
+                                    $statusName = $stat["AdStatus"];
+                                    $isChecked = in_array($statusName, $selectedStatus) ? 'checked' : '';
+                            ?>
+                                    <div class="checkbox-wrapper-4 ms-3" id="CateText">
+                                        <input class="inp-cbx" id="<?= $statusName ?>" type="checkbox" name="status[]" value="<?= $statusName ?>" <?= $isChecked ?> />
+                                        <label class="cbx" for="<?= $statusName ?>"><span>
+                                                <svg width="12px" height="10px">
+                                                    <use xlink:href="#check-4"></use>
+                                                </svg></span><span><?= $statusName ?></span></label>
+                                        <svg class="inline-svg">
+                                            <symbol id="check-4" viewbox="0 0 12 10">
+                                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                            </symbol>
+                                        </svg>
+                                    </div>
+                            <?php
+                                }
+                            endif;
+                            ?>
 
                             </div>
 
@@ -150,7 +178,7 @@ $classified = new Classified; ?>
                     <div class="row d-flex m-3 justify-content-center">
 
                         <?php
-                        $result = $classified->getAds($key, $filter, NULL, NULL);
+                        $result = $classified->getAds($key, $filter, $status, NULL);
                         if (mysqli_num_rows($result) > 0) :
                             while ($ads = $result->fetch_assoc()) {
                                 $datetime = new DateTime($ads['AdPostedDateTime']);
@@ -170,7 +198,7 @@ $classified = new Classified; ?>
                                         </p>
                                         <p class="card-text lh-lg" id="TextCate">Category:
                                             <?php
-                                            $categoriesArray = explode(' ', $ads['AdCategory']);
+                                            $categoriesArray = explode(',', $ads['AdCategory']);
                                             foreach ($categoriesArray as $category) {
 
                                             ?>

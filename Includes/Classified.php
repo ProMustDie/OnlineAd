@@ -14,10 +14,18 @@
 
         public function getAds($key, $filter, $stat, $UserID){
             $key = $this->conn->real_escape_string($key);
-            $filter = $this->conn->real_escape_string($filter);
             $status = "%$stat%";
 
-            if($key == NULL && $filter == NULL && $UserID == NULL){
+            if($key == NULL && $filter == NULL && $UserID == NULL && $stat == NULL){
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
+                        FROM " . $this->adsTable . " as a, " . $this->userTable . " as u
+                        WHERE a.AdAuthorID = u.UserID
+                        ORDER BY a.AdID DESC ";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                return $result;
+            }elseif($key == NULL && $filter == NULL && $UserID == NULL){
                 $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, " . $this->userTable . " as u
                         WHERE a.AdAuthorID = u.UserID
@@ -41,28 +49,38 @@
                 $result = $stmt->get_result();
                 return $result;
             }else{
+                $categoryConditions = [];
+                foreach ($filter as $category) {
+                    // Add each category filter condition
+                    $categoryConditions[] = "FIND_IN_SET(?, a.AdCategory) > 0";
+                }
+            
+                // Combine all category conditions using OR
+                $categoryCondition = implode(' AND ', $categoryConditions);
+            
+                // Include the category filter condition in your SQL
                 $sql = "SELECT DISTINCT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
-                FROM " . $this->adsTable . " as a, " . $this->userTable . " as u
-                WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
-                AND a.AdCategory LIKE ?
-                AND a.AdStatus LIKE ?
-                AND a.AdAuthorID = u.UserID
-                ORDER BY a.AdID DESC ";
-
+                        FROM " . $this->adsTable . " as a, " . $this->userTable . " as u
+                        WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
+                        AND a.AdStatus LIKE ?
+                        AND a.AdAuthorID = u.UserID
+                        AND ($categoryCondition)
+                        ORDER BY a.AdID DESC ";
+                        $param = "%$key%";
+                
                 $stmt = $this->conn->prepare($sql);
-                $param = "%$key%";
-                $category = "%$filter%";
-                $stmt->bind_param("sssss", $param, $param, $param, $category, $status);
+                $stmt->bind_param(str_repeat('s', count($filter) + 4), $param, $param, $param, $status, ...$filter);
                 $stmt->execute();
                 $result = $stmt->get_result();
                 return $result;
+                
             }
         }
 
         public function getCategories()
         {
             // Determine the maximum number of words in any category
-            $sqlMaxWords = "SELECT MAX(LENGTH(AdCategory) - LENGTH(REPLACE(AdCategory, ' ', '')) + 1) AS max_words FROM ads";
+            $sqlMaxWords = "SELECT MAX(LENGTH(AdCategory) - LENGTH(REPLACE(AdCategory, ',', '')) + 1) AS max_words FROM ads";
             $stmtMaxWords = $this->conn->prepare($sqlMaxWords);
             $stmtMaxWords->execute();
             $resultMaxWords = $stmtMaxWords->get_result();
@@ -71,7 +89,7 @@
             // Generate the dynamic subquery for extracting unique words
             $subquery = "";
             for ($i = 1; $i <= $maxWords; $i++) {
-                $subquery .= "SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(AdCategory, ' ', $i), ' ', -1) AS word FROM ads";
+                $subquery .= "SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(AdCategory, ',', $i), ',', -1) AS word FROM ads";
                 if ($i < $maxWords) {
                     $subquery .= " UNION ALL ";
                 }
@@ -95,6 +113,23 @@
 
             return array('result' => $result, 'selectedCategories' => $selectedCategories);
         }
+
+        public function getStatus(){
+        
+        $sql = "SELECT distinct AdStatus from ads";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $selectedStatus = array();
+        if(isset($_GET['status'])){
+            $selectedStatus = $_GET['status'];
+        }
+        return array('result' => $result, 'selectedStatus' => $selectedStatus);
+        }
+
+
+
 
         public function deleteAd($AdID)
         {
