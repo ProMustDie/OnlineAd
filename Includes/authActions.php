@@ -21,6 +21,8 @@ if($_SESSION['auth_user']['user_type']=="Admin"){
                 break;
             case "AcceptRequest":
                 $status = "Pending Payment";
+                $price = empty($_POST['Price'])? NULL : $_POST['Price'];
+                $classified->setPrice($AdID, $price);
                 break;
             case "RejectPayment":
                 $status = "Rejected Payment";

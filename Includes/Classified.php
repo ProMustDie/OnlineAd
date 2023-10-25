@@ -181,6 +181,15 @@
             $stmt->execute();
         }
         
+
+        public function setPrice($AdID, $price){
+            $sql = "UPDATE ads
+            SET Price = ?
+            WHERE AdID = ?;";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("di" ,$price, $AdID);
+            $stmt->execute();
+        }
     }
 
     ?>
