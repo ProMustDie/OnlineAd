@@ -53,7 +53,7 @@ if ($name === false || $description === false || $id === false) {
 
         if (move_uploaded_file($fileTmpPath, $Image)) {
             // Use prepared statement to insert data
-            $sql = "INSERT INTO ads (AdName, AdDescription, price, AdAuthorID, AdStatus, AdPicture, AdCategory, AdPostedDateTime) VALUES (?, ?, NULL, ?, 'Pending Review', ?, ?, NOW())";
+            $sql = "INSERT INTO ads (AdName, AdDescription, Price, AdAuthorID, AdStatus, AdPicture, AdCategory, AdPostedDateTime) VALUES (?, ?, NULL, ?, 'Pending Review', ?, ?, NOW())";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("sssss", $name, $description, $id, $ImageLoc, implode(",", $categories));
 

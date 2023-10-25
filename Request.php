@@ -267,8 +267,8 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                             <li class="list-group-item p-0 m-0 border-bottom-0">
                                                 <div class="container-fluid p-0">
                                                     <?php if ($ads['AdStatus'] == "Pending Review") : ?>
-                                                        <button class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#acceptReview-<?= $ads['AdID'] ?>">Accept Review</button>
-                                                        <button class="btn btn-outline-danger mb-2" data-bs-toggle="modal" data-bs-target="#rejectReview-<?= $ads['AdID'] ?>">Reject Review</button>
+                                                        <button class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#acceptRequest-<?= $ads['AdID'] ?>">Accept Request</button>
+                                                        <button class="btn btn-outline-danger mb-2" data-bs-toggle="modal" data-bs-target="#rejectRequest-<?= $ads['AdID'] ?>">Reject Request</button>
                                                     <?php endif;
                                                         if ($ads['AdStatus'] == "Checking Payment") :
                                                     ?>
@@ -330,7 +330,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body" style="max-height: 80vh; overflow-y: auto;">
-                                                <img class="modal-content" id="modalImg" src="<?= $ads['AdPicture'] ?>">
+                                                <img class="modal-content" id="modalImg" src="<?= $ads['AdPaymentPicture'] ?>">
                                             </div>
                                             <div class="modal-footer">
                                                 <div class="container text-center text-break m-auto" id="caption">
@@ -343,7 +343,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
 
 
                                 <!--//!REJECT Request MODAL-->
-                                <div class="modal fade" id="rejectReview-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                <div class="modal fade" id="rejectRequest-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
                                     <div class="modal-dialog modal-sm modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -392,7 +392,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
 
 
                                 <!--//!Accept Request MODAL-->
-                                <div class="modal fade" id="acceptReview-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                <div class="modal fade" id="acceptRequest-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
                                     <div class="modal-dialog modal-sm modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">

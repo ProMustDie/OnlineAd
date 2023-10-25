@@ -12,7 +12,7 @@ $redirect = empty($_GET['redirect'])?"Main.php": $_GET['redirect'];
 
 if($_SESSION['auth_user']['user_type']=="Admin"){
 
-    if($AuthorID!=NULL && $AdID != NULL){
+    if($AdID != NULL){
 
     if($requests == "RejectRequest" || $requests == "AcceptRequest" ||$requests == "RejectPayment" ||$requests == "ApproveAd" ||$requests == "Expire" ||$requests == "CancelAd"):
         switch($requests){

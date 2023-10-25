@@ -17,7 +17,7 @@
             $status = "%$stat%";
 
             if($key == NULL && $filter == NULL && $UserID == NULL && $stat == NULL){
-                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, " . $this->userTable . " as u
                         WHERE a.AdAuthorID = u.UserID
                         ORDER BY a.AdID DESC ";
@@ -26,7 +26,7 @@
                 $result = $stmt->get_result();
                 return $result;
             }elseif($key == NULL && $filter == NULL && $UserID == NULL){
-                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, " . $this->userTable . " as u
                         WHERE a.AdAuthorID = u.UserID
                         AND a.AdStatus LIKE ?
@@ -37,7 +37,7 @@
                 $result = $stmt->get_result();
                 return $result;
             }elseif($key == NULL && $filter == NULL && $UserID != NULL){
-                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
                         WHERE a.AdAuthorID = u.UserID
                         AND a.AdStatus LIKE ?
@@ -65,7 +65,7 @@
                 return $result;
             }elseif($key!= NULL && $filter == NULL && $stat != NULL ){
                 
-                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                 FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
                 WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
                 AND a.AdAuthorID = u.UserID
@@ -80,7 +80,7 @@
                 return $result;
             }elseif($key!= NULL && $filter == NULL && $stat == NULL ){
                 
-                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                 FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
                 WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
                 AND a.AdAuthorID = u.UserID
@@ -101,7 +101,7 @@
             
                 $categoryCondition = implode(' OR ', $categoryConditions);
         
-                $sql = "SELECT DISTINCT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
+                $sql = "SELECT DISTINCT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, " . $this->userTable . " as u
                         WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
                         AND a.AdStatus LIKE ?
