@@ -5,7 +5,10 @@ $classified = new Classified;
 include('includes/AuthController.php');
 $AuthLogin = new AuthenticatorController();
 $redirect = basename($_SERVER['PHP_SELF']);
-?>
+
+if (!empty($_SERVER['QUERY_STRING'])) {
+    $redirect .= '?' . $_SERVER['QUERY_STRING'];
+}?>
 
 
 <!DOCTYPE html>
@@ -207,9 +210,10 @@ $redirect = basename($_SERVER['PHP_SELF']);
 
                                 Cancel:
                                 <?= $ads['AdName'] ?>
-                                <form action="Includes/authActions.php?request=CancelAd&redirect=<?=$redirect?>" method="POST">
+                                <form action="Includes/authActions.php?request=CancelAd" method="POST">
                                     <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                     <input type="hidden" value="<?= $ads['AdAuthorID'] ?>" name="AdAuthorID">
+                                    <input type="hidden" value="<?= $redirect ?>" name="redirect">
                                     <label for="formFile" class="form-label">Are you sure you want to cancel? <br>No refunds will be
                                         provided!</label>
                                     <hr>

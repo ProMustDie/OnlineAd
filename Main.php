@@ -2,7 +2,10 @@
 include_once('includes/Classified.php');
 $classified = new Classified;
 $redirect = basename($_SERVER['PHP_SELF']);
-?>
+
+if (!empty($_SERVER['QUERY_STRING'])) {
+    $redirect .= '?' . $_SERVER['QUERY_STRING'];
+}?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -148,10 +151,11 @@ $redirect = basename($_SERVER['PHP_SELF']);
                                                         <div class="modal-body">
 
                                                             Cancel: <?= $ads['AdName'] ?>
-                                                            <form action="Includes/authActions.php?request=CancelAd&redirect=<?= $redirect ?>" method="POST">
+                                                            <form action="Includes/authActions.php?request=CancelAd" method="POST">
                                                                 <label for="formFile" class="form-label">Are you sure you want to cancel? <br>You can't revert this action!</label>
                                                                 <div class="container-fluid d-flex justify-content-end">
                                                                     <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
+                                                                    <input type="hidden" value="<?= $redirect ?>" name="redirect">
                                                                     <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
                                                                     <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
                                                                 </div>

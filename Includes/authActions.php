@@ -8,7 +8,7 @@ $requests = $_GET['request'];
 
 $AuthorID = isset($_POST['AdAuthorID'])? $_POST['AdAuthorID'] : NULL;
 $AdID = isset($_POST['AdID'])?$AdID = $_POST['AdID']:NULL;
-$redirect = empty($_GET['redirect'])?"Main.php": $_GET['redirect'];
+$redirect = empty($_POST['redirect'])?"Main.php": $_POST['redirect'];
 
 if($_SESSION['auth_user']['user_type']=="Admin"){
 
@@ -38,7 +38,7 @@ if($_SESSION['auth_user']['user_type']=="Admin"){
                 break;
         }
         $classified->changeStatus($AdID, $status);
-        header("Location: ../$redirect"); //fix redirect when at home page
+        header("Location: ../$redirect"); 
     endif;
     }
 }
@@ -56,7 +56,7 @@ if($_SESSION['auth_user']['user_id'] == $AuthorID && $AuthorID!=NULL && $AdID !=
             break;
     }
     $classified->changeStatus($AdID, $status);
-    header("Location: ../$redirect"); //fix redirect when at home page
+    header("Location: ../$redirect"); 
     endif;
 }
 ?>
