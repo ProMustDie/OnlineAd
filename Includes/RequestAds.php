@@ -56,7 +56,7 @@ if (!($name == false || $description == false || $category == false)) {
                     }
 
                     $sql = "INSERT INTO ads (AdName, AdDescription, price, AdAuthorID, AdStatus, AdPicture, AdCategory, AdPostedDateTime) VALUES 
-                    ('$name', '$description', 0, '$id', 'Pending Review','$ImageLoc', '$category', 0)";
+                    ('$name', '$description', NULL, '$id', 'Pending Review','$ImageLoc', '$category', NOW())";
 
 
 
