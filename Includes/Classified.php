@@ -14,7 +14,7 @@
 
         public function getAds($key, $filter, $stat, $UserID){
             $key = $this->conn->real_escape_string($key);
-            $status = "%$stat%";
+            $status = $stat;
 
             if($key == NULL && $filter == NULL && $UserID == NULL && $stat == NULL){
                 $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
@@ -29,37 +29,35 @@
                 $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, " . $this->userTable . " as u
                         WHERE a.AdAuthorID = u.UserID
-                        AND a.AdStatus LIKE ?
+                        AND AdStatus IN (" . str_repeat('?, ', count($status) - 1) . '?)' . "
                         ORDER BY a.AdID DESC ";
                 $stmt = $this->conn->prepare($sql);
-                $stmt->bind_param("s", $status);
+                $stmt->bind_param(str_repeat('s', count($status)), ...$status);
                 $stmt->execute();
                 $result = $stmt->get_result();
                 return $result;
-            }elseif($key == NULL && $filter == NULL && $UserID != NULL){
+            }elseif($key == NULL && $filter == NULL && $status == NULL && $UserID != NULL){
                 $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
                         WHERE a.AdAuthorID = u.UserID
-                        AND a.AdStatus LIKE ?
                         AND a.AdAuthorID = ?
                         ORDER BY a.AdID DESC ";
                 $stmt = $this->conn->prepare($sql);
-                $stmt->bind_param("si", $status, $UserID);
+                $stmt->bind_param("i", $UserID);
                 $stmt->execute();
                 $result = $stmt->get_result();
                 return $result;
-            }elseif($key!= NULL && $filter == NULL && $UserID != NULL){
+            }elseif($key!= NULL && $filter == NULL && $status == NULL && $UserID != NULL){
                 $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
                         WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
                         AND a.AdAuthorID = u.UserID
-                        AND a.AdStatus LIKE ?
                         AND a.AdAuthorID = ?
                         ORDER BY a.AdID DESC ";
 
                 $param = "%$key%";
                 $stmt = $this->conn->prepare($sql);
-                $stmt->bind_param("ssssi", $param, $param, $param, $status, $UserID);
+                $stmt->bind_param("sssi", $param, $param, $param, $UserID);
                 $stmt->execute();
                 $result = $stmt->get_result();
                 return $result;
@@ -69,12 +67,13 @@
                 FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
                 WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
                 AND a.AdAuthorID = u.UserID
-                AND a.AdStatus LIKE ?
+                AND AdStatus IN (" . str_repeat('?, ', count($status) - 1) . '?)' . "
                 ORDER BY a.AdID DESC ";
 
                 $param = "%$key%";
+                $params = array_merge([$param,$param,$param],$status);
                 $stmt = $this->conn->prepare($sql);
-                $stmt->bind_param("ssss", $param, $param, $param, $status);
+                $stmt->bind_param(str_repeat('s', count($status) + 3), ...$params);
                 $stmt->execute();
                 $result = $stmt->get_result();
                 return $result;
@@ -93,7 +92,7 @@
                 $result = $stmt->get_result();
                 return $result;
             }else{
-                $filter = explode(" ", $filter);
+                
                 $categoryConditions = [];
                 foreach ($filter as $category) {
                     $categoryConditions[] = "FIND_IN_SET(?, a.AdCategory) > 0";
@@ -104,14 +103,14 @@
                 $sql = "SELECT DISTINCT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, " . $this->userTable . " as u
                         WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
-                        AND a.AdStatus LIKE ?
+                        AND AdStatus IN (" . str_repeat('?, ', count($status) - 1) . '?)' . "
                         AND a.AdAuthorID = u.UserID
                         AND ($categoryCondition)
                         ORDER BY a.AdID DESC ";
                         $param = "%$key%";
                 
                 $stmt = $this->conn->prepare($sql);
-                $stmt->bind_param(str_repeat('s', count($filter) + 4), $param, $param, $param, $status, ...$filter);
+                $stmt->bind_param(str_repeat('s', count($filter) + 3 + count($status)), $param, $param, $param, ...$status, ...$filter);
                 $stmt->execute();
                 $result = $stmt->get_result();
                 return $result;

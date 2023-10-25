@@ -177,7 +177,9 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                         </div>
 
 
-                                        <input type="hidden" name="search" value="<?= $key ?>">
+                                        <?php if (!empty($_GET['search'])) {?>
+                                    <input type="hidden" name="search" value="<?= $key ?>">
+                                    <?php }?>
                                         <input type="submit" class="button-31 mt-5 mb-5" value="Search">
 
                                     </div>
@@ -474,7 +476,11 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
 
 
                         <?php }
-                        endif; ?>
+                        else : ?>
+
+
+                            <span class="h2 text-center text-secondary mt-5">No Advertisement Request or Post was found!</span>
+                        <?php endif; ?>
                     </div>
 
 

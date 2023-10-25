@@ -1,3 +1,6 @@
 user upload payment
-status change SQL
-no ads found statement
+category clears when action is made
+
+
+TODO 
+Automated Expiry
