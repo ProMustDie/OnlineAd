@@ -100,88 +100,97 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
             <div class="row">
 
 
-                <div class="col col-md-4 col-lg-2 col-xl-2">
+                <div class="col col-sm-12 col-md-4 col-lg-3 col-xl-2.5">
 
-                    <form action="" method="GET">
-                        <div class="text-center mt-5">
-                            <b class="fs-3">Categories</b>
-                            <hr>
-                            <div class="text-start">
+                    <nav class="navbar navbar-expand-md bg-body-tertiary">
+                        <div class="container-fluid">
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span><span style="position:relative; top:2px;">Filter</span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                                <form action="" method="GET">
+                                    <div class="text-center mt-5">
+                                        <b class="fs-3">Categories</b>
+                                        <hr>
+                                        <div class="text-start">
 
-                                <?php
-                                $categoriesData = $classified->getCategories();
-                                $result = $categoriesData['result'];
-                                $selectedCategories = $categoriesData['selectedCategories'];
+                                            <?php
+                                            $categoriesData = $classified->getCategories();
+                                            $result = $categoriesData['result'];
+                                            $selectedCategories = $categoriesData['selectedCategories'];
 
-                                if (mysqli_num_rows($result) > 0) :
-                                    while ($categories = $result->fetch_assoc()) {
-                                        $categoryName = $categories["Category"];
-                                        $isChecked = in_array($categoryName, $selectedCategories) ? 'checked' : '';
-                                ?>
-                                        <div class="checkbox-wrapper-4 ms-3" id="CateText">
-                                            <input class="inp-cbx" id="<?= $categoryName ?>" type="checkbox" name="category[]" value="<?= $categoryName ?>" <?= $isChecked ?> />
-                                            <label class="cbx" for="<?= $categoryName ?>"><span>
-                                                    <svg width="12px" height="10px">
-                                                        <use xlink:href="#check-4"></use>
-                                                    </svg></span><span><?= $categoryName ?></span></label>
-                                            <svg class="inline-svg">
-                                                <symbol id="check-4" viewbox="0 0 12 10">
-                                                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                                                </symbol>
-                                            </svg>
+                                            if (mysqli_num_rows($result) > 0) :
+                                                while ($categories = $result->fetch_assoc()) {
+                                                    $categoryName = $categories["Category"];
+                                                    $isChecked = in_array($categoryName, $selectedCategories) ? 'checked' : '';
+                                            ?>
+                                                    <div class="checkbox-wrapper-4 ms-3" id="CateText">
+                                                        <input class="inp-cbx" id="<?= $categoryName ?>" type="checkbox" name="category[]" value="<?= $categoryName ?>" <?= $isChecked ?> />
+                                                        <label class="cbx" for="<?= $categoryName ?>"><span>
+                                                                <svg width="12px" height="10px">
+                                                                    <use xlink:href="#check-4"></use>
+                                                                </svg></span><span><?= $categoryName ?></span></label>
+                                                        <svg class="inline-svg">
+                                                            <symbol id="check-4" viewbox="0 0 12 10">
+                                                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                                            </symbol>
+                                                        </svg>
+                                                    </div>
+                                            <?php
+                                                }
+                                            endif;
+                                            ?>
+
                                         </div>
-                                <?php
-                                    }
-                                endif;
-                                ?>
 
-                            </div>
+                                        <b class="fs-3">Status</b>
+                                        <hr>
+                                        <div class="text-start">
 
-                            <b class="fs-3">Status</b>
-                            <hr>
-                            <div class="text-start">
+                                            <?php
+                                            $statusData = $classified->getStatus();
+                                            $result = $statusData['result'];
+                                            $selectedStatus = $statusData['selectedStatus'];
 
-                                <?php
-                                $statusData = $classified->getStatus();
-                                $result = $statusData['result'];
-                                $selectedStatus = $statusData['selectedStatus'];
+                                            if (mysqli_num_rows($result) > 0) :
+                                                while ($stat = $result->fetch_assoc()) {
+                                                    $statusName = $stat["AdStatus"];
+                                                    $isChecked = in_array($statusName, $selectedStatus) ? 'checked' : '';
+                                            ?>
+                                                    <div class="checkbox-wrapper-4 ms-3" id="CateText">
+                                                        <input class="inp-cbx" id="<?= $statusName ?>" type="checkbox" name="status[]" value="<?= $statusName ?>" <?= $isChecked ?> />
+                                                        <label class="cbx" for="<?= $statusName ?>"><span>
+                                                                <svg width="12px" height="10px">
+                                                                    <use xlink:href="#check-4"></use>
+                                                                </svg></span><span><?= $statusName ?></span></label>
+                                                        <svg class="inline-svg">
+                                                            <symbol id="check-4" viewbox="0 0 12 10">
+                                                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                                            </symbol>
+                                                        </svg>
+                                                    </div>
+                                            <?php
+                                                }
+                                            endif;
+                                            ?>
 
-                                if (mysqli_num_rows($result) > 0) :
-                                    while ($stat = $result->fetch_assoc()) {
-                                        $statusName = $stat["AdStatus"];
-                                        $isChecked = in_array($statusName, $selectedStatus) ? 'checked' : '';
-                                ?>
-                                        <div class="checkbox-wrapper-4 ms-3" id="CateText">
-                                            <input class="inp-cbx" id="<?= $statusName ?>" type="radio" name="status[]" value="<?= $statusName ?>" <?= $isChecked ?> />
-                                            <label class="cbx" for="<?= $statusName ?>"><span>
-                                                    <svg width="12px" height="10px">
-                                                        <use xlink:href="#check-4"></use>
-                                                    </svg></span><span><?= $statusName ?></span></label>
-                                            <svg class="inline-svg">
-                                                <symbol id="check-4" viewbox="0 0 12 10">
-                                                    <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                                                </symbol>
-                                            </svg>
                                         </div>
-                                <?php
-                                    }
-                                endif;
-                                ?>
 
+
+                                        <input type="hidden" name="search" value="<?= $key ?>">
+                                        <input type="submit" class="button-31 mt-5 mb-5" value="Search">
+
+                                    </div>
+                                </form>
                             </div>
-
-
-                            <input type="hidden" name="search" value="<?= $key ?>">
-                            <input type="submit" class="button-31 mt-5 mb-5" value="Search">
-
                         </div>
-                    </form>
+                    </nav>
                 </div>
                 <!--//!Category-->
 
                 <div class="col bg-light">
 
-                    <div class="row d-flex m-3 justify-content-center">
+                    <div class="row d-flex m-1 justify-content-center">
 
                         <?php
                         $result = $classified->getAds($key, $filter, $status, NULL);
@@ -191,7 +200,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                 $formattedDatetime = $datetime->format('h:iA d/m/Y');
                         ?>
 
-                                <div class="card m-3" style="width: 24rem;">
+                                <div class="card m-2" style="width: 24rem;">
                                     <div class="ImgContainer m-2">
                                         <img src="<?= $ads['AdPicture'] ?>" class="imgSize card-img-top img-fluid" id="myImg" data-bs-toggle="modal" data-bs-target="#modalImg-<?= $ads['AdID'] ?>">
                                     </div>
@@ -264,6 +273,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                                     </form>
 
                                                 </div>
+
 
 
 
@@ -421,6 +431,31 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                     </div>
                                 </div>
 
+                                <!--//!Cancel MODAL-->
+                                <div class="modal fade" id="AcceptModal-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalToggleLabel5">Cancel Ad</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                Cancel: <?= $ads['AdName'] ?>
+                                                <form action="Includes/authActions.php?request=deleteAd" method="POST">
+                                                    <label for="formFile" class="form-label">Are you sure you want to Cancel?</label>
+                                                    <div class="container-fluid d-flex justify-content-end">
+                                                        <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
+                                                        <input type="submit" class="btn btn-outline-success mx-2 px-4" value="Yes">
+                                                        <button type="button" class="btn btn-outline-danger px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
 
 
                         <?php }
@@ -446,9 +481,9 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
     ?>
     <!--footer-->
 
-
-
     <script src="JS/request.js"></script>
+
+
 
 
 </body>
