@@ -266,12 +266,20 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
 
                                             <li class="list-group-item p-0 m-0 border-bottom-0">
                                                 <div class="container-fluid p-0">
-                                                    <form action="#" method="#">
-                                                        <a href="#" class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#AcceptModal-<?= $ads['AdID'] ?>">Accept</a>
-                                                        <a href="#" class="btn btn-outline-danger mx-2 mb-2" data-bs-toggle="modal" data-bs-target="#RejectModal-<?= $ads['AdID'] ?>">Reject</a>
-                                                        <a href="#" class="btn btn-outline-success mb-2" data-bs-toggle="modal" data-bs-target="#Receipt-<?= $ads['AdID'] ?>">Check Payment</a>
-                                                    </form>
-
+                                                    <?php if ($ads['AdStatus'] == "Pending Review") : ?>
+                                                        <button class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#acceptReview-<?= $ads['AdID'] ?>">Accept Review</button>
+                                                        <button class="btn btn-outline-danger mb-2" data-bs-toggle="modal" data-bs-target="#rejectReview-<?= $ads['AdID'] ?>">Reject Review</button>
+                                                    <?php endif;
+                                                        if ($ads['AdStatus'] == "Checking Payment") :
+                                                    ?>
+                                                        <button class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#acceptPayment-<?= $ads['AdID'] ?>">Accept Payment</button>
+                                                        <button class="btn btn-outline-danger mb-2" data-bs-toggle="modal" data-bs-target="#rejectPayment-<?= $ads['AdID'] ?>">Reject Payment</button>
+                                                        <button class="btn btn-outline-success mb-2" data-bs-toggle="modal" data-bs-target="#Receipt-<?= $ads['AdID'] ?>">Check Payment</button>
+                                                    <?php 
+                                                    endif;
+                                                    if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
+                                                        <button class="btn btn-outline-danger mb-2" data-bs-target="#cancel-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Cancel Ad</button>
+                                                    <?php endif; ?>
                                                 </div>
 
 
@@ -326,7 +334,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                             </div>
                                             <div class="modal-footer">
                                                 <div class="container text-center text-break m-auto" id="caption">
-                                                    <?= $ads['AdDescription'] ?>
+                                                    Amount to be paid: RM <?= $ads['Price'] ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -335,7 +343,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
 
 
                                 <!--//!REJECT Request MODAL-->
-                                <div class="modal fade" id="RejectModal-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                <div class="modal fade" id="rejectReview-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
                                     <div class="modal-dialog modal-sm modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -359,7 +367,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                 </div>
 
                                 <!--//!REJECT Payment MODAL-->
-                                <div class="modal fade" id="RejectModal-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                <div class="modal fade" id="rejectPayment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
                                     <div class="modal-dialog modal-sm modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -384,7 +392,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
 
 
                                 <!--//!Accept Request MODAL-->
-                                <div class="modal fade" id="AcceptModal-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                <div class="modal fade" id="acceptReview-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
                                     <div class="modal-dialog modal-sm modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -408,7 +416,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                 </div>
 
                                 <!--//!Accept Payment MODAL-->
-                                <div class="modal fade" id="AcceptModal-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                <div class="modal fade" id="acceptPayment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
                                     <div class="modal-dialog modal-sm modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -432,7 +440,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                 </div>
 
                                 <!--//!Cancel MODAL-->
-                                <div class="modal fade" id="AcceptModal-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                <div class="modal fade" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
                                     <div class="modal-dialog modal-sm modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -440,21 +448,20 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-
                                                 Cancel: <?= $ads['AdName'] ?>
-                                                <form action="Includes/authActions.php?request=deleteAd" method="POST">
-                                                    <label for="formFile" class="form-label">Are you sure you want to Cancel?</label>
+                                                <form action="Includes/authActions.php?request=CancelAd&redirect=<?= $redirect ?>" method="POST">
+                                                    <label for="formFile" class="form-label">Are you sure you want to cancel? <br>You can't revert this action!</label>
                                                     <div class="container-fluid d-flex justify-content-end">
                                                         <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
-                                                        <input type="submit" class="btn btn-outline-success mx-2 px-4" value="Yes">
-                                                        <button type="button" class="btn btn-outline-danger px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
+                                                        <input type="hidden" value="<?= $ads['AdAuthorID'] ?>" name="AdAuthorID">
+                                                        <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
+                                                        <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
 
 
 
