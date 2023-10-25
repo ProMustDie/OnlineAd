@@ -408,7 +408,18 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                                 <form action="Includes/authActions.php?request=AcceptRequest&redirect=<?= $redirect ?>" method="POST">
 
                                                     <div class="d-inline-flex  align-items-center">
-                                                        <label for="Price">Price: </label> <input type="number" step="0.01" class="form-control w-75 p-1 ms-1" placeholder="Enter an amount" id="Price" name="Price" min="0" data-bind="value:replyNumber" onkeypress="return (event.charCode != 8) && (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46" required>
+                                                        <label for="Price">Price: </label>
+
+                                                        <div class="input-group ms-1">
+                                                            <span class="input-group-text">RM</span>
+                                                            <input type="number" step="0.01" class="form-control w-75 p-1 ms-1" placeholder="Enter an amount" id="Price" name="Price" min="0" data-bind="value:replyNumber" onkeypress="return (event.charCode != 8) && (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46" required>
+                                                        </div>
+
+
+
+
+
+
                                                     </div><br><br>
 
                                                     <label for="formFile" class="form-label">Are you sure you want to accept the request?</label>
