@@ -94,13 +94,13 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
 
         <!--//! ADMIN -->
 
-        <div class="container-fluid">
+        <div class="container-fluid bg-light">
 
             <!--//!Category-->
             <div class="row">
 
 
-                <div class="col col-sm-12 col-md-4 col-lg-3 col-xl-2.5">
+                <div class="col col-md-4 col-lg-3 col-xl-2.5 m-0 p-0">
 
                     <nav class="navbar navbar-expand-md bg-body-tertiary">
                         <div class="container-fluid">
@@ -109,7 +109,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                             </button>
                             <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                                 <form action="" method="GET">
-                                    <div class="text-center mt-5">
+                                    <div class="text-center mt-1">
                                         <b class="fs-3">Categories</b>
                                         <hr>
                                         <div class="text-start">
