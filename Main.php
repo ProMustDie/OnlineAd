@@ -1,6 +1,7 @@
 <?php include('includes/app.php');
 include_once('includes/Classified.php');
 $classified = new Classified;
+$redirect = basename($_SERVER['PHP_SELF']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -119,7 +120,7 @@ $classified = new Classified;
 
                                         ?>
                                             <div class="d-flex justify-content-end m-2">
-                                                <button class="btn btn-outline-danger" data-bs-target="#DeleteModal-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Delete</button>
+                                                <button class="btn btn-outline-danger" data-bs-target="#DeleteModal-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Cancel Ad</button>
                                             </div>
 
                                             <!--*DELETE MODAL-->
@@ -127,16 +128,17 @@ $classified = new Classified;
                                                 <div class="modal-dialog modal-sm modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel5">Delete Ad</h1>
+                                                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel5">Cancel Ad</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
 
-                                                            Delete: <?= $ads['AdName'] ?>
-                                                            <form action="Includes/authActions.php?request=deleteAd" method="POST">
-                                                                <label for="formFile" class="form-label">Are you sure you want to delete?</label>
+                                                            Cancel: <?= $ads['AdName'] ?>
+                                                            <form action="Includes/authActions.php?request=CancelAd&redirect=<?=$redirect?>" method="POST">
+                                                                <label for="formFile" class="form-label">Are you sure you want to cancel? <br>You can't revert this action!</label>
                                                                 <div class="container-fluid d-flex justify-content-end">
                                                                     <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
+                                                                    <input type="hidden" value="<?= $ads['AdAuthorID'] ?>" name="AdAuthorID">
                                                                     <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
                                                                     <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
                                                                 </div>

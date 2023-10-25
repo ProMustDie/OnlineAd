@@ -157,29 +157,20 @@
         }
 
         public function getStatus(){
-        
-        $sql = "SELECT distinct AdStatus from ads";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        $selectedStatus = array();
-        if(isset($_GET['status'])){
-            $selectedStatus = $_GET['status'];
-        }
-        return array('result' => $result, 'selectedStatus' => $selectedStatus);
-        }
-
-
-
-
-        public function deleteAd($AdID)
-        {
-            $sqlQuery = "DELETE FROM " . $this->adsTable . " WHERE AdID = ?";
-            $stmt = $this->conn->prepare($sqlQuery);
-            $stmt->bind_param("i", $AdID);
+            $sql = "SELECT DISTINCT AdStatus FROM ads ORDER BY AdStatus ASC"; // Add ORDER BY clause
+            $stmt = $this->conn->prepare($sql);
             $stmt->execute();
+            $result = $stmt->get_result();
+        
+            $selectedStatus = array();
+            if(isset($_GET['status'])){
+                $selectedStatus = $_GET['status'];
+            }
+            
+            return array('result' => $result, 'selectedStatus' => $selectedStatus);
         }
+        
+
 
         public function changeStatus($AdID, $status){
             $sqlQuery = "UPDATE ads
