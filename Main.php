@@ -28,7 +28,7 @@ $redirect = basename($_SERVER['PHP_SELF']);
 
 
 
-    <div class="container-fluid">
+    <div class="container-fluid bg-light">
 
         <!--//!Category-->
         <div class="row">
@@ -43,7 +43,7 @@ $redirect = basename($_SERVER['PHP_SELF']);
                         </button>
                         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                             <form action="" method="GET">
-                                <div class="text-center mt-5">
+                                <div class="text-center mt-1">
                                     <b class="fs-3">Categories</b>
                                     <hr>
                                     <div class="text-start">
