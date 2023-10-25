@@ -207,7 +207,7 @@ $redirect = basename($_SERVER['PHP_SELF']);
 
                                 Cancel:
                                 <?= $ads['AdName'] ?>
-                                <form action="Includes/authActions.php?request=CancelAd&redirect<?=$redirect?>" method="POST">
+                                <form action="Includes/authActions.php?request=CancelAd&redirect=<?=$redirect?>" method="POST">
                                     <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                     <input type="hidden" value="<?= $ads['AdAuthorID'] ?>" name="AdAuthorID">
                                     <label for="formFile" class="form-label">Are you sure you want to cancel? <br>No refunds will be
