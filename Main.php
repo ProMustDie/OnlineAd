@@ -2,7 +2,10 @@
 include_once('includes/Classified.php');
 $classified = new Classified;
 $redirect = basename($_SERVER['PHP_SELF']);
-?>
+
+if (!empty($_SERVER['QUERY_STRING'])) {
+    $redirect .= '?' . $_SERVER['QUERY_STRING'];
+}?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -75,7 +78,9 @@ $redirect = basename($_SERVER['PHP_SELF']);
                                         endif;
                                         ?>
                                     </div>
+                                    <?php if (!empty($_GET['search'])) {?>
                                     <input type="hidden" name="search" value="<?= $key ?>">
+                                    <?php }?>
                                     <input type="submit" class="button-31 mt-5 mb-5" value="Search">
 
                                 </div>
@@ -96,7 +101,7 @@ $redirect = basename($_SERVER['PHP_SELF']);
 
                 <div class="row d-flex m-2 justify-content-center">
                     <?php
-                    $result = $classified->getAds($key, $filter, "Approved", NULL);
+                    $result = $classified->getAds($key, $filter, array("Approved"), NULL);
                     if (mysqli_num_rows($result) > 0) :
                         while ($ads = $result->fetch_assoc()) {
                             $datetime = new DateTime($ads['AdPostedDateTime']);
@@ -150,11 +155,11 @@ $redirect = basename($_SERVER['PHP_SELF']);
 
                                                             <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
 
-                                                            <form action="Includes/authActions.php?request=CancelAd&redirect=<?= $redirect ?>" method="POST">
+                                                            <form action="Includes/authActions.php?request=CancelAd&redirect" method="POST">
                                                                 <label for="formFile" class="form-label text-danger">Are you sure you want to cancel? <br>You can't revert this action!</label>
                                                                 <div class="container-fluid d-flex justify-content-end">
                                                                     <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
-                                                                    <input type="hidden" value="<?= $ads['AdAuthorID'] ?>" name="AdAuthorID">
+                                                                    <input type="hidden" value="<?= $redirect ?>" name="redirect">
                                                                     <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
                                                                     <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
                                                                 </div>
@@ -194,7 +199,11 @@ $redirect = basename($_SERVER['PHP_SELF']);
 
 
                     <?php }
-                    endif; ?>
+                    else :
+                        ?>
+                        <span class="h2 text-center text-secondary mt-5">No Advertisement Request or Post was found!</span>
+
+                    <?php endif; ?>
 
 
 

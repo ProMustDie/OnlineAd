@@ -5,7 +5,10 @@ $classified = new Classified;
 include('includes/AuthController.php');
 $AuthLogin = new AuthenticatorController();
 $redirect = basename($_SERVER['PHP_SELF']);
-?>
+
+if (!empty($_SERVER['QUERY_STRING'])) {
+    $redirect .= '?' . $_SERVER['QUERY_STRING'];
+}?>
 
 
 <!DOCTYPE html>
@@ -205,9 +208,10 @@ $redirect = basename($_SERVER['PHP_SELF']);
                             <div class="modal-body">
 
                                 <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
-                                <form action="Includes/authActions.php?request=CancelAd&redirect=<?= $redirect ?>" method="POST">
+                                <form action="Includes/authActions.php?request=CancelAd&redirect" method="POST">
                                     <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                     <input type="hidden" value="<?= $ads['AdAuthorID'] ?>" name="AdAuthorID">
+                                    <input type="hidden" value="<?= $redirect ?>" name="redirect">
                                     <label for="formFile" class="form-label text-danger">Are you sure you want to cancel? <br>No refunds will be
                                         provided!</label>
                                     <hr>

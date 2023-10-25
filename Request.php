@@ -3,7 +3,11 @@ include_once('includes/Classified.php');
 $classified = new Classified;
 include('Includes/AuthController.php');
 $AuthLogin = new AuthenticatorController();
-$redirect = basename($_SERVER['PHP_SELF']); ?>
+$redirect = basename($_SERVER['PHP_SELF']);
+if (!empty($_SERVER['QUERY_STRING'])) {
+    $redirect .= '?' . $_SERVER['QUERY_STRING'];
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -183,7 +187,9 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
 
 
 
-                                        <input type="hidden" name="search" value="<?= $key ?>">
+                                        <?php if (!empty($_GET['search'])) { ?>
+                                            <input type="hidden" name="search" value="<?= $key ?>">
+                                        <?php } ?>
                                         <input type="submit" class="button-31 mt-5 mb-5" value="Search">
 
                                     </div>
@@ -359,11 +365,11 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                             <div class="modal-body">
 
                                                 <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
-
-                                                <form action="Includes/authActions.php?request=RejectRequest&redirect=<?= $redirect ?>" method="POST">
+                                                <form action="Includes/authActions.php?request=RejectRequest" method="POST">
                                                     <label for="formFile" class="form-label text-danger">Are you sure you want to reject the request?</label>
                                                     <div class="container-fluid d-flex justify-content-end">
                                                         <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
+                                                        <input type="hidden" value="<?= $redirect ?>" name="redirect">
                                                         <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
                                                         <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
                                                     </div>
@@ -384,10 +390,11 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                             <div class="modal-body">
 
                                                 <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
-                                                <form action="Includes/authActions.php?request=RejectPayment&redirect=<?= $redirect ?>" method="POST">
+                                                <form action="Includes/authActions.php?request=RejectPayment" method="POST">
                                                     <label for="formFile" class="form-label text-danger">Are you sure you want to reject the payment?</label>
                                                     <div class="container-fluid d-flex justify-content-end">
                                                         <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
+                                                        <input type="hidden" value="<?= $redirect ?>" name="redirect">
                                                         <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
                                                         <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
                                                     </div>
@@ -409,8 +416,8 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                             <div class="modal-body">
 
                                                 <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
-                                                <form action="Includes/authActions.php?request=AcceptRequest&redirect=<?= $redirect ?>" method="POST">
-
+                                                <form action="Includes/authActions.php?request=RejectPayment" method="POST">
+                                                
                                                     <div class="d-inline-flex  align-items-center">
                                                         <label for="Price">Price: </label>
 
@@ -424,7 +431,8 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                                     <div class="container-fluid d-flex justify-content-end">
 
                                                         <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
-                                                        <input type="submit" class="btn btn-outline-primary mx-2 px-4" value="Yes">
+                                                        <input type="hidden" value="<?= $redirect ?>" name="redirect">
+                                                        <input type="submit" class="btn btn-outline-success mx-2 px-4" value="Yes">
                                                         <button type="button" class="btn btn-outline-danger px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
                                                     </div>
 
@@ -445,10 +453,12 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                             <div class="modal-body">
 
                                                 <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
-                                                <form action="Includes/authActions.php?request=ApproveAd&redirect=<?= $redirect ?>" method="POST">
+                                                <form action="Includes/authActions.php?request=ApproveAd&redirect" method="POST">
                                                     <label for="formFile" class="form-label text-primary">Ensure correct amount has been paid first.<br>This ad will be approved and posted!<br>Are you sure you want to accept the payment?</label>
                                                     <div class="container-fluid d-flex justify-content-end">
                                                         <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
+                                                        <input type="hidden" value="<?= $redirect ?>" name="redirect">
+                                                        <input type="hidden" value="<?= $redirect ?>" name="redirect">
                                                         <input type="submit" class="btn btn-outline-primary mx-2 px-4" value="Yes">
                                                         <button type="button" class="btn btn-outline-danger px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
                                                     </div>
@@ -468,11 +478,11 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                             </div>
                                             <div class="modal-body">
                                                 <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
-                                                <form action="Includes/authActions.php?request=CancelAd&redirect=<?= $redirect ?>" method="POST">
+                                                <form action="Includes/authActions.php?request=CancelAd&redirect" method="POST">
                                                     <label for="formFile" class="form-label text-danger">Are you sure you want to cancel? <br>You can't revert this action!</label>
                                                     <div class="container-fluid d-flex justify-content-end">
                                                         <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
-                                                        <input type="hidden" value="<?= $ads['AdAuthorID'] ?>" name="AdAuthorID">
+                                                        <input type="hidden" value="<?= $redirect ?>" name="redirect">
                                                         <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
                                                         <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
                                                     </div>
@@ -484,8 +494,12 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
 
 
 
-                        <?php }
-                        endif; ?>
+                            <?php }
+                        else : ?>
+
+
+                            <span class="h2 text-center text-secondary mt-5">No Advertisement Request or Post was found!</span>
+                        <?php endif; ?>
                     </div>
 
 
