@@ -34,7 +34,7 @@ $redirect = basename($_SERVER['PHP_SELF']);
         <div class="row">
 
 
-            <div class="col-sm-4 col-md-3 col-lg-3 col-xl-2">
+            <div class="col-sm-4 col-md-3 col-lg-3 col-xl-2 ">
 
                 <nav class="navbar navbar-expand-sm bg-body-tertiary">
                     <div class="container-fluid">
