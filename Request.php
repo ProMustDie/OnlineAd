@@ -2,7 +2,8 @@
 include_once('includes/Classified.php');
 $classified = new Classified;
 include('Includes/AuthController.php');
-$AuthLogin = new AuthenticatorController(); ?>
+$AuthLogin = new AuthenticatorController();
+$redirect = basename($_SERVER['PHP_SELF']); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -230,6 +231,7 @@ $AuthLogin = new AuthenticatorController(); ?>
                                                 <?php switch ($ads['AdStatus']) {
                                                     case "Pending Review":
                                                     case "Pending Payment":
+                                                    case "Checking Payment":
                                                         echo '<span class="text-warning" style:"width:150px;">';
                                                         break;
                                                     case "Rejected Request":

@@ -4,6 +4,7 @@ include_once('includes/Classified.php');
 $classified = new Classified;
 include('includes/AuthController.php');
 $AuthLogin = new AuthenticatorController();
+$redirect = basename($_SERVER['PHP_SELF']);
 ?>
 
 
@@ -77,6 +78,7 @@ $AuthLogin = new AuthenticatorController();
                                     <?php switch ($ads['AdStatus']) {
                                         case "Pending Review":
                                         case "Pending Payment":
+                                        case "Checking Payment":
                                             echo '<span class="text-warning" style:"width:150px;">';
                                             break;
                                         case "Rejected Request":
@@ -202,7 +204,7 @@ $AuthLogin = new AuthenticatorController();
 
                                 Cancel:
                                 <?= $ads['AdName'] ?>
-                                <form action="Includes/authActions.php?request=CancelAd" method="POST">
+                                <form action="Includes/authActions.php?request=CancelAd&redirect<?=$redirect?>" method="POST">
                                     <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                     <input type="hidden" value="<?= $ads['AdAuthorID'] ?>" name="AdAuthorID">
                                     <label for="formFile" class="form-label">Are you sure you want to cancel? <br>No refunds will be
