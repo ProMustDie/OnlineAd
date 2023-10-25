@@ -270,12 +270,12 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                                         <button class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#acceptRequest-<?= $ads['AdID'] ?>">Accept Request</button>
                                                         <button class="btn btn-outline-danger mb-2" data-bs-toggle="modal" data-bs-target="#rejectRequest-<?= $ads['AdID'] ?>">Reject Request</button>
                                                     <?php endif;
-                                                        if ($ads['AdStatus'] == "Checking Payment") :
+                                                    if ($ads['AdStatus'] == "Checking Payment") :
                                                     ?>
                                                         <button class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#acceptPayment-<?= $ads['AdID'] ?>">Accept Payment</button>
                                                         <button class="btn btn-outline-danger mb-2" data-bs-toggle="modal" data-bs-target="#rejectPayment-<?= $ads['AdID'] ?>">Reject Payment</button>
                                                         <button class="btn btn-outline-success mb-2" data-bs-toggle="modal" data-bs-target="#Receipt-<?= $ads['AdID'] ?>">Check Payment</button>
-                                                    <?php 
+                                                    <?php
                                                     endif;
                                                     if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
                                                         <button class="btn btn-outline-danger mb-2" data-bs-target="#cancel-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Cancel Ad</button>
@@ -353,7 +353,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                             <div class="modal-body">
 
                                                 Reject: <?= $ads['AdName'] ?>
-                                                <form action="Includes/authActions.php?request=RejectRequest&redirect=<?= $redirect?>" method="POST">
+                                                <form action="Includes/authActions.php?request=RejectRequest&redirect=<?= $redirect ?>" method="POST">
                                                     <label for="formFile" class="form-label">Are you sure you want to reject?</label>
                                                     <div class="container-fluid d-flex justify-content-end">
                                                         <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
@@ -377,7 +377,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                             <div class="modal-body">
 
                                                 Reject: <?= $ads['AdName'] ?>
-                                                <form action="Includes/authActions.php?request=RejectPayment&redirect=<?= $redirect?>" method="POST">
+                                                <form action="Includes/authActions.php?request=RejectPayment&redirect=<?= $redirect ?>" method="POST">
                                                     <label for="formFile" class="form-label">Are you sure you want to reject?</label>
                                                     <div class="container-fluid d-flex justify-content-end">
                                                         <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
@@ -401,14 +401,22 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                             </div>
                                             <div class="modal-body">
 
-                                                Accept: <?= $ads['AdName'] ?>
-                                                <form action="Includes/authActions.php?request=AcceptRequest&redirect=<?= $redirect?>" method="POST">
+                                                Accept: <?= $ads['AdName'] ?><br>
+
+                                                <form action="Includes/authActions.php?request=AcceptRequest&redirect=<?= $redirect ?>" method="POST">
+
+                                                    <div class="d-inline-flex  align-items-center">
+                                                        <label for="Price">Price: </label> <input type="number" class="form-control w-75 p-1 ms-1" placeholder="Enter an amount" value="<?= $ads['Price'] ?>" id="Price" name="Price" min="0" data-bind="value:replyNumber" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))">
+                                                    </div><br><br>
+
                                                     <label for="formFile" class="form-label">Are you sure you want to Accept?</label>
                                                     <div class="container-fluid d-flex justify-content-end">
+
                                                         <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                         <input type="submit" class="btn btn-outline-success mx-2 px-4" value="Yes">
                                                         <button type="button" class="btn btn-outline-danger px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
                                                     </div>
+
                                                 </form>
                                             </div>
                                         </div>
@@ -426,7 +434,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                             <div class="modal-body">
 
                                                 Accept: <?= $ads['AdName'] ?>
-                                                <form action="Includes/authActions.php?request=ApproveAd&redirect=<?= $redirect?>" method="POST">
+                                                <form action="Includes/authActions.php?request=ApproveAd&redirect=<?= $redirect ?>" method="POST">
                                                     <label for="formFile" class="form-label">Are you sure you want to Accept?</label>
                                                     <div class="container-fluid d-flex justify-content-end">
                                                         <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
