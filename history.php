@@ -33,7 +33,7 @@ $redirect = basename($_SERVER['PHP_SELF']);
                 <h2 class="text-center text-secondary mt-3 text-underline mb-0">History</h2>
             </u>
             <?php
-            $result = $classified->getAds($key, NULL, NULL, isset($_SESSION['auth_user']) ? $_SESSION['auth_user']['user_id'] : NULL); //Pending Review, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
+            $result = $classified->getAds($key, NULL, NULL, isset($_SESSION['auth_user']) ? $_SESSION['auth_user']['user_id'] : NULL); //Pending Review, Rejected Request, Checking Payment, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
             if (mysqli_num_rows($result) > 0) :
                 while ($ads = $result->fetch_assoc()) {
                     $datetime = new DateTime($ads['AdPostedDateTime']);
@@ -156,7 +156,7 @@ $redirect = basename($_SERVER['PHP_SELF']);
 
 
     <?php
-    $result = $classified->getAds(NULL, NULL, NULL, isset($_SESSION['auth_user']) ? $_SESSION['auth_user']['user_id'] : NULL); //Pending Review, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
+    $result = $classified->getAds(NULL, NULL, NULL, isset($_SESSION['auth_user']) ? $_SESSION['auth_user']['user_id'] : NULL); //Pending Review, Rejected Request, Checking Payment, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
     if (mysqli_num_rows($result) > 0) :
         while ($ads = $result->fetch_assoc()) {
     ?>
