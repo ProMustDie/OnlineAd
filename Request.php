@@ -406,7 +406,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                                 <form action="Includes/authActions.php?request=AcceptRequest&redirect=<?= $redirect ?>" method="POST">
 
                                                     <div class="d-inline-flex  align-items-center">
-                                                        <label for="Price">Price: </label> <input type="text" class="form-control w-50 p-1 ms-1" value="<?= $ads['Price'] ?>" id="Price" name="Price">
+                                                        <label for="Price">Price: </label> <input type="number" class="form-control w-75 p-1 ms-1" placeholder="Enter an amount" value="<?= $ads['Price'] ?>" id="Price" name="Price" min="0" data-bind="value:replyNumber" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))">
                                                     </div><br><br>
 
                                                     <label for="formFile" class="form-label">Are you sure you want to Accept?</label>
