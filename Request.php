@@ -344,7 +344,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
 
                                 <!--//!REJECT Request MODAL-->
                                 <div class="modal fade" id="rejectRequest-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
-                                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                                    <div class="modal-dialog modal-md modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="exampleModalToggleLabel5">Reject Ad Request</h1>
@@ -352,9 +352,9 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                             </div>
                                             <div class="modal-body">
 
-                                                Reject: <?= $ads['AdName'] ?>
+                                                Reject Request: <?= $ads['AdName'] ?>
                                                 <form action="Includes/authActions.php?request=RejectRequest&redirect=<?= $redirect ?>" method="POST">
-                                                    <label for="formFile" class="form-label">Are you sure you want to reject?</label>
+                                                    <label for="formFile" class="form-label">Are you sure you want to reject the request?</label>
                                                     <div class="container-fluid d-flex justify-content-end">
                                                         <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                         <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
@@ -368,7 +368,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
 
                                 <!--//!REJECT Payment MODAL-->
                                 <div class="modal fade" id="rejectPayment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
-                                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                                    <div class="modal-dialog modal-md modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="exampleModalToggleLabel5">Reject Ad Payment</h1>
@@ -376,9 +376,9 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                             </div>
                                             <div class="modal-body">
 
-                                                Reject: <?= $ads['AdName'] ?>
+                                                Reject Payment: <?= $ads['AdName'] ?>
                                                 <form action="Includes/authActions.php?request=RejectPayment&redirect=<?= $redirect ?>" method="POST">
-                                                    <label for="formFile" class="form-label">Are you sure you want to reject?</label>
+                                                    <label for="formFile" class="form-label">Are you sure you want to reject the payment?</label>
                                                     <div class="container-fluid d-flex justify-content-end">
                                                         <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                         <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
@@ -393,7 +393,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
 
                                 <!--//!Accept Request MODAL-->
                                 <div class="modal fade" id="acceptRequest-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
-                                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                                    <div class="modal-dialog modal-md modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="exampleModalToggleLabel5">Accept Ad Request</h1>
@@ -401,7 +401,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                             </div>
                                             <div class="modal-body">
 
-                                                Accept: <?= $ads['AdName'] ?><br>
+                                                Accept Request: <?= $ads['AdName'] ?><br>
 
                                                 <form action="Includes/authActions.php?request=AcceptRequest&redirect=<?= $redirect ?>" method="POST">
 
@@ -410,15 +410,17 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
 
                                                         <div class="input-group ms-1">
                                                             <span class="input-group-text">RM</span>
-                                                            <input type="text" class="form-control" placeholder="Enter an amount" value="<?= $ads['Price'] ?>" id="Price" name="Price" min="0" pattern="^\d+(\.\d+)?$">
+                                                            <input type="number" step="0.01" class="form-control w-75 p-1 ms-1" placeholder="Enter an amount" id="Price" name="Price" min="0" data-bind="value:replyNumber" onkeypress="return (event.charCode != 8) && (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46" required>
                                                         </div>
+
+                                                     
 
 
 
 
                                                     </div><br><br>
 
-                                                    <label for="formFile" class="form-label">Are you sure you want to Accept?</label>
+                                                    <label for="formFile" class="form-label">Are you sure you want to accept the request?</label>
                                                     <div class="container-fluid d-flex justify-content-end">
 
                                                         <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
@@ -434,7 +436,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
 
                                 <!--//!Accept Payment MODAL-->
                                 <div class="modal fade" id="acceptPayment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
-                                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                                    <div class="modal-dialog modal-md modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="exampleModalToggleLabel5">Accept Ad Payment</h1>
@@ -442,9 +444,9 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                             </div>
                                             <div class="modal-body">
 
-                                                Accept: <?= $ads['AdName'] ?>
+                                                Accept Payment: <?= $ads['AdName'] ?>
                                                 <form action="Includes/authActions.php?request=ApproveAd&redirect=<?= $redirect ?>" method="POST">
-                                                    <label for="formFile" class="form-label">Are you sure you want to Accept?</label>
+                                                    <label for="formFile" class="form-label">Ensure correct amount has been paid first.<br>This ad will be approved and posted!<br>Are you sure you want to accept the payment?</label>
                                                     <div class="container-fluid d-flex justify-content-end">
                                                         <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                         <input type="submit" class="btn btn-outline-success mx-2 px-4" value="Yes">
@@ -458,7 +460,7 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
 
                                 <!--//!Cancel MODAL-->
                                 <div class="modal fade" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
-                                    <div class="modal-dialog modal-sm modal-dialog-centered">
+                                    <div class="modal-dialog modal-md modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h1 class="modal-title fs-5" id="exampleModalToggleLabel5">Cancel Ad</h1>

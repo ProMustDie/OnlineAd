@@ -137,7 +137,7 @@ $redirect = basename($_SERVER['PHP_SELF']);
 
                                             <!--*DELETE MODAL-->
                                             <div class="modal fade" id="DeleteModal-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
-                                                <div class="modal-dialog modal-sm modal-dialog-centered">
+                                                <div class="modal-dialog modal-md modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h1 class="modal-title fs-5" id="exampleModalToggleLabel5">Cancel Ad</h1>
