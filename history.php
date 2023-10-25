@@ -29,6 +29,9 @@ $redirect = basename($_SERVER['PHP_SELF']);
     <!--//!HISTORY MODAL-->
     <div class="col bg-light">
         <div class="row d-flex justify-content-center m-0">
+            <u style="text-decoration-thickness: 2px; color:gray">
+                <h2 class="text-center text-secondary mt-3 text-underline mb-0">History</h2>
+            </u>
             <?php
             $result = $classified->getAds($key, NULL, NULL, isset($_SESSION['auth_user']) ? $_SESSION['auth_user']['user_id'] : NULL); //Pending Review, Rejected Request, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
             if (mysqli_num_rows($result) > 0) :

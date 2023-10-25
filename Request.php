@@ -23,9 +23,13 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
 
     <?php if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] != "Admin") : ?>
         <!--Request -->
-        <div class="container mt-5 p-5 bg-light ">
+
+        <div class="container  p-5 bg-light ">
             <div class="row ">
                 <div class="col ">
+                    <u style="text-decoration-thickness: 2px; color:gray">
+                        <h2 class="text-center text-secondary mb-3">Request Form Submission</h2>
+                    </u>
                     <form action="Includes/RequestAds.php" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
 
 
@@ -51,22 +55,23 @@ $redirect = basename($_SERVER['PHP_SELF']); ?>
                                 while ($categories = $result->fetch_assoc()) {
                                     $categoryName = $categories["Category"];
                             ?>
-                            <div class="checkbox-wrapper-4">
-                                <input class="inp-cbx" id="<?= $categoryName ?>" type="checkbox" name="category[]" value="<?= $categoryName ?>" />
-                                <label class="cbx m-auto" for="<?= $categoryName ?>"><span>
-                                        <svg width="12px" height="10px">
-                                            <use xlink:href="#check-4"></use>
-                                        </svg></span><span><?= $categoryName ?></span></label>
-                                <svg class="inline-svg">
-                                    <symbol id="check-4" viewbox="0 0 12 10">
-                                        <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-                                    </symbol>
-                                </svg>
-                            </div>
-                            <?php }endif;?>
+                                    <div class="checkbox-wrapper-4">
+                                        <input class="inp-cbx" id="<?= $categoryName ?>" type="checkbox" name="category[]" value="<?= $categoryName ?>" />
+                                        <label class="cbx m-auto" for="<?= $categoryName ?>"><span>
+                                                <svg width="12px" height="10px">
+                                                    <use xlink:href="#check-4"></use>
+                                                </svg></span><span><?= $categoryName ?></span></label>
+                                        <svg class="inline-svg">
+                                            <symbol id="check-4" viewbox="0 0 12 10">
+                                                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+                                            </symbol>
+                                        </svg>
+                                    </div>
+                            <?php }
+                            endif; ?>
                         </div>
                         <!--//! Need to use php to validate atleast 1 category is chosen -->
-                        
+
 
 
 
