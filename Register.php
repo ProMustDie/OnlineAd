@@ -9,6 +9,7 @@ $loginEmail = $email = $password = $rpt_password = $username = "";
 $ValidSignUp = false;
 $logIn = new LoginController;
 $Register = new RegisterController;
+$redirect = empty($_GET['redirect'])?"Main.php": $_GET['redirect'];
 
 
 if (isset($_POST["LogInSubmit"])) {
@@ -18,7 +19,10 @@ if (isset($_POST["LogInSubmit"])) {
 
     $login_query = $logIn->login($loginEmail, $password);
     if ($login_query) {
-        header("Location: Main.php");
+        echo '<script type="text/javascript">';
+            echo 'alert("You are now logged in!");';
+            echo 'window.location = "'.$redirect.'";';
+            echo '</script>';
     } else {
         $loginErr = "Invalid Email or Password";
     }
@@ -77,7 +81,10 @@ if (isset($_POST["SignUpSubmit"])) {
     if ($ValidSignUp == true) {
         $password = password_hash($_POST["pwd"], PASSWORD_DEFAULT);
         if ($Register->registration($username, $email, $password)) {
-            header("Location: Register.php");
+            echo '<script type="text/javascript">';
+            echo 'alert("Successfully signed up, you may now log in.");';
+            echo 'window.location = "main.php";';
+            echo '</script>';
         } else {
             $registerErr = "Account Creation Error!";
         }

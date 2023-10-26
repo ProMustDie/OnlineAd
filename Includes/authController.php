@@ -5,10 +5,10 @@
 class AuthenticatorController
 {
 
-    public function __construct()
+    public function __construct($redirect)
     {
         if(!$this->checkIsLoggedIn()){
-            header('Location: Register.php');
+            header("Location: Register.php?redirect=$redirect");
         }
     }
 
