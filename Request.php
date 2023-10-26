@@ -50,7 +50,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                         <!--//! Need to use php to validate atleast 1 category is chosen -->
                         <div class="container text-start p-0" style="width:75%;">
 
-                            <label>Categories</label>
+                            <label>Categories</label><span class="text-danger"> *Choose Minimum 1</span>
 
                             <?php
                             $categoriesData = $classified->getCategories();
@@ -80,7 +80,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
 
 
-                        <textarea class="form-control  m-auto mb-2" id="validationTextarea02" placeholder="Additional Info" style="width:75%;" rows="2" name="ExtraInfo" required></textarea>
+                        <textarea class="form-control  m-auto mb-2" id="validationTextarea02" placeholder="Note to Admin" style="width:75%;" rows="2" name="ExtraInfo"></textarea>
 
 
 
