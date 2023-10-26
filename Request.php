@@ -80,7 +80,9 @@ $AuthLogin = new AuthenticatorController($redirect);
 
 
 
-                        <textarea class="form-control  m-auto mb-2" id="validationTextarea02" placeholder="Note to Admin" style="width:75%;" rows="2" name="ExtraInfo"></textarea>
+                        <!--//! ADDITIONAL INFO
+                         <textarea class="form-control  m-auto mb-2" id="validationTextarea02" placeholder="Note to Admin" style="width:75%;" rows="2" name="ExtraInfo"></textarea>
+                        -->
 
 
 
@@ -305,19 +307,35 @@ $AuthLogin = new AuthenticatorController($redirect);
                                 <div class="modal fade p-0" id="modalImg-<?= $ads['AdID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-xl">
                                         <div class="modal-content modal-xl">
-                                            <div class="modal-header p-3">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                    <?= $ads['AdName'] ?>
-                                                </h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <div class="modal-header p-3 ">
+
+                                                <h1 class="modal-title fs-3" id="exampleModalLabel"><?= $ads['AdName'] ?></h1>
+
+                                                <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body" style="max-height: 80vh; overflow-y: auto;">
                                                 <img class="modal-content" id="modalImg" src="<?= $ads['AdPicture'] ?>">
                                             </div>
                                             <div class="modal-footer">
-                                                <div class="container text-center text-break m-auto" id="caption">
-                                                    <?= $ads['AdDescription'] ?>
+                                                <div class="container text-center text-break" id="caption">
+                                                    <span class="text-muted mx-auto"><small><?= $ads['UserName'] . " posted on " . $formattedDatetime ?></small></span>
                                                 </div>
+
+                                                <div class="container text-center text-break" id="caption">
+                                                    <p class="card-text lh-lg" id="TextCate">
+                                                        <?php
+                                                        $categoriesArray = explode(',', $ads['AdCategory']);
+                                                        foreach ($categoriesArray as $category) {
+
+                                                        ?>
+
+                                                            <span class="rounded-3 bg-success text-light px-2 py-1"><?= $category ?></span>
+
+
+                                                        <?php } ?>
+                                                    </p>
+                                                </div>
+                                                <div class="container text-center text-break m-auto" id="caption"><?= $ads['AdDescription'] ?></div>
                                             </div>
                                         </div>
                                     </div>

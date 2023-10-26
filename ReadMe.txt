@@ -1,4 +1,8 @@
 Ideal TODO 
 Automated Expiry
+Additional Info in Request
 
-payment modal put price
+
+
+
+
