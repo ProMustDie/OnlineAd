@@ -44,7 +44,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                     $formattedDatetime = $datetime->format('h:iA d/m/Y');
             ?>
 
-                    <div class="card m-3" style="width: 24rem;">
+                    <div class="card m-3" style="width: 18rem;">
                         <div class="ImgContainer m-2">
                             <img src="<?= $ads['AdPicture'] ?>" class="imgSize card-img-top img-fluid" id="myImg" data-bs-toggle="modal" data-bs-target="#modalImg-<?= $ads['AdID'] ?>">
                         </div>
@@ -52,7 +52,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                             <h5 class="card-title fs-3 fw-bold" id="TextHeader">
                                 <?= $ads['AdName'] ?>
                             </h5>
-                            <p class="card-text text-truncate" id="TextSub">
+                            <p class="card-text text-secondary text-truncate" id="TextSub">
                                 <?= $ads['AdDescription'] ?>
                             </p>
                             <p class="card-text lh-lg" id="TextCate">Category:
@@ -74,9 +74,12 @@ $AuthLogin = new AuthenticatorController($redirect);
                                     <div class="d-flex m-2 ">
 
                                 <li class="list-group-item p-0 m-0 border-0">
-                                    <p class="card-text mb-3" id="TextTime"><small class="text-muted"><?php if ($ads['AdStatus'] == "Expired" || $ads['AdStatus'] == "Cancelled" || $ads['AdStatus'] == "Approved") : echo "Posted at " . $formattedDatetime;
-                                                                                                        else : echo "Requested at " . $formattedDatetime;
-                                                                                                        endif; ?></small></p>
+
+                                    <p class="card-text mb-1" id="TextTime"><small class="text-muted">
+                                            <p class="card-text" id="TextTime"><small class="text-muted"><?php if ($ads['AdStatus'] == "Expired" || $ads['AdStatus'] == "Cancelled" || $ads['AdStatus'] == "Approved") : echo "Posted at " . $formattedDatetime;
+                                                                                                            else : echo "Requested at " . $formattedDatetime;
+                                                                                                            endif; ?></small></p>
+                                        </small></p>
                                 </li>
 
 
@@ -182,7 +185,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                 <form action="includes/RequestAds.php?request=payment" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label">Upload Image</label>
-                                        <input type="hidden" name="AdID" value="<?= $ads["AdID"]?>" >
+                                        <input type="hidden" name="AdID" value="<?= $ads["AdID"] ?>">
                                         <input type="hidden" name="redirect" value="<?= $redirect ?>">
                                         <input type="file" class="form-control m-auto mb-2" id="formFile" name="fileUpload" required accept="image/png, image/jpeg, image/jpg, application/pdf">
                                     </div>
