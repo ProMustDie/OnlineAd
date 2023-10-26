@@ -19,11 +19,11 @@ $name = empty($_POST['title']) ? false : $_POST['title'];
 $description = empty($_POST['description']) ? false : $_POST['description'];
 $id = empty($_POST['UserID']) ? false : $_POST['UserID'];
 $AdID = empty($_POST['AdID']) ? false : $_POST['AdID'];
-$categories = empty($_POST['category']) ? [] : $_POST['category'];
+$categories = empty($_POST['category']) ? false : $_POST['category'];
 $request = isset($_GET['request'])?$_GET['request'] : false;
 $redirect = empty($_POST['redirect'])?"Main.php": $_POST['redirect'];
 
-if (($name === false || $description === false || $id === false ) && $request != "payment") {
+if (($name === false || $description === false || $id === false ||$categories == false ) && $request != "payment") {
     // Handle missing form fields
     echo '<script type="text/javascript">';
     echo 'alert("Please fill in all the required fields!");';
@@ -62,9 +62,10 @@ if (($name === false || $description === false || $id === false ) && $request !=
         if (move_uploaded_file($fileTmpPath, $Image)) {
             // Use prepared statement to insert data
             if($request != "payment"){
+            $cat = implode(",", $categories);
             $sql = "INSERT INTO ads (AdName, AdDescription, Price, AdAuthorID, AdStatus, AdPicture, AdCategory, AdPostedDateTime) VALUES (?, ?, NULL, ?, 'Pending Review', ?, ?, NOW())";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sssss", $name, $description, $id, $ImageLoc, implode(",", $categories));
+            $stmt->bind_param("sssss", $name, $description, $id, $ImageLoc, $cat);
              if ($stmt->execute()) {
                 echo '<script type="text/javascript">';
                 echo 'alert("You have requested an Ad");';

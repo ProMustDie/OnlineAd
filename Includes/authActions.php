@@ -29,6 +29,7 @@ if($_SESSION['auth_user']['user_type']=="Admin"){
                 break;
             case "ApproveAd":
                 $status = "Approved";
+                $classified->setPostTimeNOW($AdID);
                 break;
             case "Expire":
                 $status = "Expired";
