@@ -166,23 +166,22 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
             <?php if (($ads['AdStatus'] == "Pending Payment" || $ads['AdStatus'] == "Rejected Payment") && $ads['AdStatus'] != "Approved" && $ads['AdStatus'] != "Cancelled") : ?>
                 <!--*PAYMENT MODAL-->
-                <div class="modal fade" id="payment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="payment-<?= $ads['AdID'] ?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+                <div class="modal fade" id="payment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="payment-<?= $ads['AdID'] ?>" tabindex="-1">
                     <div class="modal-dialog modal-md modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="payment-<?= $ads['AdID'] ?>">
-                                    <?php echo ($ads['AdStatus'] == "Pending Payment") ? "Payment" : "Resubmit Payment"; ?>
+                                <h1 class="modal-title fs-3" id="payment-<?= $ads['AdID'] ?>">
+                                    <strong><?php echo ($ads['AdStatus'] == "Pending Payment") ? "Payment" : "Resubmit Payment"; ?></strong>
                                 </h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="CloseModalPayment"></button>
                             </div>
                             <div class="modal-body">
+                                <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
 
-                                Pay for:
-                                <?= $ads['AdName'] ?>
-                                <form action="#" method="#">
+                                <form action="#" method="#" class="needs-validation" novalidate enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label">Upload Image</label>
-                                        <input class="form-control" type="file" id="formFile">
+                                        <input type="file" class="form-control m-auto mb-2" id="formFile" name="fileUpload" required accept="image/png, image/jpeg, image/jpg, application/pdf">
                                     </div>
                                     <input type="submit" class="btn btn-outline-success float-end" value="Submit">
                                 </form>
@@ -199,22 +198,21 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
             <?php if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
                 <!--*CANCEL MODAL-->
-                <div class="modal fade" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+                <div class="modal fade" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
                     <div class="modal-dialog modal-md modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Cancel Ad</h1>
+                                <h1 class="modal-title fs-3" id="exampleModalToggleLabel2"><strong>Cancel Ad</strong></h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="CloseModalCancel"></button>
                             </div>
                             <div class="modal-body">
 
-                                Cancel:
-                                <?= $ads['AdName'] ?>
-                                <form action="Includes/authActions.php?request=CancelAd" method="POST">
+                                <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
+                                <form action="Includes/authActions.php?request=CancelAd&redirect" method="POST">
                                     <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                     <input type="hidden" value="<?= $ads['AdAuthorID'] ?>" name="AdAuthorID">
                                     <input type="hidden" value="<?= $redirect ?>" name="redirect">
-                                    <label for="formFile" class="form-label">Are you sure you want to cancel? <br>No refunds will be
+                                    <label for="formFile" class="form-label text-danger">Are you sure you want to cancel? <br>No refunds will be
                                         provided!</label>
                                     <hr>
                                     <div class="container-fluid d-flex justify-content-end">
@@ -243,7 +241,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
     include("Includes/footer.php");
     ?>
     <!--footer-->
-
+    <script src="JS/request.js"></script>
 </body>
 
 </html>

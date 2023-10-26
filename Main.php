@@ -31,22 +31,22 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
 
 
-    <div class="container-fluid bg-light">
+    <div class="container-fluid bg-light p-0">
 
         <!--//!Category-->
         <div class="row">
 
 
-            <div class="col-sm-4 col-md-3 col-lg-3 col-xl-2 ">
+            <div class="col-sm-3 col-md-4 col-lg-2 m-0 p-0">
 
                 <nav class="navbar navbar-expand-sm bg-body-tertiary">
                     <div class="container-fluid">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                        <button class="navbar-toggler ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span><span style="position:relative; top:2px;">Filter</span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                             <form action="" method="GET">
-                                <div class="text-center mt-1">
+                                <div class="text-center ms-2 mt-3 ">
                                     <b class="fs-3">Categories</b>
                                     <hr>
                                     <div class="text-start">
@@ -61,7 +61,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                                 $categoryName = $categories["Category"];
                                                 $isChecked = in_array($categoryName, $selectedCategories) ? 'checked' : '';
                                         ?>
-                                                <div class="checkbox-wrapper-4 ms-3" id="CateText">
+                                                <div class="checkbox-wrapper-4" id="CateText">
                                                     <input class="inp-cbx" id="<?= $categoryName ?>" type="checkbox" name="category[]" value="<?= $categoryName ?>" <?= $isChecked ?> />
                                                     <label class="cbx" for="<?= $categoryName ?>"><span>
                                                             <svg width="12px" height="10px">
@@ -96,7 +96,8 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
 
             <!--//!Images-->
-            <div class="col-sm-8 col-md-8 col-lg-9 col-xl-10 bg-light">
+
+            <div class="col col-md-8 col-lg-10 bg-light">
 
                 <div class="row d-flex m-2 justify-content-center">
                     <?php
@@ -107,7 +108,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                             $formattedDatetime = $datetime->format('h:iA d/m/Y');
                     ?>
 
-                            <div class="card m-2" style="width: 24rem;">
+                            <div class="card m-2" style="width: 18rem;">
                                 <div class="ImgContainer m-2">
                                     <img src="<?= $ads['AdPicture'] ?>" class="imgSize card-img-top img-fluid" id="myImg" data-bs-toggle="modal" data-bs-target="#modalImg-<?= $ads['AdID'] ?>">
                                 </div>
@@ -131,7 +132,9 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item"></li>
-                                        <p class="card-text m-2 text-tertiary" id="TextTime"><small class="text-secondary"><?= $ads['UserName'] . " posted on " . $formattedDatetime ?></small></p>
+                                        <p class="card-text mb-1" id="TextTime"><small class="text-muted">
+                                                <p class="card-text" id="TextTime"><small class="text-muted"><?= $ads['UserName'] . " posted on " . $formattedDatetime ?></small></p>
+                                            </small></p>
                                         <?php
                                         if (isset($_SESSION['auth_user']) && $_SESSION['auth_user']['user_type'] === "Admin") :
 
@@ -145,14 +148,15 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                                 <div class="modal-dialog modal-md modal-dialog-centered">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel5">Cancel Ad</h1>
+                                                            <h1 class="modal-title fs-3" id="exampleModalToggleLabel5"><strong>Cancel Ad</strong></h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
 
-                                                            Cancel: <?= $ads['AdName'] ?>
-                                                            <form action="Includes/authActions.php?request=CancelAd" method="POST">
-                                                                <label for="formFile" class="form-label">Are you sure you want to cancel? <br>You can't revert this action!</label>
+                                                            <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
+
+                                                            <form action="Includes/authActions.php?request=CancelAd&redirect" method="POST">
+                                                                <label for="formFile" class="form-label text-danger">Are you sure you want to cancel? <br>You can't revert this action!</label>
                                                                 <div class="container-fluid d-flex justify-content-end">
                                                                     <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                     <input type="hidden" value="<?= $redirect ?>" name="redirect">
@@ -180,7 +184,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content modal-xl">
                                         <div class="modal-header p-3 ">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel"><?= $ads['AdName'] ?></h1>
+                                            <h1 class="modal-title fs-3" id="exampleModalLabel"><?= $ads['AdName'] ?></h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body" style="max-height: 80vh; overflow-y: auto;">
