@@ -8,7 +8,7 @@ $redirect = basename($_SERVER['PHP_SELF']);
 
 if (!empty($_SERVER['QUERY_STRING'])) {
     $redirect .= '?' . $_SERVER['QUERY_STRING'];
-}?>
+} ?>
 
 
 <!DOCTYPE html>
@@ -102,7 +102,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                     </span>
                                 </div>
 
-                                <li class="list-group-item p-0 m-0 border-bottom-0">
+                                <li class="list-group-item p-0 m-0 border-bottom-0 text-end">
                                     <div class="container-fluid p-0">
                                         <?php if (($ads['AdStatus'] == "Pending Payment" || $ads['AdStatus'] == "Rejected Payment") && $ads['AdStatus'] != "Approved" && $ads['AdStatus'] != "Cancelled") : ?>
                                             <button class="btn btn-outline-success m-1" data-bs-target="#payment-<?= $ads['AdID'] ?>" data-bs-toggle="modal" aria-labelledby="exampleModalToggleLabel2">

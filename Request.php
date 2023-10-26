@@ -101,7 +101,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
         <div class="container-fluid bg-light p-0 m-0">
 
             <!--//!Category-->
-            <div class="row">
+            <div class="row m-0 p-0">
 
 
                 <div class="col-sm-4 col-md-3 col-xl-2 m-0 p-0">
@@ -205,7 +205,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
                 <div class="col bg-light">
 
-                    <div class="row d-flex m-2 justify-content-center">
+                    <div class="row d-flex justify-content-center">
 
                         <?php
                         $result = $classified->getAds($key, $filter, $status, NULL);
@@ -281,20 +281,9 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
                                             <li class="list-group-item p-0 m-0 border-bottom-0">
                                                 <div class="container-fluid p-0 text-end">
-                                                    <?php if ($ads['AdStatus'] == "Pending Review") : ?>
-                                                        <button class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#acceptRequest-<?= $ads['AdID'] ?>">Accept Request</button>
-                                                        <button class="btn btn-outline-danger mb-2" data-bs-toggle="modal" data-bs-target="#rejectRequest-<?= $ads['AdID'] ?>">Reject Request</button>
-                                                    <?php endif;
-                                                    if ($ads['AdStatus'] == "Checking Payment") :
-                                                    ?>
-                                                        <button class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#acceptPayment-<?= $ads['AdID'] ?>">Accept Payment</button>
-                                                        <button class="btn btn-outline-danger mb-2" data-bs-toggle="modal" data-bs-target="#rejectPayment-<?= $ads['AdID'] ?>">Reject Payment</button>
-                                                        <button class="btn btn-outline-success mb-2" data-bs-toggle="modal" data-bs-target="#Receipt-<?= $ads['AdID'] ?>">Check Payment</button>
-                                                    <?php
-                                                    endif;
-                                                    if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
-                                                        <button class="btn btn-outline-danger mb-2" data-bs-target="#cancel-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Cancel Ad</button>
-                                                    <?php endif; ?>
+                                                    <button class="btn btn-outline-dark btn-floating m-1" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal" role="button"><i class="bi bi-pen"></i></button>
+
+
                                                 </div>
 
 
@@ -306,6 +295,68 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
                                     </ul>
                                 </div>
+
+
+
+                                <!--//!MODAL FOR Edit Buttons POPUP-->
+
+                                <div class="modal fade" id="modalEdit-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-3" id="exampleModalToggleLabel1"><strong>Edit</strong></h1>
+
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <?php if ($ads['AdStatus'] == "Pending Review") : ?>
+                                                    <button class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#acceptRequest-<?= $ads['AdID'] ?>">Accept Request</button>
+                                                    <button class="btn btn-outline-danger mb-2" data-bs-toggle="modal" data-bs-target="#rejectRequest-<?= $ads['AdID'] ?>">Reject Request</button>
+                                                <?php endif;
+                                                if ($ads['AdStatus'] == "Checking Payment") :
+                                                ?>
+                                                    <button class="btn btn-outline-primary mb-2" data-bs-toggle="modal" data-bs-target="#acceptPayment-<?= $ads['AdID'] ?>">Accept Payment</button>
+                                                    <button class="btn btn-outline-danger mb-2" data-bs-toggle="modal" data-bs-target="#rejectPayment-<?= $ads['AdID'] ?>">Reject Payment</button>
+                                                    <button class="btn btn-outline-success mb-2" data-bs-toggle="modal" data-bs-target="#Receipt-<?= $ads['AdID'] ?>">Check Payment</button>
+                                                <?php
+                                                endif;
+                                                if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
+                                                    <button class="btn btn-outline-danger mb-2" data-bs-target="#cancel-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Cancel Ad</button>
+                                                <?php endif; ?>
+                                            </div>
+                                            <div class="modal-footer d-flex justify-content-between">
+
+                                                <div class="text-start mb-2 p-0">Title: <?= $ads['AdName'] ?></div>
+                                                <div class="p-0  mb-2">
+
+                                                    Status:
+                                                    <?php switch ($ads['AdStatus']) {
+                                                        case "Pending Review":
+                                                        case "Pending Payment":
+                                                        case "Checking Payment":
+                                                            echo '<span class="text-warning" style:"width:150px;">';
+                                                            break;
+                                                        case "Rejected Request":
+                                                        case "Rejected Payment":
+                                                        case "Cancelled":
+                                                        case "Expired":
+                                                            echo '<span class="text-danger" style:"width:150px;">';
+                                                            break;
+                                                        case "Approved":
+                                                            echo '<span class="text-success" style:"width:150px;">';
+                                                            break;
+                                                    }
+                                                    echo "&nbsp;" . $ads['AdStatus'];
+                                                    ?>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
 
 
 
@@ -333,6 +384,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                 </div>
 
 
+
                                 <!--//!MODAL FOR RECEIPT PAYMENT POPUP-->
 
                                 <div class="modal fade p-0" id="Receipt-<?= $ads['AdID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -348,8 +400,9 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                                 <img class="modal-content" id="modalImg" src="<?= $ads['AdPaymentPicture'] ?>">
                                             </div>
                                             <div class="modal-footer">
-                                                <div class="container text-center text-break m-auto" id="caption">
-                                                    Amount to be paid: RM <?= $ads['Price'] ?>
+                                                <div class="container d-flex text-break p-0 m-0 justify-content-between" id="caption">
+                                                    <div class="">Amount to be paid: RM <?= $ads['Price'] ?></div>
+                                                    <button class="btn btn-primary " data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Back to Edit</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -378,6 +431,9 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                                     </div>
                                                 </form>
                                             </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-primary" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Back to Edit</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -402,6 +458,9 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                                         <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
                                                     </div>
                                                 </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-primary" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Back to Edit</button>
                                             </div>
                                         </div>
                                     </div>
@@ -441,6 +500,9 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
                                                 </form>
                                             </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-primary" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Back to Edit</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -467,6 +529,9 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                                     </div>
                                                 </form>
                                             </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-primary" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Back to Edit</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -490,6 +555,9 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                                         <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
                                                     </div>
                                                 </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-primary" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Back to Edit</button>
                                             </div>
                                         </div>
                                     </div>
