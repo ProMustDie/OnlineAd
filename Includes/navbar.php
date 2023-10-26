@@ -5,7 +5,10 @@ $logIn = new LoginController;
 if (isset($_POST['logout_btn'])) {
     $checkLoggedOut = $logIn->logout();
     if ($checkLoggedOut) {
-        header("Location: main.php");
+            echo '<script type="text/javascript">';
+            echo 'alert("You are logged out!");';
+            echo 'window.location = "main.php";';
+            echo '</script>';
     }
 }
 

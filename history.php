@@ -3,12 +3,13 @@ include('includes/app.php');
 include_once('includes/Classified.php');
 $classified = new Classified;
 include('includes/AuthController.php');
-$AuthLogin = new AuthenticatorController();
 $redirect = basename($_SERVER['PHP_SELF']);
 
 if (!empty($_SERVER['QUERY_STRING'])) {
     $redirect .= '?' . $_SERVER['QUERY_STRING'];
-} ?>
+}
+$AuthLogin = new AuthenticatorController($redirect);
+ ?>
 
 
 <!DOCTYPE html>
