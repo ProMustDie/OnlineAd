@@ -232,6 +232,15 @@
             $stmt->bind_param("di" ,$price, $AdID);
             $stmt->execute();
         }
+
+        public function setPostTimeNOW($AdID){
+            $sql = "UPDATE ads
+            SET AdPostedDateTime = NOW()
+            WHERE AdID = ?;";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("i", $AdID);
+            $stmt->execute();
+        }
     }
 
     ?>

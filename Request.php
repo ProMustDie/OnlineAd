@@ -279,26 +279,44 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                                 </span>
                                             </div>
 
-
+                                            <?php if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
                                             <li class="list-group-item p-0 m-0 border-bottom-0">
                                                 <div class="container-fluid p-0 text-end">
                                                     <button class="btn btn-outline-dark btn-floating m-1" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal" role="button"><i class="bi bi-pen"></i></button>
-
-
                                                 </div>
-
-
-
-
+                                            <?php endif;?>
 
                                     </div>
                                     </li>
 
                                     </ul>
                                 </div>
+                                
+                                 <!--//!MODAL FOR IMAGES POPUP-->
 
+                                 <div class="modal fade p-0" id="modalImg-<?= $ads['AdID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-xl">
+                                        <div class="modal-content modal-xl">
+                                            <div class="modal-header p-3">
+                                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                    <?= $ads['AdName'] ?>
+                                                </h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body" style="max-height: 80vh; overflow-y: auto;">
+                                                <img class="modal-content" id="modalImg" src="<?= $ads['AdPicture'] ?>">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <div class="container text-center text-break m-auto" id="caption">
+                                                    <?= $ads['AdDescription'] ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-
+                                                
+                                <?php if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
                                 <!--//!MODAL FOR Edit Buttons POPUP-->
 
                                 <div class="modal fade" id="modalEdit-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
@@ -355,37 +373,8 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
-
-
-                                <!--//!MODAL FOR IMAGES POPUP-->
-
-                                <div class="modal fade p-0" id="modalImg-<?= $ads['AdID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-xl">
-                                        <div class="modal-content modal-xl">
-                                            <div class="modal-header p-3">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                    <?= $ads['AdName'] ?>
-                                                </h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body" style="max-height: 80vh; overflow-y: auto;">
-                                                <img class="modal-content" id="modalImg" src="<?= $ads['AdPicture'] ?>">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <div class="container text-center text-break m-auto" id="caption">
-                                                    <?= $ads['AdDescription'] ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
+                                
+                                <?php if ($ads['AdStatus'] == "Checking Payment") :?>
                                 <!--//!MODAL FOR RECEIPT PAYMENT POPUP-->
 
                                 <div class="modal fade p-0" id="Receipt-<?= $ads['AdID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -405,35 +394,6 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                                     <div class="">Amount to be paid: RM <?= $ads['Price'] ?></div>
                                                     <button class="btn btn-primary " data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Back to Edit</button>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <!--//!REJECT Request MODAL-->
-                                <div class="modal fade" id="rejectRequest-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
-                                    <div class="modal-dialog modal-md modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-3" id="exampleModalToggleLabel5"><strong>Reject Ad Request</strong></h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-
-                                                <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
-                                                <form action="Includes/authActions.php?request=RejectRequest" method="POST">
-                                                    <label for="formFile" class="form-label text-danger">Are you sure you want to reject the request?</label>
-                                                    <div class="container-fluid d-flex justify-content-end">
-                                                        <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
-                                                        <input type="hidden" value="<?= $redirect ?>" name="redirect">
-                                                        <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
-                                                        <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-primary" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Back to Edit</button>
                                             </div>
                                         </div>
                                     </div>
@@ -467,6 +427,68 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                     </div>
                                 </div>
 
+                                <!--//!Accept Payment MODAL-->
+                                <div class="modal fade" id="acceptPayment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                    <div class="modal-dialog modal-md modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-3" id="exampleModalToggleLabel5"><strong>Accept Ad Payment</strong></h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
+                                                <form action="Includes/authActions.php?request=ApproveAd" method="POST">
+                                                    <label for="formFile" class="form-label text-primary">Ensure correct amount has been paid first.<br>This ad will be approved and posted!<br>Are you sure you want to accept the payment?</label>
+                                                    <div class="container-fluid d-flex justify-content-end">
+                                                        <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
+                                                        <input type="hidden" value="<?= $redirect ?>" name="redirect">
+                                                        <input type="submit" class="btn btn-outline-primary mx-2 px-4" value="Yes">
+                                                        <button type="button" class="btn btn-outline-danger px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-primary" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Back to Edit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <?php endif; 
+                                if ($ads['AdStatus'] == "Pending Review") :
+                                ?>
+
+
+                                <!--//!REJECT Request MODAL-->
+                                <div class="modal fade" id="rejectRequest-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                    <div class="modal-dialog modal-md modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-3" id="exampleModalToggleLabel5"><strong>Reject Ad Request</strong></h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
+                                                <form action="Includes/authActions.php?request=RejectRequest" method="POST">
+                                                    <label for="formFile" class="form-label text-danger">Are you sure you want to reject the request?</label>
+                                                    <div class="container-fluid d-flex justify-content-end">
+                                                        <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
+                                                        <input type="hidden" value="<?= $redirect ?>" name="redirect">
+                                                        <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
+                                                        <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-primary" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Back to Edit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
 
                                 <!--//!Accept Request MODAL-->
                                 <div class="modal fade" id="acceptRequest-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
@@ -479,7 +501,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                             <div class="modal-body">
 
                                                 <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
-                                                <form action="Includes/authActions.php?request=RejectPayment" method="POST">
+                                                <form action="Includes/authActions.php?request=AcceptRequest" method="POST">
 
                                                     <div class="d-inline-flex  align-items-center">
                                                         <label for="Price">Price: </label>
@@ -508,34 +530,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                     </div>
                                 </div>
 
-                                <!--//!Accept Payment MODAL-->
-                                <div class="modal fade" id="acceptPayment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
-                                    <div class="modal-dialog modal-md modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-3" id="exampleModalToggleLabel5"><strong>Accept Ad Payment</strong></h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-
-                                                <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
-                                                <form action="Includes/authActions.php?request=ApproveAd&redirect" method="POST">
-                                                    <label for="formFile" class="form-label text-primary">Ensure correct amount has been paid first.<br>This ad will be approved and posted!<br>Are you sure you want to accept the payment?</label>
-                                                    <div class="container-fluid d-flex justify-content-end">
-                                                        <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
-                                                        <input type="hidden" value="<?= $redirect ?>" name="redirect">
-                                                        <input type="hidden" value="<?= $redirect ?>" name="redirect">
-                                                        <input type="submit" class="btn btn-outline-primary mx-2 px-4" value="Yes">
-                                                        <button type="button" class="btn btn-outline-danger px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn btn-primary" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Back to Edit</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php endif;?>
 
                                 <!--//!Cancel MODAL-->
                                 <div class="modal fade" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
@@ -547,7 +542,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                             </div>
                                             <div class="modal-body">
                                                 <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
-                                                <form action="Includes/authActions.php?request=CancelAd&redirect" method="POST">
+                                                <form action="Includes/authActions.php?request=CancelAd" method="POST">
                                                     <label for="formFile" class="form-label text-danger">Are you sure you want to cancel? <br>You can't revert this action!</label>
                                                     <div class="container-fluid d-flex justify-content-end">
                                                         <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
@@ -563,7 +558,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                         </div>
                                     </div>
                                 </div>
-
+                            <?php endif;?>
 
 
                             <?php }

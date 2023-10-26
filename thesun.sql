@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2023 at 06:05 AM
+-- Generation Time: Oct 26, 2023 at 06:26 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -46,14 +46,15 @@ CREATE TABLE `ads` (
 
 INSERT INTO `ads` (`AdID`, `AdName`, `AdDescription`, `Price`, `AdAuthorID`, `AdStatus`, `AdPicture`, `AdPaymentPicture`, `AdCategory`, `AdPostedDateTime`) VALUES
 (1, 'Testing 1', 'No clue but testing', 0, 7, 'Approved', 'img/logo.png', NULL, 'morning,afternoon,night,bottom,jeans,random,word,test', '2023-10-16 10:00:00'),
-(2, 'Testing 2', 'Idk but another test', 0, 7, 'Pending Review', 'img/TheSun.jpeg', NULL, 'morning,afternoon,evening,night', '2023-10-14 14:00:00'),
+(2, 'Testing 2', 'Idk but another test', NULL, 7, 'Pending Review', 'img/TheSun.jpeg', NULL, 'morning,afternoon,evening,night', '2023-10-14 14:00:00'),
 (5, 'Testing 3', 'I am giving up', 0, 7, 'Pending Payment', 'img/logo.png', NULL, 'afternoon', '2023-10-15 16:00:00'),
 (7, 'Testing 4', 'Idk Im starting to get tired', 0, 7, 'Rejected Payment', 'img/logo.png', NULL, 'afternoon', '2023-10-18 10:57:14'),
 (8, 'Testing 5', 'Im close to passing out', 0, 7, 'Rejected Request', 'img/logo.png', NULL, 'evening,night', '2023-10-18 11:12:38'),
 (9, 'Testing 6', 'passed out', 0, 7, 'Cancelled', 'img/logo.png', NULL, 'night', '2023-10-18 11:12:38'),
 (10, 'Testing 7', 'ded', 0, 7, 'Expired', 'img/logo.png', NULL, 'afternoon', '2023-10-18 11:12:38'),
 (11, 'testing 8', 'dead', 0, 7, 'Approved', 'img/logo.png', NULL, 'afternoon,evening,morning,night', '2023-10-23 05:09:52'),
-(20, 'category testing', 'works? sql injection pending ', 0, 7, 'Checking Payment', 'img/classifiedIMG/db4a97a3be37a89faccbb0dff53aaf25.png', NULL, 'bottom,random,test,word', '0000-00-00 00:00:00');
+(20, 'category testing', 'works? sql injection pending ', 0, 7, 'Checking Payment', 'img/classifiedIMG/db4a97a3be37a89faccbb0dff53aaf25.png', NULL, 'bottom,random,test,word', '0000-00-00 00:00:00'),
+(31, 'asd', 'asdasdasd', 69420.69, 11, 'Approved', 'img/classifiedIMG/fcc8bb395113394fcabbcbd5d087085b.jpg', 'img/transactionIMG/9379ee0e87a498a7a77f29bff7fd4e83.png', 'test', '2023-10-26 12:15:12');
 
 -- --------------------------------------------------------
 
@@ -76,7 +77,9 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`UserID`, `UserEmail`, `UserName`, `UserPassword`, `UserType`) VALUES
 (7, 'ausca33@gmail.com', 'AuscaLaiSuperLongAssNameTOTEst', '$2y$10$RdnEuO1rK0mZ.8YhompxzeAC.8ZlIIbA3aapbyzSypfmUJNJe8ju6', 'User'),
 (9, 'tester2@gmail.com', 'Tester2', '$2y$10$mND3uqU68xoTDa2UBcTyYe11fa5fG83.IrkXcOidCiO275rJjqGvK', 'User'),
-(10, 'admin@admin.com', 'Admin', '$2y$10$gXf6xfEDdzn/gQEKO4kGYeV5LsZDrV52TwAAkdB4a3j1oRRvU.t9q', 'Admin');
+(10, 'admin@admin.com', 'Admin', '$2y$10$gXf6xfEDdzn/gQEKO4kGYeV5LsZDrV52TwAAkdB4a3j1oRRvU.t9q', 'Admin'),
+(11, '1234@gmail.com', 'yougurt', '$2y$10$t9rRPtAYGdWC3dpGdNXIDunKxqSvr7fHye11NCZsX4.LAvUeJEdlC', 'User'),
+(12, '1234@hotmail.com', '1234', '$2y$10$HjcMbhOh5NH66Vf/1uaCK.atdS9w9JYrQ9/Ym9jlY1aBk/ENdoU3C', 'Admin');
 
 --
 -- Indexes for dumped tables
@@ -102,13 +105,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `ads`
 --
 ALTER TABLE `ads`
-  MODIFY `AdID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `AdID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
