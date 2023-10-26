@@ -5,7 +5,7 @@ $redirect = basename($_SERVER['PHP_SELF']);
 
 if (!empty($_SERVER['QUERY_STRING'])) {
     $redirect .= '?' . $_SERVER['QUERY_STRING'];
-}?>
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +45,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                             <span class="navbar-toggler-icon"></span><span style="position:relative; top:2px;">Filter</span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                            <form action="" method="GET">
+                            <form action="" method="GET" class="mx-auto">
                                 <div class="text-center ms-2 mt-3 ">
                                     <b class="fs-3">Categories</b>
                                     <hr>
@@ -78,9 +78,9 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                         endif;
                                         ?>
                                     </div>
-                                    <?php if (!empty($_GET['search'])) {?>
-                                    <input type="hidden" name="search" value="<?= $key ?>">
-                                    <?php }?>
+                                    <?php if (!empty($_GET['search'])) { ?>
+                                        <input type="hidden" name="search" value="<?= $key ?>">
+                                    <?php } ?>
                                     <input type="submit" class="button-31 mt-5 mb-5" value="Search">
 
                                 </div>
@@ -198,7 +198,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                             </div>
 
 
-                    <?php }
+                        <?php }
                     else :
                         ?>
                         <span class="h2 text-center text-secondary mt-5">No Advertisement Request or Post was found!</span>

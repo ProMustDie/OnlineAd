@@ -141,7 +141,7 @@
 
 
     .checkbox-wrapper-4#CateText{
-        font-size: clamp(0.8rem, 1.4vw, 1.2rem); 
+        font-size: clamp(0.8rem, 1.4vw, 0.9rem); 
         word-wrap: break-word;
     }
 
@@ -234,3 +234,4 @@ input[type="submit"]#request {
     transition: .2s ease-in;
     cursor: pointer;
 }
+
