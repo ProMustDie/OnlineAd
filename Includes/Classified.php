@@ -17,6 +17,7 @@
             $status = $stat;
 
             if($key == NULL && $filter == NULL && $UserID == NULL && $stat == NULL){
+                //Constructor Method
                 $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, " . $this->userTable . " as u
                         WHERE a.AdAuthorID = u.UserID
@@ -26,6 +27,7 @@
                 $result = $stmt->get_result();
                 return $result;
             }elseif($key == NULL && $filter == NULL && $UserID == NULL){
+                //Main Page without search and category (included with Approved) / Request Page without search and category but has status
                 $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, " . $this->userTable . " as u
                         WHERE a.AdAuthorID = u.UserID
@@ -37,6 +39,7 @@
                 $result = $stmt->get_result();
                 return $result;
             }elseif($key == NULL && $filter == NULL && $status == NULL && $UserID != NULL){
+                //History Page without search
                 $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
                         WHERE a.AdAuthorID = u.UserID
@@ -48,6 +51,7 @@
                 $result = $stmt->get_result();
                 return $result;
             }elseif($key!= NULL && $filter == NULL && $status == NULL && $UserID != NULL){
+                //History page with serch
                 $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
                         WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
@@ -62,7 +66,7 @@
                 $result = $stmt->get_result();
                 return $result;
             }elseif($key!= NULL && $filter == NULL && $stat != NULL ){
-                
+                //Request page with search and status, but without category / Main page with search, without category
                 $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                 FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
                 WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
@@ -77,8 +81,47 @@
                 $stmt->execute();
                 $result = $stmt->get_result();
                 return $result;
-            }elseif($key!= NULL && $filter == NULL && $stat == NULL ){
-                
+            }elseif($key!= NULL && $filter != NULL && $stat == NULL ){
+                //Request page with search and category, but without status
+                $categoryConditions = [];
+                foreach ($filter as $category) {
+                    $categoryConditions[] = "FIND_IN_SET(?, a.AdCategory) > 0";
+                }
+                $categoryCondition = implode(' OR ', $categoryConditions);
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
+                FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
+                WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
+                AND a.AdAuthorID = u.UserID
+                AND ($categoryCondition)
+                ORDER BY a.AdID DESC ";
+
+                $param = "%$key%";
+                $params = array_merge([$param,$param,$param],$filter);
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param(str_repeat('s', count($params)), ...$params);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                return $result;
+            }elseif($key== NULL && $filter != NULL && $stat == NULL ){
+                //Request page with category, but without search and status 
+                $categoryConditions = [];
+                foreach ($filter as $category) {
+                    $categoryConditions[] = "FIND_IN_SET(?, a.AdCategory) > 0";
+                }
+                $categoryCondition = implode(' OR ', $categoryConditions);
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
+                FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
+                WHERE a.AdAuthorID = u.UserID
+                AND ($categoryCondition)
+                ORDER BY a.AdID DESC ";
+
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bind_param(str_repeat('s', count($filter)), ...$filter);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                return $result;
+            }elseif($key!= NULL && $filter == NULL && $stat == NULL && $UserID == NULL){
+                //Main page with search without category / Request page with search without category and status
                 $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                 FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
                 WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
@@ -92,7 +135,7 @@
                 $result = $stmt->get_result();
                 return $result;
             }else{
-                
+                //Request page with search, category, and status
                 $categoryConditions = [];
                 foreach ($filter as $category) {
                     $categoryConditions[] = "FIND_IN_SET(?, a.AdCategory) > 0";
