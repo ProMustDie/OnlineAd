@@ -34,7 +34,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
     <div class="container-fluid bg-light p-0">
 
         <!--//!Category-->
-        <div class="row">
+        <div class="row m-0 p-0">
 
 
             <div class="col-sm-3 col-md-4 col-lg-2 m-0 p-0">
