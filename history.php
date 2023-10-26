@@ -178,9 +178,11 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                             <div class="modal-body">
                                 <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
 
-                                <form action="#" method="#" class="needs-validation" novalidate enctype="multipart/form-data">
+                                <form action="includes/RequestAds.php?request=payment" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label">Upload Image</label>
+                                        <input type="hidden" name="AdID" value="<?= $ads["AdID"]?>" >
+                                        <input type="hidden" name="redirect" value="<?= $redirect ?>">
                                         <input type="file" class="form-control m-auto mb-2" id="formFile" name="fileUpload" required accept="image/png, image/jpeg, image/jpg, application/pdf">
                                     </div>
                                     <input type="submit" class="btn btn-outline-success float-end" value="Submit">

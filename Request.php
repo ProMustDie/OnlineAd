@@ -38,6 +38,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
 
                         <input type="hidden" name="UserID" value="<?= $_SESSION['auth_user']['user_id'] ?>">
+                        <input type="hidden" name="redirect" value="<?= $redirect ?>">
 
                         <input type="file" class="form-control m-auto mb-2" id="validationCustom01" name="fileUpload" style="width:75%;" required accept="image/png, image/jpeg, image/jpg, application/pdf">
 
