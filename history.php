@@ -52,20 +52,29 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                 <?= $ads['AdName'] ?>
                             </h5>
                             <p class="card-text text-secondary text-truncate" id="TextSub">
-                                <?= $ads['AdDescription'] ?>
+                                <small> <?= $ads['AdDescription'] ?></small>
                             </p>
-                            <p class="card-text lh-lg" id="TextCate">Category:
-                                <?php
-                                $categoriesArray = explode(',', $ads['AdCategory']);
-                                foreach ($categoriesArray as $category) {
+                            <div class="dropdown d-inline">
+                                <button class="btn btn-sm btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Category
+                                </button>
+                                <div class="dropdown-menu p-2 mt-1 rounded-3 bg-secondary-subtle" style="width:250%;">
+                                    <p class="card-text lh-lg" id="TextCate">
+                                        <?php
+                                        $categoriesArray = explode(',', $ads['AdCategory']);
+                                        foreach ($categoriesArray as $category) {
 
-                                ?>
+                                        ?>
 
-                                    <span class="rounded-3 bg-success text-light px-2 py-1"><?= $category ?></span>
+                                            <span class="rounded-3 bg-success text-light px-2 py-1"><?= $category ?></span>
 
 
-                                <?php } ?>
-                            </p>
+                                        <?php } ?>
+                                    </p>
+                                </div>
+                            </div>
+
+
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item"></li>
                                 <li class="list-group-item p-0 m-0 border-bottom-0">
@@ -168,7 +177,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
     ?>
 
             <?php if (($ads['AdStatus'] == "Pending Payment" || $ads['AdStatus'] == "Rejected Payment") && $ads['AdStatus'] != "Approved" && $ads['AdStatus'] != "Cancelled") : ?>
-                <!--*PAYMENT MODAL-->
+                <!--//*PAYMENT MODAL-->
                 <div class="modal fade" id="payment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="payment-<?= $ads['AdID'] ?>" tabindex="-1">
                     <div class="modal-dialog modal-md modal-dialog-centered">
                         <div class="modal-content">
@@ -179,11 +188,21 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="CloseModalPayment"></button>
                             </div>
                             <div class="modal-body">
-                                <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
+                                <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br>
+
+
+                                <div class="d-inline-flex  align-items-center">
+                                    <strong class="fs-5"><label for="Price">Price: </label></strong>
+
+                                    <div class="input-group ms-1">
+                                        <span class="input-group-text">RM</span>
+                                        <input type="number" step="0.01" class="form-control w-75 p-1" placeholder="Enter an amount" value="<?= $ads['Price'] ?>" id="Price" name="Price" min="0" data-bind="value:replyNumber" onkeypress="return (event.charCode != 8) && (event.charCode >= 48 && event.charCode <= 57) || event.charCode == 46" disabled>
+                                    </div>
+                                </div><br><br>
 
                                 <form action="includes/RequestAds.php?request=payment" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
                                     <div class="mb-3">
-                                        <label for="formFile" class="form-label">Upload Image</label>
+                                        <label for="formFile" class="form-label">Upload Image: </label>
                                         <input type="hidden" name="AdID" value="<?= $ads["AdID"] ?>">
                                         <input type="hidden" name="redirect" value="<?= $redirect ?>">
                                         <input type="file" class="form-control m-auto mb-2" id="formFile" name="fileUpload" required accept="image/png, image/jpeg, image/jpg, application/pdf">
@@ -197,12 +216,12 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                         </div>
                     </div>
                 </div>
-                <!--*PAYMENT MODAL-->
+                <!--//*PAYMENT MODAL-->
 
             <?php endif; ?>
 
             <?php if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
-                <!--*CANCEL MODAL-->
+                <!--//*CANCEL MODAL-->
                 <div class="modal fade" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
                     <div class="modal-dialog modal-md modal-dialog-centered">
                         <div class="modal-content">

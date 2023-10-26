@@ -114,19 +114,33 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title fs-3 fw-bold" id="TextHeader"><?= $ads['AdName'] ?></h5>
-                                    <p class="card-text text-truncate text-secondary" id="TextSub"><?= $ads['AdDescription'] ?></p>
-                                    <p class="card-text lh-lg" id="TextCate">Category:
-                                        <?php
-                                        $categoriesArray = explode(',', $ads['AdCategory']);
-                                        foreach ($categoriesArray as $category) {
-
-                                        ?>
-
-                                            <span class="rounded-3 bg-success text-light px-2 py-1"><?= $category ?></span>
+                                    <p class="card-text text-truncate text-secondary" id="TextSub"><small> <?= $ads['AdDescription'] ?></small></p>
 
 
-                                        <?php } ?>
-                                    </p>
+                                    <div class="dropdown d-inline">
+                                        <button class="btn btn-sm btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Category
+                                        </button>
+                                        <div class="dropdown-menu p-2 mt-1 rounded-3 bg-secondary-subtle" style="width:250%;">
+                                            <p class="card-text lh-lg" id="TextCate">
+                                                <?php
+                                                $categoriesArray = explode(',', $ads['AdCategory']);
+                                                foreach ($categoriesArray as $category) {
+
+                                                ?>
+
+                                                    <span class="rounded-3 bg-success text-light px-2 py-1"><?= $category ?></span>
+
+
+                                                <?php } ?>
+                                            </p>
+                                        </div>
+                                    </div>
+
+
+
+
+
 
 
 
