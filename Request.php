@@ -220,7 +220,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                                 <div class="card m-2" style="width: 18rem;">
                                     <div class="ImgContainer m-2">
-                                        <img src="<?= $ads['AdPicture'] ?>" class="imgSize card-img-top img-fluid" id="myImg" data-bs-toggle="modal" data-bs-target="#modalImg-<?= $ads['AdID'] ?>">
+                                        <img src="<?= $ads['AdPicture'] ?>" class="imgSize card-img-top " id="myImg" data-bs-toggle="modal" data-bs-target="#modalImg-<?= $ads['AdID'] ?>">
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title fs-5 fw-bold text-truncate" id="TextHeader" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="<?= $ads['AdName'] ?>"><?= $ads['AdName'] ?></h5>
@@ -304,21 +304,28 @@ $AuthLogin = new AuthenticatorController($redirect);
                                 <!--//!MODAL FOR IMAGES POPUP-->
 
                                 <div class="modal fade p-0" id="modalImg-<?= $ads['AdID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-xl">
+                                    <div class="modal-dialog modal-xl  mt-1">
                                         <div class="modal-content modal-xl">
-                                            <div class="modal-header p-3 ">
+                                            <div class="modal-header p-3">
 
-                                                <h1 class="modal-title fs-3" id="exampleModalLabel"><?= $ads['AdName'] ?></h1>
+                                                <div class="col">
+                                                    <div class="item1">
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 95%;"></button>
+                                                    </div>
+                                                    <div class="item2">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel"><?= $ads['AdName'] ?></h1>
+                                                    </div>
+                                                    <div class="item3">
+                                                        <span class="text-muted mx-auto"><small><?= $ads['UserName'] . " posted on " . $formattedDatetime ?></small></span>
+                                                    </div>
+                                                </div>
 
-                                                <button type="button" class="btn-close m-0" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body" style="max-height: 80vh; overflow-y: auto;">
                                                 <img class="modal-content" id="modalImg" src="<?= $ads['AdPicture'] ?>">
                                             </div>
                                             <div class="modal-footer">
-                                                <div class="container text-center text-break" id="caption">
-                                                    <span class="text-muted mx-auto"><small><?= $ads['UserName'] . " posted on " . $formattedDatetime ?></small></span>
-                                                </div>
+
 
                                                 <div class="container text-center text-break" id="caption">
                                                     <p class="card-text lh-lg" id="TextCate">

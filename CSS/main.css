@@ -1,14 +1,16 @@
 .ImgContainer {
     width:95%;
-    height: 220px;
+    height: 150px;
     overflow: hidden;
     }
     
     .imgSize {
     width: 100%;
     height: 100%;
-    object-fit: cover  ;
+    object-fit: cover;
     }
+
+
 
     .checkbox-wrapper-4 * {
         box-sizing: border-box;
