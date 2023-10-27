@@ -81,7 +81,7 @@ if (!empty($_GET['status'])) {
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <li>
                                         <form action="" method="POST" class="text-center">
-                                            <button type="submit" name="logout_btn" class="btn btn-outline-primary "><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
+                                            <button type="submit" name="logout_btn" class="btn btn-outline-danger "><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
                                         </form>
                                     </li>
                                 </ul>
@@ -92,7 +92,7 @@ if (!empty($_GET['status'])) {
                                     Profile
                                 </a>
                                 <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
-                                    <li><a type="submit" class="btn btn-outline-danger " href="Register.php"><i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In</a></li>
+                                    <li><a type="submit" class="btn btn-outline-primary " href="Register.php"><i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In</a></li>
                                 </ul>
                             </li>
                         <?php endif; ?>

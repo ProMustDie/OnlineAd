@@ -92,7 +92,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
 
                                 <div class="container-fluid p-0 d-inline-flex align-items-center mb-2">
-                                    Status:
+                                    Status: &nbsp;
                                     <?php switch ($ads['AdStatus']) {
                                         case "Pending Review":
                                         case "Pending Payment":
@@ -220,7 +220,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                                 <form action="includes/RequestAds.php?request=payment" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
                                     <div class="mb-3">
-                                        <label for="formFile" class="form-label">Upload Image: </label>
+                                        <label for="formFile" class="form-label">Upload Payment Receipt: </label>
                                         <input type="hidden" name="AdID" value="<?= $ads["AdID"] ?>">
                                         <input type="hidden" name="redirect" value="<?= $redirect ?>">
                                         <input type="file" class="form-control m-auto mb-2" id="formFile" name="fileUpload" required accept="image/png, image/jpeg, image/jpg, application/pdf">
