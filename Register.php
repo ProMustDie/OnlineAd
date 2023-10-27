@@ -83,7 +83,7 @@ if (isset($_POST["SignUpSubmit"])) {
         if ($Register->registration($username, $email, $password)) {
             echo '<script type="text/javascript">';
             echo 'alert("Successfully signed up, you may now log in.");';
-            echo 'window.location = "main.php";';
+            echo 'window.location = "register.php";';
             echo '</script>';
         } else {
             $registerErr = "Account Creation Error!";
