@@ -223,9 +223,9 @@ $AuthLogin = new AuthenticatorController($redirect);
                                         <img src="<?= $ads['AdPicture'] ?>" class="imgSize card-img-top img-fluid" id="myImg" data-bs-toggle="modal" data-bs-target="#modalImg-<?= $ads['AdID'] ?>">
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title fs-3 fw-bold text-truncate" id="TextHeader" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="<?= $ads['AdName'] ?>"><?= $ads['AdName'] ?></h5>
+                                        <h5 class="card-title fs-5 fw-bold text-truncate" id="TextHeader" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="<?= $ads['AdName'] ?>"><?= $ads['AdName'] ?></h5>
 
-                                        <p class="card-text text-truncate text-secondary " id="TextSub">
+                                        <p class="card-text text-truncate text-secondary " id="TextSub" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="<?= $ads['AdDescription'] ?>">
                                             <small> <?= $ads['AdDescription'] ?></small>
                                         </p>
                                         <div class="dropdown d-inline">
@@ -348,7 +348,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-3" id="exampleModalToggleLabel1"><strong>Edit</strong></h1>
+                                                    <h1 class="modal-title fs-3" id="exampleModalToggleLabel"><strong>Edit</strong></h1>
 
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
@@ -399,14 +399,16 @@ $AuthLogin = new AuthenticatorController($redirect);
                                         </div>
                                     </div>
 
+
+
                                     <?php if ($ads['AdStatus'] == "Checking Payment") : ?>
                                         <!--//!MODAL FOR RECEIPT PAYMENT POPUP-->
 
-                                        <div class="modal fade p-0" id="Receipt-<?= $ads['AdID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade p-0" id="Receipt-<?= $ads['AdID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
                                             <div class="modal-dialog modal-xl">
                                                 <div class="modal-content modal-xl">
                                                     <div class="modal-header p-3">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                                        <h1 class="modal-title fs-3" id="exampleModalLabel1">
                                                             <?= $ads['AdName'] ?>
                                                         </h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -425,11 +427,11 @@ $AuthLogin = new AuthenticatorController($redirect);
                                         </div>
 
                                         <!--//!REJECT Payment MODAL-->
-                                        <div class="modal fade" id="rejectPayment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                        <div class="modal fade" id="rejectPayment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
                                             <div class="modal-dialog modal-md modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel5"><strong>Reject Ad Payment</strong></h1>
+                                                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel2"><strong>Reject Ad Payment</strong></h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
@@ -441,23 +443,21 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                                 <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                 <input type="hidden" value="<?= $redirect ?>" name="redirect">
                                                                 <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
-                                                                <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
+                                                                <button type="button" class="btn btn-outline-warning px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
                                                             </div>
                                                         </form>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-primary" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Back to Edit</button>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
 
                                         <!--//!Accept Payment MODAL-->
-                                        <div class="modal fade" id="acceptPayment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                        <div class="modal fade" id="acceptPayment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
                                             <div class="modal-dialog modal-md modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel5"><strong>Accept Ad Payment</strong></h1>
+                                                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel3"><strong>Accept Ad Payment</strong></h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
@@ -469,13 +469,11 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                                 <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                 <input type="hidden" value="<?= $redirect ?>" name="redirect">
                                                                 <input type="submit" class="btn btn-outline-primary mx-2 px-4" value="Yes">
-                                                                <button type="button" class="btn btn-outline-danger px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
+                                                                <button type="button" class="btn btn-outline-danger px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
                                                             </div>
                                                         </form>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-primary" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Back to Edit</button>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -486,11 +484,11 @@ $AuthLogin = new AuthenticatorController($redirect);
 
 
                                         <!--//!REJECT Request MODAL-->
-                                        <div class="modal fade" id="rejectRequest-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                        <div class="modal fade" id="rejectRequest-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel4" tabindex="-1">
                                             <div class="modal-dialog modal-md modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel5"><strong>Reject Ad Request</strong></h1>
+                                                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel4"><strong>Reject Ad Request</strong></h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
@@ -502,13 +500,11 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                                 <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                 <input type="hidden" value="<?= $redirect ?>" name="redirect">
                                                                 <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
-                                                                <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
+                                                                <button type="button" class="btn btn-outline-warning px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
                                                             </div>
                                                         </form>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-primary" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Back to Edit</button>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -543,14 +539,12 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                                 <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                 <input type="hidden" value="<?= $redirect ?>" name="redirect">
                                                                 <input type="submit" class="btn btn-outline-success mx-2 px-4" value="Yes">
-                                                                <button type="button" class="btn btn-outline-danger px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
+                                                                <button type="button" class="btn btn-outline-danger px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
                                                             </div>
 
                                                         </form>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-primary" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Back to Edit</button>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -558,11 +552,11 @@ $AuthLogin = new AuthenticatorController($redirect);
                                     <?php endif; ?>
 
                                     <!--//!Cancel MODAL-->
-                                    <div class="modal fade" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                    <div class="modal fade" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel6" tabindex="-1">
                                         <div class="modal-dialog modal-md modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-3 " id="exampleModalToggleLabel5"><strong>Cancel Ad</strong></h1>
+                                                    <h1 class="modal-title fs-3 " id="exampleModalToggleLabel6"><strong>Cancel Ad</strong></h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
@@ -573,13 +567,11 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                             <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                             <input type="hidden" value="<?= $redirect ?>" name="redirect">
                                                             <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
-                                                            <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
+                                                            <button type="button" class="btn btn-outline-warning px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
                                                         </div>
                                                     </form>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-primary" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Back to Edit</button>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -592,12 +584,12 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                             <span class="h2 text-center text-secondary mt-5">No Advertisement Request or Post was found!</span>
                         <?php endif; ?>
+
+
+
                     </div>
-
-
                 </div>
             </div>
-        </div>
         </div>
 
         <!--ADMIN -->

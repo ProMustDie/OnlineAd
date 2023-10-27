@@ -49,9 +49,9 @@ $AuthLogin = new AuthenticatorController($redirect);
                             <img src="<?= $ads['AdPicture'] ?>" class="imgSize card-img-top img-fluid" id="myImg" data-bs-toggle="modal" data-bs-target="#modalImg-<?= $ads['AdID'] ?>">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title fs-3 fw-bold text-truncate" id="TextHeader" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="<?= $ads['AdName'] ?>"><?= $ads['AdName'] ?></h5>
+                            <h5 class="card-title fs-5 fw-bold text-truncate" id="TextHeader" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="<?= $ads['AdName'] ?>"><?= $ads['AdName'] ?></h5>
 
-                            <p class="card-text text-secondary text-truncate" id="TextSub">
+                            <p class="card-text text-secondary text-truncate" id="TextSub" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="<?= $ads['AdDescription'] ?>">
                                 <small> <?= $ads['AdDescription'] ?></small>
                             </p>
                             <div class="dropdown d-inline">
