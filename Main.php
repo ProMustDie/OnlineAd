@@ -115,7 +115,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                 <div class="ImgContainer m-2">
                                     <img src="<?= $ads['AdPicture'] ?>" class="imgSize card-img-top" id="myImg" data-bs-toggle="modal" data-bs-target="#modalImg-<?= $ads['AdID'] ?>">
                                 </div>
-                                <div class="card-body" style="height:13rem;">
+                                <div class="card-body" style="height:10rem;">
                                     <div class="title d-inline-flex" style="height:3.5rem; width:15rem; overflow: hidden;">
                                         <h6 class="card-title fw-bold" id="TextHeader" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="<?= $ads['AdName'] ?>"><?= $ads['AdName'] ?></h6>
                                     </div>
