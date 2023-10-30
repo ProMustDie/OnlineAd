@@ -16,7 +16,7 @@ $AuthLogin = new AuthenticatorController($redirect);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="CSS/main.css" rel="stylesheet">
-    <title>Request</title>
+    <title>Enquiry</title>
 </head>
 
 <body>
@@ -32,7 +32,7 @@ $AuthLogin = new AuthenticatorController($redirect);
             <div class="row ">
                 <div class="col ">
                     <u style="text-decoration-thickness: 2px; color:gray">
-                        <h2 class="text-center text-secondary mb-3">Request Form Submission</h2>
+                        <h2 class="text-center text-secondary mb-3">Enquiry Form Submission</h2>
                     </u>
                     <form action="Includes/RequestAds.php" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
 
