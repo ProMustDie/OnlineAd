@@ -147,7 +147,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                                         <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
 
                                                         <form action="Includes/authActions.php?request=CancelAd&redirect" method="POST">
-                                                            <label for="formFile" class="form-label text-danger">Are you sure you want to cancel? <br>You can't revert this action!</label>
+                                                            <label for="formFile" class="form-label text-danger">Are you sure you want to <b><u>cancel?</u></b> <br>You can't revert this action!</label>
                                                             <div class="container-fluid d-flex justify-content-end">
                                                                 <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                 <input type="hidden" value="<?= $redirect ?>" name="redirect">

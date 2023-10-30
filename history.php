@@ -262,7 +262,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                     <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                     <input type="hidden" value="<?= $ads['AdAuthorID'] ?>" name="AdAuthorID">
                                     <input type="hidden" value="<?= $redirect ?>" name="redirect">
-                                    <label for="formFile" class="form-label text-danger">Are you sure you want to cancel? <br>No refunds will be
+                                    <label for="formFile" class="form-label text-danger">Are you sure you want to <b><u>cancel?</u></b> <br>No refunds will be
                                         provided!</label>
                                     <hr>
                                     <div class="container-fluid d-flex justify-content-end">

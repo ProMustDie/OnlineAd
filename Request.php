@@ -445,7 +445,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                                                         <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
                                                         <form action="Includes/authActions.php?request=RejectPayment" method="POST">
-                                                            <label for="formFile" class="form-label text-danger">Are you sure you want to reject the payment?</label>
+                                                            <label for="formFile" class="form-label text-danger">Are you sure you want to <B><u>reject the payment?</u></B></label>
                                                             <div class="container-fluid d-flex justify-content-end">
                                                                 <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                 <input type="hidden" value="<?= $redirect ?>" name="redirect">
@@ -471,7 +471,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                                                         <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
                                                         <form action="Includes/authActions.php?request=ApproveAd" method="POST">
-                                                            <label for="formFile" class="form-label text-primary">Ensure correct amount has been paid first.<br>This ad will be approved and posted!<br>Are you sure you want to accept the payment?</label>
+                                                            <label for="formFile" class="form-label text-primary">Ensure correct amount has been paid first.<br>This ad will be approved and posted!<br>Are you sure you want to <b><u>accept the payment?</u></b></label>
                                                             <div class="container-fluid d-flex justify-content-end">
                                                                 <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                 <input type="hidden" value="<?= $redirect ?>" name="redirect">
@@ -502,7 +502,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                                                         <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
                                                         <form action="Includes/authActions.php?request=RejectRequest" method="POST">
-                                                            <label for="formFile" class="form-label text-danger">Are you sure you want to reject the request?</label>
+                                                            <label for="formFile" class="form-label text-danger">Are you sure you want to <b><u>reject the request?</u></b></label>
                                                             <div class="container-fluid d-flex justify-content-end">
                                                                 <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                 <input type="hidden" value="<?= $redirect ?>" name="redirect">
@@ -540,7 +540,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                                 </div>
                                                             </div><br><br>
 
-                                                            <label for="formFile" class="form-label text-primary">Are you sure you want to accept the request?</label>
+                                                            <label for="formFile" class="form-label text-primary">Are you sure you want to <b><u>accept the request?</u></b></label>
                                                             <div class="container-fluid d-flex justify-content-end">
 
                                                                 <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
@@ -569,7 +569,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                 <div class="modal-body">
                                                     <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
                                                     <form action="Includes/authActions.php?request=CancelAd" method="POST">
-                                                        <label for="formFile" class="form-label text-danger">Are you sure you want to cancel? <br>You can't revert this action!</label>
+                                                        <label for="formFile" class="form-label text-danger">Are you sure you want to <B><u>cancel?</u></B> <br>You can't revert this action!</label>
                                                         <div class="container-fluid d-flex justify-content-end">
                                                             <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                             <input type="hidden" value="<?= $redirect ?>" name="redirect">
