@@ -412,13 +412,22 @@ $AuthLogin = new AuthenticatorController($redirect);
                                         <!--//!MODAL FOR RECEIPT PAYMENT POPUP-->
 
                                         <div class="modal fade p-0" id="Receipt-<?= $ads['AdID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-                                            <div class="modal-dialog modal-xl mt-1">
+                                            <div class="modal-dialog modal-xl mt-4">
                                                 <div class="modal-content modal-xl">
                                                     <div class="modal-header p-3">
-                                                        <h1 class="modal-title fs-3" id="exampleModalLabel1">
-                                                            <?= $ads['AdName'] ?>
-                                                        </h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                                                        <div class="col">
+                                                            <div class="item1">
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 95%;"></button>
+                                                            </div>
+                                                            <div class="item2">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel"><?= $ads['AdName'] ?></h1>
+                                                            </div>
+                                                            <div class="item3">
+                                                                <span class="text-muted mx-auto"><small><?= $ads['UserName'] . " posted on " . $formattedDatetime ?></small></span>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                     <div class="modal-body" style="max-height: 80vh; overflow-y: auto;">
                                                         <img class="modal-content" id="modalImg" src="<?= $ads['AdPaymentPicture'] ?>">
