@@ -75,10 +75,10 @@ if (!empty($_GET['status'])) {
                         endif;
                         if (isset($_SESSION["authenticated"]) && $_SESSION['authenticated'] ==  true) : ?>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">
                                     <?= $_SESSION['auth_user']["user_name"] ?>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <ul class="dropdown-menu dropdown-menu-end w-50" aria-labelledby="navbarDropdown">
                                     <li>
                                         <form action="" method="POST" class="text-center">
                                             <button type="submit" name="logout_btn" class="btn btn-outline-danger "><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
@@ -88,10 +88,10 @@ if (!empty($_GET['status'])) {
                             </li>
                         <?php else : ?>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">
                                     Profile
                                 </a>
-                                <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
+                                <ul class="dropdown-menu text-center dropdown-menu-end mb-2 w-50" aria-labelledby="navbarDropdown">
                                     <li><a type="submit" class="btn btn-outline-primary " href="Register.php"><i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In</a></li>
                                 </ul>
                             </li>

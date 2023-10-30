@@ -229,7 +229,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                             <small> <?= $ads['AdDescription'] ?></small>
                                         </p>
                                         <div class="dropdown d-inline">
-                                            <button class="btn btn-sm btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <button class="btn btn-sm btn-success dropdown-toggle" type="button" aria-expanded="false">
                                                 Category
                                             </button>
                                             <div class="dropdown-menu p-2 mt-1 rounded-3 bg-secondary-subtle" style="width:250%;">
