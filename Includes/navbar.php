@@ -49,6 +49,7 @@ if (!empty($_GET['status'])) {
 
     <!--navbar-->
     <header>
+        <!--Created by © Ausca Lai 2023 & © Teoh Yo Wen 2023 -->
         <nav class="navbar navbar-expand-md navbar-dark fs-3 position-top bg-success">
             <div class="container-fluid">
                 <a class="navbar-brand" href="main.php" style="width:80px;">
