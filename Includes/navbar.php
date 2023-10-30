@@ -64,11 +64,11 @@ if (!empty($_GET['status'])) {
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="Request.php">Request</a>
+                            <a class="nav-link" href="Request.php">Enquiry</a>
                         </li>
                         <?php if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] != "Admin") : ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="history.php" id="History">Enquiry</a>
+                                <a class="nav-link" href="history.php" id="History">History</a>
                             </li>
 
                         <?php
