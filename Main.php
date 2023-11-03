@@ -138,9 +138,9 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                             </p>
 
 
-                                            <!--*DELETE MODAL-->
-                                            <div class="modal fade" id="DeleteModal-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
-                                                <div class="modal-dialog modal-md modal-dialog-centered">
+                                            <!--//!DELETE MODAL-->
+                                            <div class="modal fade p-0" id="DeleteModal-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                                <div class="modal-dialog modal-md modal-dialog-centered mt-1">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h1 class="modal-title fs-3" id="exampleModalToggleLabel5"><strong>Cancel Ad</strong></h1>
@@ -163,7 +163,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!--*DELETE MODAL-->
+                                            <!--//!DELETE MODAL-->
 
                                         <?php endif; ?>
                                         </ul>

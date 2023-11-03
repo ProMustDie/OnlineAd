@@ -351,8 +351,8 @@ $AuthLogin = new AuthenticatorController($redirect);
                                 <?php if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
                                     <!--//!MODAL FOR Edit Buttons POPUP-->
 
-                                    <div class="modal fade" id="modalEdit-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                                        <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal fade p-0" id="modalEdit-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                                        <div class="modal-dialog modal-dialog-centered mt-1">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-3" id="exampleModalToggleLabel"><strong>Edit</strong></h1>
@@ -412,13 +412,22 @@ $AuthLogin = new AuthenticatorController($redirect);
                                         <!--//!MODAL FOR RECEIPT PAYMENT POPUP-->
 
                                         <div class="modal fade p-0" id="Receipt-<?= $ads['AdID'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-                                            <div class="modal-dialog modal-xl">
+                                            <div class="modal-dialog modal-xl mt-4">
                                                 <div class="modal-content modal-xl">
                                                     <div class="modal-header p-3">
-                                                        <h1 class="modal-title fs-3" id="exampleModalLabel1">
-                                                            <?= $ads['AdName'] ?>
-                                                        </h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                                                        <div class="col">
+                                                            <div class="item1">
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 95%;"></button>
+                                                            </div>
+                                                            <div class="item2">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel"><?= $ads['AdName'] ?></h1>
+                                                            </div>
+                                                            <div class="item3">
+                                                                <span class="text-muted mx-auto"><small><?= $ads['UserName'] . " posted on " . $formattedDatetime ?></small></span>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                     <div class="modal-body" style="max-height: 80vh; overflow-y: auto;">
                                                         <img class="modal-content" id="modalImg" src="<?= $ads['AdPaymentPicture'] ?>">
@@ -434,8 +443,8 @@ $AuthLogin = new AuthenticatorController($redirect);
                                         </div>
 
                                         <!--//!REJECT Payment MODAL-->
-                                        <div class="modal fade" id="rejectPayment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-                                            <div class="modal-dialog modal-md modal-dialog-centered">
+                                        <div class="modal fade p-0" id="rejectPayment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                                            <div class="modal-dialog modal-md modal-dialog-centered mt-1">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h1 class="modal-title fs-3" id="exampleModalToggleLabel2"><strong>Reject Ad Payment</strong></h1>
@@ -460,8 +469,8 @@ $AuthLogin = new AuthenticatorController($redirect);
                                         </div>
 
                                         <!--//!Accept Payment MODAL-->
-                                        <div class="modal fade" id="acceptPayment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
-                                            <div class="modal-dialog modal-md modal-dialog-centered">
+                                        <div class="modal fade p-0" id="acceptPayment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel3" tabindex="-1">
+                                            <div class="modal-dialog modal-md modal-dialog-centered mt-1">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h1 class="modal-title fs-3" id="exampleModalToggleLabel3"><strong>Accept Ad Payment</strong></h1>
@@ -491,8 +500,8 @@ $AuthLogin = new AuthenticatorController($redirect);
 
 
                                         <!--//!REJECT Request MODAL-->
-                                        <div class="modal fade" id="rejectRequest-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel4" tabindex="-1">
-                                            <div class="modal-dialog modal-md modal-dialog-centered">
+                                        <div class="modal fade p-0" id="rejectRequest-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel4" tabindex="-1">
+                                            <div class="modal-dialog modal-md modal-dialog-centered mt-1">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h1 class="modal-title fs-3" id="exampleModalToggleLabel4"><strong>Reject Ad Request</strong></h1>
@@ -519,8 +528,8 @@ $AuthLogin = new AuthenticatorController($redirect);
 
 
                                         <!--//!Accept Request MODAL-->
-                                        <div class="modal fade" id="acceptRequest-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
-                                            <div class="modal-dialog modal-md modal-dialog-centered">
+                                        <div class="modal fade p-0" id="acceptRequest-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel5" tabindex="-1">
+                                            <div class="modal-dialog modal-md modal-dialog-centered mt-1">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h1 class="modal-title fs-5" id="exampleModalToggleLabel5"><strong>Accept Ad Request</strong></h1>
@@ -559,8 +568,8 @@ $AuthLogin = new AuthenticatorController($redirect);
                                     <?php endif; ?>
 
                                     <!--//!Cancel MODAL-->
-                                    <div class="modal fade" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel6" tabindex="-1">
-                                        <div class="modal-dialog modal-md modal-dialog-centered">
+                                    <div class="modal fade p-0" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel6" tabindex="-1">
+                                        <div class="modal-dialog modal-md modal-dialog-centered mt-1">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-3 " id="exampleModalToggleLabel6"><strong>Cancel Ad</strong></h1>

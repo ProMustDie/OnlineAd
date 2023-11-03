@@ -204,8 +204,8 @@ $AuthLogin = new AuthenticatorController($redirect);
 
             <?php if (($ads['AdStatus'] == "Pending Payment" || $ads['AdStatus'] == "Rejected Payment") && $ads['AdStatus'] != "Approved" && $ads['AdStatus'] != "Cancelled") : ?>
                 <!--//*PAYMENT MODAL-->
-                <div class="modal fade" id="payment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="payment-<?= $ads['AdID'] ?>" tabindex="-1">
-                    <div class="modal-dialog modal-md modal-dialog-centered">
+                <div class="modal fade p-0" id="payment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="payment-<?= $ads['AdID'] ?>" tabindex="-1">
+                    <div class="modal-dialog modal-md modal-dialog-centered mt-1">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-3" id="payment-<?= $ads['AdID'] ?>">
@@ -248,8 +248,8 @@ $AuthLogin = new AuthenticatorController($redirect);
 
             <?php if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
                 <!--//*CANCEL MODAL-->
-                <div class="modal fade" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-                    <div class="modal-dialog modal-md modal-dialog-centered">
+                <div class="modal fade p-0" id="cancel-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                    <div class="modal-dialog modal-md modal-dialog-centered mt-1">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-3" id="exampleModalToggleLabel2"><strong>Cancel Ad</strong></h1>

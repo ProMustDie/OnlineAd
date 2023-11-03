@@ -79,7 +79,7 @@ if (!empty($_GET['status'])) {
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">
                                     <?= $_SESSION['auth_user']["user_name"] ?>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end w-50" aria-labelledby="navbarDropdown">
+                                <ul class="dropdown-menu dropdown-menu-end mb-2 w-50" aria-labelledby="navbarDropdown">
                                     <li>
                                         <form action="" method="POST" class="text-center">
                                             <button type="submit" name="logout_btn" class="btn btn-outline-danger "><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
