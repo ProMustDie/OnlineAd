@@ -1,6 +1,7 @@
 <?php
 include('app.php');
 include_once 'Classified.php';
+include('mail.php');
 
 $classified = new Classified;
 
@@ -18,24 +19,29 @@ if($_SESSION['auth_user']['user_type']=="Admin"){
         switch($requests){
             case "RejectRequest":
                 $status = "Rejected Request";
+                send_mail($classified->getAuthorEmail($AdID), $classified->getAuthorName($AdID),"AD REQUEST REJECTED","Ad request for: \"".$classified->getAdName($AdID)."\" has been rejected!");
                 break;
             case "AcceptRequest":
                 $status = "Pending Payment";
                 $price = empty($_POST['Price'])? NULL : $_POST['Price'];
                 $classified->setPrice($AdID, $price);
+                send_mail($classified->getAuthorEmail($AdID), $classified->getAuthorName($AdID),"AD REQUEST ACCEPTED","Ad request for: \"".$classified->getAdName($AdID)."\" has been accepted!\nPlease pay RM".$price." and upload the receipt in our website.");
                 break;
             case "RejectPayment":
                 $status = "Rejected Payment";
+                send_mail($classified->getAuthorEmail($AdID), $classified->getAuthorName($AdID),"AD PAYMENT REJECT","Ad payment for: \"".$classified->getAdName($AdID)."\" has been rejected!\nPlease resubmit you receipt again in our website.");
                 break;
             case "ApproveAd":
                 $status = "Approved";
                 $classified->setPostTimeNOW($AdID);
+                send_mail($classified->getAuthorEmail($AdID), $classified->getAuthorName($AdID),"AD APPROVED","Ad \"".$classified->getAdName($AdID)."\" has its payment approved!");
                 break;
             case "Expire":
                 $status = "Expired";
                 break;
             case "CancelAd":
                 $status = "Cancelled";
+                send_mail($classified->getAuthorEmail($AdID), $classified->getAuthorName($AdID),"AD CANCELLED","Ad \"".$classified->getAdName($AdID)."\" has been cancelled!\nContact customer support if there are any enquiries.");
                 break;
         }
         $classified->changeStatus($AdID, $status);

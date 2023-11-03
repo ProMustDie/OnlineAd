@@ -241,6 +241,56 @@
             $stmt->bind_param("i", $AdID);
             $stmt->execute();
         }
+
+        public function getAuthorName($AdID){
+            $sql = "SELECT DISTINCT u.UserName
+            FROM users u, ads a
+            WHERE a.AdID = ?
+            AND a.AdAuthorID = u.UserID;";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("i", $AdID);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                return $row['UserName'];
+            } else {
+                return false;
+            }
+        }
+
+        public function getAuthorEmail($AdID){
+            $sql = "SELECT DISTINCT u.UserEmail
+            FROM users u, ads a
+            WHERE a.AdID = ?
+            AND a.AdAuthorID = u.UserID;";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("i", $AdID);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                return $row['UserEmail'];
+            } else {
+                return false;
+            }
+        }
+
+        public function getAdName($AdID){
+            $sql = "SELECT AdName
+            FROM ads
+            WHERE AdID = ? ;";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bind_param("i", $AdID);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                return $row['AdName'];
+            } else {
+                return false;
+            }
+        }
     }
 
     ?>
