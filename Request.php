@@ -291,7 +291,18 @@ $AuthLogin = new AuthenticatorController($redirect);
                                             <?php if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
                                                 <li class="list-group-item p-0 m-0 border-bottom-0">
                                                     <div class="container-fluid p-0 text-end">
-                                                        <button class="btn btn-outline-dark btn-floating m-1" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal" role="button"><i class="bi bi-pen"></i></button>
+                                                        <button class="btn btn-outline-dark btn-floating m-1" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal" role="button"><i class="bi bi-pen-fill"></i>
+
+
+                                                            <?php if ((isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] == "Admin") && ($ads['AdStatus'] == "Pending Review") || ($ads['AdStatus'] == "Checking Payment")) { ?>
+                                                                <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                                                                    <span class="visually-hidden">New alerts</span>
+                                                                </span>
+                                                            <?php } ?>
+
+
+
+                                                        </button>
                                                     </div>
                                                 <?php endif; ?>
 
