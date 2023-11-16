@@ -47,6 +47,10 @@ if (!empty($_GET['status'])) {
 
 <body>
 
+
+    <a class="btn btn-outline-dark rounded-pill btn-floating text-center m-0 p-0 opacity-75" id="buttonUp"></a>
+
+
     <!--navbar-->
     <header>
         <!--Created by © Ausca Lai 2023 & © Teoh Yo Wen 2023 -->
@@ -118,6 +122,8 @@ if (!empty($_GET['status'])) {
         </nav>
     </header>
     <!--navbar-->
+
+
 
 
 </body>

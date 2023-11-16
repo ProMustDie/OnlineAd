@@ -247,6 +247,8 @@ if (!empty($_SERVER['QUERY_STRING'])) {
         ?>
         <!--footer-->
 
+
+       
 </body>
 
 </html>

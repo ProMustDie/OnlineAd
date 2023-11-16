@@ -1,8 +1,8 @@
 <footer class="footer bg-dark text-center text-white mt-auto">
     <!-- Grid container -->
-    <div class="container p-4 pb-0 mt-auto">
+    <div class="container py-2 mt-auto">
         <!-- Section: Social media -->
-        <section class="mb-4">
+        <section>
             <!-- Facebook -->
             <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/thesundaily" role="button"><i class="bi bi-facebook"></i></a>
 
@@ -39,9 +39,34 @@
 
 <!--Footer-->
 
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    var btn = $('#buttonUp');
+
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > 300) {
+            btn.addClass('show');
+        } else {
+            btn.removeClass('show');
+        }
+    });
+
+    btn.on('click', function(e) {
+        e.preventDefault();
+        $('html, body').animate({
+            scrollTop: 0
+        }, '300');
+    });
+</script>
+
+
 <script>
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 </script>
+
+
 
 <!--Created by © Ausca Lai 2023 & © Teoh Yo Wen 2023 -->

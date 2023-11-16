@@ -14,3 +14,48 @@
 #NavSize{
     font-size: clamp(1rem, 2.5vw, 2rem);
 }
+
+
+
+#buttonUp {
+    display: flex;
+    background-color: #736d65;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    border-radius: 4px;
+    position: fixed;
+    right: 2.22222222vw;
+    bottom: 1.66666667vw;
+    transition: background-color .3s,
+        opacity .5s, visibility .5s;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1000;
+    justify-content: center;
+}
+
+#buttonUp::after {
+    content: "\f062";
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 2em;
+    line-height: 40px;
+    color: #fff;
+}
+
+
+#buttonUp:hover {
+    cursor: pointer;
+    background-color: #333;
+}
+
+#buttonUp:active {
+    background-color: #555;
+}
+
+#buttonUp.show {
+    opacity: 1;
+    visibility: visible;
+}
