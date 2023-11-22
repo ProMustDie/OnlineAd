@@ -155,7 +155,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                                                 <div class="container-fluid d-flex justify-content-end">
                                                                     <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                     <input type="hidden" value="<?= $redirect ?>" name="redirect">
-                                                                    <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
+                                                                    <input type="submit" class="btn btn-outline-danger mx-2 px-4 dynamic-input" value="Yes" id="DeleteButton-<?= $ads['AdID'] ?>">
                                                                     <button type="button" class="btn btn-outline-warning px-4" data-bs-dismiss="modal" aria-label="Close">No</button>
                                                                 </div>
                                                             </form>
@@ -248,7 +248,6 @@ if (!empty($_SERVER['QUERY_STRING'])) {
         <!--footer-->
 
 
-       
 </body>
 
 </html>

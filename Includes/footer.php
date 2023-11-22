@@ -67,6 +67,7 @@
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 </script>
 
+<script src="JS/loading.js"></script>
 
 
 <!--Created by © Ausca Lai 2023 & © Teoh Yo Wen 2023 -->

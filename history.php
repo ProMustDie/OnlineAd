@@ -233,7 +233,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                         <input type="hidden" name="redirect" value="<?= $redirect ?>">
                                         <input type="file" class="form-control m-auto mb-2" id="formFile" name="fileUpload" required accept="image/png, image/jpeg, image/jpg, application/pdf">
                                     </div>
-                                    <input type="submit" class="btn btn-outline-success float-end" value="Submit">
+                                    <input type="submit" class="btn btn-outline-success float-end dynamic-input" value="Submit" id="paymentButton-<?= $ads['AdID'] ?>">
                                 </form>
 
 
@@ -266,7 +266,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                         provided!</label>
                                     <hr>
                                     <div class="container-fluid d-flex justify-content-end">
-                                        <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
+                                        <input type="submit" class="btn btn-outline-danger mx-2 px-4 dynamic-input" value="Yes" id="cancelButton-<?= $ads['AdID'] ?>">
                                         <button type="button" class="btn btn-outline-warning px-4" data-bs-target="#historyModal" data-bs-toggle="modal">No</button>
                                     </div>
                                 </form>

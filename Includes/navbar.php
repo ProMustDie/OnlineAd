@@ -47,8 +47,11 @@ if (!empty($_GET['status'])) {
 
 <body>
 
-
+    <!--Move Up Button-->
     <a class="btn btn-outline-dark rounded-pill btn-floating text-center m-0 p-0 opacity-75" id="buttonUp"></a>
+
+    <!--LOADING SCREEN-->
+    <div class="loader loader-hidden"></div>
 
 
     <!--navbar-->

@@ -25,6 +25,7 @@ $AuthLogin = new AuthenticatorController($redirect);
     include("Includes/navbar.php");
     ?>
 
+
     <?php if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] != "Admin") : ?>
         <!--Request -->
 
@@ -469,7 +470,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                             <div class="container-fluid d-flex justify-content-end">
                                                                 <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                 <input type="hidden" value="<?= $redirect ?>" name="redirect">
-                                                                <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
+                                                                <input type="submit" class="btn btn-outline-danger mx-2 px-4 dynamic-input" value="Yes" id="rejectPaymentButton-<?= $ads['AdID'] ?>">
                                                                 <button type="button" class="btn btn-outline-warning px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
                                                             </div>
                                                         </form>
@@ -495,7 +496,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                             <div class="container-fluid d-flex justify-content-end">
                                                                 <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                 <input type="hidden" value="<?= $redirect ?>" name="redirect">
-                                                                <input type="submit" class="btn btn-outline-primary mx-2 px-4" value="Yes">
+                                                                <input type="submit" class="btn btn-outline-primary mx-2 px-4 dynamic-input" value="Yes" id="acceptPaymentButton-<?= $ads['AdID'] ?>">
                                                                 <button type="button" class="btn btn-outline-danger px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
                                                             </div>
                                                         </form>
@@ -526,7 +527,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                             <div class="container-fluid d-flex justify-content-end">
                                                                 <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                 <input type="hidden" value="<?= $redirect ?>" name="redirect">
-                                                                <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
+                                                                <input type="submit" class="btn btn-outline-danger mx-2 px-4 dynamic-input" value="Yes" id="rejectRequestButton-<?= $ads['AdID'] ?>">
                                                                 <button type="button" class="btn btn-outline-warning px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
                                                             </div>
                                                         </form>
@@ -565,7 +566,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                                                                 <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                 <input type="hidden" value="<?= $redirect ?>" name="redirect">
-                                                                <input type="submit" class="btn btn-outline-success mx-2 px-4" value="Yes">
+                                                                <input type="submit" class="btn btn-outline-success mx-2 px-4 dynamic-input" value="Yes" id="acceptRequestButton-<?= $ads['AdID'] ?>">
                                                                 <button type="button" class="btn btn-outline-danger px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
                                                             </div>
 
@@ -593,7 +594,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                         <div class="container-fluid d-flex justify-content-end">
                                                             <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                             <input type="hidden" value="<?= $redirect ?>" name="redirect">
-                                                            <input type="submit" class="btn btn-outline-danger mx-2 px-4" value="Yes">
+                                                            <input type="submit" class="btn btn-outline-danger mx-2 px-4 dynamic-input" value="Yes" id="cancelButton-<?= $ads['AdID'] ?>">
                                                             <button type="button" class="btn btn-outline-warning px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
                                                         </div>
                                                     </form>
@@ -633,6 +634,8 @@ $AuthLogin = new AuthenticatorController($redirect);
     <!--footer-->
 
     <script src="JS/request.js"></script>
+
+
 
 
 
