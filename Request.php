@@ -19,7 +19,7 @@ $AuthLogin = new AuthenticatorController($redirect);
     <title>Inquiry</title>
 </head>
 
-<body>
+<body class="bg-light">
 
     <?php
     include("Includes/navbar.php");
@@ -609,36 +609,74 @@ $AuthLogin = new AuthenticatorController($redirect);
                                     <!--//!MODAL FOR EDIT ADS-->
 
                                     <div class="modal fade p-0" id="edit-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel7" tabindex="-1">
-                                        <div class="modal-dialog modal-md modal-dialog-centered mt-1">
+                                        <div class="modal-dialog modal-lg modal-dialog-centered mt-1">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h1 class="modal-title fs-5" id="exampleModalToggleLabel7"><strong>Edit Ads</strong></h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
-                                                    <form action="Includes/authActions.php?request=AcceptRequest" method="POST">
 
-                                                        <div class="input-group flex-nowrap mt-1 w-auto">
-                                                            <span class="input-group-text" id="addon-wrapping">@</span>
-                                                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+                                                    <form action="#" method="POST">
+
+                                                        <div class="input-group flex-nowrap mb-2 w-auto">
+                                                            <span class="input-group-text" id="addon-wrapping"><Strong>ID</Strong></span>
+                                                            <input type="text" class="form-control" placeholder="ID" aria-label="ID" aria-describedby="addon-wrapping" value="<?= $ads['AdID'] ?>" disabled>
                                                         </div>
 
-                                                        <div class="input-group flex-nowrap mt-1 w-auto">
-                                                            <span class="input-group-text" id="addon-wrapping">@</span>
-                                                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+                                                        <div class="input-group flex-nowrap mb-2 w-auto">
+                                                            <span class="input-group-text" id="addon-wrapping"><Strong>Title</Strong></span>
+                                                            <input type="text" class="form-control" placeholder="Title" aria-label="Title" aria-describedby="addon-wrapping" value="<?= $ads['AdName'] ?>">
+                                                        </div>
+
+                                                        <div class="input-group flex-nowrap mb-2 w-auto">
+                                                            <span class="input-group-text" id="addon-wrapping"><Strong>Description</Strong></span>
+                                                            <textarea class="form-control" aria-label="With textarea" placeholder="Description"><?= $ads['AdDescription'] ?></textarea>
+                                                        </div>
+
+                                                        <div class="input-group mb-2">
+                                                            <label class="input-group-text" for="inputGroupSelect01"><Strong>Status</Strong></label>
+                                                            <select class="form-select" id="inputGroupSelect01">
+                                                                <option selected><?= $ads['AdStatus'] ?></option>
+                                                                <option value="Pending Review">Pending Review</option>
+                                                                <option value="Pending Payment">Pending Payment</option>
+                                                                <option value="Checking Payment">Checking Payment</option>
+                                                                <option value="Rejected Request">Rejected Request</option>
+                                                                <option value="Rejected Payment">Rejected Payment</option>
+                                                                <option value="Cancelled">Cancelled</option>
+                                                                <option value="Expired">Expired</option>
+                                                                <option value="Approved">Approved</option>
+                                                            </select>
+                                                        </div>
+
+
+                                                        <div class="input-group mb-3">
+                                                            <label class="input-group-text" for="inputGroupSelect01"><Strong>Category</Strong></label>
+                                                            <select class="form-select" id="inputGroupSelect01">
+                                                                <option selected>Choose...</option>
+                                                                <option value="1">One</option>
+                                                                <option value="2">Two</option>
+                                                                <option value="3">Three</option>
+                                                            </select>
                                                         </div>
 
 
 
 
-                                                        <label for="formFile" class="form-label text-primary">Are you sure you want to <b><u>accept the request?</u></b></label>
+
+
+
+
+
+
+                                                        <label for="formFile" class="form-label text-danger">Are you sure you want to <b><u>edit the Ad?</u></b></label>
                                                         <div class="container-fluid d-flex justify-content-end">
 
                                                             <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                             <input type="hidden" value="<?= $redirect ?>" name="redirect">
-                                                            <input type="submit" class="btn btn-outline-success mx-2 px-4 dynamic-input" value="Yes" id="acceptRequestButton-<?= $ads['AdID'] ?>">
+                                                            <input type="submit" class="btn btn-outline-success mx-2 px-4 dynamic-input" value="Yes">
                                                             <button type="button" class="btn btn-outline-danger px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
+                                                            <input type="reset" class="btn btn-outline-secondary mx-2 px-4" value="Reset">
                                                         </div>
 
                                                     </form>
