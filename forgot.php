@@ -12,60 +12,60 @@ $logIn = new LoginController;
 if (isset($_POST['reset-password'])) {
 
     $email = empty($_POST["email"]) ? "" : $_POST["email"];
-    $checkEmail_query = $register->isEmailExist($email); 
-    if($checkEmail_query){
+    $checkEmail_query = $register->isEmailExist($email);
+    if ($checkEmail_query) {
 
-    $selector = bin2hex(random_bytes(8));
-    $token = random_bytes(32);
+        $selector = bin2hex(random_bytes(8));
+        $token = random_bytes(32);
 
-    //Live Server
-    //$url = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
-    
-    //LocalHost
-    $url = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]/OnlineAd/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+        //Live Server
+        //$url = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+
+        //LocalHost
+        $url = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]/OnlineAd/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
 
-    $expires = date("U") + 600; //expires in 10 mins
-    
-    $sql = "DELETE FROM pwdReset WHERE pwdResetEmail=?";
-    $stmt = mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmt,$sql)){
-        echo "Error";
-        exit();
-    }else{
-        mysqli_stmt_bind_param($stmt,"s",$email);
-        mysqli_stmt_execute($stmt);
-    }
+        $expires = date("U") + 600; //expires in 10 mins
 
-    $sql = "INSERT INTO pwdReset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpires) VALUES (?,?,?,?);";
-    $stmt = mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmt,$sql)){
-        echo "Error";
-        exit();
-    }else{
-        $hashedToken = password_hash($token, PASSWORD_DEFAULT);
-        mysqli_stmt_bind_param($stmt,"ssss",$email, $selector, $hashedToken, $expires);
-        mysqli_stmt_execute($stmt);
+        $sql = "DELETE FROM pwdReset WHERE pwdResetEmail=?";
+        $stmt = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            echo "Error";
+            exit();
+        } else {
+            mysqli_stmt_bind_param($stmt, "s", $email);
+            mysqli_stmt_execute($stmt);
+        }
 
-        $query = "SELECT UserName FROM users WHERE UserEmail = ?";
-        $stmt = $conn ->prepare($query);
+        $sql = "INSERT INTO pwdReset (pwdResetEmail, pwdResetSelector, pwdResetToken, pwdResetExpires) VALUES (?,?,?,?);";
+        $stmt = mysqli_stmt_init($conn);
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            echo "Error";
+            exit();
+        } else {
+            $hashedToken = password_hash($token, PASSWORD_DEFAULT);
+            mysqli_stmt_bind_param($stmt, "ssss", $email, $selector, $hashedToken, $expires);
+            mysqli_stmt_execute($stmt);
 
-        if ($stmt) {
-            $stmt->bind_param("s", $email);
-            $stmt->execute();
-            $stmt->bind_result($name);
-            if ($stmt->fetch()) {
-                $receipientName = $name;
+            $query = "SELECT UserName FROM users WHERE UserEmail = ?";
+            $stmt = $conn->prepare($query);
+
+            if ($stmt) {
+                $stmt->bind_param("s", $email);
+                $stmt->execute();
+                $stmt->bind_result($name);
+                if ($stmt->fetch()) {
+                    $receipientName = $name;
+                }
             }
-    }
-  }
+        }
 
-    mysqli_stmt_close($stmt);
-    mysqli_close($conn);
+        mysqli_stmt_close($stmt);
+        mysqli_close($conn);
 
-    $to = $email;
-    $subject = "TheSun Classified: Password Reset Request";
-    $message = "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"nl-container\" role=\"presentation\" style=\"mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #091548;\" width=\"100%\">
+        $to = $email;
+        $subject = "TheSun Classified: Password Reset Request";
+        $message = "<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"nl-container\" role=\"presentation\" style=\"mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #091548;\" width=\"100%\">
     <tbody>
     <tr>
     <td>
@@ -108,8 +108,8 @@ if (isset($_POST['reset-password'])) {
     <tr>
     <td class=\"pad\" style=\"padding-bottom:20px;padding-left:15px;padding-right:15px;padding-top:20px;text-align:center;\">
     <div align=\"center\" class=\"alignment\"><a href=\"";
-    $message .= "$url";
-    $message .= "\" style=\"text-decoration:none;display:inline-block;color:#091548;background-color:#ffffff;border-radius:24px;width:auto;border-top:0px solid transparent;font-weight:undefined;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:5px;padding-bottom:5px;font-family:'Varela Round', 'Trebuchet MS', Helvetica, sans-serif;font-size:15px;text-align:center;mso-border-alt:none;word-break:keep-all;\" target=\"_blank\"><span style=\"padding-left:25px;padding-right:25px;font-size:15px;display:inline-block;letter-spacing:normal;\"><span style=\"word-break:break-word;\"><span data-mce-style=\"\" style=\"line-height: 30px;\"><strong>RESET MY PASSWORD</strong></span></span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
+        $message .= "$url";
+        $message .= "\" style=\"text-decoration:none;display:inline-block;color:#091548;background-color:#ffffff;border-radius:24px;width:auto;border-top:0px solid transparent;font-weight:undefined;border-right:0px solid transparent;border-bottom:0px solid transparent;border-left:0px solid transparent;padding-top:5px;padding-bottom:5px;font-family:'Varela Round', 'Trebuchet MS', Helvetica, sans-serif;font-size:15px;text-align:center;mso-border-alt:none;word-break:keep-all;\" target=\"_blank\"><span style=\"padding-left:25px;padding-right:25px;font-size:15px;display:inline-block;letter-spacing:normal;\"><span style=\"word-break:break-word;\"><span data-mce-style=\"\" style=\"line-height: 30px;\"><strong>RESET MY PASSWORD</strong></span></span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
     </td>
     </tr>
     </table>
@@ -196,17 +196,13 @@ if (isset($_POST['reset-password'])) {
 
 
 
-    send_mail($to, $receipientName, $subject, $message);
-    
-    header("Location: forgot.php?reset=success");
+        send_mail($to, $receipientName, $subject, $message);
 
-
-
-
-    }else{
-    header("Location: forgot.php?reset=failed");
+        header("Location: forgot.php?reset=success");
+    } else {
+        header("Location: forgot.php?reset=failed");
     }
-  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -216,38 +212,94 @@ if (isset($_POST['reset-password'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="css/navbar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
     <title>Reset Password</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(315deg, #ff7878 0%, #74d680 74%);
+        }
+
+        h2#title {
+            color: #573b8a;
+            font-size: 2.3em;
+            font-weight: bold;
+        }
+
+
+        input#submit {
+            width: 60%;
+            height: 40px;
+            background: #e0dede;
+            justify-content: center;
+            display: flex;
+            margin: 20px auto;
+            padding: 10px;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        input[type="submit"]#submit {
+            width: 60%;
+            height: 40px;
+            margin: 10px auto;
+            justify-content: center;
+            display: block;
+            color: #fff;
+            background: #573b8a;
+            font-size: 1em;
+            font-weight: bold;
+            margin-top: 20px;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            transition: 0.2s ease-in;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
-<?php include('Includes/navbar.php'); ?>
-<div class="centering">
-    <div class="login-box">
-        <h2>Reset Password</h2>
-        <form name="SignUp" id="SignUp" action="forgot.php" method="post">
-            <div class="user-box">
-                <input type="text" name="email" id="email" required="" value="<?= $email; ?>">
-                <label>Email<span class="error">*</span></label>
-            </div>
+    <?php include('Includes/navbar.php'); ?>
 
-            <div class="user-box">
-                <?php if(isset($_GET['reset'])){
-                    if ($_GET['reset']=="success"){
-                    echo '<span class="success">Check your Inbox/Spam folder!</span>';
-                    }elseif($_GET['reset']=="failed"){
-                    echo '<span class="error">Couldn\'t find your email!</span>';
-                    }}?>
-                <a href="register.php" class="SignUp">Log In</a>
-            </div>
 
-            <input type="submit" id="submit" name="reset-password" value="Send reset request">
+    <div class="position-absolute top-50 start-50 translate-middle">
+        <div class="login-box">
+            <h2 id="title">Reset Password</h2>
+            <form name="SignUp" id="SignUp" action="forgot.php" method="post" class="needs-validation" novalidate>
 
-        </form>
+
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" placeholder="name@example.com" name="email" id="validationCustom01" required="" value="<?= $email; ?>">
+                    <label for="floatingInput">Email address</label>
+                </div>
+
+
+
+                <div class="user-box">
+                    <?php if (isset($_GET['reset'])) {
+                        if ($_GET['reset'] == "success") {
+                            echo '<span class="text-success fw-semibold">Check your Inbox/Spam folder!</span>';
+                        } elseif ($_GET['reset'] == "failed") {
+                            echo '<span class="text-danger fw-semibold">Couldn\'t find your email!</span>';
+                        }
+                    } ?>
+                    <a href="register.php" class="SignUp float-end fw-semibold">Log In</a>
+                </div><br>
+
+                <input type="submit" name="reset-password" value="Send reset request" id="submit" class="float-start m-0">
+
+
+            </form>
+        </div>
     </div>
-</div>
-  </div>
+
+
+    <?php include('Includes/footer.php'); ?>
+
 </body>
 
 </html>
