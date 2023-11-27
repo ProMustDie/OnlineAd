@@ -385,6 +385,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                     endif;
                                                     if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
                                                         <button class="btn btn-outline-danger mb-2" data-bs-target="#cancel-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Cancel Ad</button>
+                                                        <button class="btn btn-outline-secondary mb-2" data-bs-target="#edit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">Edit Ad</button>
                                                     <?php endif; ?>
                                                 </div>
                                                 <div class="modal-footer d-flex justify-content-between">
@@ -603,6 +604,51 @@ $AuthLogin = new AuthenticatorController($redirect);
                                             </div>
                                         </div>
                                     </div>
+
+
+                                    <!--//!MODAL FOR EDIT ADS-->
+
+                                    <div class="modal fade p-0" id="edit-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel7" tabindex="-1">
+                                        <div class="modal-dialog modal-md modal-dialog-centered mt-1">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel7"><strong>Edit Ads</strong></h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
+                                                    <form action="Includes/authActions.php?request=AcceptRequest" method="POST">
+
+                                                        <div class="input-group flex-nowrap mt-1 w-auto">
+                                                            <span class="input-group-text" id="addon-wrapping">@</span>
+                                                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+                                                        </div>
+
+                                                        <div class="input-group flex-nowrap mt-1 w-auto">
+                                                            <span class="input-group-text" id="addon-wrapping">@</span>
+                                                            <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+                                                        </div>
+
+
+
+
+                                                        <label for="formFile" class="form-label text-primary">Are you sure you want to <b><u>accept the request?</u></b></label>
+                                                        <div class="container-fluid d-flex justify-content-end">
+
+                                                            <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
+                                                            <input type="hidden" value="<?= $redirect ?>" name="redirect">
+                                                            <input type="submit" class="btn btn-outline-success mx-2 px-4 dynamic-input" value="Yes" id="acceptRequestButton-<?= $ads['AdID'] ?>">
+                                                            <button type="button" class="btn btn-outline-danger px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                 <?php endif; ?>
 
 
