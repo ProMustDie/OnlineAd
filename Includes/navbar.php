@@ -38,6 +38,7 @@ if (!empty($_GET['status'])) {
         min-height: 100vh;
         display: flex;
         flex-direction: column;
+        background-color:
     }
 
     footer {
@@ -45,7 +46,7 @@ if (!empty($_GET['status'])) {
     }
 </style>
 
-<body>
+<body class="bg-light">
 
     <!--Move Up Button-->
     <a class="btn btn-outline-dark rounded-pill btn-floating text-center m-0 p-0 opacity-75" id="buttonUp"></a>
@@ -125,8 +126,3 @@ if (!empty($_GET['status'])) {
         </nav>
     </header>
     <!--navbar-->
-
-
-
-
-</body>

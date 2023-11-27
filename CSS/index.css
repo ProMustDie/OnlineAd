@@ -1,102 +1,97 @@
-*{
-    font-family: 'segoeui',sans-serif;
+* {
+  font-family: "segoeui", sans-serif;
 }
 
-#burger{
-    box-shadow: none;
+#burger {
+  box-shadow: none;
 }
 
 #burger:hover {
-    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
-    transition: 0.5s;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+  transition: 0.5s;
 }
 
-#NavSize{
-    font-size: clamp(1rem, 2.5vw, 2rem);
+#NavSize {
+  font-size: clamp(1rem, 2.5vw, 2rem);
 }
-
-
 
 #buttonUp {
-    display: flex;
-    background-color: #736d65;
-    width: 45px;
-    height: 45px;
-    text-align: center;
-    border-radius: 4px;
-    position: fixed;
-    right: 2.22222222vw;
-    bottom: 1.66666667vw;
-    transition: background-color .3s,
-        opacity .5s, visibility .5s;
-    opacity: 0;
-    visibility: hidden;
-    z-index: 1000;
-    justify-content: center;
+  display: flex;
+  background-color: #736d65;
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  border-radius: 4px;
+  position: fixed;
+  right: 2.22222222vw;
+  bottom: 1.66666667vw;
+  transition: background-color 0.3s, opacity 0.5s, visibility 0.5s;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  justify-content: center;
 }
 
 #buttonUp::after {
-    content: "\f062";
-    font-family: FontAwesome;
-    font-weight: normal;
-    font-style: normal;
-    font-size: 2em;
-    line-height: 40px;
-    color: #fff;
+  content: "\f062";
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 2em;
+  line-height: 40px;
+  color: #fff;
 }
 
-
 #buttonUp:hover {
-    cursor: pointer;
-    background-color: #333;
+  cursor: pointer;
+  background-color: #333;
 }
 
 #buttonUp:active {
-    background-color: #555;
+  background-color: #555;
 }
 
 #buttonUp.show {
-    opacity: 1;
-    visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
-
-
 .loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(172, 169, 169, 0.6);
-    transition: opacity 0.75s, visibility 0.75s;
-    z-index: 2000;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(172, 169, 169, 0.6);
+  transition: opacity 0.75s, visibility 0.75s;
+  z-index: 2000;
 }
 
 .loader-hidden {
-    opacity: 0;
-    visibility: hidden;
+  opacity: 0;
+  visibility: hidden;
 }
 
 .loader::after {
-    content: "";
-    width: 75px;
-    height: 75px;
-    border: 15px solid #999393;
-    border-top-color: blue;
-    border-radius: 50%;
-    animation: loading 0.75s ease infinite;
+  content: "";
+  width: 75px;
+  height: 75px;
+  border: 15px solid #999393;
+  border-top-color: blue;
+  border-radius: 50%;
+  animation: loading 0.75s ease infinite;
 }
 
 @keyframes loading {
-    from {
-        transform: rotate(0turn);
-    }
+  from {
+    transform: rotate(0turn);
+  }
 
-    to {
-        transform: rotate(1turn);
-    }
+  to {
+    transform: rotate(1turn);
+  }
 }

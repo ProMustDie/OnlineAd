@@ -237,15 +237,22 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
             </div>
 
+            <!--Load more button-->
+            <div class="container-fluid pb-3 text-center d-grid gap-2 col-2">
+                <button type="button" class="btn btn-outline-secondary btn-lg">Load More...</button>
+            </div>
+            <!--Load more button-->
+
         </div>
+    </div>
 
-        <!--Main Body-->
+    <!--Main Body-->
 
-        <!--footer-->
-        <?php
-        include("Includes/footer.php");
-        ?>
-        <!--footer-->
+    <!--footer-->
+    <?php
+    include("Includes/footer.php");
+    ?>
+    <!--footer-->
 
 
 </body>

@@ -9,7 +9,7 @@ $loginEmail = $email = $password = $rpt_password = $username = "";
 $ValidSignUp = false;
 $logIn = new LoginController;
 $Register = new RegisterController;
-$redirect = empty($_GET['redirect'])?"Main.php": $_GET['redirect'];
+$redirect = empty($_GET['redirect']) ? "Main.php" : $_GET['redirect'];
 
 
 if (isset($_POST["LogInSubmit"])) {
@@ -20,9 +20,9 @@ if (isset($_POST["LogInSubmit"])) {
     $login_query = $logIn->login($loginEmail, $password);
     if ($login_query) {
         echo '<script type="text/javascript">';
-            echo 'alert("You are now logged in!");';
-            echo 'window.location = "'.$redirect.'";';
-            echo '</script>';
+        echo 'alert("You are now logged in!");';
+        echo 'window.location = "' . $redirect . '";';
+        echo '</script>';
     } else {
         $loginErr = "Invalid Email or Password";
     }
@@ -149,9 +149,10 @@ if (isset($_POST["SignUpSubmit"])) {
 
                     <label for="error" class="ms-5" style="color:#dc3545;"><?= $loginErr ?></label>
 
-
+                    <a href="#" class="p-0 m-0 mb-2">Forgot Password</a>
                     <input type="submit" name="LogInSubmit" value="Login" id="register">
                 </form>
+
             </div>
         </div>
     </div>
