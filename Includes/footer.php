@@ -39,7 +39,7 @@
 
 <!--Footer-->
 
-</body>
+
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
@@ -69,6 +69,9 @@
 </script>
 
 <script src="JS/loading.js"></script>
+
+
+
 
 
 <!--Created by © Ausca Lai 2023 & © Teoh Yo Wen 2023 -->

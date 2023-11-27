@@ -14,14 +14,9 @@ if (!empty($_SERVER['QUERY_STRING'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="CSS/main.css" rel="stylesheet">
     <title>Classified</title>
-
-
-
-
 </head>
 
-<body>
-
+<body class="bg-light">
     <!--navbar-->
     <?php
     include("Includes/navbar.php");

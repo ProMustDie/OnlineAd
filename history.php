@@ -22,7 +22,7 @@ $AuthLogin = new AuthenticatorController($redirect);
     <title>History</title>
 </head>
 
-<body>
+<body class="bg-light">
 
     <!--navbar-->
     <?php

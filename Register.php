@@ -102,16 +102,15 @@ if (isset($_POST["SignUpSubmit"])) {
     <link href="CSS/register.css" rel="stylesheet">
 </head>
 
-<html>
 
-<body>
+<body class="bg-light">
 
     <?php
     include("Includes/navbar.php")
     ?>
 
 
-    <div class="container-fluid d-flex justify-content-center align-items-center" id="register">
+    <div class="container-fluid d-flex justify-content-center align-items-center mb-5" id="register">
         <div class="main mt-5" id="register">
             <input type="checkbox" id="chk" aria-hidden="true">
 
@@ -164,9 +163,11 @@ if (isset($_POST["SignUpSubmit"])) {
 
 
 
+    <?php
+    include("Includes/footer.php");
+    ?>
     <script src="JS/loginPreference.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 
 </html>
