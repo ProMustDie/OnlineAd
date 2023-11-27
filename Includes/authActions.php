@@ -1,9 +1,11 @@
 <?php
 include('app.php');
 include_once 'Classified.php';
+include_once 'RegisterController.php';
 include('mail.php');
 
 $classified = new Classified;
+$usersystem = new LoginController();
 
 $requests = $_GET['request'];
 
@@ -48,6 +50,22 @@ if($_SESSION['auth_user']['user_type']=="Admin"){
         header("Location: ../$redirect"); 
     endif;
     }
+
+    if($requests=="editUserType"){
+        $redirect= $_GET['redirect'];
+        $userID= $_POST['admin-select-user-id'];
+        $typeChange = $_POST['admin-select-acctype'];
+        if($usersystem->editUserType($userID,$typeChange)){
+            header("Location: ../$redirect");
+        };
+    }
+
+    if($requests=="getusertype"){
+        $userID= $_GET['userID'];
+        $result = $classified->getusertype($userID);
+        echo $result;
+    }
+    
 }
 
 

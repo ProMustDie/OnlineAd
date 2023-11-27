@@ -92,4 +92,18 @@ class LoginController
         return false;
     }
 }
+
+public function editUserType($userID, $typeChange){
+    $edit_query = "UPDATE users
+        SET UserType = ?
+        WHERE UserID = ?";
+
+    $stmt = $this->conn->prepare($edit_query);
+    $stmt->bind_param("ss", $typeChange, $userID);
+
+    $result = $stmt->execute();
+    $stmt->close();
+
+    return $result;
+}
 }

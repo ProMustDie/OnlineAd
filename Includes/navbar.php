@@ -1,6 +1,12 @@
 <?php
 include_once('includes/RegisterController.php');
+include_once('includes/Classified.php');
 $logIn = new LoginController;
+$redirect2 = basename($_SERVER['PHP_SELF']);
+
+if (!empty($_SERVER['QUERY_STRING'])) {
+    $redirect2 .= '?' . $_SERVER['QUERY_STRING'];
+}
 
 if (isset($_POST['logout_btn'])) {
     $checkLoggedOut = $logIn->logout();
@@ -31,6 +37,7 @@ if (!empty($_GET['status'])) {
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+<link rel="stylesheet" href="CSS/virtual-select.min.css">
 <link href="CSS/index.css" rel="stylesheet">
 
 <style>
@@ -87,18 +94,20 @@ if (!empty($_GET['status'])) {
                                     <?= $_SESSION['auth_user']["user_name"] ?>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end mb-2 w-50" aria-labelledby="navbarDropdown">
+                                <?php if ($_SESSION['auth_user']['user_type'] == "Admin") : ?>
                                     <li>
-                                        <form action="" method="POST" class="text-center">
-                                            <button type="submit" name="logout_btn" class="btn btn-outline-danger "><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
-                                        </form>
+                                        <div class="text-center">
+                                            <button class="btn btn-outline-dark" data-bs-target="#EditUserType" data-bs-toggle="modal">Edit Users</button>
+                                        </div>
                                     </li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
+                                <?php endif; ?>
                                     <li>
-                                        <div class="text-center">
-                                            <button class="btn btn-outline-dark" data-bs-target="#VirtualSelect" data-bs-toggle="modal">Users</button>
-                                        </div>
+                                        <form action="" method="POST" class="text-center">
+                                            <button type="submit" name="logout_btn" class="btn btn-outline-danger "><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
+                                        </form>
                                     </li>
                                 </ul>
                             </li>
@@ -134,85 +143,10 @@ if (!empty($_GET['status'])) {
     </header>
     <!--navbar-->
 
+    <?php if(isset($_SESSION['auth_user']) && $_SESSION['auth_user']['user_type']=="Admin"):?>
 
-
-    <!--//!MODAL FOR EDIT USER INFO-->
-
-    <div class="modal fade p-0" id="edit-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel1" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered mt-1">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel1"><strong>Edit User</strong></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                    <form action="#" method="POST">
-
-                        <div class="row g-2 mb-3">
-                            <div class="col-md-4">
-                                <div class="form-floating mb-2">
-                                    <input type="text" class="form-control" id="ID" placeholder="ID" value="<?= $ads['AdID'] ?>" disabled>
-                                    <label for="floatingInputDisabled">ID</label>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="col-md-4">
-                                    <div class="form-floating mb-2">
-                                        <input type="text" class="form-control" id="Name" placeholder="Name" value="<?= $ads['AdID'] ?>" disabled>
-                                        <label for="floatingInputDisabled">UserName</label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-floating mb-2">
-                            <input type="email" class="form-control" id="Email" placeholder="Email" value="<?= $ads['AdID'] ?>" disabled>
-                            <label for="floatingInputDisabled">Email</label>
-                        </div>
-
-
-                        <div class="form-floating mb-3">
-                            <select class="form-select" id="floatingSelectGrid">
-                                <option selected><?= $ads['AdStatus'] ?></option>
-                                <option value="Pending Review">Pending Review</option>
-                                <option value="Pending Payment">Pending Payment</option>
-                                <option value="Checking Payment">Checking Payment</option>
-                                <option value="Rejected Request">Rejected Request</option>
-                                <option value="Rejected Payment">Rejected Payment</option>
-                                <option value="Cancelled">Cancelled</option>
-                                <option value="Expired">Expired</option>
-                                <option value="Approved">Approved</option>
-                            </select>
-                            <label for="floatingSelectGrid">Status Options</label>
-                        </div>
-
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="addon-wrapping"><Strong>Upload File</Strong></span>
-                            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                        </div>
-
-                        <label for="formFile" class="form-label text-danger">Are you sure you want to <b><u>edit the Ad?</u></b></label>
-                        <div class="container-fluid d-flex justify-content-end">
-
-                            <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
-                            <input type="hidden" value="<?= $redirect ?>" name="redirect">
-                            <input type="submit" class="btn btn-outline-success mx-2 px-4 dynamic-input" value="Yes">
-                            <button type="button" class="btn btn-outline-danger px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
-                            <input type="reset" class="btn btn-outline-secondary mx-2 px-4" value="Reset">
-                        </div>
-
-                    </form>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-
-    <!--// VIRTUAL SELECT MODAL-->
-    <div class="modal fade p-0" id="VirtualSelect" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <!--// EDIT USER MODAL-->
+    <div class="modal fade p-0" id="EditUserType" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
         <div class="modal-dialog modal-md modal-dialog-centered mt-1">
             <div class="modal-content">
                 <div class="modal-header">
@@ -220,11 +154,76 @@ if (!empty($_GET['status'])) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
-
+                <form action="Includes/authActions.php?request=editUserType&redirect=<?=$redirect2?>" method="POST">
+                    <h2> User: </h2><div id="admin-user-select"></div><br><br>
+                    <h2> Account Type:</h2><div id="admin-acctype-select"></div></h2><br>
+                    <br>
+                    <button type="submit" name="updateUser"><i class="fa-solid fa-pen-to-square"></i> Update User</button><br>
+                  </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <!--// VIRTUAL SELECT MODAL-->
+    <!--// EDIT USER MODAL-->
+
+    <script src="JS/virtual-select.min.js"></script>
+
+  <script>
+document.addEventListener("DOMContentLoaded", function () {
+  VirtualSelect.init({
+        ele: "#admin-user-select",
+        options: [
+          <?php 	
+          $classified2 = new Classified();
+          $result = $classified2->getUsersList($_SESSION['auth_user']['user_id']);
+          while ($member = $result->fetch_assoc()) {?>
+          { label: "<?= $member['UserName']?>, <?= $member['UserEmail']?>", value: "<?= $member['UserID']?>" },
+          <?php }?>
+        ],
+        search:true,
+        required:true,
+        noSearchResultsText:"No Users Found",
+        searchPlaceholderText:"Seach Users...",
+        placeholder:"Select Users",
+        name:"admin-select-user-id",
+      });
+      VirtualSelect.init({
+        ele: "#admin-acctype-select",
+        options: [
+          { label: "Admin", value: "Admin" },
+          { label: "User", value: "User" },
+        ],
+        required:true,
+        placeholder:"Select Account Type",
+        name:"admin-select-acctype",
+      });
+});
+</script>
+<script>
+
+function checknUpdateAccType(userId){
+    fetch(`Includes/authActions.php?request=getusertype&userID=${userId}`)
+        .then(response => response.text())
+        .then(accType => {
+            console.log(accType);
+            if (accType && accType.trim() == "Admin") {
+                document.querySelector('#admin-acctype-select').setValue("Admin");
+            } else {
+                document.querySelector('#admin-acctype-select').setValue("User");
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching user type:', error);
+        });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    const adminUserSelect = document.querySelector('#admin-user-select');
+    adminUserSelect.addEventListener('change', function () {
+        const adminUserSelectedId = adminUserSelect.value;
+            checknUpdateAccType(adminUserSelectedId);
+    });
+});
+</script>
+<?php endif;?>

@@ -291,6 +291,37 @@
                 return false;
             }
         }
+
+        public function getUsersList($currentID) {
+            $sqlQuery = "
+                SELECT u.UserName, u.UserID, u.UserEmail
+                FROM " . $this->userTable . " as u
+                WHERE u.UserID != '$currentID'
+                ORDER BY u.UserName ASC";
+                
+            $stmt = $this->conn->prepare($sqlQuery);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            
+            return $result;
+        }
+
+        public function getusertype($userID){
+            $getType_query = "SELECT UserType FROM users WHERE UserID = ?";
+    
+            $stmt = $this->conn->prepare($getType_query);
+            $stmt->bind_param("i", $userID);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $type = $row['UserType'];
+                return $type;
+            } else {
+                return NULL;
+            }
+        }
     }
 
     ?>
