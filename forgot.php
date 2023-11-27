@@ -18,7 +18,11 @@ if (isset($_POST['reset-password'])) {
     $selector = bin2hex(random_bytes(8));
     $token = random_bytes(32);
 
-    $url = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    //Live Server
+    //$url = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
+    
+    //LocalHost
+    $url = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]/OnlineAd/create-new-password.php?selector=" . $selector . "&validator=" . bin2hex($token);
 
 
     $expires = date("U") + 600; //expires in 10 mins

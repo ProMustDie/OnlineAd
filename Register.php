@@ -150,6 +150,10 @@ if (isset($_POST["SignUpSubmit"])) {
 
                     <div class="d-flex flex-column mx-auto w-75">
                         <label for="error" class="ms-1" style="color:#dc3545;"><?= $loginErr ?></label>
+                        <?php if(isset($_GET['newpwd'])){
+                    if ($_GET['newpwd']=="passwordupdated"){
+                    echo '<span class="text-success">Password Changed!</span>';
+                    }}?>
                         <a href="forgot.php" class="mb-2 ms-auto">Forgot Password?</a>
                     </div>
 
