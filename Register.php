@@ -139,7 +139,7 @@ if (isset($_POST["SignUpSubmit"])) {
             </div>
 
             <div class="login" id="register">
-                <form action="#" method="POST" class="needs-validation" novalidate>
+                <form action="#" method="POST" class="needs-validation container" novalidate>
                     <label for="chk" aria-hidden="true" id="register">Login</label>
 
 
@@ -147,9 +147,12 @@ if (isset($_POST["SignUpSubmit"])) {
 
                     <input type="password" class="form-control m-auto mb-2" id="validationCustom06" placeholder="Password" name="PasswordLogin" required style="width:75%;">
 
-                    <label for="error" class="ms-5" style="color:#dc3545;"><?= $loginErr ?></label>
 
-                    <a href="#" class="p-0 m-0 mb-2">Forgot Password</a>
+                    <div class="d-flex flex-column mx-auto w-75">
+                        <label for="error" class="ms-1" style="color:#dc3545;"><?= $loginErr ?></label>
+                        <a href="#" class="mb-2 ms-auto">Forgot Password?</a>
+                    </div>
+
                     <input type="submit" name="LogInSubmit" value="Login" id="register">
                 </form>
 

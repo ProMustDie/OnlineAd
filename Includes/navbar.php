@@ -38,7 +38,6 @@ if (!empty($_GET['status'])) {
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        background-color:
     }
 
     footer {
