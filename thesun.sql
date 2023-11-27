@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2023 at 05:08 AM
+-- Generation Time: Nov 27, 2023 at 08:29 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -50,6 +50,20 @@ INSERT INTO `ads` (`AdID`, `AdName`, `AdDescription`, `Price`, `AdAuthorID`, `Ad
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pwdreset`
+--
+
+CREATE TABLE `pwdreset` (
+  `pwdResetId` int(11) NOT NULL,
+  `pwdResetEmail` varchar(255) NOT NULL,
+  `pwdResetSelector` text NOT NULL,
+  `pwdResetToken` longtext NOT NULL,
+  `pwdResetExpires` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -67,7 +81,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`UserID`, `UserEmail`, `UserName`, `UserPassword`, `UserType`) VALUES
 (1, 'admin@a.com', 'Admin', '$2y$10$4bZ3s4hlAxYeHPlg8OzJvOy5pTUorVtrosmE1y30wRXlYXcf/UwRe', 'Admin'),
-(2, 'ausca@gmail.com', 'Ausca Lai', '$2y$10$2OVFtnLg4kGiq6XuXX8hxer5KiGSlYWE.qQt92/00Ln6kQgb9e0Ou', 'User');
+(2, 'ausca33@gmail.com', 'Ausca Lai', '$2y$10$32Bk9Qwlb8ICUZGopuGSR.PnnZlvwWs/wcj8TghU7eNy50x0vjKym', 'User');
 
 --
 -- Indexes for dumped tables
@@ -78,6 +92,13 @@ INSERT INTO `users` (`UserID`, `UserEmail`, `UserName`, `UserPassword`, `UserTyp
 --
 ALTER TABLE `ads`
   ADD PRIMARY KEY (`AdID`);
+
+--
+-- Indexes for table `pwdreset`
+--
+ALTER TABLE `pwdreset`
+  ADD PRIMARY KEY (`pwdResetId`),
+  ADD KEY `pwdResetEmail` (`pwdResetEmail`);
 
 --
 -- Indexes for table `users`
@@ -93,7 +114,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `ads`
 --
 ALTER TABLE `ads`
-  MODIFY `AdID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `AdID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `pwdreset`
+--
+ALTER TABLE `pwdreset`
+  MODIFY `pwdResetId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
