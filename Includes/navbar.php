@@ -125,3 +125,79 @@ if (!empty($_GET['status'])) {
         </nav>
     </header>
     <!--navbar-->
+
+
+
+    <!--//!MODAL FOR EDIT USER INFO-->
+
+    <div class="modal fade p-0" id="edit-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel1" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered mt-1">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel1"><strong>Edit User</strong></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form action="#" method="POST">
+
+                        <div class="row g-2 mb-3">
+                            <div class="col-md-4">
+                                <div class="form-floating mb-2">
+                                    <input type="text" class="form-control" id="ID" placeholder="ID" value="<?= $ads['AdID'] ?>" disabled>
+                                    <label for="floatingInputDisabled">ID</label>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="col-md-4">
+                                    <div class="form-floating mb-2">
+                                        <input type="text" class="form-control" id="Name" placeholder="Name" value="<?= $ads['AdID'] ?>" disabled>
+                                        <label for="floatingInputDisabled">UserName</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-floating mb-2">
+                            <input type="email" class="form-control" id="Email" placeholder="Email" value="<?= $ads['AdID'] ?>" disabled>
+                            <label for="floatingInputDisabled">Email</label>
+                        </div>
+
+
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="floatingSelectGrid">
+                                <option selected><?= $ads['AdStatus'] ?></option>
+                                <option value="Pending Review">Pending Review</option>
+                                <option value="Pending Payment">Pending Payment</option>
+                                <option value="Checking Payment">Checking Payment</option>
+                                <option value="Rejected Request">Rejected Request</option>
+                                <option value="Rejected Payment">Rejected Payment</option>
+                                <option value="Cancelled">Cancelled</option>
+                                <option value="Expired">Expired</option>
+                                <option value="Approved">Approved</option>
+                            </select>
+                            <label for="floatingSelectGrid">Status Options</label>
+                        </div>
+
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="addon-wrapping"><Strong>Upload File</Strong></span>
+                            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                        </div>
+
+                        <label for="formFile" class="form-label text-danger">Are you sure you want to <b><u>edit the Ad?</u></b></label>
+                        <div class="container-fluid d-flex justify-content-end">
+
+                            <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
+                            <input type="hidden" value="<?= $redirect ?>" name="redirect">
+                            <input type="submit" class="btn btn-outline-success mx-2 px-4 dynamic-input" value="Yes">
+                            <button type="button" class="btn btn-outline-danger px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
+                            <input type="reset" class="btn btn-outline-secondary mx-2 px-4" value="Reset">
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>

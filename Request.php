@@ -15,6 +15,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link href="CSS/main.css" rel="stylesheet">
     <title>Inquiry</title>
 </head>
@@ -619,24 +620,44 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                                                     <form action="#" method="POST">
 
-                                                        <div class="input-group flex-nowrap mb-2 w-auto">
-                                                            <span class="input-group-text" id="addon-wrapping"><Strong>ID</Strong></span>
-                                                            <input type="text" class="form-control" placeholder="ID" aria-label="ID" aria-describedby="addon-wrapping" value="<?= $ads['AdID'] ?>" disabled>
+                                                        <div class="row g-2 mb-3">
+                                                            <div class="col-md-4">
+                                                                <div class="form-floating mb-2">
+                                                                    <input type="text" class="form-control" id="floatingInputDisabled" placeholder="ID" value="<?= $ads['AdID'] ?>" disabled>
+                                                                    <label for="floatingInputDisabled">ID</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div class="form-floating">
+                                                                    <select class="form-select" id="floatingSelectGrid">
+                                                                        <option selected><?= $ads['AdStatus'] ?></option>
+                                                                        <option value="Pending Review">Pending Review</option>
+                                                                        <option value="Pending Payment">Pending Payment</option>
+                                                                        <option value="Checking Payment">Checking Payment</option>
+                                                                        <option value="Rejected Request">Rejected Request</option>
+                                                                        <option value="Rejected Payment">Rejected Payment</option>
+                                                                        <option value="Cancelled">Cancelled</option>
+                                                                        <option value="Expired">Expired</option>
+                                                                        <option value="Approved">Approved</option>
+                                                                    </select>
+                                                                    <label for="floatingSelectGrid">Status Options</label>
+                                                                </div>
+                                                            </div>
                                                         </div>
 
-                                                        <div class="input-group flex-nowrap mb-2 w-auto">
-                                                            <span class="input-group-text" id="addon-wrapping"><Strong>Title</Strong></span>
-                                                            <input type="text" class="form-control" placeholder="Title" aria-label="Title" aria-describedby="addon-wrapping" value="<?= $ads['AdName'] ?>">
+                                                        <div class="form-floating mb-3">
+                                                            <textarea class="form-control" placeholder="Title" id="floatingTextarea"><?= $ads['AdName'] ?></textarea>
+                                                            <label for="floatingTextarea">Title</label>
                                                         </div>
 
-                                                        <div class="input-group flex-nowrap mb-2 w-auto">
-                                                            <span class="input-group-text" id="addon-wrapping"><Strong>Description</Strong></span>
-                                                            <textarea class="form-control" aria-label="With textarea" placeholder="Description"><?= $ads['AdDescription'] ?></textarea>
+                                                        <div class="form-floating mb-3">
+                                                            <textarea class="form-control" placeholder="Description" id="floatingTextarea"><?= $ads['AdDescription'] ?></textarea>
+                                                            <label for="floatingTextarea">Description</label>
                                                         </div>
 
-                                                        <div class="input-group mb-2">
-                                                            <label class="input-group-text" for="inputGroupSelect01"><Strong>Status</Strong></label>
-                                                            <select class="form-select" id="inputGroupSelect01">
+
+                                                        <div class="form-floating mb-3">
+                                                            <select class="form-select" id="floatingSelectGrid">
                                                                 <option selected><?= $ads['AdStatus'] ?></option>
                                                                 <option value="Pending Review">Pending Review</option>
                                                                 <option value="Pending Payment">Pending Payment</option>
@@ -647,27 +668,14 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                                 <option value="Expired">Expired</option>
                                                                 <option value="Approved">Approved</option>
                                                             </select>
+                                                            <label for="floatingSelectGrid">Status Options</label>
                                                         </div>
 
 
                                                         <div class="input-group mb-3">
-                                                            <label class="input-group-text" for="inputGroupSelect01"><Strong>Category</Strong></label>
-                                                            <select class="form-select" id="inputGroupSelect01">
-                                                                <option selected>Choose...</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                            </select>
+                                                            <span class="input-group-text" id="addon-wrapping"><Strong>Upload File</Strong></span>
+                                                            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                                                         </div>
-
-
-
-
-
-
-
-
-
 
                                                         <label for="formFile" class="form-label text-danger">Are you sure you want to <b><u>edit the Ad?</u></b></label>
                                                         <div class="container-fluid d-flex justify-content-end">
