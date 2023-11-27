@@ -725,13 +725,6 @@ $AuthLogin = new AuthenticatorController($redirect);
     ?>
     <!--footer-->
 
-    <script src="JS/request.js"></script>
-
-
-
-
-
-
 </body>
 
 </html>
