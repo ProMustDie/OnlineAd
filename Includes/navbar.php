@@ -92,6 +92,14 @@ if (!empty($_GET['status'])) {
                                             <button type="submit" name="logout_btn" class="btn btn-outline-danger "><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
                                         </form>
                                     </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <div class="text-center">
+                                            <button class="btn btn-outline-dark" data-bs-target="#VirtualSelect" data-bs-toggle="modal">Users</button>
+                                        </div>
+                                    </li>
                                 </ul>
                             </li>
                         <?php else : ?>
@@ -201,3 +209,22 @@ if (!empty($_GET['status'])) {
             </div>
         </div>
     </div>
+
+
+    <!--// VIRTUAL SELECT MODAL-->
+    <div class="modal fade p-0" id="VirtualSelect" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-md modal-dialog-centered mt-1">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-3" id="exampleModalToggleLabel2"><strong>Users</strong></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--// VIRTUAL SELECT MODAL-->
