@@ -113,8 +113,6 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                     <nav class="navbar navbar-expand-sm bg-body-tertiary">
                         <div class="container-fluid pe-0">
-
-
                             <button class="navbar-toggler ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span><span style="position:relative; top:2px;">Filter</span>
                             </button>
@@ -198,14 +196,18 @@ $AuthLogin = new AuthenticatorController($redirect);
                                         <?php if (!empty($_GET['search'])) { ?>
                                             <input type="hidden" name="search" value="<?= $key ?>">
                                         <?php } ?>
-                                        <input type="submit" class="button-31 mt-5 mb-5" value="Search">
+                                        <input type="submit" class="button-31 mt-5 mb-3" value="Search">
 
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="btn btn-outline-dark btn-floating w-75 ms-2" data-bs-target="#addcate" data-bs-toggle="modal"><i class="bi bi-plus-slash-minus fs-6"> Category</i></a>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </nav>
                 </div>
+
                 <!--//!Category-->
 
                 <div class="col bg-light">
@@ -662,7 +664,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                                                             <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                             <input type="hidden" value="<?= $redirect ?>" name="redirect">
-                                                            <input type="submit" class="btn btn-outline-success mx-2 px-4 dynamic-input" value="Yes">
+                                                            <input type="submit" class="btn btn-outline-primary mx-2 px-4 dynamic-input" value="Yes">
                                                             <button type="button" class="btn btn-outline-danger px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
                                                             <input type="reset" class="btn btn-outline-secondary mx-2 px-4" value="Reset">
                                                         </div>
@@ -724,12 +726,70 @@ $AuthLogin = new AuthenticatorController($redirect);
 
 
 
+    <!--//!Add Category MODAL-->
+    <div class="modal fade p-0" id="addcate" aria-hidden="true" aria-labelledby="addcate" tabindex="-1">
+        <div class="modal-dialog modal-md modal-dialog-centered mt-1">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-3 fw-semibold" id="addcate">Add Category</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="POST">
+
+                        <div class="row g-2">
+                            <div class="col-md">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="floatingInputGrid" placeholder="Category">
+                                    <label for="floatingInputGrid">Add Category</label>
+                                </div>
+                            </div>
+                            <div class="col-md">
+                                <div class="form-floating">
+                                    <select class="form-select" id="floatingSelectGrid">
+                                        <option selected>None</option>
+                                        <option value="1">One</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                    <label for="floatingSelectGrid">Delete Category</label>
+                                </div>
+                            </div>
+                        </div><br>
+
+                        <label for="formFile" class="form-label text-danger">Are you sure you want to <B><u>add/remove?</u></B></label>
+                        <div class="container-fluid d-flex justify-content-end">
+                            <input type="hidden" value="<?= $redirect ?>" name="redirect">
+                            <input type="submit" class="btn btn-outline-primary mx-2 px-4" value="Add/Delete" id="AddButton" name="add">
+                            <button type="button" class="btn btn-outline-danger mx-2 px-3" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!--Load more button-->
+    <div class="container-fluid m-auto mb-3 text-center">
+        <button type="button" class="btn btn-outline-secondary btn-lg w-50 mx-auto focus-ring" style="--bs-focus-ring-color: rgba(var(--bs-secondary-rgb), .25)">Load More...</button>
+    </div>
+    <!--Load more button-->
+
+
 
     <!--footer-->
     <?php
     include("Includes/footer.php");
     ?>
     <!--footer-->
+
 
 </body>
 

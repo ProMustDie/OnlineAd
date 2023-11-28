@@ -235,7 +235,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
             <!--Load more button-->
             <div class="container-fluid m-auto mb-3 text-center">
-                <button type="button" class="btn btn-outline-secondary btn-lg w-50 mx-auto ">Load More...</button>
+                <button type="button" class="btn btn-outline-secondary btn-lg w-50 mx-auto " style="--bs-focus-ring-color: rgba(var(--bs-secondary-rgb), .25)">Load More...</button>
             </div>
             <!--Load more button-->
 
