@@ -181,7 +181,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 95%;"></button>
                                                         </div>
                                                         <div class="item2">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel"><?= $ads['AdName'] ?></h1>
+                                                            <h1 class="modal-title fs-5 fw-semibold" id="exampleModalLabel"><?= $ads['AdName'] ?></h1>
                                                         </div>
                                                         <div class="item3">
                                                             <span class="text-muted mx-auto"><small><?= $ads['UserName'] . " posted on " . $formattedDatetime ?></small></span>

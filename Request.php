@@ -326,7 +326,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 95%;"></button>
                                                     </div>
                                                     <div class="item2">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel"><?= $ads['AdName'] ?></h1>
+                                                        <h1 class="modal-title fs-5 fw-semibold" id="exampleModalLabel"><?= $ads['AdName'] ?></h1>
                                                     </div>
                                                     <div class="item3">
                                                         <span class="text-muted mx-auto"><small><?= $ads['UserName'] . " posted on " . $formattedDatetime ?></small></span>
@@ -364,12 +364,11 @@ $AuthLogin = new AuthenticatorController($redirect);
                                 <?php if ($ads['AdStatus'] != "Expired" && $ads['AdStatus'] != "Rejected Request" && $ads['AdStatus'] != "Cancelled") : ?>
                                     <!--//!MODAL FOR Edit Buttons POPUP-->
 
-                                    <div class="modal fade p-0" id="modalEdit-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                                    <div class="modal fade p-0" id="modalEdit-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="edit" tabindex="-1">
                                         <div class="modal-dialog modal-dialog-centered mt-1">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-3" id="exampleModalToggleLabel"><strong>Edit</strong></h1>
-
+                                                    <h1 class="modal-title fs-3 fw-semibold" id="edit">Edit</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
@@ -391,7 +390,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                 </div>
                                                 <div class="modal-footer d-flex justify-content-between">
 
-                                                    <div class="text-start mb-2 p-0">Title: <?= $ads['AdName'] ?></div>
+                                                    <div class="text-start mb-2 p-0"> <span class="fw-semibold">Title:</span><?= $ads['AdName'] ?></div>
                                                     <div class="p-0  mb-2">
 
                                                         Status:
@@ -435,7 +434,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 95%;"></button>
                                                             </div>
                                                             <div class="item2">
-                                                                <h1 class="modal-title fs-5" id="exampleModalLabel"><?= $ads['AdName'] ?></h1>
+                                                                <h1 class="modal-title fs-5 fw-semibold" id="exampleModalLabel"><?= $ads['AdName'] ?></h1>
                                                             </div>
                                                             <div class="item3">
                                                                 <span class="text-muted mx-auto"><small><?= $ads['UserName'] . " posted on " . $formattedDatetime ?></small></span>
@@ -461,12 +460,12 @@ $AuthLogin = new AuthenticatorController($redirect);
                                             <div class="modal-dialog modal-md modal-dialog-centered mt-1">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel2"><strong>Reject Ad Payment</strong></h1>
+                                                        <h1 class="modal-title fs-3 fw-semibold" id="exampleModalToggleLabel2">Reject Ad Payment</h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
 
-                                                        <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
+                                                        <div class="text-start mb-2 p-0 fs-5"> <span class="fw-semibold">Title:</span><?= $ads['AdName'] ?></div>
                                                         <form action="Includes/authActions.php?request=RejectPayment" method="POST">
                                                             <label for="formFile" class="form-label text-danger">Are you sure you want to <B><u>reject the payment?</u></B></label>
                                                             <div class="container-fluid d-flex justify-content-end">
@@ -487,12 +486,12 @@ $AuthLogin = new AuthenticatorController($redirect);
                                             <div class="modal-dialog modal-md modal-dialog-centered mt-1">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel3"><strong>Accept Ad Payment</strong></h1>
+                                                        <h1 class="modal-title fs-3 fw-semibold" id="exampleModalToggleLabel3">Accept Ad Payment</h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
 
-                                                        <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
+                                                        <div class="text-start mb-2 p-0 fs-5"> <span class="fw-semibold">Title:</span><?= $ads['AdName'] ?></div>
                                                         <form action="Includes/authActions.php?request=ApproveAd" method="POST">
                                                             <label for="formFile" class="form-label text-primary">Ensure correct amount has been paid first.<br>This ad will be approved and posted!<br>Are you sure you want to <b><u>accept the payment?</u></b></label>
                                                             <div class="container-fluid d-flex justify-content-end">
@@ -518,12 +517,13 @@ $AuthLogin = new AuthenticatorController($redirect);
                                             <div class="modal-dialog modal-md modal-dialog-centered mt-1">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h1 class="modal-title fs-3" id="exampleModalToggleLabel4"><strong>Reject Ad Request</strong></h1>
+                                                        <h1 class="modal-title fs-3 fw-semibold" id="exampleModalToggleLabel4">Reject Ad Request</h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
+
                                                     <div class="modal-body">
 
-                                                        <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
+                                                        <div class="text-start mb-2 p-0 fs-5"> <span class="fw-semibold">Title:</span><?= $ads['AdName'] ?></div>
                                                         <form action="Includes/authActions.php?request=RejectRequest" method="POST">
                                                             <label for="formFile" class="form-label text-danger">Are you sure you want to <b><u>reject the request?</u></b></label>
                                                             <div class="container-fluid d-flex justify-content-end">
@@ -546,12 +546,12 @@ $AuthLogin = new AuthenticatorController($redirect);
                                             <div class="modal-dialog modal-md modal-dialog-centered mt-1">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel5"><strong>Accept Ad Request</strong></h1>
+                                                        <h1 class="modal-title fs-3 fw-semibold" id="exampleModalToggleLabel5">Accept Ad Request</h1>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
 
-                                                        <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
+                                                        <div class="text-start mb-2 p-0 fs-5"> <span class="fw-semibold">Title:</span><?= $ads['AdName'] ?></div>
                                                         <form action="Includes/authActions.php?request=AcceptRequest" method="POST">
 
                                                             <div class="d-inline-flex  align-items-center">
@@ -586,11 +586,11 @@ $AuthLogin = new AuthenticatorController($redirect);
                                         <div class="modal-dialog modal-md modal-dialog-centered mt-1">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-3 " id="exampleModalToggleLabel6"><strong>Cancel Ad</strong></h1>
+                                                    <h1 class="modal-title fs-3 fw-semibold" id="exampleModalToggleLabel6">Cancel Ad</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
+                                                    <div class="text-start mb-2 p-0 fs-5"> <span class="fw-semibold">Title:</span><?= $ads['AdName'] ?></div>
                                                     <form action="Includes/authActions.php?request=CancelAd" method="POST">
                                                         <label for="formFile" class="form-label text-danger">Are you sure you want to <B><u>cancel?</u></B> <br>You can't revert this action!</label>
                                                         <div class="container-fluid d-flex justify-content-end">
@@ -613,7 +613,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                         <div class="modal-dialog modal-lg modal-dialog-centered mt-1">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel7"><strong>Edit Ads</strong></h1>
+                                                    <h1 class="modal-title fs-3 fw-semibold" id="exampleModalToggleLabel7 ">Edit Ads</h1>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
@@ -673,7 +673,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
 
                                                         <div class="input-group mb-3">
-                                                            <span class="input-group-text" id="addon-wrapping"><Strong>Upload File</Strong></span>
+                                                            <span class="input-group-text" id="addon-wrapping fw-semibold">Upload File</span>
                                                             <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                                                         </div>
 

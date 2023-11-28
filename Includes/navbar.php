@@ -93,17 +93,17 @@ if (!empty($_GET['status'])) {
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">
                                     <?= $_SESSION['auth_user']["user_name"] ?>
                                 </a>
-                                <ul class="dropdown-menu dropdown-menu-end mb-2 w-50" aria-labelledby="navbarDropdown">
-                                <?php if ($_SESSION['auth_user']['user_type'] == "Admin") : ?>
-                                    <li>
-                                        <div class="text-center">
-                                            <button class="btn btn-outline-dark" data-bs-target="#EditUserType" data-bs-toggle="modal">Edit Users</button>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                <?php endif; ?>
+                                <ul class="dropdown-menu dropdown-menu-end mb-2 bg-light" aria-labelledby="navbarDropdown">
+                                    <?php if ($_SESSION['auth_user']['user_type'] == "Admin") : ?>
+                                        <li>
+                                            <div class="text-center">
+                                                <button class="btn btn-outline-dark" data-bs-target="#EditUserType" data-bs-toggle="modal">Edit Users</button>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                    <?php endif; ?>
                                     <li>
                                         <form action="" method="POST" class="text-center">
                                             <button type="submit" name="logout_btn" class="btn btn-outline-danger "><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
@@ -143,87 +143,96 @@ if (!empty($_GET['status'])) {
     </header>
     <!--navbar-->
 
-    <?php if(isset($_SESSION['auth_user']) && $_SESSION['auth_user']['user_type']=="Admin"):?>
+    <?php if (isset($_SESSION['auth_user']) && $_SESSION['auth_user']['user_type'] == "Admin") : ?>
 
-    <!--// EDIT USER MODAL-->
-    <div class="modal fade p-0" id="EditUserType" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-        <div class="modal-dialog modal-md modal-dialog-centered mt-1">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-3" id="exampleModalToggleLabel2"><strong>Users</strong></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                <form action="Includes/authActions.php?request=editUserType&redirect=<?=$redirect2?>" method="POST">
-                    <h2> User: </h2><div id="admin-user-select"></div><br><br>
-                    <h2> Account Type:</h2><div id="admin-acctype-select"></div></h2><br>
-                    <br>
-                    <button type="submit" name="updateUser"><i class="fa-solid fa-pen-to-square"></i> Update User</button><br>
-                  </form>
+        <!--// EDIT USER MODAL-->
+        <div class="modal fade p-0" id="EditUserType" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+            <div class="modal-dialog modal-md modal-dialog-centered mt-1">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-3 fw-semibold" id="edit">Edit Users</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="Includes/authActions.php?request=editUserType&redirect=<?= $redirect2 ?>" method="POST">
+                            <span class="fw-semibold">User:</span>
+                            <div id="admin-user-select"></div><br><br>
+                            <span class="fw-semibold">Account Type:</span>
+                            <div id="admin-acctype-select"></div>
+                            </h2><br>
+                            <br>
+                            <button type="submit" name="updateUser" class="btn btn-outline-success mt-4 px-4 float-end"><i class="fa-solid fa-pen-to-square"></i> Update User</button><br>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--// EDIT USER MODAL-->
+        <!--// EDIT USER MODAL-->
 
-    <script src="JS/virtual-select.min.js"></script>
+        <script src="JS/virtual-select.min.js"></script>
 
-  <script>
-document.addEventListener("DOMContentLoaded", function () {
-  VirtualSelect.init({
-        ele: "#admin-user-select",
-        options: [
-          <?php 	
-          $classified2 = new Classified();
-          $result = $classified2->getUsersList($_SESSION['auth_user']['user_id']);
-          while ($member = $result->fetch_assoc()) {?>
-          { label: "<?= $member['UserName']?>, <?= $member['UserEmail']?>", value: "<?= $member['UserID']?>" },
-          <?php }?>
-        ],
-        search:true,
-        required:true,
-        noSearchResultsText:"No Users Found",
-        searchPlaceholderText:"Seach Users...",
-        placeholder:"Select Users",
-        name:"admin-select-user-id",
-      });
-      VirtualSelect.init({
-        ele: "#admin-acctype-select",
-        options: [
-          { label: "Admin", value: "Admin" },
-          { label: "User", value: "User" },
-        ],
-        required:true,
-        placeholder:"Select Account Type",
-        name:"admin-select-acctype",
-      });
-});
-</script>
-<script>
-
-function checknUpdateAccType(userId){
-    fetch(`Includes/authActions.php?request=getusertype&userID=${userId}`)
-        .then(response => response.text())
-        .then(accType => {
-            console.log(accType);
-            if (accType && accType.trim() == "Admin") {
-                document.querySelector('#admin-acctype-select').setValue("Admin");
-            } else {
-                document.querySelector('#admin-acctype-select').setValue("User");
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                VirtualSelect.init({
+                    ele: "#admin-user-select",
+                    options: [
+                        <?php
+                        $classified2 = new Classified();
+                        $result = $classified2->getUsersList($_SESSION['auth_user']['user_id']);
+                        while ($member = $result->fetch_assoc()) { ?> {
+                                label: "<?= $member['UserName'] ?>, <?= $member['UserEmail'] ?>",
+                                value: "<?= $member['UserID'] ?>"
+                            },
+                        <?php } ?>
+                    ],
+                    search: true,
+                    required: true,
+                    noSearchResultsText: "No Users Found",
+                    searchPlaceholderText: "Seach Users...",
+                    placeholder: "Select Users",
+                    name: "admin-select-user-id",
+                });
+                VirtualSelect.init({
+                    ele: "#admin-acctype-select",
+                    options: [{
+                            label: "Admin",
+                            value: "Admin"
+                        },
+                        {
+                            label: "User",
+                            value: "User"
+                        },
+                    ],
+                    required: true,
+                    placeholder: "Select Account Type",
+                    name: "admin-select-acctype",
+                });
+            });
+        </script>
+        <script>
+            function checknUpdateAccType(userId) {
+                fetch(`Includes/authActions.php?request=getusertype&userID=${userId}`)
+                    .then(response => response.text())
+                    .then(accType => {
+                        console.log(accType);
+                        if (accType && accType.trim() == "Admin") {
+                            document.querySelector('#admin-acctype-select').setValue("Admin");
+                        } else {
+                            document.querySelector('#admin-acctype-select').setValue("User");
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching user type:', error);
+                    });
             }
-        })
-        .catch(error => {
-            console.error('Error fetching user type:', error);
-        });
-}
 
-document.addEventListener('DOMContentLoaded', function () {
-    const adminUserSelect = document.querySelector('#admin-user-select');
-    adminUserSelect.addEventListener('change', function () {
-        const adminUserSelectedId = adminUserSelect.value;
-            checknUpdateAccType(adminUserSelectedId);
-    });
-});
-</script>
-<?php endif;?>
+            document.addEventListener('DOMContentLoaded', function() {
+                const adminUserSelect = document.querySelector('#admin-user-select');
+                adminUserSelect.addEventListener('change', function() {
+                    const adminUserSelectedId = adminUserSelect.value;
+                    checknUpdateAccType(adminUserSelectedId);
+                });
+            });
+        </script>
+    <?php endif; ?>

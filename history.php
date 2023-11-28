@@ -49,7 +49,10 @@ $AuthLogin = new AuthenticatorController($redirect);
                             <img src="<?= $ads['AdPicture'] ?>" class="imgSize card-img-top" id="myImg" data-bs-toggle="modal" data-bs-target="#modalImg-<?= $ads['AdID'] ?>">
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title fs-5 fw-bold text-truncate" id="TextHeader" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="<?= $ads['AdName'] ?>"><?= $ads['AdName'] ?></h5>
+
+                            <div class="title d-inline-flex" style="height:4.7rem; width:15rem; overflow: hidden;">
+                                <h5 class="card-title fs-5 fw-bold " id="TextHeader" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="<?= $ads['AdName'] ?>"><?= $ads['AdName'] ?></h5>
+                            </div>
 
                             <p class="card-text text-secondary text-truncate" id="TextSub" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="<?= $ads['AdDescription'] ?>">
                                 <small> <?= $ads['AdDescription'] ?></small>
@@ -149,7 +152,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-left: 95%;"></button>
                                         </div>
                                         <div class="item2">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel"><?= $ads['AdName'] ?></h1>
+                                            <h1 class="modal-title fs-5 fw-semibold" id="exampleModalLabel"><?= $ads['AdName'] ?></h1>
                                         </div>
                                         <div class="item3">
                                             <span class="text-muted mx-auto"><small><?= $ads['UserName'] . " posted on " . $formattedDatetime ?></small></span>
@@ -207,18 +210,18 @@ $AuthLogin = new AuthenticatorController($redirect);
                 <div class="modal fade p-0" id="payment-<?= $ads['AdID'] ?>" aria-hidden="true" aria-labelledby="payment-<?= $ads['AdID'] ?>" tabindex="-1">
                     <div class="modal-dialog modal-md modal-dialog-centered mt-1">
                         <div class="modal-content">
+
                             <div class="modal-header">
-                                <h1 class="modal-title fs-3" id="payment-<?= $ads['AdID'] ?>">
-                                    <strong><?php echo ($ads['AdStatus'] == "Pending Payment") ? "Payment" : "Resubmit Payment"; ?></strong>
-                                </h1>
+                                <h1 class="modal-title fs-3 fw-semibold" id="payment-<?= $ads['AdID'] ?>"><?php echo ($ads['AdStatus'] == "Pending Payment") ? "Payment" : "Resubmit Payment"; ?></h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="CloseModalPayment"></button>
                             </div>
+
                             <div class="modal-body">
-                                <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br>
+                                <div class="text-start mb-2 p-0"> <span class="fw-semibold">Title: </span><?= $ads['AdName'] ?></div>
 
 
                                 <div class="d-inline-flex  align-items-center">
-                                    <strong class="fs-5"><label for="Price">Price: </label></strong>
+                                    <div class="fw-semibold"><label for="Price">Price: </label></div>
 
                                     <div class="input-group ms-1">
                                         <span class="input-group-text">RM</span>
@@ -228,12 +231,12 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                                 <form action="includes/RequestAds.php?request=payment" method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
                                     <div class="mb-3">
-                                        <label for="formFile" class="form-label">Upload Payment Receipt: </label>
+                                        <label for="formFile" class="form-label fw-semibold">Upload Payment Receipt: </label>
                                         <input type="hidden" name="AdID" value="<?= $ads["AdID"] ?>">
                                         <input type="hidden" name="redirect" value="<?= $redirect ?>">
                                         <input type="file" class="form-control m-auto mb-2" id="formFile" name="fileUpload" required accept="image/png, image/jpeg, image/jpg, application/pdf">
                                     </div>
-                                    <input type="submit" class="btn btn-outline-success float-end dynamic-input" value="Submit" id="paymentButton-<?= $ads['AdID'] ?>">
+                                    <input type="submit" class="btn btn-outline-success float-end" value="Submit" id="paymentButton-<?= $ads['AdID'] ?>">
                                 </form>
 
 
@@ -252,12 +255,12 @@ $AuthLogin = new AuthenticatorController($redirect);
                     <div class="modal-dialog modal-md modal-dialog-centered mt-1">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-3" id="exampleModalToggleLabel2"><strong>Cancel Ad</strong></h1>
+                                <h1 class="modal-title fs-3 fw-semibold" id="exampleModalToggleLabel2">Cancel Ad</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="CloseModalCancel"></button>
                             </div>
                             <div class="modal-body">
 
-                                <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
+                                <div class="text-start mb-2 p-0"> <span class="fw-semibold">Title:</span><?= $ads['AdName'] ?></div>
                                 <form action="Includes/authActions.php?request=CancelAd&redirect" method="POST">
                                     <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                     <input type="hidden" value="<?= $ads['AdAuthorID'] ?>" name="AdAuthorID">
