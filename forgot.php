@@ -212,61 +212,17 @@ if (isset($_POST['reset-password'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/forgotPass.css">
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
     <title>Reset Password</title>
 
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-image: linear-gradient(315deg, #ff7878 0%, #74d680 74%);
-        }
-
-        h2#title {
-            color: #573b8a;
-            font-size: 2.3em;
-            font-weight: bold;
-        }
-
-
-        input#submit {
-            width: 60%;
-            height: 40px;
-            background: #e0dede;
-            justify-content: center;
-            display: flex;
-            margin: 20px auto;
-            padding: 10px;
-            border: none;
-            outline: none;
-            border-radius: 5px;
-        }
-
-        input[type="submit"]#submit {
-            width: 60%;
-            height: 40px;
-            margin: 10px auto;
-            justify-content: center;
-            display: block;
-            color: #fff;
-            background: #573b8a;
-            font-size: 1em;
-            font-weight: bold;
-            margin-top: 20px;
-            outline: none;
-            border: none;
-            border-radius: 5px;
-            transition: 0.2s ease-in;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
     <?php include('Includes/navbar.php'); ?>
 
 
-    <div class="position-absolute top-50 start-50 translate-middle">
+    <div class="main-box position-absolute top-50 start-50 translate-middle shadow-lg p-5 rounded-4" id="forgot-box">
         <div class="login-box">
             <h2 id="title">Reset Password</h2>
             <form name="SignUp" id="SignUp" action="forgot.php" method="post" class="needs-validation" novalidate>
@@ -274,7 +230,7 @@ if (isset($_POST['reset-password'])) {
 
                 <div class="form-floating mb-3">
                     <input type="email" class="form-control" placeholder="name@example.com" name="email" id="validationCustom01" required="" value="<?= $email; ?>">
-                    <label for="floatingInput">Email address</label>
+                    <label for="floatingInput text-secondary">Email address</label>
                 </div>
 
 
@@ -282,9 +238,9 @@ if (isset($_POST['reset-password'])) {
                 <div class="user-box">
                     <?php if (isset($_GET['reset'])) {
                         if ($_GET['reset'] == "success") {
-                            echo '<span class="text-success fw-semibold">Check your Inbox/Spam folder!</span>';
+                            echo '<span class="text-success fw-semibold" style="font-size:94%;">Check your Inbox/Spam folder!</span>';
                         } elseif ($_GET['reset'] == "failed") {
-                            echo '<span class="text-danger fw-semibold">Couldn\'t find your email!</span>';
+                            echo '<span class="text-danger fw-semibold" style="font-size:94%;">Couldn\'t find your email!</span>';
                         }
                     } ?>
                     <a href="register.php" class="SignUp float-end fw-semibold">Log In</a>
