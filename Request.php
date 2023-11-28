@@ -654,23 +654,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                             <textarea class="form-control" placeholder="Description" id="floatingTextarea"><?= $ads['AdDescription'] ?></textarea>
                                                             <label for="floatingTextarea">Description</label>
                                                         </div>
-
-
-                                                        <div class="form-floating mb-3">
-                                                            <select class="form-select" id="floatingSelectGrid">
-                                                                <option selected><?= $ads['AdStatus'] ?></option>
-                                                                <option value="Pending Review">Pending Review</option>
-                                                                <option value="Pending Payment">Pending Payment</option>
-                                                                <option value="Checking Payment">Checking Payment</option>
-                                                                <option value="Rejected Request">Rejected Request</option>
-                                                                <option value="Rejected Payment">Rejected Payment</option>
-                                                                <option value="Cancelled">Cancelled</option>
-                                                                <option value="Expired">Expired</option> <!-- Might need to remove-->
-                                                                <option value="Approved">Approved</option>
-                                                            </select>
-                                                            <label for="floatingSelectGrid">Status Options</label>
-                                                        </div>
-
+                                                        
                                                         <div id="category-select-<?= $ads['AdID'] ?>"></div>
 
 
