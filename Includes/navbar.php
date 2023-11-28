@@ -82,7 +82,7 @@ if (!empty($_GET['status'])) {
                             <a class="nav-link" href="Request.php">Inquiry</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="stats.html">Statistics</a>
+                            <a class="nav-link" href="stats.html">Analytics</a>
                         </li>
                         <?php if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] != "Admin") : ?>
                             <li class="nav-item">
