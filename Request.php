@@ -654,13 +654,8 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                             <textarea class="form-control" placeholder="Description" id="floatingTextarea"><?= $ads['AdDescription'] ?></textarea>
                                                             <label for="floatingTextarea">Description</label>
                                                         </div>
-                                                        
-                                                        <div id="category-select-<?= $ads['AdID'] ?>"></div>
 
-
-                                                        <div class="input-group mb-3">
-                                                            <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-                                                        </div>
+                                                        <div id="category-select-<?= $ads['AdID'] ?>"></div><br><br>
 
                                                         <label for="formFile" class="form-label text-danger">Are you sure you want to <b><u>edit the Ad?</u></b></label>
                                                         <div class="container-fluid d-flex justify-content-end">
@@ -680,26 +675,29 @@ $AuthLogin = new AuthenticatorController($redirect);
                                     </div>
 
                                     <script>
-                                    document.addEventListener("DOMContentLoaded", function () {
-                                      VirtualSelect.init({
-                                            ele: "#category-select-<?= $ads['AdID'] ?>",
-                                            options: [
-                                              <?php 	
-                                              $categoriesData2 = $classified->getCategories();
-                                              $result2 = $categoriesData2['result'];
-                                              while ($categories2 = $result2->fetch_assoc()) { $categoryName2 = $categories2["Category"];?>
-                                              { label: "<?= $categoryName2?>", value: "<?= $categoryName2?>" },
-                                              <?php }?>
-                                            ],
-                                            search:true,
-                                            required:true,
-                                            multiple:true,
-                                            noSearchResultsText:"No Categories Found",
-                                            searchPlaceholderText:"Seach Categories...",
-                                            placeholder:"Select Categories",
-                                            name:"categories",
-                                          });
-                                    });
+                                        document.addEventListener("DOMContentLoaded", function() {
+                                            VirtualSelect.init({
+                                                ele: "#category-select-<?= $ads['AdID'] ?>",
+                                                options: [
+                                                    <?php
+                                                    $categoriesData2 = $classified->getCategories();
+                                                    $result2 = $categoriesData2['result'];
+                                                    while ($categories2 = $result2->fetch_assoc()) {
+                                                        $categoryName2 = $categories2["Category"]; ?> {
+                                                            label: "<?= $categoryName2 ?>",
+                                                            value: "<?= $categoryName2 ?>"
+                                                        },
+                                                    <?php } ?>
+                                                ],
+                                                search: true,
+                                                required: true,
+                                                multiple: true,
+                                                noSearchResultsText: "No Categories Found",
+                                                searchPlaceholderText: "Seach Categories...",
+                                                placeholder: "Select Categories",
+                                                name: "categories",
+                                            });
+                                        });
                                     </script>
 
 
