@@ -665,11 +665,13 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                                 <option value="Rejected Request">Rejected Request</option>
                                                                 <option value="Rejected Payment">Rejected Payment</option>
                                                                 <option value="Cancelled">Cancelled</option>
-                                                                <option value="Expired">Expired</option>
+                                                                <option value="Expired">Expired</option> <!-- Might need to remove-->
                                                                 <option value="Approved">Approved</option>
                                                             </select>
                                                             <label for="floatingSelectGrid">Status Options</label>
                                                         </div>
+
+                                                        <div id="category-select-<?= $ads['AdID'] ?>"></div>
 
 
                                                         <div class="input-group mb-3">
@@ -693,6 +695,29 @@ $AuthLogin = new AuthenticatorController($redirect);
                                             </div>
                                         </div>
                                     </div>
+
+                                    <script>
+                                    document.addEventListener("DOMContentLoaded", function () {
+                                      VirtualSelect.init({
+                                            ele: "#category-select-<?= $ads['AdID'] ?>",
+                                            options: [
+                                              <?php 	
+                                              $categoriesData2 = $classified->getCategories();
+                                              $result2 = $categoriesData2['result'];
+                                              while ($categories2 = $result2->fetch_assoc()) { $categoryName2 = $categories2["Category"];?>
+                                              { label: "<?= $categoryName2?>", value: "<?= $categoryName2?>" },
+                                              <?php }?>
+                                            ],
+                                            search:true,
+                                            required:true,
+                                            multiple:true,
+                                            noSearchResultsText:"No Categories Found",
+                                            searchPlaceholderText:"Seach Categories...",
+                                            placeholder:"Select Categories",
+                                            name:"categories",
+                                          });
+                                    });
+                                    </script>
 
 
                                 <?php endif; ?>
