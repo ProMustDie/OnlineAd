@@ -720,13 +720,7 @@ $AuthLogin = new AuthenticatorController($redirect);
             </div>
         </div>
 
-        <!--ADMIN -->
-
-    <?php endif; ?>
-
-
-
-    <!--//!Add Category MODAL-->
+        <!--//!Add Category MODAL-->
     <div class="modal fade p-0" id="addcate" aria-hidden="true" aria-labelledby="addcate" tabindex="-1">
         <div class="modal-dialog modal-md modal-dialog-centered mt-1">
             <div class="modal-content">
@@ -735,7 +729,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" method="POST">
+                    <form action="Includes/authActions.php?request=addremovecat" method="POST">
 
                         <div class="row g-2">
                             <div class="col-md">
@@ -748,9 +742,16 @@ $AuthLogin = new AuthenticatorController($redirect);
                                 <div class="form-floating">
                                     <select class="form-select" id="floatingSelectGrid">
                                         <option selected>None</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        <?php
+                                        $categoriesData3 = $classified->getCategories();
+                                        $result3 = $categoriesData3['result'];
+
+                                        if (mysqli_num_rows($result) > 0) :
+                                            while ($categories3 = $result3->fetch_assoc()) {
+                                                $categoryName3 = $categories3["Category"];
+                                        ?>
+                                        <option value="<?= $categoryName3?>"><?= $categoryName3 ?></option>
+                                    <?php } endif;?>
                                     </select>
                                     <label for="floatingSelectGrid">Delete Category</label>
                                 </div>
@@ -769,6 +770,13 @@ $AuthLogin = new AuthenticatorController($redirect);
             </div>
         </div>
     </div>
+        <!--ADMIN -->
+
+    <?php endif; ?>
+
+
+
+    
 
 
 
