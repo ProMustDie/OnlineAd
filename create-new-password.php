@@ -104,46 +104,58 @@ if (isset($_POST['change-password'])) {
     <?php include('Includes/navbar.php'); ?>
 
 
-    <div class="main-box position-absolute top-50 start-50 translate-middle shadow-lg p-5 rounded-4" id="forgot-box">
-        <div class="login-box">
-            <h2 id="title">Reset Password</h2>
-            <?php
-            if (!empty($_GET['selector']) && !empty($validator = $_GET['validator'])) {
-                $selector = $_GET['selector'];
-                $validator = $_GET['validator'];
-                if (ctype_xdigit($selector) !== false && ctype_xdigit($validator) !== false) {
-            ?>
-                    <form name="SignUp" id="SignUp" action="create-new-password.php?selector=<?= $selector ?>&validator=<?= $validator ?>" method="POST" class="needs-validation" novalidate>
-                        <input type="hidden" name="selector" value="<?= $selector ?>">
-                        <input type="hidden" name="validator" value="<?= $validator ?>">
+    <div class="container-fluid d-flex justify-content-center align-items-center mb-5" id="forgot">
+        <div class="main mt-5" id="forgot" style="height:400px;">
+
+            <div class="login-box" id="forgot">
+
+                <div class="container-fluid pt-5" style="width:80%;">
+
+                    <h2 id="title">Reset Password</h2>
+                    <?php
+                    if (!empty($_GET['selector']) && !empty($validator = $_GET['validator'])) {
+                        $selector = $_GET['selector'];
+                        $validator = $_GET['validator'];
+                        if (ctype_xdigit($selector) !== false && ctype_xdigit($validator) !== false) {
+                    ?>
+                            <form name="SignUp" id="SignUp" action="create-new-password.php?selector=<?= $selector ?>&validator=<?= $validator ?>" method="POST" class="needs-validation" novalidate>
+                                <input type="hidden" name="selector" value="<?= $selector ?>">
+                                <input type="hidden" name="validator" value="<?= $validator ?>">
 
 
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" placeholder="password" name="password" id="password" required="" value="<?= $pwd; ?>">
-                            <label for="floatingInput text-secondary">New Password</label>
-                        </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" placeholder="password" name="password" id="password" required="" value="<?= $pwd; ?>">
+                                    <label for="floatingInput text-secondary">New Password</label>
+                                </div>
 
-                        <div class="form-floating mb-1">
-                            <input type="password" class="form-control" placeholder="Rptpassword" name="Rptpassword" id="Rptpassword" required="" value="<?= $rptpwd; ?>">
-                            <label for="floatingInput">Repeat Password</label>
-                        </div>
+                                <div class="form-floating mb-1">
+                                    <input type="password" class="form-control" placeholder="Rptpassword" name="Rptpassword" id="Rptpassword" required="" value="<?= $rptpwd; ?>">
+                                    <label for="floatingInput">Repeat Password</label>
+                                </div>
 
-                        <div class="user-box mb-3">
-                            <span class="text-danger fw-semibold" style="font-size:90%;"><?= $Err; ?></span>
-                            <a href="login.php" class="SignUp float-end fw-semibold">Log In</a>
-                        </div>
+                                <div class="user-box">
+                                    <span class="text-danger fw-semibold" style="font-size:90%;"><?= $Err; ?></span>
+                                    <a href="register.php" class="SignUp float-end fw-semibold">Log In</a>
+                                </div>
 
-                        <input type="submit" name="change-password" value="Reset Password" id="submit" class="float-start m-0">
-                    </form>
-            <?php
-                }
-            } else if (empty($selector) || empty($validator)) {
-                echo '<span class="error">Could not validate your request!</span>';
-                echo '<a href="forgot.php" class="SignUp">Try Again</a>';
-            }
-            ?>
+                                <input type="submit" name="change-password" value="Reset Password" id="submit" class="float-start mt-2">
+                            </form>
+                    <?php
+                        }
+                    } else if (empty($selector) || empty($validator)) {
+                        echo '<span class="text-danger">Could not validate your request!</span><br>';
+                        echo '<a href="forgot.php" class="SignUp">Try Again</a>';
+                    }
+                    ?>
+
+                </div>
+
+            </div>
+
         </div>
     </div>
+
+
 
     <?php include('Includes/footer.php'); ?>
 

@@ -139,12 +139,12 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                                 <div class="modal-dialog modal-md modal-dialog-centered mt-1">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h1 class="modal-title fs-3" id="exampleModalToggleLabel5"><strong>Cancel Ad</strong></h1>
+                                                            <h1 class="modal-title fs-3 fw-semibold" id="exampleModalToggleLabel5">Cancel Ad</h1>
                                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body">
 
-                                                            <strong class="fs-5">Title: <?= $ads['AdName'] ?></strong><br><br>
+                                                            <div class="text-start mb-2 p-0 fs-5"> <span class="fw-semibold">Title:</span><?= $ads['AdName'] ?></div>
 
                                                             <form action="Includes/authActions.php?request=CancelAd&redirect" method="POST">
                                                                 <label for="formFile" class="form-label text-danger">Are you sure you want to <b><u>cancel?</u></b> <br>You can't revert this action!</label>
@@ -234,8 +234,8 @@ if (!empty($_SERVER['QUERY_STRING'])) {
             </div>
 
             <!--Load more button-->
-            <div class="container-fluid pb-3 text-center d-grid gap-2 col-2">
-                <button type="button" class="btn btn-outline-secondary btn-lg">Load More...</button>
+            <div class="container-fluid m-auto mb-3 text-center">
+                <button type="button" class="btn btn-outline-secondary btn-lg w-50 mx-auto ">Load More...</button>
             </div>
             <!--Load more button-->
 

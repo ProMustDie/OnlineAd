@@ -221,37 +221,48 @@ if (isset($_POST['reset-password'])) {
 <body>
     <?php include('Includes/navbar.php'); ?>
 
+    <div class="container-fluid d-flex justify-content-center align-items-center mb-5" id="forgot">
+        <div class="main mt-5" id="forgot">
 
-    <div class="main-box position-absolute top-50 start-50 translate-middle shadow-lg p-5 rounded-4" id="forgot-box">
-        <div class="login-box">
-            <h2 id="title">Reset Password</h2>
-            <form name="SignUp" id="SignUp" action="forgot.php" method="post" class="needs-validation" novalidate>
+            <div class="login-box" id="forgot">
+
+                <div class="container-fluid pt-5" style="width:80%;">
+                    <h2 id="title">Reset Password</h2>
+                    <form name="SignUp" id="SignUp" action="forgot.php" method="post" class="needs-validation" novalidate>
+
+                        <div class="form-floating mb-3">
+                            <input type="email" class="form-control" placeholder="name@example.com" name="email" id="validationCustom01" required="" value="<?= $email; ?>">
+                            <label for="floatingInput text-secondary">Email address</label>
+                        </div>
 
 
-                <div class="form-floating mb-3">
-                    <input type="email" class="form-control" placeholder="name@example.com" name="email" id="validationCustom01" required="" value="<?= $email; ?>">
-                    <label for="floatingInput text-secondary">Email address</label>
+
+                        <div class="user-box">
+                            <?php if (isset($_GET['reset'])) {
+                                if ($_GET['reset'] == "success") {
+                                    echo '<span class="text-success fw-semibold" style="font-size:94%;">Check your Inbox/Spam folder!</span>';
+                                } elseif ($_GET['reset'] == "failed") {
+                                    echo '<span class="text-danger fw-semibold" style="font-size:94%;">Couldn\'t find your email!</span>';
+                                }
+                            } ?>
+                            <a href="register.php" class="SignUp float-end fw-semibold">Log In</a>
+                        </div><br>
+
+                        <input type="submit" name="reset-password" value="Send reset request" id="submit" class="btn float-start m-0 w-75">
+
+
+                    </form>
                 </div>
 
+            </div>
 
-
-                <div class="user-box">
-                    <?php if (isset($_GET['reset'])) {
-                        if ($_GET['reset'] == "success") {
-                            echo '<span class="text-success fw-semibold" style="font-size:94%;">Check your Inbox/Spam folder!</span>';
-                        } elseif ($_GET['reset'] == "failed") {
-                            echo '<span class="text-danger fw-semibold" style="font-size:94%;">Couldn\'t find your email!</span>';
-                        }
-                    } ?>
-                    <a href="register.php" class="SignUp float-end fw-semibold">Log In</a>
-                </div><br>
-
-                <input type="submit" name="reset-password" value="Send reset request" id="submit" class="float-start m-0">
-
-
-            </form>
         </div>
     </div>
+
+
+
+
+
 
 
     <?php include('Includes/footer.php'); ?>

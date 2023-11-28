@@ -655,25 +655,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                             <label for="floatingTextarea">Description</label>
                                                         </div>
 
-
-                                                        <div class="form-floating mb-3">
-                                                            <select class="form-select" id="floatingSelectGrid">
-                                                                <option selected><?= $ads['AdStatus'] ?></option>
-                                                                <option value="Pending Review">Pending Review</option>
-                                                                <option value="Pending Payment">Pending Payment</option>
-                                                                <option value="Checking Payment">Checking Payment</option>
-                                                                <option value="Rejected Request">Rejected Request</option>
-                                                                <option value="Rejected Payment">Rejected Payment</option>
-                                                                <option value="Cancelled">Cancelled</option>
-                                                                <option value="Expired">Expired</option>
-                                                                <option value="Approved">Approved</option>
-                                                            </select>
-                                                            <label for="floatingSelectGrid">Status Options</label>
-                                                        </div>
-
-
                                                         <div class="input-group mb-3">
-                                                            <span class="input-group-text" id="addon-wrapping fw-semibold">Upload File</span>
                                                             <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
                                                         </div>
 

@@ -81,6 +81,9 @@ if (!empty($_GET['status'])) {
                         <li class="nav-item">
                             <a class="nav-link" href="Request.php">Inquiry</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="stats.html">Statistics</a>
+                        </li>
                         <?php if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] != "Admin") : ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="history.php" id="History">History</a>
