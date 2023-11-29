@@ -8,3 +8,8 @@ Admin Acc: admin@a.com:admin
 User Acc: ausca@gmail.com:asda
 
 
+TODO FOR REAL:
+Load More button
+edit ads
+add category
+add dashboard
