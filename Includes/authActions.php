@@ -65,21 +65,53 @@ if ($_SESSION['auth_user']['user_type'] == "Admin") {
         $result = $classified->getusertype($userID);
         echo $result;
     }
+    
+    if($requests=="addremovecat"){
+        $addCat = $_POST['add-cat'];
+        $delCat = $_POST['del-cat'];
+        $alertMsg = "";
+
+        if(!empty($addCat)){
+            if(!$classified->catIsDuplicate($addCat)){
+                if($classified->addCategory($addCat)){
+                    $alertMsg.="\"$addCat\" added to category. ";
+                }else{
+                    $alertMsg.="\"$addCat\" failed to be added. ";
+                }
+            }else{
+                $alertMsg.="\"$addCat\" already exists. ";
+            }
+        }
+
+        if($delCat != "None"){
+            if($classified->delCategory($delCat)){
+                $alertMsg.="\"$delCat\" category deleted. ";
+            }else{
+                $alertMsg.="\"$delCat\" failed to delete. ";
+            }
+        }
+
+        elseif(empty($addCat) && $delCat=="None"){
+            $alertMsg.="No inputs were given!";
+        }
+ 
+    }
 }
 
 
-if ($_SESSION['auth_user']['user_id'] == $AuthorID && $AuthorID != NULL && $AdID != NULL) {
-
-    if ($requests == "SubmitPayment" || $requests == "CancelAd") :
-        switch ($requests) {
-            case "SubmitPayment":
-                $status = "Checking Payment";
-                break;
-            case "CancelAd":
-                $status = "Cancelled";
-                break;
-        }
-        $classified->changeStatus($AdID, $status);
-        header("Location: ../$redirect");
+if($_SESSION['auth_user']['user_id'] == $AuthorID && $AuthorID!=NULL && $AdID != NULL){
+    
+    if($requests== "SubmitPayment" ||$requests == "CancelAd"):
+    switch($requests){
+        case "SubmitPayment":
+            $status = "Checking Payment";
+            break;
+        case "CancelAd":
+            $status = "Cancelled";
+            send_mail($classified->getAuthorEmail($AdID), $classified->getAuthorName($AdID),"AD CANCELLED","Ad \"".$classified->getAdName($AdID)."\" has been cancelled!\nContact customer support if there are any enquiries.");
+            break;
+    }
+    $classified->changeStatus($AdID, $status);
+    header("Location: ../$redirect"); 
     endif;
 }

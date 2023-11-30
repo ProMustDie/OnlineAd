@@ -322,6 +322,58 @@
                 return NULL;
             }
         }
+
+        public function catIsDuplicate($category){
+            $dupli_query ="SELECT AdCategory FROM ads WHERE AdID = 1";
+            $stmt = $this->conn->prepare($dupli_query);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $categories = array_map('strtolower', explode(',', $row['AdCategory']));
+                $provided_category = strtolower($category);
+
+                if (in_array($provided_category, $categories)) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+
+        public function addCategory($category){
+            $addCat_query = "UPDATE ads SET AdCategory = CONCAT(AdCategory, ?) WHERE AdID = 1";
+            $stmt = $this->conn->prepare($addCat_query);
+            $category = ",".$category;
+            $stmt->bind_param("s", $category);
+            $result = $stmt->execute();
+            return $result;
+        }
+
+        public function delCategory($category){
+            $getCat_query = "SELECT AdCategory FROM ads WHERE AdID = 1";
+            $stmt = $this->conn->prepare($getCat_query);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $fetchedCat = $row['AdCategory'];
+                $catArray = explode(',', $fetchedCat);
+                $updatedCatArray = array_diff($catArray, array($category));
+                $updatedCat = implode(',', $updatedCatArray); 
+
+                $delCat_query = "UPDATE ads SET AdCategory = '$updatedCat' WHERE AdID = 1";
+                $stmt = $this->conn->prepare($delCat_query);
+                $result = $stmt->execute();
+                return $result;
+            } else {
+                return false;
+            }   
+        }
     }
 
     ?>

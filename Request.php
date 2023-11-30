@@ -734,19 +734,19 @@ $AuthLogin = new AuthenticatorController($redirect);
                         <div class="row g-2">
                             <div class="col-md">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="floatingInputGrid" placeholder="Category">
+                                    <input type="text" class="form-control" name="add-cat" id="floatingInputGrid" placeholder="Category">
                                     <label for="floatingInputGrid">Add Category</label>
                                 </div>
                             </div>
                             <div class="col-md">
                                 <div class="form-floating">
-                                    <select class="form-select" id="floatingSelectGrid">
+                                    <select class="form-select" name="del-cat" id="floatingSelectGrid">
                                         <option selected>None</option>
                                         <?php
                                         $categoriesData3 = $classified->getCategories();
                                         $result3 = $categoriesData3['result'];
 
-                                        if (mysqli_num_rows($result) > 0) :
+                                        if (mysqli_num_rows($result3) > 0) :
                                             while ($categories3 = $result3->fetch_assoc()) {
                                                 $categoryName3 = $categories3["Category"];
                                         ?>
