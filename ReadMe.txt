@@ -11,5 +11,5 @@ User Acc: ausca@gmail.com:asda
 TODO FOR REAL:
 Load More button
 edit ads
-add category
+add category (needs alert)
 add dashboard
