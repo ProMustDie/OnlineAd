@@ -56,6 +56,23 @@
   visibility: visible;
 }
 
+.navbar#topnav {
+  display: none;
+}
+
+#topnav.show {
+  opacity: 1;
+  display: block;
+}
+
+#BtmNavImg.show {
+  display: block;
+}
+
+#BtmNavImg.hide {
+  display: none;
+}
+
 .loader {
   position: fixed;
   top: 50%;
