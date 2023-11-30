@@ -66,7 +66,7 @@ if($_SESSION['auth_user']['user_type']=="Admin"){
         echo $result;
     }
     
-    if($requests=="addremovecat"){
+    if($requests=="addremovecat"){ //needs redirect page
         $addCat = $_POST['add-cat'];
         $delCat = $_POST['del-cat'];
         $alertMsg = "";
@@ -95,6 +95,18 @@ if($_SESSION['auth_user']['user_type']=="Admin"){
             $alertMsg.="No inputs were given!";
         }
  
+    }
+
+    if($requests=="EditAd"){
+        $title = $_POST['title'];
+        $desc = $_POST['description'];
+        $status = $_POST['status'];
+        $categories = $_POST['categories'];
+
+        if($classified->updateCategory($AdID,$title,$desc,$status,$categories)){
+            header("Location: ../$redirect");
+        }
+
     }
 }
 

@@ -620,18 +620,18 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                 </div>
                                                 <div class="modal-body">
 
-                                                    <form action="#" method="POST">
+                                                    <form action="Includes/authActions.php? request=EditAd" method="POST">
 
                                                         <div class="row g-2 mb-3">
                                                             <div class="col-md-4">
                                                                 <div class="form-floating mb-2">
-                                                                    <input type="text" class="form-control" id="floatingInputDisabled" placeholder="ID" value="<?= $ads['AdID'] ?>" disabled>
+                                                                    <input type="text" class="form-control" id="floatingInputDisabled" name="AdID" placeholder="ID" value="<?= $ads['AdID'] ?>" disabled>
                                                                     <label for="floatingInputDisabled">ID</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-8">
                                                                 <div class="form-floating">
-                                                                    <select class="form-select" id="floatingSelectGrid">
+                                                                    <select class="form-select" id="floatingSelectGrid" name="status">
                                                                         <option selected><?= $ads['AdStatus'] ?></option>
                                                                         <option value="Pending Review">Pending Review</option>
                                                                         <option value="Pending Payment">Pending Payment</option>
@@ -648,12 +648,12 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                         </div>
 
                                                         <div class="form-floating mb-3">
-                                                            <textarea class="form-control" placeholder="Title" id="floatingTextarea"><?= $ads['AdName'] ?></textarea>
+                                                            <textarea class="form-control" placeholder="Title" name="title" id="floatingTextarea"><?= $ads['AdName'] ?></textarea>
                                                             <label for="floatingTextarea">Title</label>
                                                         </div>
 
                                                         <div class="form-floating mb-3">
-                                                            <textarea class="form-control" placeholder="Description" id="floatingTextarea"><?= $ads['AdDescription'] ?></textarea>
+                                                            <textarea class="form-control" placeholder="Description" name="description" id="floatingTextarea"><?= $ads['AdDescription'] ?></textarea>
                                                             <label for="floatingTextarea">Description</label>
                                                         </div>
 
@@ -694,6 +694,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                 search: true,
                                                 required: true,
                                                 multiple: true,
+                                                selectedValue: [<?= implode(",", array_map(fn($word) => '"' . trim($word) . '"', explode(",", $ads["AdCategory"])))?>],
                                                 noSearchResultsText: "No Categories Found",
                                                 searchPlaceholderText: "Seach Categories...",
                                                 placeholder: "Select Categories",

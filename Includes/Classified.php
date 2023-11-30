@@ -374,6 +374,16 @@
                 return false;
             }   
         }
+
+        public function updateCategory($AdID, $title, $desc, $status, $categories){
+            $updateAd_query = "UPDATE ads SET AdName = ?, AdDescription = ?, AdStatus = ?, AdCategory = ? WHERE AdID = ?";
+            $stmt = $this->conn->prepare($updateAd_query);
+            $stmt->bind_param("ssssi", $title, $desc, $status, $categories, $AdID);
+            $result = $stmt->execute();
+            echo $stmt->error;
+            return $result;
+
+        }
     }
 
     ?>
