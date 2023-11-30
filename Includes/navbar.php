@@ -30,6 +30,8 @@ if (!empty($_GET['category'])) {
 if (!empty($_GET['status'])) {
     $status = $_GET['status'];
 }
+
+
 ?>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -63,37 +65,86 @@ if (!empty($_GET['status'])) {
 
     <!--navbar-->
     <header>
-        <!--Created by © Ausca Lai 2023 & © Teoh Yo Wen 2023 -->
-        <nav class="navbar navbar-expand-md navbar-dark fs-3 position-top bg-success">
+
+        <!--TOP NAV-->
+        <nav class="navbar bg-light m-0 p-0 mt-1" id="topnav">
             <div class="container-fluid">
-                <a class="navbar-brand" href="main.php" style="width:80px;">
+
+                <div style="width:8rem; height:4.5rem;">
+                    <a class="navbar-brand w-auto h-auto" href="#">
+                        <img src="img/logo.png" alt="Logo" class="d-inline-block align-text-top m-auto p-0 img-fluid">
+                    </a>
+                </div>
+
+                <div class="ms-auto d-inline">
+
+                    <span>DATE TIME</span>
+                    <!-- Section: Social media -->
+
+                    <!-- Facebook -->
+                    <a class="btn btn-outline-dark btn-floating m-1" href="https://www.facebook.com/thesundaily" role="button"><i class="bi bi-facebook"></i></a>
+
+                    <!-- Twitter -->
+                    <a class="btn btn-outline-dark btn-floating m-1" href="https://twitter.com/thesundaily" role="button"><i class="bi bi-twitter-x"></i></a>
+
+                    <!-- Google -->
+                    <a class="btn btn-outline-dark btn-floating m-1" href="https://www.instagram.com/thesundaily/" role="button"><i class="bi bi-instagram"></i></a>
+
+                    <!-- Instagram -->
+                    <a class="btn btn-outline-dark btn-floating m-1" href="https://www.youtube.com/channel/UCJNLiW1NkgyHeoijxH-a_Wg" role="button"><i class="bi bi-youtube"></i></a>
+
+                    <!-- Linkedin -->
+                    <a class="btn btn-outline-dark btn-floating m-1" href="https://www.tiktok.com/@thesundaily?lang=en" role="button"><i class="bi bi-tiktok"></i></a>
+
+                    <!-- Github -->
+                    <a class="btn btn-outline-dark btn-floating m-1" href="https://t.me/thesuntelegram" role="button"><i class="bi bi-telegram"></i></a>
+
+                    <a class="btn btn-outline-dark btn-floating m-1" href="https://ipaper.thesundaily.my/epaper/viewer.aspx?publication=The%20Sun%20Daily" role="button">
+                        <img src="https://www.thesundaily.my/base-portlet/webrsrc/theme/5d54942b1f61e0b83545fbac4d992dab.png" class="bi" width="24" height="24" alt="Custom Image">
+                    </a>
+
+                    <!-- Section: Social media -->
+
+                </div>
+
+            </div>
+        </nav>
+
+
+
+
+        <!--Created by © Ausca Lai 2023 & © Teoh Yo Wen 2023 -->
+        <!--BTM NAV-->
+        <nav class="navbar navbar-expand-md navbar-dark fs-3 bg-success m-0 pb-2" id="BtmNav">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="main.php" style="width:60px;" id="BtmNavImg">
                     <img src="img/logo.png" alt="" class="img-fluid">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="burger">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="height:50px;">
                     <ul class="navbar-nav me-auto" id="NavSize">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="Main.php">Home</a>
+                            <a class="nav-link active fs-4" aria-current="page" href="Main.php">Home</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="Request.php">Inquiry</a>
+                            <a class="nav-link fs-4" href="Request.php">Inquiry</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="stats.html">Analytics</a>
+                            <a class="nav-link fs-4" href="stats.html">Analytics</a>
                         </li>
                         <?php if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] != "Admin") : ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="history.php" id="History">History</a>
+                                <a class="nav-link fs-4" href="history.php" id="History">History</a>
                             </li>
 
                         <?php
                         endif;
                         if (isset($_SESSION["authenticated"]) && $_SESSION['authenticated'] ==  true) : ?>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle fs-4" href="#" id="navbarDropdown" role="button" aria-expanded="false">
                                     <?= $_SESSION['auth_user']["user_name"] ?>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end mb-2 bg-light" aria-labelledby="navbarDropdown">
@@ -116,7 +167,7 @@ if (!empty($_GET['status'])) {
                             </li>
                         <?php else : ?>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" aria-expanded="false">
+                                <a class="nav-link dropdown-toggle fs-4" href="#" id="navbarDropdown" role="button" aria-expanded="false">
                                     Profile
                                 </a>
                                 <ul class="dropdown-menu text-center dropdown-menu-end mb-2 w-50" aria-labelledby="navbarDropdown">
@@ -125,8 +176,8 @@ if (!empty($_GET['status'])) {
                             </li>
                         <?php endif; ?>
                     </ul>
-                    <form class="d-flex" action="" method="GET">
-                        <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search" value="<?= $key ?>">
+                    <form class="d-flex" action="" method="GET" style="height: 40px;">
+                        <input class="form-control me-2 py-1 pb-2" type="search" placeholder="Search" name="search" aria-label="Search" value="<?= $key ?>">
                         <?php
                         if (!empty($filter)) {
                             foreach ($filter as $filtering) { ?>
@@ -138,7 +189,8 @@ if (!empty($_GET['status'])) {
                                 <input type="hidden" name="status[]" value="<?= $stat ?>">
                         <?php }
                         } ?>
-                        <button class="btn btn-outline-light" type="submit" style="box-shadow:none;">Search</button>
+                        <button type="submit" class="btn btn-outline-light btn-sm">Search</button>
+
                     </form>
                 </div>
             </div>

@@ -63,6 +63,7 @@
 </script>
 
 
+
 <script>
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
@@ -70,6 +71,7 @@
 
 <script src="JS/loading.js"></script>
 <script src="JS/request.js"></script>
+<script src="JS/navbar.js"></script>
 
 
 
