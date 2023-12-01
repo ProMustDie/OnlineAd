@@ -73,6 +73,14 @@
   display: none;
 }
 
+#space.big {
+  padding-top: 150px;
+}
+
+#space.small {
+  padding-top: 70px;
+}
+
 .loader {
   position: fixed;
   top: 50%;

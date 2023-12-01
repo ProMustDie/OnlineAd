@@ -196,6 +196,8 @@ if (!empty($_GET['status'])) {
             </div>
         </nav>
     </header>
+
+    <div class="container" id="space"></div>
     <!--navbar-->
 
     <?php if (isset($_SESSION['auth_user']) && $_SESSION['auth_user']['user_type'] == "Admin") : ?>
