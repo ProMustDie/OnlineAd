@@ -3,9 +3,9 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require $_SERVER['DOCUMENT_ROOT'] . '/TheSun/OnlineAd/mail/Exception.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/TheSun/OnlineAd/mail/PHPMailer.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/TheSun/OnlineAd/mail/SMTP.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/OnlineAd/mail/Exception.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/OnlineAd/mail/PHPMailer.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/OnlineAd/mail/SMTP.php';
 
 function send_mail($recipient, $name, $subject, $message)
 {

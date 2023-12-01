@@ -56,7 +56,7 @@ if ($_SESSION['auth_user']['user_type'] == "Admin") {
         $userID = $_POST['admin-select-user-id'];
         $typeChange = $_POST['admin-select-acctype'];
         if ($usersystem->editUserType($userID, $typeChange)) {
-            header("Location: ../$redirect?");
+            header("Location: ../$redirect?modal=EditUserType");
         };
     }
 
@@ -65,65 +65,61 @@ if ($_SESSION['auth_user']['user_type'] == "Admin") {
         $result = $classified->getusertype($userID);
         echo $result;
     }
-    
-    if($requests=="addremovecat"){ //needs redirect page
+
+    if ($requests == "addremovecat") { //needs redirect page
         $addCat = $_POST['add-cat'];
         $delCat = $_POST['del-cat'];
         $alertMsg = "";
 
-        if(!empty($addCat)){
-            if(!$classified->catIsDuplicate($addCat)){
-                if($classified->addCategory($addCat)){
-                    $alertMsg.="\"$addCat\" added to category. ";
-                }else{
-                    $alertMsg.="\"$addCat\" failed to be added. ";
+        if (!empty($addCat)) {
+            if (!$classified->catIsDuplicate($addCat)) {
+                if ($classified->addCategory($addCat)) {
+                    $alertMsg .= "\"$addCat\" added to category. ";
+                } else {
+                    $alertMsg .= "\"$addCat\" failed to be added. ";
                 }
-            }else{
-                $alertMsg.="\"$addCat\" already exists. ";
+            } else {
+                $alertMsg .= "\"$addCat\" already exists. ";
             }
         }
 
-        if($delCat != "None"){
-            if($classified->delCategory($delCat)){
-                $alertMsg.="\"$delCat\" category deleted. ";
-            }else{
-                $alertMsg.="\"$delCat\" failed to delete. ";
+        if ($delCat != "None") {
+            if ($classified->delCategory($delCat)) {
+                $alertMsg .= "\"$delCat\" category deleted. ";
+            } else {
+                $alertMsg .= "\"$delCat\" failed to delete. ";
             }
+        } elseif (empty($addCat) && $delCat == "None") {
+            $alertMsg .= "No inputs were given!";
         }
-
-        elseif(empty($addCat) && $delCat=="None"){
-            $alertMsg.="No inputs were given!";
-        }
- 
     }
 
-    if($requests=="EditAd"){
+    if ($requests == "EditAd") {
         $title = $_POST['title'];
         $desc = $_POST['description'];
         $status = $_POST['status'];
         $categories = $_POST['categories'];
 
-        if($classified->updateCategory($AdID,$title,$desc,$status,$categories)){
+        if ($classified->updateCategory($AdID, $title, $desc, $status, $categories)) {
             header("Location: ../$redirect");
         }
-
     }
 }
 
 
-if($_SESSION['auth_user']['user_id'] == $AuthorID && $AuthorID!=NULL && $AdID != NULL){
-    
-    if($requests== "SubmitPayment" ||$requests == "CancelAd"):
-    switch($requests){
-        case "SubmitPayment":
-            $status = "Checking Payment";
-            break;
-        case "CancelAd":
-            $status = "Cancelled";
-            send_mail($classified->getAuthorEmail($AdID), $classified->getAuthorName($AdID),"AD CANCELLED","Ad \"".$classified->getAdName($AdID)."\" has been cancelled!\nContact customer support if there are any enquiries.");
-            break;
-    }
-    $classified->changeStatus($AdID, $status);
-    header("Location: ../$redirect"); 
+if ($_SESSION['auth_user']['user_id'] == $AuthorID && $AuthorID != NULL && $AdID != NULL) {
+
+    if ($requests == "SubmitPayment" || $requests == "CancelAd") :
+        switch ($requests) {
+            case "SubmitPayment":
+                $status = "Checking Payment";
+                break;
+            case "CancelAd":
+                $status = "Cancelled";
+                send_mail($classified->getAuthorEmail($AdID), $classified->getAuthorName($AdID), "AD CANCELLED", "Ad \"" . $classified->getAdName($AdID) . "\" has been cancelled!\nContact customer support if there are any enquiries.");
+                break;
+        }
+        $classified->changeStatus($AdID, $status);
+        header("Location: ../$redirect");
     endif;
 }
