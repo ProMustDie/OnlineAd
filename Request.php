@@ -770,6 +770,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                         <label for="formFile" class="form-label text-danger">Are you sure you want to <B><u>add/remove?</u></B></label>
                         <div class="container-fluid d-flex justify-content-end">
                             <input type="hidden" value="<?= $redirect ?>" name="redirect">
+                            <input type="hidden" value="addcate" name="modalID">
                             <input type="submit" class="btn btn-outline-primary mx-2 px-4" value="Add/Delete" id="AddButton" name="add">
                             <button type="button" class="btn btn-outline-danger mx-2 px-3" data-bs-dismiss="modal">Close</button>
                         </div>
