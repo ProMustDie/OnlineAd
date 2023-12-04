@@ -9,5 +9,4 @@ User Acc: ausca@gmail.com:asda
 
 
 TODO FOR REAL:
-Load More button  
 add dashboard

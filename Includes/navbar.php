@@ -2,6 +2,7 @@
 include_once('includes/RegisterController.php');
 include_once('includes/Classified.php');
 $logIn = new LoginController;
+$page_system = new Classified;
 $redirect2 = basename($_SERVER['PHP_SELF']);
 
 if (!empty($_SERVER['QUERY_STRING'])) {
@@ -17,6 +18,19 @@ if (isset($_POST['logout_btn'])) {
         echo '</script>';
     }
 }
+
+//Paging system initializer
+if (isset($_GET['page']) && $_GET['page']!="") {
+    $page_no = $_GET['page'];
+}else {
+    $page_no = 1;
+}
+
+$prev_page = $page_no - 1;
+$next_page = $page_no + 1;
+$adjacents = "2";
+
+//End Paging System initializer
 
 $key = NULL;
 $filter = NULL;

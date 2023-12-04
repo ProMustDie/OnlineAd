@@ -37,6 +37,14 @@ $AuthLogin = new AuthenticatorController($redirect);
                 <h2 class="text-center text-secondary mt-3 text-underline mb-0">History</h2>
             </u>
             <?php
+            $total_ads_per_page=2;
+            $offset = ($page_no-1) * $total_ads_per_page;
+            $total_ads=$page_system->getTotalAds($key, $filter, $status, NULL);
+            $total_pages= ceil($total_ads/$total_ads_per_page);
+            $second_last= $total_pages - 1;
+
+            $classified->total_ads_per_page = $total_ads_per_page;
+            $classified->offset = $offset;
             $result = $classified->getAds($key, NULL, NULL, isset($_SESSION['auth_user']) ? $_SESSION['auth_user']['user_id'] : NULL); //Pending Review, Rejected Request, Checking Payment, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
             if (mysqli_num_rows($result) > 0) :
                 while ($ads = $result->fetch_assoc()) {
@@ -292,6 +300,103 @@ $AuthLogin = new AuthenticatorController($redirect);
                 <!--*CANCEL MODAL-->
             <?php endif; ?>
 
+            <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
+            <strong>Page <?= $page_no." of ".$total_pages; ?></strong>
+        </div>
+
+                <ul class="pagination">
+                    <?php 
+                    $page_redir = $redirect;
+                    if (strpos($page_redir, '?') !== false || strpos($page_redir, '&') !== false) {
+                        if (strpos($page_redir, 'page=') !== false) {
+                            $page_redir = preg_replace('/[?&]page=[^&]+/', '', $page_redir);
+                            $page_redir .= "&page=";
+                        } else {
+                            $page_redir .= "&page=";
+                        }
+                    } else {
+                        $page_redir .= "?page=";
+                    }
+                    if($page_no > 1){
+                    echo "<li><a href='$page_redir"."1'>First Page</a></li>";
+                    } ?>
+
+                    <li <?php if($page_no <= 1){ echo "class='disabled'"; } ?>>
+                    <a <?php if($page_no > 1){
+                    echo "href='$page_redir"."$prev_page'";
+                    } ?>>Previous</a>
+                    </li>
+
+                    <?php 
+                    if ($total_pages <= 10){  	 
+                        for ($counter = 1; $counter <= $total_pages; $counter++){
+                            if ($counter == $page_no) {
+                                echo "<li class='active'><a>$counter</a></li>";	
+                            }else{
+                                echo "<li><a href='$page_redir"."$counter'>$counter</a></li>";
+                            }
+                        }
+                    }elseif ($total_pages > 10){
+                        if($page_no <= 4) {			
+                            for ($counter = 1; $counter < 8; $counter++){		 
+                               if ($counter == $page_no) {
+                                  echo "<li class='active'><a>$counter</a></li>";	
+                                }else{
+                                    echo "<li><a href='$page_redir"."$counter'>$counter</a></li>";
+                                }
+                            }
+                            echo "<li><a>...</a></li>";
+                            echo "<li><a href='$page_redir"."$second_last'>$second_last</a></li>";
+                            echo "<li><a href='$page_redir"."$total_pages'>$total_pages</a></li>";
+                        }elseif($page_no > 4 && $page_no < $total_pages - 4) {		 
+                            echo "<li><a href='$page_redir"."1'>1</a></li>";
+                            echo "<li><a href='$page_redir"."2'>2</a></li>";
+                            echo "<li><a>...</a></li>";
+                            for (
+                                 $counter = $page_no - $adjacents;
+                                 $counter <= $page_no + $adjacents;
+                                 $counter++
+                            ) {		
+                                if ($counter == $page_no) {
+                                    echo "<li class='active'><a>$counter</a></li>";	
+                                }else{
+                                    echo "<li><a href='$page_redir"."$counter'>$counter</a></li>";
+                                }                  
+                            }
+                            echo "<li><a>...</a></li>";
+                            echo "<li><a href='$page_redir"."$second_last'>$second_last</a></li>";
+                            echo "<li><a href='$page_redir"."$total_pages'>$total_pages</a></li>";
+                        }else {
+                            echo "<li><a href='$page_redir"."1'>1</a></li>";
+                            echo "<li><a href='$page_redir"."2'>2</a></li>";
+                            echo "<li><a>...</a></li>";
+                            for (
+                                 $counter = $total_pages - 6;
+                                 $counter <= $total_pages;
+                                 $counter++
+                            ) {
+                                if ($counter == $page_no) {
+                                    echo "<li class='active'><a>$counter</a></li>";	
+                                }else{
+                                    echo "<li><a href='$page_redir"."$counter'>$counter</a></li>";
+                                }                   
+                            }
+                        }
+                    }
+                    ?>
+
+                    <li <?php if($page_no >= $total_pages){
+                    echo "class='disabled'";
+                    } ?>>
+                    <a <?php if($page_no < $total_pages) {
+                    echo "href='$page_redir"."$next_page'";
+                    } ?>>Next</a>
+                    </li>
+
+                    <?php if($page_no < $total_pages){
+                    echo "<li><a href='$page_redir"."$total_pages'>Last &rsaquo;&rsaquo;</a></li>";
+                    } ?>
+                </ul>
 
     <?php }
     endif; ?>
