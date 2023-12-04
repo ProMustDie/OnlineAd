@@ -64,12 +64,12 @@
 
 
 <?php
-if (!empty($_GET['modal'])) {
-    $open = $_GET['modal'];
+if (!empty($_GET['modalID'])) {
+    $open = $_GET['modalID'];
 ?>
 
     <script>
-        var myModal = new bootstrap.Modal(document.getElementById('EditUserType'));
+        var myModal = new bootstrap.Modal(document.getElementById("<?=$open?>"));
         myModal.show();
     </script>
 

@@ -12,6 +12,19 @@ $requests = $_GET['request'];
 $AuthorID = isset($_POST['AdAuthorID']) ? $_POST['AdAuthorID'] : NULL;
 $AdID = isset($_POST['AdID']) ? $AdID = $_POST['AdID'] : NULL;
 $redirect = empty($_POST['redirect']) ? "Main.php" : $_POST['redirect'];
+$modalID = empty($_POST['modalID']) ? NULL : $_POST['modalID'];
+
+
+if ((strpos($redirect, '?') !== false || strpos($redirect, '&') !== false) && $redirect != "Main.php") {
+    if (strpos($redirect, 'modalID=') !== false) {
+        // Replace the value of modalID= with the new value
+        $redirect = preg_replace('/(modalID=)[^&]*/', '${1}' . $modalID, $redirect);
+    } else {
+        $redirect .= "&modalID=$modalID";
+    }
+} else {
+    $redirect .= "?modalID=$modalID";
+}
 
 if ($_SESSION['auth_user']['user_type'] == "Admin") {
 
@@ -56,7 +69,7 @@ if ($_SESSION['auth_user']['user_type'] == "Admin") {
         $userID = $_POST['admin-select-user-id'];
         $typeChange = $_POST['admin-select-acctype'];
         if ($usersystem->editUserType($userID, $typeChange)) {
-            header("Location: ../$redirect?modal=EditUserType");
+            header("Location: ../$redirect");
         };
     }
 
@@ -92,6 +105,19 @@ if ($_SESSION['auth_user']['user_type'] == "Admin") {
         } elseif (empty($addCat) && $delCat == "None") {
             $alertMsg .= "No inputs were given!";
         }
+
+        if (strpos($redirect, '?') !== false || strpos($redirect, '&') !== false) {
+            if (strpos($redirect, 'alert=') !== false) {
+                // Replace the value of modalID= with the new value
+                $redirect = preg_replace('/(alert=)[^&]*/', '${1}' . $alertMsg, $redirect);
+            } else {
+                $redirect .= "&alert=$alertMsg";
+            }
+        } else {
+            $redirect .= "?alert=$alertMsg";
+        }
+
+        header("Location: ../$redirect");
     }
 
     if ($requests == "EditAd") {
@@ -100,7 +126,7 @@ if ($_SESSION['auth_user']['user_type'] == "Admin") {
         $status = $_POST['status'];
         $categories = $_POST['categories'];
 
-        if ($classified->updateCategory($AdID, $title, $desc, $status, $categories)) {
+        if ($classified->updateAd($AdID, $title, $desc, $status, $categories)) {
             header("Location: ../$redirect");
         }
     }

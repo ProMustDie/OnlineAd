@@ -146,7 +146,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
                                                                 <div class="text-start mb-2 p-0 fs-5"> <span class="fw-semibold">Title:</span><?= $ads['AdName'] ?></div>
 
-                                                                <form action="Includes/authActions.php?request=CancelAd&redirect" method="POST">
+                                                                <form action="Includes/authActions.php?request=CancelAd" method="POST">
                                                                     <label for="formFile" class="form-label text-danger">Are you sure you want to <b><u>cancel?</u></b> <br>You can't revert this action!</label>
                                                                     <div class="container-fluid d-flex justify-content-end">
                                                                         <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
