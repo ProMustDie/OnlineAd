@@ -55,7 +55,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                             </div>
 
                             <p class="card-text text-secondary text-truncate" id="TextSub" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="<?= $ads['AdDescription'] ?>">
-                                <small> <?= $ads['AdDescription'] ?></small>
+                                <small> <?= $ads['AdDescription'] ?></small><br>
                             </p>
                             <div class="dropdown d-inline">
                                 <button class="btn btn-sm btn-success dropdown-toggle" type="button" aria-expanded="false">

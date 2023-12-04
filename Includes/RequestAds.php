@@ -16,7 +16,7 @@ $categories = empty($_POST['category']) ? false : $_POST['category'];
 $request = isset($_GET['request']) ? $_GET['request'] : false;
 $redirect = empty($_POST['redirect']) ? "Main.php" : $_POST['redirect'];
 
-if (($name === false || $description === false || $id === false || $categories == false) && $request != "payment") {
+if (($name === false || $id === false || $categories == false) && $request != "payment") {
     // Handle missing form fields
     echo '<script type="text/javascript">';
     echo 'alert("Please fill in all the required fields!");';

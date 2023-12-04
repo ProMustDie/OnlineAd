@@ -46,7 +46,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                         <input type="text" class="form-control m-auto mb-2" id="validationCustom02" placeholder="Title" name="title" required style="width:75%;">
 
-                        <textarea class="form-control  m-auto mb-2" id="validationTextarea01" placeholder="Description" style="width:75%;" rows="2" name="description" required></textarea>
+                        <textarea class="form-control  m-auto mb-2" id="validationTextarea01" placeholder="Description" style="width:75%;" rows="2" name="description"></textarea>
 
 
                         <!--//! Need to use php to validate atleast 1 category is chosen -->
@@ -230,7 +230,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                         <h5 class="card-title fs-5 fw-bold text-truncate" id="TextHeader" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip" data-bs-title="<?= $ads['AdName'] ?>"><?= $ads['AdName'] ?></h5>
 
                                         <p class="card-text text-truncate text-secondary " id="TextSub" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="custom-tooltip" data-bs-title="<?= $ads['AdDescription'] ?>">
-                                            <small> <?= $ads['AdDescription'] ?></small>
+                                            <small> <?= $ads['AdDescription'] ?></small><br>
                                         </p>
                                         <div class="dropdown d-inline">
                                             <button class="btn btn-sm btn-success dropdown-toggle" type="button" aria-expanded="false">
@@ -730,30 +730,30 @@ $AuthLogin = new AuthenticatorController($redirect);
         </div>
 
         <!--//!Add Category MODAL-->
-    <div class="modal fade p-0" id="addcate" aria-hidden="true" aria-labelledby="addcate" tabindex="-1">
-        <div class="modal-dialog modal-md modal-dialog-centered mt-1">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-3 fw-semibold" id="addcate">Add Category</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="Includes/authActions.php?request=addremovecat" method="POST">
+        <div class="modal fade p-0" id="addcate" aria-hidden="true" aria-labelledby="addcate" tabindex="-1">
+            <div class="modal-dialog modal-md modal-dialog-centered mt-1">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-3 fw-semibold" id="addcate">Add Category</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="Includes/authActions.php?request=addremovecat" method="POST">
 
-                        <div class="row g-2">
-                            <div class="col-md">
-                                <div class="form-floating">
-                                    <input type="text" class="form-control" name="add-cat" id="floatingInputGrid" placeholder="Category">
-                                    <label for="floatingInputGrid">Add Category</label>
+                            <div class="row g-2">
+                                <div class="col-md">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" name="add-cat" id="floatingInputGrid" placeholder="Category">
+                                        <label for="floatingInputGrid">Add Category</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md">
-                                <div class="form-floating">
-                                    <select class="form-select" name="del-cat" id="floatingSelectGrid">
-                                        <option selected>None</option>
-                                        <?php
-                                        $categoriesData3 = $classified->getCategories();
-                                        $result3 = $categoriesData3['result'];
+                                <div class="col-md">
+                                    <div class="form-floating">
+                                        <select class="form-select" name="del-cat" id="floatingSelectGrid">
+                                            <option selected>None</option>
+                                            <?php
+                                            $categoriesData3 = $classified->getCategories();
+                                            $result3 = $categoriesData3['result'];
 
                                         if (mysqli_num_rows($result3) > 0) :
                                             while ($categories3 = $result3->fetch_assoc()) {
@@ -764,32 +764,28 @@ $AuthLogin = new AuthenticatorController($redirect);
                                     </select>
                                     <label for="floatingSelectGrid">Delete Category</label>
                                 </div>
-                                <?php if(!empty($_GET['alert']))
-                                    echo $_GET['alert'];
-                                ?>
                             </div>
                         </div><br>
 
                         <label for="formFile" class="form-label text-danger">Are you sure you want to <B><u>add/remove?</u></B></label>
                         <div class="container-fluid d-flex justify-content-end">
                             <input type="hidden" value="<?= $redirect ?>" name="redirect">
-                            <input type="hidden" value="addcate" name="modalID">
                             <input type="submit" class="btn btn-outline-primary mx-2 px-4" value="Add/Delete" id="AddButton" name="add">
                             <button type="button" class="btn btn-outline-danger mx-2 px-3" data-bs-dismiss="modal">Close</button>
                         </div>
                     </form>
                 </div>
 
+                </div>
             </div>
         </div>
-    </div>
         <!--ADMIN -->
 
     <?php endif; ?>
 
 
 
-    
+
 
 
 
@@ -802,7 +798,6 @@ $AuthLogin = new AuthenticatorController($redirect);
         <button type="button" class="btn btn-outline-secondary btn-lg w-50 mx-auto focus-ring" style="--bs-focus-ring-color: rgba(var(--bs-secondary-rgb), .25)">Load More...</button>
     </div>
     <!--Load more button-->
-
 
 
     <!--footer-->
