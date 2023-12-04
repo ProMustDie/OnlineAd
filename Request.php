@@ -331,7 +331,9 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                         <h1 class="modal-title fs-5 fw-semibold" id="exampleModalLabel"><?= $ads['AdName'] ?></h1>
                                                     </div>
                                                     <div class="item3">
-                                                        <span class="text-muted mx-auto"><small><?= $ads['UserName'] . " posted on " . $formattedDatetime ?></small></span>
+                                                        <span class="text-muted mx-auto"><small><?php if ($ads['AdStatus'] == "Expired" || $ads['AdStatus'] == "Cancelled" || $ads['AdStatus'] == "Approved") : echo  $ads['UserName'] . " posted at " . $formattedDatetime;
+                                                                                                                        else : echo $ads['UserName'] . " requested at " . $formattedDatetime;
+                                                                                                                        endif; ?></small></span>
                                                     </div>
                                                 </div>
 
