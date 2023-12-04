@@ -300,7 +300,13 @@ $AuthLogin = new AuthenticatorController($redirect);
                 <!--*CANCEL MODAL-->
             <?php endif; ?>
 
-            <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
+
+    <?php }
+    endif; ?>
+
+    <!--//!HISTORY MODAL-->
+
+    <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
             <strong>Page <?= $page_no." of ".$total_pages; ?></strong>
         </div>
 
@@ -309,8 +315,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                     $page_redir = $redirect;
                     if (strpos($page_redir, '?') !== false || strpos($page_redir, '&') !== false) {
                         if (strpos($page_redir, 'page=') !== false) {
-                            $page_redir = preg_replace('/[?&]page=[^&]+/', '', $page_redir);
-                            $page_redir .= "&page=";
+                            $page_redir = preg_replace('/(page=)[^&]*/', '${1}', $page_redir);
                         } else {
                             $page_redir .= "&page=";
                         }
@@ -397,12 +402,6 @@ $AuthLogin = new AuthenticatorController($redirect);
                     echo "<li><a href='$page_redir"."$total_pages'>Last &rsaquo;&rsaquo;</a></li>";
                     } ?>
                 </ul>
-
-    <?php }
-    endif; ?>
-
-    <!--//!HISTORY MODAL-->
-
     <!--footer-->
     <?php
     include("Includes/footer.php");
