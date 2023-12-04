@@ -20,9 +20,9 @@ if (isset($_POST['logout_btn'])) {
 }
 
 //Paging system initializer
-if (isset($_GET['page']) && $_GET['page']!="") {
+if (isset($_GET['page']) && $_GET['page'] != "") {
     $page_no = $_GET['page'];
-}else {
+} else {
     $page_no = 1;
 }
 
@@ -84,7 +84,7 @@ if (!empty($_GET['status'])) {
             <div class="container-fluid">
 
                 <div style="width:8rem; height:4.5rem;">
-                    <a class="navbar-brand w-auto h-auto" href="#">
+                    <a class="navbar-brand w-auto h-auto" href="main.php">
                         <img src="img/logo.png" alt="Logo" class="d-inline-block align-text-top m-auto p-0 img-fluid">
                     </a>
                 </div>
@@ -146,7 +146,7 @@ if (!empty($_GET['status'])) {
                             <a class="nav-link fs-4" href="Request.php">Inquiry</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fs-4" href="stats.html">Analytics</a>
+                            <a class="nav-link fs-4" href="#">Analytics</a>
                         </li>
                         <?php if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] != "Admin") : ?>
                             <li class="nav-item">
