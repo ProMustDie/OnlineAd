@@ -251,8 +251,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                     $page_redir = $redirect;
                     if (strpos($page_redir, '?') !== false || strpos($page_redir, '&') !== false) {
                         if (strpos($page_redir, 'page=') !== false) {
-                            $page_redir = preg_replace('/[?&]page=[^&]+/', '', $page_redir);
-                            $page_redir .= "&page=";
+                            $page_redir = preg_replace('/(page=)[^&]*/', '${1}', $page_redir);
                         } else {
                             $page_redir .= "&page=";
                         }
