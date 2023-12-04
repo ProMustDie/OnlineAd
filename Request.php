@@ -473,6 +473,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                             <div class="container-fluid d-flex justify-content-end">
                                                                 <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                 <input type="hidden" value="<?= $redirect ?>" name="redirect">
+                                                                <input type="hidden" value="modalEdit-<?= $ads['AdID'] ?>" name="modalID">
                                                                 <input type="submit" class="btn btn-outline-danger mx-2 px-4 dynamic-input" value="Yes" id="rejectPaymentButton-<?= $ads['AdID'] ?>">
                                                                 <button type="button" class="btn btn-outline-warning px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
                                                             </div>
@@ -499,6 +500,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                             <div class="container-fluid d-flex justify-content-end">
                                                                 <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                 <input type="hidden" value="<?= $redirect ?>" name="redirect">
+                                                                <input type="hidden" value="modalEdit-<?= $ads['AdID'] ?>" name="modalID">
                                                                 <input type="submit" class="btn btn-outline-primary mx-2 px-4 dynamic-input" value="Yes" id="acceptPaymentButton-<?= $ads['AdID'] ?>">
                                                                 <button type="button" class="btn btn-outline-danger px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
                                                             </div>
@@ -531,6 +533,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                             <div class="container-fluid d-flex justify-content-end">
                                                                 <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                 <input type="hidden" value="<?= $redirect ?>" name="redirect">
+                                                                <input type="hidden" value="modalEdit-<?= $ads['AdID'] ?>" name="modalID">
                                                                 <input type="submit" class="btn btn-outline-danger mx-2 px-4 dynamic-input" value="Yes" id="rejectRequestButton-<?= $ads['AdID'] ?>">
                                                                 <button type="button" class="btn btn-outline-warning px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
                                                             </div>
@@ -570,6 +573,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                                                                 <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                                 <input type="hidden" value="<?= $redirect ?>" name="redirect">
+                                                                <input type="hidden" value="modalEdit-<?= $ads['AdID'] ?>" name="modalID">
                                                                 <input type="submit" class="btn btn-outline-success mx-2 px-4 dynamic-input" value="Yes" id="acceptRequestButton-<?= $ads['AdID'] ?>">
                                                                 <button type="button" class="btn btn-outline-danger px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
                                                             </div>
@@ -620,7 +624,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                 </div>
                                                 <div class="modal-body">
 
-                                                    <form action="Includes/authActions.php? request=EditAd" method="POST">
+                                                    <form action="Includes/authActions.php?request=EditAd" method="POST">
 
                                                         <div class="row g-2 mb-3">
                                                             <div class="col-md-4">
@@ -664,6 +668,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                                                             <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                             <input type="hidden" value="<?= $redirect ?>" name="redirect">
+                                                            <input type="hidden" value="edit-<?= $ads['AdID'] ?>" name="modalID">
                                                             <input type="submit" class="btn btn-outline-primary mx-2 px-4 dynamic-input" value="Yes">
                                                             <button type="button" class="btn btn-outline-danger px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
                                                             <input type="reset" class="btn btn-outline-secondary mx-2 px-4" value="Reset">
@@ -694,7 +699,8 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                 search: true,
                                                 required: true,
                                                 multiple: true,
-                                                selectedValue: [<?= implode(",", array_map(fn ($word) => '"' . trim($word) . '"', explode(",", $ads["AdCategory"]))) ?>],
+                                                allowNewOption: true,
+                                                selectedValue: [<?= implode(",", array_map(fn($word) => '"' . trim($word) . '"', explode(",", $ads["AdCategory"])))?>],
                                                 noSearchResultsText: "No Categories Found",
                                                 searchPlaceholderText: "Seach Categories...",
                                                 placeholder: "Select Categories",
@@ -747,27 +753,26 @@ $AuthLogin = new AuthenticatorController($redirect);
                                             $categoriesData3 = $classified->getCategories();
                                             $result3 = $categoriesData3['result'];
 
-                                            if (mysqli_num_rows($result3) > 0) :
-                                                while ($categories3 = $result3->fetch_assoc()) {
-                                                    $categoryName3 = $categories3["Category"];
-                                            ?>
-                                                    <option value="<?= $categoryName3 ?>"><?= $categoryName3 ?></option>
-                                            <?php }
-                                            endif; ?>
-                                        </select>
-                                        <label for="floatingSelectGrid">Delete Category</label>
-                                    </div>
+                                        if (mysqli_num_rows($result3) > 0) :
+                                            while ($categories3 = $result3->fetch_assoc()) {
+                                                $categoryName3 = $categories3["Category"];
+                                        ?>
+                                        <option value="<?= $categoryName3?>"><?= $categoryName3 ?></option>
+                                    <?php } endif;?>
+                                    </select>
+                                    <label for="floatingSelectGrid">Delete Category</label>
                                 </div>
-                            </div><br>
-
-                            <label for="formFile" class="form-label text-danger">Are you sure you want to <B><u>add/remove?</u></B></label>
-                            <div class="container-fluid d-flex justify-content-end">
-                                <input type="hidden" value="<?= $redirect ?>" name="redirect">
-                                <input type="submit" class="btn btn-outline-primary mx-2 px-4" value="Add/Delete" id="AddButton" name="add">
-                                <button type="button" class="btn btn-outline-danger mx-2 px-3" data-bs-dismiss="modal">Close</button>
                             </div>
-                        </form>
-                    </div>
+                        </div><br>
+
+                        <label for="formFile" class="form-label text-danger">Are you sure you want to <B><u>add/remove?</u></B></label>
+                        <div class="container-fluid d-flex justify-content-end">
+                            <input type="hidden" value="<?= $redirect ?>" name="redirect">
+                            <input type="submit" class="btn btn-outline-primary mx-2 px-4" value="Add/Delete" id="AddButton" name="add">
+                            <button type="button" class="btn btn-outline-danger mx-2 px-3" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
 
                 </div>
             </div>
