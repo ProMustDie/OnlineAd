@@ -63,6 +63,21 @@
 </script>
 
 
+<?php
+if (!empty($_GET['modal'])) {
+    $open = $_GET['modal'];
+?>
+
+    <script>
+        var myModal = new bootstrap.Modal(document.getElementById('EditUserType'));
+        myModal.show();
+    </script>
+
+<?php
+    echo "The value of \$open is: $open";
+}
+?>
+
 
 <script>
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')

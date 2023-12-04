@@ -31,7 +31,6 @@ if (!empty($_GET['status'])) {
     $status = $_GET['status'];
 }
 
-
 ?>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -67,7 +66,7 @@ if (!empty($_GET['status'])) {
     <header>
 
         <!--TOP NAV-->
-        <nav class="navbar bg-light m-0 p-0 mt-1" id="topnav">
+        <nav class="navbar bg-light m-0 p-0" id="topnav">
             <div class="container-fluid">
 
                 <div style="width:8rem; height:4.5rem;">
