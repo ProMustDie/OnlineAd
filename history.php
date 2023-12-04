@@ -198,6 +198,13 @@ $AuthLogin = new AuthenticatorController($redirect);
         </div>
     </div>
 
+    <!--Load more button-->
+    <div class="container-fluid m-auto mb-3 text-center">
+        <button type="button" class="btn btn-outline-secondary btn-lg w-50 mx-auto " style="--bs-focus-ring-color: rgba(var(--bs-secondary-rgb), .25)">Load More...</button>
+    </div>
+    <!--Load more button-->
+
+
 
     <?php
     $result = $classified->getAds(NULL, NULL, NULL, isset($_SESSION['auth_user']) ? $_SESSION['auth_user']['user_id'] : NULL); //Pending Review, Rejected Request, Checking Payment, Pending Payment, Rejected Payment, Approved, Cancelled, Expired
