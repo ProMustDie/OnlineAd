@@ -764,6 +764,9 @@ $AuthLogin = new AuthenticatorController($redirect);
                                     </select>
                                     <label for="floatingSelectGrid">Delete Category</label>
                                 </div>
+                                <?php if(!empty($_GET['alert']))
+                                    echo $_GET['alert'];
+                                ?>
                             </div>
                         </div><br>
 
