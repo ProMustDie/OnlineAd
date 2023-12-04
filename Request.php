@@ -332,8 +332,8 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                     </div>
                                                     <div class="item3">
                                                         <span class="text-muted mx-auto"><small><?php if ($ads['AdStatus'] == "Expired" || $ads['AdStatus'] == "Cancelled" || $ads['AdStatus'] == "Approved") : echo  $ads['UserName'] . " posted at " . $formattedDatetime;
-                                                                                                                        else : echo $ads['UserName'] . " requested at " . $formattedDatetime;
-                                                                                                                        endif; ?></small></span>
+                                                                                                else : echo $ads['UserName'] . " requested at " . $formattedDatetime;
+                                                                                                endif; ?></small></span>
                                                     </div>
                                                 </div>
 
@@ -671,7 +671,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                             <input type="hidden" value="<?= $ads['AdID'] ?>" name="AdID">
                                                             <input type="hidden" value="<?= $redirect ?>" name="redirect">
                                                             <input type="hidden" value="edit-<?= $ads['AdID'] ?>" name="modalID">
-                                                            <input type="submit" class="btn btn-outline-primary mx-2 px-4 dynamic-input" value="Yes">
+                                                            <input type="submit" class="btn btn-outline-primary mx-2 px-4" value="Yes">
                                                             <button type="button" class="btn btn-outline-danger px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
                                                             <input type="reset" class="btn btn-outline-secondary mx-2 px-4" value="Reset">
                                                         </div>
@@ -702,7 +702,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                 required: true,
                                                 multiple: true,
                                                 allowNewOption: true,
-                                                selectedValue: [<?= implode(",", array_map(fn($word) => '"' . trim($word) . '"', explode(",", $ads["AdCategory"])))?>],
+                                                selectedValue: [<?= implode(",", array_map(fn ($word) => '"' . trim($word) . '"', explode(",", $ads["AdCategory"]))) ?>],
                                                 noSearchResultsText: "No Categories Found",
                                                 searchPlaceholderText: "Seach Categories...",
                                                 placeholder: "Select Categories",
@@ -745,6 +745,11 @@ $AuthLogin = new AuthenticatorController($redirect);
                                     <div class="form-floating">
                                         <input type="text" class="form-control" name="add-cat" id="floatingInputGrid" placeholder="Category">
                                         <label for="floatingInputGrid">Add Category</label>
+                                        <div class="text-secondary"><br>
+                                            <?php if (!empty($_GET['alert']))
+                                                echo $_GET['alert'];
+                                            ?>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md">
@@ -755,41 +760,40 @@ $AuthLogin = new AuthenticatorController($redirect);
                                             $categoriesData3 = $classified->getCategories();
                                             $result3 = $categoriesData3['result'];
 
-                                        if (mysqli_num_rows($result3) > 0) :
-                                            while ($categories3 = $result3->fetch_assoc()) {
-                                                $categoryName3 = $categories3["Category"];
-                                        ?>
-                                        <option value="<?= $categoryName3?>"><?= $categoryName3 ?></option>
-                                    <?php } endif;?>
-                                    </select>
-                                    <label for="floatingSelectGrid">Delete Category</label>
-                                </div>
-                                <?php if(!empty($_GET['alert']))
-                                    echo $_GET['alert'];
-                                ?>
-                            </div>
-                        </div><br>
+                                            if (mysqli_num_rows($result3) > 0) :
+                                                while ($categories3 = $result3->fetch_assoc()) {
+                                                    $categoryName3 = $categories3["Category"];
+                                            ?>
+                                                    <option value="<?= $categoryName3 ?>"><?= $categoryName3 ?></option>
+                                            <?php }
+                                            endif; ?>
+                                        </select>
+                                        <label for="floatingSelectGrid">Delete Category</label>
+                                    </div>
 
-                        <label for="formFile" class="form-label text-danger">Are you sure you want to <B><u>add/remove?</u></B></label>
-                        <div class="container-fluid d-flex justify-content-end">
-                            <input type="hidden" value="<?= $redirect ?>" name="redirect">
-                            <input type="hidden" value="addcate" name="modalID">
-                            <input type="submit" class="btn btn-outline-primary mx-2 px-4" value="Add/Delete" id="AddButton" name="add">
-                            <button type="button" class="btn btn-outline-danger mx-2 px-3" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </form>
-                </div>
+                                </div>
+                            </div><br>
+
+                            <label for="formFile" class="form-label text-danger">Are you sure you want to <B><u>add/remove?</u></B></label>
+                            <div class="container-fluid d-flex justify-content-end">
+                                <input type="hidden" value="<?= $redirect ?>" name="redirect">
+                                <input type="hidden" value="addcate" name="modalID">
+                                <input type="submit" class="btn btn-outline-primary mx-2 px-4" value="Add/Delete" id="AddButton" name="add">
+                                <button type="button" class="btn btn-outline-danger mx-2 px-3" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                    </div>
 
                 </div>
             </div>
         </div>
         <!--ADMIN -->
 
-         <!--Load more button-->
-    <div class="container-fluid m-auto mb-3 text-center">
-        <button type="button" class="btn btn-outline-secondary btn-lg w-50 mx-auto focus-ring" style="--bs-focus-ring-color: rgba(var(--bs-secondary-rgb), .25)">Load More...</button>
-    </div>
-    <!--Load more button-->
+        <!--Load more button-->
+        <div class="container-fluid m-auto mb-3 text-center">
+            <button type="button" class="btn btn-outline-secondary btn-lg w-50 mx-auto focus-ring" style="--bs-focus-ring-color: rgba(var(--bs-secondary-rgb), .25)">Load More...</button>
+        </div>
+        <!--Load more button-->
     <?php endif; ?>
 
 
@@ -802,7 +806,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
 
 
-   
+
 
 
     <!--footer-->

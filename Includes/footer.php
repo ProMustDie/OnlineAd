@@ -69,12 +69,11 @@ if (!empty($_GET['modalID'])) {
 ?>
 
     <script>
-        var myModal = new bootstrap.Modal(document.getElementById("<?=$open?>"));
+        var myModal = new bootstrap.Modal(document.getElementById("<?= $open ?>"));
         myModal.show();
     </script>
 
 <?php
-    echo "The value of \$open is: $open";
 }
 ?>
 
