@@ -162,41 +162,41 @@
         }
 
         public function getCategories()
-        {
-            // Determine the maximum number of words in any category
-            $sqlMaxWords = "SELECT MAX(LENGTH(AdCategory) - LENGTH(REPLACE(AdCategory, ',', '')) + 1) AS max_words FROM ads";
-            $stmtMaxWords = $this->conn->prepare($sqlMaxWords);
-            $stmtMaxWords->execute();
-            $resultMaxWords = $stmtMaxWords->get_result();
-            $maxWords = $resultMaxWords->fetch_assoc()["max_words"];
+{
+    // Determine the maximum number of words in any category for AdID=1
+    $sqlMaxWords = "SELECT MAX(LENGTH(AdCategory) - LENGTH(REPLACE(AdCategory, ',', '')) + 1) AS max_words FROM ads WHERE AdID = 1";
+    $stmtMaxWords = $this->conn->prepare($sqlMaxWords);
+    $stmtMaxWords->execute();
+    $resultMaxWords = $stmtMaxWords->get_result();
+    $maxWords = $resultMaxWords->fetch_assoc()["max_words"];
 
-            // Generate the dynamic subquery for extracting unique words
-            $subquery = "";
-            for ($i = 1; $i <= $maxWords; $i++) {
-                $subquery .= "SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(AdCategory, ',', $i), ',', -1) AS word FROM ads";
-                if ($i < $maxWords) {
-                    $subquery .= " UNION ALL ";
-                }
-            }
-
-            // Construct the final SQL query
-            $sql = "SELECT word AS Category
-                    FROM ($subquery) subquery
-                    WHERE word IS NOT NULL AND word != ''
-                    GROUP BY word
-                    ORDER BY word";
-
-            $stmt = $this->conn->prepare($sql);
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            $selectedCategories = array();
-            if (isset($_GET['category'])) {
-                $selectedCategories = $_GET['category'];
-            }
-
-            return array('result' => $result, 'selectedCategories' => $selectedCategories);
+    // Generate the dynamic subquery for extracting unique words for AdID=1
+    $subquery = "";
+    for ($i = 1; $i <= $maxWords; $i++) {
+        $subquery .= "SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(AdCategory, ',', $i), ',', -1) AS word FROM ads WHERE AdID = 1";
+        if ($i < $maxWords) {
+            $subquery .= " UNION ALL ";
         }
+    }
+
+    // Construct the final SQL query
+    $sql = "SELECT word AS Category
+            FROM ($subquery) subquery
+            WHERE word IS NOT NULL AND word != ''
+            GROUP BY word
+            ORDER BY word";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $selectedCategories = array();
+    if (isset($_GET['category'])) {
+        $selectedCategories = $_GET['category'];
+    }
+
+    return array('result' => $result, 'selectedCategories' => $selectedCategories);
+}
 
         public function getStatus(){
             $sql = "SELECT DISTINCT AdStatus FROM ads ORDER BY AdStatus ASC"; // Add ORDER BY clause
