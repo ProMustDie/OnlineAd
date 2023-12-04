@@ -210,13 +210,15 @@ if (!empty($_GET['status'])) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="Includes/authActions.php?request=editUserType&redirect=<?= $redirect2 ?>" method="POST">
+                        <form action="Includes/authActions.php?request=editUserType" method="POST">
                             <span class="fw-semibold">User:</span>
                             <div id="admin-user-select"></div><br><br>
                             <span class="fw-semibold">Account Type:</span>
                             <div id="admin-acctype-select"></div>
                             </h2><br>
                             <br>
+                            <input type="hidden" value="<?= $redirect2 ?>" name="redirect">
+                            <input type="hidden" value="EditUserType" name="modalID">
                             <button type="submit" name="updateUser" class="btn btn-outline-success mt-4 px-4 float-end"><i class="fa-solid fa-pen-to-square"></i> Update User</button><br>
                         </form>
                     </div>

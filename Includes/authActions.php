@@ -65,7 +65,6 @@ if ($_SESSION['auth_user']['user_type'] == "Admin") {
     }
 
     if ($requests == "editUserType") {
-        $redirect = $_GET['redirect'];
         $userID = $_POST['admin-select-user-id'];
         $typeChange = $_POST['admin-select-acctype'];
         if ($usersystem->editUserType($userID, $typeChange)) {
