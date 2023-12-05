@@ -805,6 +805,12 @@ $AuthLogin = new AuthenticatorController($redirect);
                 <ul class="pagination">
                     <?php 
                     $page_redir = $redirect;
+                    if(isset($_GET['modalID'])){
+                        $page_redir = preg_replace('/[?&]modalID=[^&]*/', '', $page_redir);
+                    }
+                    if(isset($_GET['alert'])){
+                        $page_redir = preg_replace('/[?&]alert=[^&]*/', '', $page_redir);
+                    }
                     if (strpos($page_redir, '?') !== false || strpos($page_redir, '&') !== false) {
                         if (strpos($page_redir, 'page=') !== false) {
                             $page_redir = preg_replace('/(page=)[^&]*/', '${1}', $page_redir);
