@@ -26,6 +26,34 @@
         </div>
     </div>
 
+    <!-- Bootstrap Table -->
+    <div class="container mt-3">
+        <h2>Bootstrap Table</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>30</td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-primary" onclick="exportTableToPDF()">Export Table to PDF</button>
+    </div>
+
     <!-- Buttons for changing the data range -->
     <div class="container mt-3">
         <button onclick="changeData('daily')">Daily</button>
@@ -42,16 +70,16 @@
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 2,
                     fill: false,
-                    data: [4, 10, 20, 15, 30]
+                    data: [4, 10, 20, 15, 30],
                 },
                 {
                     label: 'Request Ads',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 2,
                     fill: false,
-                    data: [6, 12, 18, 25, 22]
-                }
-            ]
+                    data: [6, 12, 18, 25, 22],
+                },
+            ],
         };
 
         var chartData2 = {
@@ -61,25 +89,25 @@
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 2,
                     fill: false,
-                    data: [10, 15, 25, 20]
+                    data: [10, 15, 25, 20],
                 },
                 {
                     label: 'Reject',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 2,
                     fill: false,
-                    data: [5, 8, 15, 10]
-                }
-            ]
+                    data: [5, 8, 15, 10],
+                },
+            ],
         };
 
         // Configuration options
         var options = {
             scales: {
                 y: {
-                    beginAtZero: true
-                }
-            }
+                    beginAtZero: true,
+                },
+            },
         };
 
         // Create line charts with initial data
@@ -87,14 +115,14 @@
         var myLineChart1 = new Chart(ctx1, {
             type: 'line',
             data: chartData1,
-            options: options
+            options: options,
         });
 
         var ctx2 = document.getElementById('myLineChart2').getContext('2d');
         var myLineChart2 = new Chart(ctx2, {
             type: 'line',
             data: chartData2,
-            options: options
+            options: options,
         });
 
         // Set the initial data to daily
@@ -107,7 +135,6 @@
                     chartData1.labelVariable = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
                     chartData1.datasets[0].data = [4, 10, 20, 15, 30];
                     chartData1.datasets[1].data = [6, 12, 18, 25, 22];
-
 
                     chartData2.labelVariable = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
                     chartData2.datasets[0].data = [4, 10, 20, 15, 30];
@@ -196,12 +223,28 @@
             // Save the PDF
             pdf.save('lineCharts.pdf');
         }
+
+        // Function to export Bootstrap table to PDF using jspdf
+        function exportTableToPDF() {
+            // Create a new jsPDF instance
+            var pdf = new jspdf.jsPDF();
+
+            // Get the Table element
+            var table = document.querySelector('.table');
+
+            // Convert Table to HTML string
+            var tableHtml = table.outerHTML;
+
+            // Add HTML to PDF
+            pdf.fromHTML(tableHtml, 15, 15);
+
+            // Save the PDF
+            pdf.save('tableData.pdf');
+        }
     </script>
 
-
     <!-- Button to trigger PDF export -->
-    <button onclick="exportLineChartsToPDF()">Export Line Charts to PDF</button>
-
+    <button class="btn btn-primary mt-3" onclick="exportLineChartsToPDF()">Export Line Charts to PDF</button>
 </body>
 
 </html>

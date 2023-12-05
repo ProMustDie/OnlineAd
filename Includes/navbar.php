@@ -95,7 +95,7 @@ if (!empty($_GET['status'])) {
                     $currentDate = date('D, M j, Y');
                     ?>
 
-                    <span><?=$currentDate?> </span>
+                    <span><?= $currentDate ?> </span>
                     <!-- Section: Social media -->
 
                     <!-- Facebook -->
@@ -150,7 +150,7 @@ if (!empty($_GET['status'])) {
                             <a class="nav-link fs-4" href="Request.php">Inquiry</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fs-4" href="#">Analytics</a>
+                            <a class="nav-link fs-4" href="stats.php">Analytics</a>
                         </li>
                         <?php if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] != "Admin") : ?>
                             <li class="nav-item">
