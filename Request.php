@@ -753,11 +753,6 @@ $AuthLogin = new AuthenticatorController($redirect);
                                     <div class="form-floating">
                                         <input type="text" class="form-control" name="add-cat" id="floatingInputGrid" placeholder="Category">
                                         <label for="floatingInputGrid">Add Category</label>
-                                        <div class="text-secondary"><br>
-                                            <?php if (!empty($_GET['alert']))
-                                                echo $_GET['alert'];
-                                            ?>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md">
@@ -779,6 +774,11 @@ $AuthLogin = new AuthenticatorController($redirect);
                                         <label for="floatingSelectGrid">Delete Category</label>
                                     </div>
 
+                                </div>
+                                <div class="text-secondary">
+                                    <?php if (!empty($_GET['alert']))
+                                        echo $_GET['alert'];
+                                    ?>
                                 </div>
                             </div><br>
 
