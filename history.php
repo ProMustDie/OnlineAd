@@ -37,7 +37,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                 <h2 class="text-center text-secondary mt-3 text-underline mb-0">History</h2>
             </u>
             <?php
-            $total_ads_per_page = 2;
+            $total_ads_per_page = 16;
             $offset = ($page_no - 1) * $total_ads_per_page;
             $total_ads = $page_system->getTotalAds($key, NULL, NULL, isset($_SESSION['auth_user']) ? $_SESSION['auth_user']['user_id'] : NULL);
             $total_pages = ceil($total_ads / $total_ads_per_page);

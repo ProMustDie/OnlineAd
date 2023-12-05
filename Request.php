@@ -215,7 +215,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                     <div class="row d-flex justify-content-center">
 
                         <?php
-                        $total_ads_per_page = 2;
+                        $total_ads_per_page = 16;
                         $offset = ($page_no - 1) * $total_ads_per_page;
                         $total_ads = $page_system->getTotalAds($key, $filter, $status, NULL);
                         $total_pages = ceil($total_ads / $total_ads_per_page);
