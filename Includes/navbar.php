@@ -90,8 +90,12 @@ if (!empty($_GET['status'])) {
                 </div>
 
                 <div class="ms-auto d-inline">
+                    <?php
+                    date_default_timezone_set('Asia/Kuala_Lumpur');
+                    $currentDate = date('D, M j, Y');
+                    ?>
 
-                    <span>DATE TIME</span>
+                    <span><?=$currentDate?> </span>
                     <!-- Section: Social media -->
 
                     <!-- Facebook -->
