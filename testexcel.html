@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Data Table</title>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+</head>
+
+<body>
+    <button onclick="exportTableToExcel()">Export Table to Excel</button>
+    <table id="fakeDataTable" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Author</th>
+                <th>Status</th>
+                <th>Picture</th>
+                <th>Payment</th>
+                <th>Category</th>
+                <th>Posted Date Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Product 1</td>
+                <td>Description 1</td>
+                <td>19.99</td>
+                <td>Author 1</td>
+                <td>Active</td>
+                <td>image1.jpg</td>
+                <td>Credit Card</td>
+                <td>Category 1</td>
+                <td>2023-01-01 10:30:00</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Product 2</td>
+                <td>Description 2</td>
+                <td>29.99</td>
+                <td>Author 2</td>
+                <td>Inactive</td>
+                <td>image2.jpg</td>
+                <td>PayPal</td>
+                <td>Category 2</td>
+                <td>2023-01-02 11:45:00</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Product 3</td>
+                <td>Description 3</td>
+                <td>39.99</td>
+                <td>Author 3</td>
+                <td>Active</td>
+                <td>image3.jpg</td>
+                <td>Stripe</td>
+                <td>Category 1</td>
+                <td>2023-01-03 14:15:00</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Product 4</td>
+                <td>Description 4</td>
+                <td>49.99</td>
+                <td>Author 4</td>
+                <td>Inactive</td>
+                <td>image4.jpg</td>
+                <td>PayPal</td>
+                <td>Category 2</td>
+                <td>2023-01-04 16:30:00</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Product 5</td>
+                <td>Description 5</td>
+                <td>59.99</td>
+                <td>Author 5</td>
+                <td>Active</td>
+                <td>image5.jpg</td>
+                <td>Credit Card</td>
+                <td>Category 3</td>
+                <td>2023-01-05 18:45:00</td>
+            </tr>
+            <!-- Add more rows as needed -->
+        </tbody>
+    </table>
+
+    <script>
+        function exportTableToExcel() {
+            var table = document.getElementById('fakeDataTable');
+            var ws = XLSX.utils.table_to_sheet(table);
+            var wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'FakeDataSheet');
+            XLSX.writeFile(wb, 'fake_data.xlsx');
+        }
+    </script>
+</body>
+
+</html>
