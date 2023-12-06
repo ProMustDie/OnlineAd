@@ -36,7 +36,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light"
-                                    onclick="exportTableToExcel()">Export Table to
+                                    onclick="exportTablesToExcel()">Export Table to
                                     Excel</button></a>
                         </li>
                     </ul>
@@ -79,7 +79,8 @@
         <div class="row m-1 mb-3 gy-2 gx-2 d-flex">
             <div class="col-lg-6 bg-light">
                 <div class="table-responsive" style="height: 26rem;">
-                    <table class="table caption-top table-striped table-hover table-bordered border-secondary table-sm">
+                    <table class="table caption-top table-striped table-hover table-bordered border-secondary table-sm"
+                        id="UserTable">
                         <caption class="text-dark">10 Most Recent Inquiries</caption>
                         <thead class="table-dark">
                             <tr>
@@ -197,7 +198,8 @@
                     <div class="col-lg-5">
                         <div class="table-responsive" style="height: 26rem;">
                             <table
-                                class="table caption-top table-striped table-hover table-bordered border-secondary table-sm">
+                                class="table caption-top table-striped table-hover table-bordered border-secondary table-sm"
+                                id="SalesTable">
                                 <caption>Sales</caption>
                                 <thead class="table-dark">
                                     <tr>
@@ -313,9 +315,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
         </script>
+    <!-- Bootstrap JavaScript Libraries -->
 
+    <!-- //!Export Data -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <!-- //!Export Data -->
+
+    <!-- //!Chartjs-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+    <!-- //!Chartjs-->
 
     <script>
         const UserReq = document.getElementById('UserReq');
@@ -415,6 +425,72 @@
 
             }
         });
+
+        // Function to export line charts to PDF using jspdf
+        function exportLineChartsToPDF() {
+            // Create a new jsPDF instance with a larger page (A2)
+            var pdf = new jspdf.jsPDF({
+                orientation: 'landscape',
+                unit: 'mm',
+                format: [594, 420], // A2 size in landscape
+            });
+
+            // Get the canvas elements
+            var canvas1 = document.getElementById('UserReq');
+            var canvas2 = document.getElementById('AcceptRej');
+            var canvas3 = document.getElementById('Sales');
+
+            // Convert the canvases to images
+            var imgData1 = canvas1.toDataURL('image/jpeg', 1.0);
+            var imgData2 = canvas2.toDataURL('image/jpeg', 1.0);
+            var imgData3 = canvas3.toDataURL('image/jpeg', 1.0);
+
+            // Calculate the height as 30% of the PDF page
+            var pageHeight = pdf.internal.pageSize.getHeight();
+            var height = pageHeight * 0.3;
+
+            // Add the images to the PDF side by side, filling up the entire width
+            var padding = 10; // Adjust the padding value as needed
+            var width = pdf.internal.pageSize.getWidth() / 2 - padding * 2;
+
+            pdf.addImage(imgData1, 'JPEG', padding, padding, width, height);
+            pdf.addImage(imgData2, 'JPEG', width + padding * 2, padding, width, height);
+
+            // Extra space for the pie chart
+            var extraSpace = 10;
+
+            // Add the pie chart to the PDF below the line charts
+            pdf.addImage(imgData3, 'JPEG', padding, height + padding * 2 + extraSpace, pdf.internal.pageSize.getWidth() - padding * 2, height);
+
+            // Display values below the line charts
+            var extraSpaceLineCharts = 20;
+
+            // Save the PDF
+            pdf.save('lineCharts.pdf');
+        }
+
+        // Function to export Bootstrap tables to Excel using xlsx
+        function exportTablesToExcel() {
+            // Get the Table elements
+            var tableSales = document.getElementById('SalesTable');
+            var tableUser = document.getElementById('UserTable');
+
+            // Create a workbook
+            var wb = XLSX.utils.book_new();
+
+            // Convert each table to a worksheet
+            var wsSales = XLSX.utils.table_to_sheet(tableSales);
+            var wsUser = XLSX.utils.table_to_sheet(tableUser);
+
+            // Add each worksheet to the workbook with a unique name
+            XLSX.utils.book_append_sheet(wb, wsSales, "SalesSheet");
+            XLSX.utils.book_append_sheet(wb, wsUser, "UserSheet");
+
+            // Save the workbook as an Excel file
+            XLSX.writeFile(wb, 'tablesData.xlsx');
+        }
+
+
     </script>
 
 
