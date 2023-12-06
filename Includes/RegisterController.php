@@ -8,11 +8,11 @@ class RegisterController
         $this->conn = $db->conn;
     }
 
-    public function registration($name, $email, $password)
+    public function registration($name, $email, $password, $regDate)
 {
-    $register_query = "INSERT INTO users (UserEmail, UserName, UserPassword, UserType) VALUES (?, ?, ?, 'User')";
+    $register_query = "INSERT INTO users (UserEmail, UserName, UserPassword, UserType, RegDate) VALUES (?, ?, ?, 'User', ?)";
     $stmt = $this->conn->prepare($register_query);
-    $stmt->bind_param("sss",$email,$name, $password);
+    $stmt->bind_param("ssss",$email,$name, $password, $regDate);
     $result = $stmt->execute();
     return $result;
 }

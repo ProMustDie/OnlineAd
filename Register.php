@@ -79,8 +79,9 @@ if (isset($_POST["SignUpSubmit"])) {
     }
 
     if ($ValidSignUp == true) {
+        $regDate = $_POST["registerDate"];
         $password = password_hash($_POST["pwd"], PASSWORD_DEFAULT);
-        if ($Register->registration($username, $email, $password)) {
+        if ($Register->registration($username, $email, $password, $regDate)) {
             echo '<script type="text/javascript">';
             echo 'alert("Successfully signed up, you may now log in.");';
             echo 'window.location = "register.php";';
@@ -118,7 +119,7 @@ if (isset($_POST["SignUpSubmit"])) {
                 <form action="#" method="POST" class="needs-validation" novalidate>
                     <label for="chk" aria-hidden="true" id="register">Sign up</label>
 
-
+                    <input type="hidden" name="registerDate" readonly value="<?= date('Y-m-d'); ?>" >
                     <input type="text" class="form-control m-auto mb-2" id="validationCustom01" placeholder="Username" name="Username" value="<?= $username ?>" required style="width:75%;">
 
 
