@@ -90,7 +90,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                 <div class="overflow-y-scroll" style="height: 24rem;">
                     <div class="table-responsive p-2 m-0">
                         <table class="table caption-top table-striped table-hover table-bordered border-secondary table-sm">
-                            <caption>List of users inquiries</caption>
+                            <caption>Recent Ads Requested (31 Days)</caption>
                             <thead class="table-dark">
                                 <tr>
                                     <th scope="col">#</th>
@@ -99,21 +99,17 @@ $AuthLogin = new AuthenticatorController($redirect);
                                     <th scope="col">AdCategory</th>
                                     <th scope="col">AdPrice</th>
                                     <th scope="col">AdStatus</th>
-                                    <th scope="col">AdPosted</th>
-                                    <th scope="col">AdRequested</th>
+                                    <th scope="col">Request Date</th>
+                                    <th scope="col">Approved Date</th>
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
 
                                 <?php
-                                $classified->total_ads_per_page = 10;
-                                $classified->offset = 0;
-                                $result = $classified->getAds($key, $filter, $status, NULL);
+                                $result = $classified->getAds31days();
                                 if (mysqli_num_rows($result) > 0) :
                                     $counter = 1;
                                     while ($ads = $result->fetch_assoc()) {
-                                        $datetime = new DateTime($ads['AdPostedDateTime']);
-                                        $formattedDatetime = $datetime->format('h:iA d/m/Y');
                                 ?>
                                 <tr>
                                     <th scope="row"><?= $counter?></th>
@@ -122,7 +118,8 @@ $AuthLogin = new AuthenticatorController($redirect);
                                     <td><?= $ads['AdCategory'] ?></td>
                                     <td><?= (empty($ads['Price']))?"Not Set":$ads['Price']; ?></td>
                                     <td><?= $ads['AdStatus'] ?></td>
-                                    <td><?= $formattedDatetime ?></td>
+                                    <td><?= $ads['AdRequestedDate'] ?></td>
+                                    <td><?= (empty($ads['AdApprovedDate']))?"Not Yet Approved":$ads['AdApprovedDate']; ?></td>
                                 </tr>
 
                                 <?php $counter++; }endif;

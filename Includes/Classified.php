@@ -727,6 +727,19 @@
                 $result = $stmt->get_result();
                 return $result;
         }
+
+        public function getAds31days(){
+            $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdRequestedDate, a.AdApprovedDate, a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
+            FROM ads a
+            INNER JOIN users u ON a.AdAuthorID = u.UserID
+            WHERE a.AdRequestedDate BETWEEN CURDATE() - INTERVAL 31 DAY AND CURDATE()
+            ORDER BY a.AdID DESC;            
+            ";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result;
+        }
     }
 
     ?>
