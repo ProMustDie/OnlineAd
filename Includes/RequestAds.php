@@ -57,7 +57,7 @@ if (($name === false || $id === false || $categories == false) && $request != "p
                 // Use prepared statement to insert data
                 if ($request != "payment") {
                     $cat = implode(",", $categories);
-                    $sql = "INSERT INTO ads (AdName, AdDescription, Price, AdAuthorID, AdStatus, AdPicture, AdCategory, AdPostedDateTime) VALUES (?, ?, NULL, ?, 'Pending Review', ?, ?, NOW())";
+                    $sql = "INSERT INTO ads (AdName, AdDescription, Price, AdAuthorID, AdStatus, AdPicture, AdCategory, AdPostedDateTime, AdRequestedDate, AdRejectedDate) VALUES (?, ?, NULL, ?, 'Pending Review', ?, ?, NOW(), NOW(), NULL)";
                     $stmt = $conn->prepare($sql);
                     $stmt->bind_param("sssss", $name, $description, $id, $ImageLoc, $cat);
                     if ($stmt->execute()) {

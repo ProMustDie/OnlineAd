@@ -1,18 +1,34 @@
-<?php include('includes/app.php');
+<?php 
+include('includes/app.php');
 include_once('includes/Classified.php');
+$classified = new Classified;
+include('Includes/AuthController.php');
+$redirect = basename($_SERVER['PHP_SELF']);
+if (!empty($_SERVER['QUERY_STRING'])) {
+    $redirect .= '?' . $_SERVER['QUERY_STRING'];
+}
+$AuthLogin = new AuthenticatorController($redirect);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>Statistics</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 </head>
 
@@ -25,8 +41,7 @@ include_once('includes/Classified.php');
     include("Includes/navbar.php");
     ?>
 
-    <!-- //!date range picker -->
-
+    <!-- CHART PARAMS -->
     <div class="container-fluid d-flex align-items-center justify-content-center p-4">
 
         <div class="ms-auto">
@@ -47,11 +62,11 @@ include_once('includes/Classified.php');
         </div>
     </div>
 
-    <!-- //!2 graphs -->
+    <!-- DATA & CHARTS -->
     <div class="container-fluid text-center ">
 
 
-
+        <!-- 2 Line Graphs-->
         <div class="row">
             <div class="col-6 bg-light">
                 <div class="p-1" style="height: 22rem;">
@@ -67,9 +82,10 @@ include_once('includes/Classified.php');
             </div>
         </div>
 
-        <!-- //!table and sales -->
+        <!-- Data Tables -->
         <div class="row mt-3">
 
+            <!-- Data table-->
             <div class="col-6 bg-warning">
                 <div class="overflow-y-scroll" style="height: 24rem;">
                     <div class="table-responsive p-2 m-0">
@@ -84,48 +100,35 @@ include_once('includes/Classified.php');
                                     <th scope="col">AdPrice</th>
                                     <th scope="col">AdStatus</th>
                                     <th scope="col">AdPosted</th>
+                                    <th scope="col">AdRequested</th>
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider">
+
+                                <?php
+                                $classified->total_ads_per_page = 10;
+                                $classified->offset = 0;
+                                $result = $classified->getAds($key, $filter, $status, NULL);
+                                if (mysqli_num_rows($result) > 0) :
+                                    $counter = 1;
+                                    while ($ads = $result->fetch_assoc()) {
+                                        $datetime = new DateTime($ads['AdPostedDateTime']);
+                                        $formattedDatetime = $datetime->format('h:iA d/m/Y');
+                                ?>
                                 <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>@mdo</td>
-                                    <td>@mdo</td>
-                                    <td>@mdo</td>
+                                    <th scope="row"><?= $counter?></th>
+                                    <td><?= $ads['UserName'] ?></td>
+                                    <td><?= $ads['AdName'] ?></td>
+                                    <td><?= $ads['AdCategory'] ?></td>
+                                    <td><?= (empty($ads['Price']))?"Not Set":$ads['Price']; ?></td>
+                                    <td><?= $ads['AdStatus'] ?></td>
+                                    <td><?= $formattedDatetime ?></td>
                                 </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td>Larry</td>
-                                    <td>the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
+
+                                <?php $counter++; }endif;
+                                ?>
+                                
+                                
                             </tbody>
 
                         </table>
@@ -133,6 +136,7 @@ include_once('includes/Classified.php');
                 </div>
             </div>
 
+            <!-- Pie Chart-->
             <div class="col-6 bg-info">
                 <div class="row p-2 g-2 d-flex" style="height: 25rem;">
                     <div class="col-6 container-fluid ">
@@ -151,42 +155,24 @@ include_once('includes/Classified.php');
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
+
+                                <?php 
+                                $categoriesData = $classified->getCategories();
+                                $catResult = $categoriesData['result'];
+
+                                if (mysqli_num_rows($catResult) > 0) :
+                                    $counter=1;
+                                    while ($categories = $catResult->fetch_assoc()) {
+                                        $categoryName = $categories["Category"];
+                                ?>
                                     <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
+                                        <th scope="row"><?=$counter?></th>
+                                        <td><?=$categoryName?></td>
                                         <td>Otto</td>
                                         <td>@mdo</td>
                                     </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
+
+                                <?php $counter++; }endif;?>
                                 </tbody>
 
                             </table>
@@ -196,23 +182,9 @@ include_once('includes/Classified.php');
             </div>
         </div>
 
-
-
     </div>
 
-    <!-- //!Bootstrap JavaScript Libraries -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous">
-    </script>
-
-
-    <!-- //!Date range picker -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <!-- Output Date Selection-->
     <script>
         $(function() {
             $('input[name="daterange"]').daterangepicker({
@@ -222,65 +194,55 @@ include_once('includes/Classified.php');
             });
         });
     </script>
-    <!-- //!Date range picker -->
-
-
-
-    <!-- //!Date range picker -->
-    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-    <!-- //!Date range picker -->
-
-    <!-- //!chart -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
 
     <script>
-        // Initial data for the line charts
+        // Initiazer config for the line charts
         var chartData1 = {
-            labelVariable: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
             datasets: [{
-                    label: 'New User',
+                    label: 'New Users',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 2,
                     fill: false,
-                    data: [4, 10, 20, 15, 30],
                 },
                 {
                     label: 'Request Ads',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 2,
                     fill: false,
-                    data: [6, 12, 18, 25, 22],
                 },
             ],
         };
 
         var chartData2 = {
-            labelVariable: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
             datasets: [{
-                    label: 'Accept',
+                    label: 'Approved Ads',
                     borderColor: 'rgba(75, 192, 192, 1)',
                     borderWidth: 2,
                     fill: false,
-                    data: [10, 15, 25, 20],
                 },
                 {
-                    label: 'Reject',
+                    label: 'Rejected Requests',
                     borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 2,
                     fill: false,
-                    data: [5, 8, 15, 10],
                 },
             ],
         };
 
         // Pie chart data
         var pieData = {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: [<?php $categoriesData = $classified->getCategories();
+                            $result = $categoriesData['result'];
+                        if (mysqli_num_rows($result) > 0) :
+                            $categoriesArray = [];
+                            while ($row = $result->fetch_assoc()) {
+                                $categoriesArray[] = "'".$row['Category']."'";
+                            }
+                            echo implode(",", $categoriesArray);
+                        endif;
+                        ?>],
             datasets: [{
-                label: 'Sales',
-                data: [12, 19, 3, 5, 2, 3],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.7)',
                     'rgba(54, 162, 235, 0.7)',
@@ -351,39 +313,90 @@ include_once('includes/Classified.php');
         function changeData(range) {
             switch (range) {
                 case 'daily':
-                    chartData1.labelVariable = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-                    chartData1.datasets[0].data = [4, 10, 20, 15, 30];
-                    chartData1.datasets[1].data = [6, 12, 18, 25, 22];
+                    <?php $totalUsers = $classified->getTotalUsers("day");
+                    $totalReqAds = $classified->getTotalReqAds("day");
+                        if (mysqli_num_rows($totalUsers) > 0 && mysqli_num_rows($totalReqAds)) :
+                            $dayArray = [];
+                            $totalUsersArray=[];
+                            $totalReqAdsArray=[];
+                            $totalApprovedArray=[];
+                            $totalRejectedArray=[];
+                            while ($row = $totalUsers->fetch_assoc()) {
+                                $dayArray[] = "'".$row['Registration_Date']."'";
+                                $totalUsersArray[] = "'".$row['Total_Users_Registered']."'";
+                            }
+                            while ($row = $totalReqAds->fetch_assoc()) {
+                                $totalReqAdsArray[] = "'".$row['Total_Ads_Requested']."'";
+                                $totalApprovedArray[] = "'".$row['Total_Ads_Approved']."'";
+                                $totalRejectedArray[] = "'".$row['Total_Ads_Rejected']."'";
+                            }
+                        endif;
+                    ?>
+                    labelVariable = [<?= implode(",", $dayArray);?>];
+                    chartData1.datasets[0].data = [<?= implode(",", $totalUsersArray);?>];
+                    chartData1.datasets[1].data = [<?= implode(",", $totalReqAdsArray);?>];
 
-                    chartData2.labelVariable = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-                    chartData2.datasets[0].data = [4, 10, 20, 15, 30];
-                    chartData2.datasets[1].data = [2, 5, 10, 8, 12];
+                    chartData2.datasets[0].data = [<?= implode(",", $totalApprovedArray);?>];
+                    chartData2.datasets[1].data = [<?= implode(",", $totalRejectedArray);?>];
 
-                    pieData.labels = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'];
                     pieData.datasets[0].data = [12, 19, 3, 5, 2, 3];
                     break;
                 case 'weekly':
-                    chartData1.labelVariable = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
-                    chartData1.datasets[0].data = [10, 15, 25, 20];
-                    chartData1.datasets[1].data = [12, 18, 22, 28];
+                    <?php $totalUsers = $classified->getTotalUsers("week");
+                    $totalReqAds = $classified->getTotalReqAds("week");
+                    if (mysqli_num_rows($totalUsers) > 0 && mysqli_num_rows($totalReqAds)) :
+                        $dayArray = [];
+                        $totalUsersArray=[];
+                        $totalReqAdsArray=[];
+                        $totalApprovedArray=[];
+                        $totalRejectedArray=[];
+                            while ($row = $totalUsers->fetch_assoc()) {
+                                $weekArray[] = "'".$row['Week_Start_Date']."'";
+                                $totalUsersArray[] = "'".$row['Total_Users_Registered']."'";
+                            }
+                            while ($row = $totalReqAds->fetch_assoc()) {
+                                $totalReqAdsArray[] = "'".$row['Total_Ads_Requested']."'";
+                                $totalApprovedArray[] = "'".$row['Total_Ads_Approved']."'";
+                                $totalRejectedArray[] = "'".$row['Total_Ads_Rejected']."'";
+                            }
+                        endif;
+                    ?>
+                    labelVariable = [<?= implode(",", $weekArray);?>];
+                    chartData1.datasets[0].data = [<?= implode(",", $totalUsersArray);?>];
+                    chartData1.datasets[1].data = [<?= implode(",", $totalReqAdsArray);?>];
 
-                    chartData2.labelVariable = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
-                    chartData2.datasets[0].data = [10, 15, 25, 20];
-                    chartData2.datasets[1].data = [5, 8, 15, 10];
+                    chartData2.datasets[0].data = [<?= implode(",", $totalApprovedArray);?>];
+                    chartData2.datasets[1].data = [<?= implode(",", $totalRejectedArray);?>];
 
-                    pieData.labels = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'];
                     pieData.datasets[0].data = [15, 22, 32, 28, 40, 38];
                     break;
                 case 'monthly':
-                    chartData1.labelVariable = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-                    chartData1.datasets[0].data = [5, 12, 22, 18, 30, 28, 15, 10, 25, 20, 35, 40];
-                    chartData1.datasets[1].data = [8, 15, 25, 20, 30, 32, 18, 12, 28, 22, 40, 45];
+                    <?php $totalUsers = $classified->getTotalUsers("month");
+                    $totalReqAds = $classified->getTotalReqAds("month");
+                    if (mysqli_num_rows($totalUsers) > 0 && mysqli_num_rows($totalReqAds)) :
+                        $dayArray = [];
+                        $totalUsersArray=[];
+                        $totalReqAdsArray=[];
+                        $totalApprovedArray=[];
+                            $totalRejectedArray=[];
+                            while ($row = $totalUsers->fetch_assoc()) {
+                                $monthArray[] = "'".$row['Month_Start_Date']."'";
+                                $totalUsersArray[] = "'".$row['Total_Users_Registered']."'";
+                            }
+                            while ($row = $totalReqAds->fetch_assoc()) {
+                                $totalReqAdsArray[] = "'".$row['Total_Ads_Requested']."'";
+                                $totalApprovedArray[] = "'".$row['Total_Ads_Approved']."'";
+                                $totalRejectedArray[] = "'".$row['Total_Ads_Rejected']."'";
+                            }
+                        endif;
+                    ?>
+                    labelVariable = [<?= implode(",", $monthArray);?>];
+                    chartData1.datasets[0].data = [<?= implode(",", $totalUsersArray);?>];
+                    chartData1.datasets[1].data = [<?= implode(",", $totalReqAdsArray);?>];
 
-                    chartData2.labelVariable = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-                    chartData2.datasets[0].data = [15, 22, 32, 28, 40, 38, 25, 20, 35, 30, 45, 50];
-                    chartData2.datasets[1].data = [10, 18, 28, 22, 35, 40, 15, 8, 20, 18, 30, 38];
+                    chartData2.datasets[0].data = [<?= implode(",", $totalApprovedArray);?>];
+                    chartData2.datasets[1].data = [<?= implode(",", $totalRejectedArray);?>];
 
-                    pieData.labels = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'];
                     pieData.datasets[0].data = [25, 32, 42, 38, 50, 48];
                     break;
                 default:
@@ -391,17 +404,16 @@ include_once('includes/Classified.php');
             }
 
             // Update chart data
-            myLineChart1.data.labels = chartData1.labelVariable;
+            myLineChart1.data.labels = labelVariable;
             myLineChart1.data.datasets[0].data = chartData1.datasets[0].data;
             myLineChart1.data.datasets[1].data = chartData1.datasets[1].data;
             myLineChart1.update();
 
-            myLineChart2.data.labels = chartData2.labelVariable;
+            myLineChart2.data.labels = labelVariable;
             myLineChart2.data.datasets[0].data = chartData2.datasets[0].data;
             myLineChart2.data.datasets[1].data = chartData2.datasets[1].data;
             myLineChart2.update();
 
-            myPieChart.data.labels = pieData.labels;
             myPieChart.data.datasets[0].data = pieData.datasets[0].data;
             myPieChart.update();
         }
