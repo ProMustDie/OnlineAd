@@ -728,6 +728,32 @@
                 return $result;
         }
 
+        public function getAdsCategoriesType($day){
+                    $sql = "
+                    SELECT category, COUNT(*) AS category_count 
+        FROM (
+            SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(AdCategory, ',', numbers.n), ',', -1) AS category
+            FROM (
+                SELECT 1 + a.N + b.N * 10 AS n
+                FROM 
+                    (SELECT 0 AS N UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS a
+                    CROSS JOIN 
+                    (SELECT 0 AS N UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) AS b
+                ORDER BY n
+            ) AS numbers
+            JOIN ads ON CHAR_LENGTH(AdCategory) - CHAR_LENGTH(REPLACE(AdCategory, ',', '')) >= numbers.n - 1
+            WHERE AdRequestedDate BETWEEN DATE_SUB(NOW(), INTERVAL $day DAY) AND NOW()
+        ) AS category_list
+        GROUP BY category
+                
+                    ";
+
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                return $result;
+        }
+
         public function getAds31days(){
             $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdRequestedDate, a.AdApprovedDate, a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
             FROM ads a

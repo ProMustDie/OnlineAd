@@ -34,7 +34,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
 
 
-<body class="bg-dark">
+<body class="bg-light">
 
 
     <?php
@@ -42,43 +42,66 @@ $AuthLogin = new AuthenticatorController($redirect);
     ?>
 
     <!-- CHART PARAMS -->
-    <div class="container-fluid d-flex align-items-center justify-content-center p-4">
+    
 
-        <div class="ms-auto">
-            <button type="button" class="btn btn-outline-primary" onclick="exportLineChartsToPDF()">Export Line Charts
-                to PDF</button>
-            <button type="button" class="btn btn-outline-info" onclick="exportTableToExcel()">Export Table to
-                Excel</button>
-        </div>
-
-        <div class="ms-5 me-5">
-            <button type="button" class="btn btn-outline-primary" onclick="changeData('daily')">Daily</button>
-            <button type="button" class="btn btn-outline-info" onclick="changeData('weekly')">Weekly</button>
-            <button type="button" class="btn btn-outline-success" onclick="changeData('monthly')">Monthly</button>
-        </div>
-        <div class=""><span class="fw-bold fs-5 text-light pe-2 ps-5">Calender: </span></div>
-        <div class="">
-            <input type="text" name="daterange" class="form-control w-100 d-inline" />
-        </div>
-    </div>
-
+    
+    <nav class="navbar navbar-expand-lg bg-dark ">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#"><button type="button"
+                                    class="btn btn-outline-light" onclick="exportLineChartsToPDF()">Export Line
+                                    Charts
+                                    to PDF</button></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light"
+                                    onclick="exportTablesToExcel()">Export Table to
+                                    Excel</button></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"> <button type="button" class="btn btn-outline-light"
+                                    onclick="changeData('daily')">Daily</button>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light"
+                                    onclick="changeData('weekly')">Weekly</button>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light"
+                                    onclick="changeData('monthly')">Monthly</button>
+                            </a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <button class="btn btn-dark me-1 fs-5" type="submit" disabled>Calender: </button>
+                        <input type="text" name="daterange" class="form-control w-75 d-inline" />
+                    </form>
+                </div>
+            </div>
+        </nav>
     <!-- DATA & CHARTS -->
     <div class="container-fluid text-center ">
 
 
         <!-- 2 Line Graphs-->
-        <div class="row">
-            <div class="col-6 bg-light">
-                <div class="p-1" style="height: 22rem;">
-                    <div class="container-fluid"> <canvas id="UserReq" width="400" height="190"></canvas>
-                    </div>
-                </div>
+        <div class="row m-1 mb-3 gy-2 gx-2 d-flex">
+            <div class="col-lg-6">
+                <canvas id="UserReq"></canvas>
             </div>
-            <div class="col-6 bg-warning">
-                <div class="p-1" style="height: 22rem;">
-                    <div class="container-fluid"> <canvas id="AcceptRej" width="400" height="190"></canvas>
-                    </div>
-                </div>
+
+            <div class="col-lg-6">
+                <canvas id="AcceptRej"></canvas>
             </div>
         </div>
 
@@ -86,14 +109,15 @@ $AuthLogin = new AuthenticatorController($redirect);
         <div class="row mt-3">
 
             <!-- Data table-->
-            <div class="col-6 bg-warning">
-                <div class="overflow-y-scroll" style="height: 24rem;">
-                    <div class="table-responsive p-2 m-0">
-                        <table class="table caption-top table-striped table-hover table-bordered border-secondary table-sm">
-                            <caption>Recent Ads Requested (31 Days)</caption>
-                            <thead class="table-dark">
-                                <tr>
-                                    <th scope="col">#</th>
+            <div class="row  mb-3 gy-2 gx-2 d-flex">
+            <div class="col-lg-6 bg-light">
+                <div class="table-responsive" style="height: 26rem;">
+                    <table class="table caption-top table-striped table-hover table-bordered border-secondary table-sm"
+                        id="UserTable">
+                        <caption class="text-dark">Recent Ads Requested (31 Days)</caption>
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">AdName</th>
                                     <th scope="col">AdCategory</th>
@@ -101,85 +125,49 @@ $AuthLogin = new AuthenticatorController($redirect);
                                     <th scope="col">AdStatus</th>
                                     <th scope="col">Request Date</th>
                                     <th scope="col">Approved Date</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider">
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <?php
+                            $result = $classified->getAds31days();
+                            if (mysqli_num_rows($result) > 0) :
+                                $counter = 1;
+                                while ($ads = $result->fetch_assoc()) {
+                            ?>
+                            <tr>
+                                <th scope="row"><?= $counter?></th>
+                                <td><?= $ads['UserName'] ?></td>
+                                <td><?= $ads['AdName'] ?></td>
+                                <td><?= $ads['AdCategory'] ?></td>
+                                <td><?= (empty($ads['Price']))?"Not Set":$ads['Price']; ?></td>
+                                <td><?= $ads['AdStatus'] ?></td>
+                                <td><?= $ads['AdRequestedDate'] ?></td>
+                                <td><?= (empty($ads['AdApprovedDate']))?"Not Yet Approved":$ads['AdApprovedDate']; ?></td>
+                            </tr>
 
-                                <?php
-                                $result = $classified->getAds31days();
-                                if (mysqli_num_rows($result) > 0) :
-                                    $counter = 1;
-                                    while ($ads = $result->fetch_assoc()) {
-                                ?>
-                                <tr>
-                                    <th scope="row"><?= $counter?></th>
-                                    <td><?= $ads['UserName'] ?></td>
-                                    <td><?= $ads['AdName'] ?></td>
-                                    <td><?= $ads['AdCategory'] ?></td>
-                                    <td><?= (empty($ads['Price']))?"Not Set":$ads['Price']; ?></td>
-                                    <td><?= $ads['AdStatus'] ?></td>
-                                    <td><?= $ads['AdRequestedDate'] ?></td>
-                                    <td><?= (empty($ads['AdApprovedDate']))?"Not Yet Approved":$ads['AdApprovedDate']; ?></td>
-                                </tr>
+                            <?php $counter++; }endif;
+                            ?>
+                            
+                            
+                        </tbody>
 
-                                <?php $counter++; }endif;
-                                ?>
-                                
-                                
-                            </tbody>
-
-                        </table>
-                    </div>
+                    </table>
                 </div>
             </div>
 
-            <!-- Pie Chart-->
-            <div class="col-6 bg-info">
-                <div class="row p-2 g-2 d-flex" style="height: 25rem;">
-                    <div class="col-6 container-fluid ">
-                        <canvas id="Sales" width="50" height="50"></canvas>
+            <div class="col-lg-6">
+                <div class="row m-0">
+                    <div class="col-lg-7" style="height: 26rem;">
+                        <canvas id="Sales"></canvas>
                     </div>
-                    <div class="col-6 container-fluid p-0 m-0 pe-2">
-                        <div class="table-responsive">
-                            <table class="table caption-top table-striped table-hover table-bordered border-secondary table-sm">
-                                <caption>Sales</caption>
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">AdCategory</th>
-                                        <th scope="col">Chosen</th>
-                                        <th scope="col">Sales</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-group-divider">
-
-                                <?php 
-                                $categoriesData = $classified->getCategories();
-                                $catResult = $categoriesData['result'];
-
-                                if (mysqli_num_rows($catResult) > 0) :
-                                    $counter=1;
-                                    while ($categories = $catResult->fetch_assoc()) {
-                                        $categoryName = $categories["Category"];
-                                ?>
-                                    <tr>
-                                        <th scope="row"><?=$counter?></th>
-                                        <td><?=$categoryName?></td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-
-                                <?php $counter++; }endif;?>
-                                </tbody>
-
-                            </table>
+                    <div class="col-lg-5">
+                        <div class="table-responsive" style="height: 26rem;">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-    </div>
 
     <!-- Output Date Selection-->
     <script>
@@ -229,16 +217,6 @@ $AuthLogin = new AuthenticatorController($redirect);
 
         // Pie chart data
         var pieData = {
-                labels: [<?php $categoriesData = $classified->getCategories();
-                            $result = $categoriesData['result'];
-                        if (mysqli_num_rows($result) > 0) :
-                            $categoriesArray = [];
-                            while ($row = $result->fetch_assoc()) {
-                                $categoriesArray[] = "'".$row['Category']."'";
-                            }
-                            echo implode(",", $categoriesArray);
-                        endif;
-                        ?>],
             datasets: [{
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.7)',
@@ -296,8 +274,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                         position: 'bottom',
                     },
                     title: {
-                        display: true,
-                        text: 'Sales Chart'
+                        display: true
                     }
                 }
             },
@@ -312,8 +289,11 @@ $AuthLogin = new AuthenticatorController($redirect);
                 case 'daily':
                     <?php $totalUsers = $classified->getTotalUsers("day");
                     $totalReqAds = $classified->getTotalReqAds("day");
+                    $totalCategory = $classified->getAdsCategoriesType(7);
                         if (mysqli_num_rows($totalUsers) > 0 && mysqli_num_rows($totalReqAds)) :
                             $dayArray = [];
+                            $categoryArray = [];
+                            $totalCategoryArray = [];
                             $totalUsersArray=[];
                             $totalReqAdsArray=[];
                             $totalApprovedArray=[];
@@ -327,22 +307,31 @@ $AuthLogin = new AuthenticatorController($redirect);
                                 $totalApprovedArray[] = "'".$row['Total_Ads_Approved']."'";
                                 $totalRejectedArray[] = "'".$row['Total_Ads_Rejected']."'";
                             }
+                            while ($row = $totalCategory->fetch_assoc()) {
+                                $categoryArray[] = "'".$row['category']."'";
+                                $totalCategoryArray[] = "'".$row['category_count']."'";
+                            }
                         endif;
                     ?>
                     labelVariable = [<?= implode(",", $dayArray);?>];
+                    pieLabel = "Last 7 Days";
                     chartData1.datasets[0].data = [<?= implode(",", $totalUsersArray);?>];
                     chartData1.datasets[1].data = [<?= implode(",", $totalReqAdsArray);?>];
 
                     chartData2.datasets[0].data = [<?= implode(",", $totalApprovedArray);?>];
                     chartData2.datasets[1].data = [<?= implode(",", $totalRejectedArray);?>];
-
-                    pieData.datasets[0].data = [12, 19, 3, 5, 2, 3];
+                    
+                    pieData.labels = [<?= implode(",", $categoryArray);?>];
+                    pieData.datasets[0].data = [<?= implode(",", $totalCategoryArray);?>];
                     break;
                 case 'weekly':
                     <?php $totalUsers = $classified->getTotalUsers("week");
                     $totalReqAds = $classified->getTotalReqAds("week");
+                    $totalCategory = $classified->getAdsCategoriesType(31);
                     if (mysqli_num_rows($totalUsers) > 0 && mysqli_num_rows($totalReqAds)) :
                         $dayArray = [];
+                        $categoryArray = [];
+                            $totalCategoryArray = [];
                         $totalUsersArray=[];
                         $totalReqAdsArray=[];
                         $totalApprovedArray=[];
@@ -355,23 +344,31 @@ $AuthLogin = new AuthenticatorController($redirect);
                                 $totalReqAdsArray[] = "'".$row['Total_Ads_Requested']."'";
                                 $totalApprovedArray[] = "'".$row['Total_Ads_Approved']."'";
                                 $totalRejectedArray[] = "'".$row['Total_Ads_Rejected']."'";
+                            }while ($row = $totalCategory->fetch_assoc()) {
+                                $categoryArray[] = "'".$row['category']."'";
+                                $totalCategoryArray[] = "'".$row['category_count']."'";
                             }
                         endif;
                     ?>
                     labelVariable = [<?= implode(",", $weekArray);?>];
+                    pieLabel = "Last 31 Days";
                     chartData1.datasets[0].data = [<?= implode(",", $totalUsersArray);?>];
                     chartData1.datasets[1].data = [<?= implode(",", $totalReqAdsArray);?>];
 
                     chartData2.datasets[0].data = [<?= implode(",", $totalApprovedArray);?>];
                     chartData2.datasets[1].data = [<?= implode(",", $totalRejectedArray);?>];
 
-                    pieData.datasets[0].data = [15, 22, 32, 28, 40, 38];
+                    pieData.labels = [<?= implode(",", $categoryArray);?>];
+                    pieData.datasets[0].data = [<?= implode(",", $totalCategoryArray);?>];
                     break;
                 case 'monthly':
                     <?php $totalUsers = $classified->getTotalUsers("month");
                     $totalReqAds = $classified->getTotalReqAds("month");
+                    $totalCategory = $classified->getAdsCategoriesType(365);
                     if (mysqli_num_rows($totalUsers) > 0 && mysqli_num_rows($totalReqAds)) :
                         $dayArray = [];
+                        $categoryArray = [];
+                            $totalCategoryArray = [];
                         $totalUsersArray=[];
                         $totalReqAdsArray=[];
                         $totalApprovedArray=[];
@@ -384,17 +381,22 @@ $AuthLogin = new AuthenticatorController($redirect);
                                 $totalReqAdsArray[] = "'".$row['Total_Ads_Requested']."'";
                                 $totalApprovedArray[] = "'".$row['Total_Ads_Approved']."'";
                                 $totalRejectedArray[] = "'".$row['Total_Ads_Rejected']."'";
+                            }while ($row = $totalCategory->fetch_assoc()) {
+                                $categoryArray[] = "'".$row['category']."'";
+                                $totalCategoryArray[] = "'".$row['category_count']."'";
                             }
                         endif;
                     ?>
                     labelVariable = [<?= implode(",", $monthArray);?>];
+                    pieLabel = "Last 12 Months";
                     chartData1.datasets[0].data = [<?= implode(",", $totalUsersArray);?>];
                     chartData1.datasets[1].data = [<?= implode(",", $totalReqAdsArray);?>];
 
                     chartData2.datasets[0].data = [<?= implode(",", $totalApprovedArray);?>];
                     chartData2.datasets[1].data = [<?= implode(",", $totalRejectedArray);?>];
 
-                    pieData.datasets[0].data = [25, 32, 42, 38, 50, 48];
+                    pieData.labels = [<?= implode(",", $categoryArray);?>];
+                    pieData.datasets[0].data = [<?= implode(",", $totalCategoryArray);?>];
                     break;
                 default:
                     break;
@@ -412,6 +414,8 @@ $AuthLogin = new AuthenticatorController($redirect);
             myLineChart2.update();
 
             myPieChart.data.datasets[0].data = pieData.datasets[0].data;
+            myPieChart.options.plugins.title.text = pieLabel;
+            myPieChart.data.labels = pieData.labels;
             myPieChart.update();
         }
 
@@ -474,20 +478,30 @@ $AuthLogin = new AuthenticatorController($redirect);
         }
 
         // Function to export Bootstrap table to Excel using xlsx
-        function exportTableToExcel() {
-            // Get the Table element
-            var table = document.querySelector('.table');
+        function exportTablesToExcel() {
+            // Get the Table elements
+            var tableSales = document.getElementById('SalesTable');
+            var tableUser = document.getElementById('UserTable');
+            var Shortcut = document.getElementById('Shortcut');
 
-            // Convert Table to worksheet
-            var ws = XLSX.utils.table_to_sheet(table);
-
-            // Create a workbook with a single sheet
+            // Create a workbook
             var wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+            // Convert each table to a worksheet
+            var wsSales = XLSX.utils.table_to_sheet(tableSales);
+            var wsUser = XLSX.utils.table_to_sheet(tableUser);
+            var wsShortcut = XLSX.utils.table_to_sheet(Shortcut);
+
+            // Add each worksheet to the workbook with a unique name
+            XLSX.utils.book_append_sheet(wb, wsSales, "SalesSheet");
+            XLSX.utils.book_append_sheet(wb, wsUser, "UserSheet");
+            XLSX.utils.book_append_sheet(wb, wsShortcut, "Shortcut");
 
             // Save the workbook as an Excel file
-            XLSX.writeFile(wb, 'tableData.xlsx');
+            XLSX.writeFile(wb, 'tablesData.xlsx');
         }
+
+
     </script>
 
 
