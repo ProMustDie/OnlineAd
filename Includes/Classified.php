@@ -242,9 +242,9 @@
             $stmt->execute();
         }
 
-        public function setPostTimeNOW($AdID){
+        public function setTimeNOW($AdID, $Column){
             $sql = "UPDATE ads
-            SET AdPostedDateTime = NOW()
+            SET $Column = NOW()
             WHERE AdID = ?;";
             $stmt = $this->conn->prepare($sql);
             $stmt->bind_param("i", $AdID);
@@ -554,6 +554,178 @@
             } else {
                 return NULL;
             }
+        }
+
+        public function getTotalUsers($timeInterval){
+            switch ($timeInterval) {
+                case 'day':
+                    $sql = "
+                        SELECT date_range.date AS Registration_Date, COUNT(users.RegDate) AS Total_Users_Registered
+                        FROM (
+                            SELECT CURDATE() - INTERVAL (a.a + (10 * b.a) + (100 * c.a)) DAY AS date
+                            FROM (
+                                SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9
+                            ) AS a
+                            CROSS JOIN (
+                                SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9
+                            ) AS b
+                            CROSS JOIN (
+                                SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9
+                            ) AS c
+                        ) AS date_range
+                        LEFT JOIN users ON DATE(users.RegDate) = date_range.date
+                        WHERE date_range.date BETWEEN CURDATE() - INTERVAL 6 DAY AND CURDATE()
+                        GROUP BY date_range.date
+                        ORDER BY date_range.date;
+                    ";
+                    break;
+                
+                case 'week':
+                    $sql = "
+                    SELECT 
+                    week_range.Week_Start_Date,
+                    week_range.Week_End_Date,
+                    IFNULL(COUNT(users.RegDate), 0) AS Total_Users_Registered
+                FROM (
+                    SELECT 
+                        DATE_SUB(DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY), INTERVAL (7 * (a.a)) DAY) AS Week_Start_Date,
+                        DATE_ADD(DATE_SUB(DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY), INTERVAL (7 * (a.a)) DAY), INTERVAL 6 DAY) AS Week_End_Date
+                    FROM (
+                        SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3
+                    ) AS a
+                ) AS week_range
+                LEFT JOIN users ON users.RegDate BETWEEN week_range.Week_Start_Date AND week_range.Week_End_Date
+                GROUP BY week_range.Week_Start_Date
+                ORDER BY week_range.Week_Start_Date ASC
+                LIMIT 4;
+                
+                    ";
+                    break;
+        
+                case 'month':
+                    $sql = "
+                    SELECT 
+                    month_range.start_date AS Month_Start_Date,
+                    month_range.end_date AS Month_End_Date,
+                    IFNULL(COUNT(users.RegDate), 0) AS Total_Users_Registered
+                FROM (
+                    SELECT 
+                        CONCAT(YEAR(CURDATE() - INTERVAL a.a MONTH), '-', LPAD(MONTH(CURDATE() - INTERVAL a.a MONTH), 2, '00'), '-01') AS start_date,
+                        LAST_DAY(CURDATE() - INTERVAL a.a MONTH) AS end_date
+                    FROM (
+                        SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11
+                    ) AS a
+                ) AS month_range
+                LEFT JOIN users ON users.RegDate BETWEEN month_range.start_date AND month_range.end_date
+                GROUP BY month_range.start_date
+                ORDER BY month_range.start_date ASC
+                LIMIT 12;                
+                    ";
+                    break;
+                
+                default:
+                    echo "Invalid time interval provided.";
+                    return;
+            }
+
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                return $result;
+        }
+
+        public function getTotalReqAds($timeInterval){
+            switch ($timeInterval) {
+                case 'day':
+                    $sql = "
+                    SELECT 
+                        date_range.date AS Requested_Date,
+                        IFNULL(COUNT(CASE WHEN ads.AdRequestedDate = date_range.date THEN 1 END), 0) AS Total_Ads_Requested,
+                        IFNULL(COUNT(CASE WHEN ads.AdApprovedDate = date_range.date THEN 1 END), 0) AS Total_Ads_Approved,
+                        IFNULL(COUNT(CASE WHEN ads.AdRejectedDate = date_range.date THEN 1 END), 0) AS Total_Ads_Rejected
+                    FROM (
+                        SELECT CURDATE() - INTERVAL (a.a + (10 * b.a) + (100 * c.a)) DAY AS date
+                        FROM (
+                            SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9
+                        ) AS a
+                        CROSS JOIN (
+                            SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9
+                        ) AS b
+                        CROSS JOIN (
+                            SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9
+                        ) AS c
+                    ) AS date_range
+                    LEFT JOIN ads ON DATE(ads.AdRequestedDate) = date_range.date OR DATE(ads.AdApprovedDate) = date_range.date OR DATE(ads.AdRejectedDate) = date_range.date
+                    WHERE date_range.date BETWEEN CURDATE() - INTERVAL 6 DAY AND CURDATE()
+                    GROUP BY date_range.date
+                    ORDER BY date_range.date;
+                
+                    ";
+                    break;
+                
+                case 'week':
+                    $sql = "
+                    SELECT 
+                        week_range.Week_Start_Date,
+                        week_range.Week_End_Date,
+                        IFNULL(COUNT(CASE WHEN ads.AdRequestedDate BETWEEN week_range.Week_Start_Date AND week_range.Week_End_Date THEN 1 END), 0) AS Total_Ads_Requested,
+                        IFNULL(COUNT(CASE WHEN ads.AdApprovedDate BETWEEN week_range.Week_Start_Date AND week_range.Week_End_Date THEN 1 END), 0) AS Total_Ads_Approved,
+                        IFNULL(COUNT(CASE WHEN ads.AdRejectedDate BETWEEN week_range.Week_Start_Date AND week_range.Week_End_Date THEN 1 END), 0) AS Total_Ads_Rejected
+                    FROM (
+                        SELECT 
+                            DATE_SUB(DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY), INTERVAL (7 * (a.a)) DAY) AS Week_Start_Date,
+                            DATE_ADD(DATE_SUB(DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY), INTERVAL (7 * (a.a)) DAY), INTERVAL 6 DAY) AS Week_End_Date
+                        FROM (
+                            SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3
+                        ) AS a
+                    ) AS week_range
+                    LEFT JOIN ads ON 
+                        (ads.AdRequestedDate BETWEEN week_range.Week_Start_Date AND week_range.Week_End_Date)
+                        OR (ads.AdApprovedDate BETWEEN week_range.Week_Start_Date AND week_range.Week_End_Date)
+                        OR (ads.AdRejectedDate BETWEEN week_range.Week_Start_Date AND week_range.Week_End_Date)
+                    GROUP BY week_range.Week_Start_Date
+                    ORDER BY week_range.Week_Start_Date ASC
+                    LIMIT 4;
+
+                    ";
+                    break;
+        
+                case 'month':
+                    $sql = "
+                    SELECT 
+                        month_range.start_date AS Month_Start_Date,
+                        month_range.end_date AS Month_End_Date,
+                        IFNULL(COUNT(CASE WHEN ads.AdRequestedDate BETWEEN month_range.start_date AND month_range.end_date THEN 1 END), 0) AS Total_Ads_Requested,
+                        IFNULL(COUNT(CASE WHEN ads.AdApprovedDate BETWEEN month_range.start_date AND month_range.end_date THEN 1 END), 0) AS Total_Ads_Approved,
+                        IFNULL(COUNT(CASE WHEN ads.AdRejectedDate BETWEEN month_range.start_date AND month_range.end_date THEN 1 END), 0) AS Total_Ads_Rejected
+                    FROM (
+                        SELECT 
+                            CONCAT(YEAR(CURDATE() - INTERVAL a.a MONTH), '-', LPAD(MONTH(CURDATE() - INTERVAL a.a MONTH), 2, '00'), '-01') AS start_date,
+                            LAST_DAY(CURDATE() - INTERVAL a.a MONTH) AS end_date
+                        FROM (
+                            SELECT 0 AS a UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL SELECT 10 UNION ALL SELECT 11
+                        ) AS a
+                    ) AS month_range
+                    LEFT JOIN ads ON 
+                        (ads.AdRequestedDate BETWEEN month_range.start_date AND month_range.end_date)
+                        OR (ads.AdApprovedDate BETWEEN month_range.start_date AND month_range.end_date)
+                        OR (ads.AdRejectedDate BETWEEN month_range.start_date AND month_range.end_date)
+                    GROUP BY month_range.start_date
+                    ORDER BY month_range.start_date ASC
+                    LIMIT 12;
+           
+                    ";
+                    break;
+                
+                default:
+                    echo "Invalid time interval provided.";
+                    return;
+            }
+
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                return $result;
         }
     }
 

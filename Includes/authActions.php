@@ -34,6 +34,7 @@ if ($_SESSION['auth_user']['user_type'] == "Admin") {
             switch ($requests) {
                 case "RejectRequest":
                     $status = "Rejected Request";
+                    $classified->setTimeNOW($AdID, "AdRejectedDate");
                     send_mail($classified->getAuthorEmail($AdID), $classified->getAuthorName($AdID), "AD REQUEST REJECTED", "Ad request for: \"" . $classified->getAdName($AdID) . "\" has been rejected!");
                     break;
                 case "AcceptRequest":
@@ -48,7 +49,8 @@ if ($_SESSION['auth_user']['user_type'] == "Admin") {
                     break;
                 case "ApproveAd":
                     $status = "Approved";
-                    $classified->setPostTimeNOW($AdID);
+                    $classified->setTimeNOW($AdID, "AdPostedDateTime");
+                    $classified->setTimeNOW($AdID, "AdApprovedDate");
                     send_mail($classified->getAuthorEmail($AdID), $classified->getAuthorName($AdID), "AD APPROVED", "Ad \"" . $classified->getAdName($AdID) . "\" has its payment approved!");
                     break;
                 case "Expire":
