@@ -83,10 +83,6 @@ $AuthLogin = new AuthenticatorController($redirect);
                             </a>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search">
-                        <button class="btn btn-dark me-1 fs-5" type="submit" disabled>Calender: </button>
-                        <input type="text" name="daterange" class="form-control w-75 d-inline" />
-                    </form>
                 </div>
             </div>
         </nav>
@@ -167,18 +163,6 @@ $AuthLogin = new AuthenticatorController($redirect);
                 </div>
             </div>
         </div>
-
-
-    <!-- Output Date Selection-->
-    <script>
-        $(function() {
-            $('input[name="daterange"]').daterangepicker({
-                opens: 'left'
-            }, function(start, end, label) {
-                console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-            });
-        });
-    </script>
     
 
     <script>
@@ -459,14 +443,14 @@ $AuthLogin = new AuthenticatorController($redirect);
             var extraSpaceLineCharts = 20;
 
             // Display values of each x label below the line charts
-            var labels1 = chartData1.labelVariable;
+            var labels1 = labelVariable;
             var values1_1 = chartData1.datasets[0].data;
             var values1_2 = chartData1.datasets[1].data;
             for (var i = 0; i < labels1.length; i++) {
                 pdf.text(`${labels1[i]}: New User - ${values1_1[i]}, Request Ads - ${values1_2[i]}`, padding + i * (width / labels1.length), height + padding * 2 + extraSpaceLineCharts);
             }
 
-            var labels2 = chartData2.labelVariable;
+            var labels2 = labelVariable;
             var values2_1 = chartData2.datasets[0].data;
             var values2_2 = chartData2.datasets[1].data;
             for (var j = 0; j < labels2.length; j++) {
@@ -480,22 +464,16 @@ $AuthLogin = new AuthenticatorController($redirect);
         // Function to export Bootstrap table to Excel using xlsx
         function exportTablesToExcel() {
             // Get the Table elements
-            var tableSales = document.getElementById('SalesTable');
             var tableUser = document.getElementById('UserTable');
-            var Shortcut = document.getElementById('Shortcut');
 
             // Create a workbook
             var wb = XLSX.utils.book_new();
 
             // Convert each table to a worksheet
-            var wsSales = XLSX.utils.table_to_sheet(tableSales);
             var wsUser = XLSX.utils.table_to_sheet(tableUser);
-            var wsShortcut = XLSX.utils.table_to_sheet(Shortcut);
 
             // Add each worksheet to the workbook with a unique name
-            XLSX.utils.book_append_sheet(wb, wsSales, "SalesSheet");
             XLSX.utils.book_append_sheet(wb, wsUser, "UserSheet");
-            XLSX.utils.book_append_sheet(wb, wsShortcut, "Shortcut");
 
             // Save the workbook as an Excel file
             XLSX.writeFile(wb, 'tablesData.xlsx');
