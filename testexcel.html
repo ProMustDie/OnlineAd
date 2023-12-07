@@ -32,6 +32,36 @@
         </tbody>
     </table>
 
+
+
+    <table id="DataTable" border="1">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Category</th>
+                <th>Sum</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Notice</td>
+                <td>=COUNTIF($I$2:$I:$I,I2)</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Tuition</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Jobs</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Fake data will be generated and inserted here -->
+        </tbody>
+    </table>
+
     <script>
         function generateFakeData(rowCount) {
             const statusChoices = ['Pending Review', 'Pending Payment', 'Checking Payment', 'Rejected Payment',
@@ -58,33 +88,27 @@
             return fakeData;
         }
 
-        function renderFakeData() {
-            const tableBody = document.querySelector('#fakeDataTable tbody');
-            const fakeData = generateFakeData(100);
-
-            fakeData.forEach(rowData => {
-                const row = document.createElement('tr');
-                rowData.forEach(cellData => {
-                    const cell = document.createElement('td');
-                    cell.textContent = cellData;
-                    row.appendChild(cell);
-                });
-                tableBody.appendChild(row);
-            });
-        }
 
         function exportToExcel() {
             const fakeData = generateFakeData(100);
-            const ws = XLSX.utils.aoa_to_sheet([
+            const wsFake = XLSX.utils.aoa_to_sheet([
                 ['ID', 'Name', 'Description', 'Price', 'Author', 'Status', 'Picture', 'Payment', 'Category', 'Posted Date'], ...fakeData
             ]);
+
+            const wsDataTable = XLSX.utils.table_to_sheet(document.getElementById('DataTable'));
+
+            // Merge both datasets into a single sheet
+            const mergedData = [...XLSX.utils.sheet_to_json(wsFake, { header: 1 }), ...XLSX.utils.sheet_to_json(wsDataTable, { header: 1 })];
+            const wsMerged = XLSX.utils.aoa_to_sheet(mergedData);
+
             const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-            XLSX.writeFile(wb, 'fake_data.xlsx');
+            XLSX.utils.book_append_sheet(wb, wsMerged, 'MergedData');
+            XLSX.writeFile(wb, 'exported_data.xlsx');
         }
 
-        // Render fake data when the page loads
-        renderFakeData();
+        // Render fake data and DataTable when the page loads
+        renderFakeData('fakeDataTable', 100);
+        renderFakeData('DataTable', 3); // Assuming 3 rows for DataTable
     </script>
 
 </body>

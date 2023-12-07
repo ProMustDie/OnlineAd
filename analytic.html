@@ -324,11 +324,18 @@
             </tr>
             <tr>
                 <th scope="row">3</th>
-                <td>=countif('select start of data' : then ctrl + shift + 'down arrow key'/or select entire column, 'select start of data') .
+                <td>=countif('select start of data' : then ctrl + shift + 'down arrow key'/or select entire column,
+                    'select start of data') .
                     When it is done, click on the first and second part and press f4 /// To double check, =countif(
                     'select start of data': 'select start of data', 'select start of data').. in the first data, add '$'
                     in between</td>
                 <td>Get dulpicate data // double confirm the data</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>=(LEN(TEXTJOIN("", TRUE, 'start of data':'end of data'))-LEN(SUBSTITUTE(TEXTJOIN("", TRUE, 'start of
+                    data':'end of data'), "grape", "")))/LEN("grape")</td>
+                <td>Count amount of categories have chosen</td>
             </tr>
         </tbody>
 
