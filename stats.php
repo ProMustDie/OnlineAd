@@ -46,43 +46,46 @@ $AuthLogin = new AuthenticatorController($redirect);
 
 
     <nav class="navbar navbar-expand-lg bg-dark ">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#"><button type="button" class="btn btn-outline-light" onclick="exportLineChartsToPDF()">Export Line
-                                Charts
-                                to PDF</button></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light" onclick="exportTablesToExcel()">Export Table to
-                                Excel</button></a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"> <button type="button" class="btn btn-outline-light" onclick="changeData('daily')">Daily</button>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light" onclick="changeData('weekly')">Weekly</button>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light" onclick="changeData('monthly')">Monthly</button>
-                        </a>
-                    </li>
-                </ul>
-                <form class="d-flex" role="search">
-                    <button class="btn btn-dark me-1 fs-5" type="submit" disabled>Calender: </button>
-                    <input type="text" name="daterange" class="form-control w-75 d-inline" />
-                </form>
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#"><button type="button"
+                                    class="btn btn-outline-light" onclick="exportLineChartsToPDF()">Export Line
+                                    Charts
+                                    to PDF</button></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light"
+                                    onclick="exportTablesToExcel()">Export Table to
+                                    Excel</button></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"> <button type="button" class="btn btn-outline-light"
+                                    onclick="changeData('daily')">Daily</button>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light"
+                                    onclick="changeData('weekly')">Weekly</button>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light"
+                                    onclick="changeData('monthly')">Monthly</button>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
     <!-- DATA & CHARTS -->
     <div class="container-fluid text-center ">
 
@@ -149,31 +152,19 @@ $AuthLogin = new AuthenticatorController($redirect);
                     </div>
                 </div>
 
-                <div class="col-lg-6">
-                    <div class="row m-0">
-                        <div class="col-lg-7" style="height: 26rem;">
-                            <canvas id="Sales"></canvas>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="table-responsive" style="height: 26rem;">
-                            </div>
+            <div class="col-lg-6">
+                <div class="row m-0">
+                    <div class="col-lg-7" style="height: 26rem;">
+                        <canvas id="Sales"></canvas>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="table-responsive" style="height: 26rem;">
                         </div>
                     </div>
                 </div>
             </div>
-
-
-            <!-- Output Date Selection-->
-            <script>
-                $(function() {
-                    $('input[name="daterange"]').daterangepicker({
-                        opens: 'left'
-                    }, function(start, end, label) {
-                        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-                    });
-                });
-            </script>
-
+        </div>
+    
 
             <script>
                 // Initiazer config for the line charts
@@ -454,44 +445,38 @@ $AuthLogin = new AuthenticatorController($redirect);
                     // Display values below the line charts
                     var extraSpaceLineCharts = 20;
 
-                    // Display values of each x label below the line charts
-                    var labels1 = labelVariable;
-                    var values1_1 = chartData1.datasets[0].data;
-                    var values1_2 = chartData1.datasets[1].data;
-                    for (var i = 0; i < labels1.length; i++) {
-                        pdf.text(`${labels1[i]}: New User - ${values1_1[i]}, Request Ads - ${values1_2[i]}`, padding + i * (width / labels1.length), height + padding * 2 + extraSpaceLineCharts);
-                    }
+            // Display values of each x label below the line charts
+            var labels1 = labelVariable;
+            var values1_1 = chartData1.datasets[0].data;
+            var values1_2 = chartData1.datasets[1].data;
+            for (var i = 0; i < labels1.length; i++) {
+                pdf.text(`${labels1[i]}: New User - ${values1_1[i]}, Request Ads - ${values1_2[i]}`, padding + i * (width / labels1.length), height + padding * 2 + extraSpaceLineCharts);
+            }
 
-                    var labels2 = labelVariable;
-                    var values2_1 = chartData2.datasets[0].data;
-                    var values2_2 = chartData2.datasets[1].data;
-                    for (var j = 0; j < labels2.length; j++) {
-                        pdf.text(`${labels2[j]}: Accept - ${values2_1[j]}, Reject - ${values2_2[j]}`, width + padding * 2 + j * (width / labels2.length), height + padding * 2 + extraSpaceLineCharts);
-                    }
+            var labels2 = labelVariable;
+            var values2_1 = chartData2.datasets[0].data;
+            var values2_2 = chartData2.datasets[1].data;
+            for (var j = 0; j < labels2.length; j++) {
+                pdf.text(`${labels2[j]}: Accept - ${values2_1[j]}, Reject - ${values2_2[j]}`, width + padding * 2 + j * (width / labels2.length), height + padding * 2 + extraSpaceLineCharts);
+            }
 
                     // Save the PDF
                     pdf.save('lineCharts.pdf');
                 }
 
-                // Function to export Bootstrap table to Excel using xlsx
-                function exportTablesToExcel() {
-                    // Get the Table elements
-                    var tableSales = document.getElementById('SalesTable');
-                    var tableUser = document.getElementById('UserTable');
-                    var Shortcut = document.getElementById('Shortcut');
+        // Function to export Bootstrap table to Excel using xlsx
+        function exportTablesToExcel() {
+            // Get the Table elements
+            var tableUser = document.getElementById('UserTable');
 
                     // Create a workbook
                     var wb = XLSX.utils.book_new();
 
-                    // Convert each table to a worksheet
-                    var wsSales = XLSX.utils.table_to_sheet(tableSales);
-                    var wsUser = XLSX.utils.table_to_sheet(tableUser);
-                    var wsShortcut = XLSX.utils.table_to_sheet(Shortcut);
+            // Convert each table to a worksheet
+            var wsUser = XLSX.utils.table_to_sheet(tableUser);
 
-                    // Add each worksheet to the workbook with a unique name
-                    XLSX.utils.book_append_sheet(wb, wsSales, "SalesSheet");
-                    XLSX.utils.book_append_sheet(wb, wsUser, "UserSheet");
-                    XLSX.utils.book_append_sheet(wb, wsShortcut, "Shortcut");
+            // Add each worksheet to the workbook with a unique name
+            XLSX.utils.book_append_sheet(wb, wsUser, "UserSheet");
 
                     // Save the workbook as an Excel file
                     XLSX.writeFile(wb, 'tablesData.xlsx');
