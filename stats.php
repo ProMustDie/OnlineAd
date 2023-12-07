@@ -198,8 +198,6 @@ include_once('includes/Classified.php');
 
 
 
-
-
     </div>
 
     <!-- //!Bootstrap JavaScript Libraries -->
