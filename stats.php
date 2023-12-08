@@ -173,72 +173,206 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                         <!--Daily User/Request chart-->
                         <div class="container">
-                            <table id="NewUserRequest">
+                            <table id="AllLineChart">
                                 <tr>
                                     <th>#</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>Monday</th>
+                                    <th>TUES</th>
+                                    <th>WED</th>
+                                    <th>THURS</th>
+                                    <th>FRI</th>
+                                    <th>SAT</th>
+                                    <th>SUN</th>
+                                    <th>#</th>
+                                    <th>Week 1</th>
+                                    <th>Week 2</th>
+                                    <th>Week 3</th>
+                                    <th>Week 4</th>
+                                    <th>#</th>
+                                    <th>JAN</th>
+                                    <th>FEB</th>
+                                    <th>March</th>
+                                    <th>April</th>
+                                    <th>May</th>
+                                    <th>June</th>
+                                    <th>July</th>
+                                    <th>August</th>
+                                    <th>September</th>
+                                    <th>October</th>
+                                    <th>November</th>
+                                    <th>December</th>
+                                </tr>
+                                <tr>
+                                    <td>New User</td>
+                                    <td>1</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>3</td>
+                                    <td>3</td>
+                                    <td>3</td>
+                                    <td>3</td>
+                                    <td>#</td>
+                                    <td>0</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>#</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>6</td>
+                                    <td>7</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                </tr>
+                                <tr>
+                                    <td>Requested Ads</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>1</td>
+                                    <td>3</td>
+                                    <td>5</td>
+                                    <td>8</td>
+                                    <td>3</td>
+                                    <td>#</td>
+                                    <td>1</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>#</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>6</td>
+                                    <td>7</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                </tr>
+                                <tr>
+                                    <th>#</th>
+                                </tr>
+                                <tr>
+                                    <td>Approved</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>6</td>
+                                    <td>7</td>
+                                    <td>#</td>
+                                    <td>4</td>
+                                    <td>2</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>#</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>6</td>
+                                    <td>7</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                </tr>
+                                <tr>
+                                    <td>Rejected</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>6</td>
+                                    <td>7</td>
+                                    <td>#</td>
+                                    <td>4</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>4</td>
+                                    <td>#</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                    <td>6</td>
+                                    <td>7</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                    <td>5</td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+                        <div class="container">
+                            <table id="SumLineChart">
+                                <tr>
+                                    <th>#</th>
+                                    <th>SumDaily</th>
+                                    <th>#</th>
+                                    <th>SumWeekly</th>
+                                    <th>#</th>
+                                    <th>SumMonthly</th>
                                     <th></th>
                                     <th></th>
                                 </tr>
                                 <tr>
                                     <td>New User</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>=SUM(AllLineChart!$B$2:$H$2, A2)</td>
+                                    <td>#</td>
+                                    <td>=SUM(AllLineChart!$J$2:$M$2, A2)</td>
+                                    <td>#</td>
+                                    <td>=SUM(AllLineChart!$O$2:$Z$2, A2)</td>
                                 </tr>
                                 <tr>
                                     <td>Requested Ads</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>=SUM(AllLineChart!$B$3:$H$3, A3)</td>
+                                    <td>#</td>
+                                    <td>=SUM(AllLineChart!$J$3:$M$3, A3)</td>
+                                    <td>#</td>
+                                    <td>=SUM(AllLineChart!$O$3:$Z$3, A3)</td>
+                                </tr>
+                                <tr>
+                                    <th>#</th>
+                                </tr>
+                                <tr>
+                                    <td>Approved</td>
+                                    <td>=SUM(AllLineChart!$B$5:$H$5, A5)</td>
+                                    <td>#</td>
+                                    <td>=SUM(AllLineChart!$J$5:$M$5, A5)</td>
+                                    <td>#</td>
+                                    <td>=SUM(AllLineChart!$O$5:$Z$5, A5)</td>
+
+                                </tr>
+                                <tr>
+                                    <td>Rejected</td>
+                                    <td>=SUM(AllLineChart!$B$6:$H$6, A6)</td>
+                                    <td>#</td>
+                                    <td>=SUM(AllLineChart!$J$6:$M$6, A6)</td>
+                                    <td>#</td>
+                                    <td>=SUM(AllLineChart!$O$6:$Z$6, A6)</td>
+
                                 </tr>
                             </table>
                         </div>
 
-                        <div class="container">
-                            <table id="ApprovedRejected">
-                                <tr>
-                                    <th>#</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <td>Approved</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>Rejected</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </table>
-                        </div>
 
 
                         <div class="container">
@@ -586,19 +720,29 @@ $AuthLogin = new AuthenticatorController($redirect);
                     pdf.save('lineCharts.pdf');
                 }
 
+
                 // Function to export Bootstrap table to Excel using xlsx
                 function exportTablesToExcel() {
                     // Get the Table elements
+                    var AllLineChart = document.getElementById('AllLineChart');
+                    var SumLineChart = document.getElementById('SumLineChart');
+                    var PieChart = document.getElementById('PieChart');
                     var tableUser = document.getElementById('UserTable');
 
                     // Create a workbook
                     var wb = XLSX.utils.book_new();
 
                     // Convert each table to a worksheet
+                    var wsAllLineChart = XLSX.utils.table_to_sheet(AllLineChart);
+                    var wsSumLineChart = XLSX.utils.table_to_sheet(SumLineChart);
+                    var wsPieChart = XLSX.utils.table_to_sheet(PieChart);
                     var wsUser = XLSX.utils.table_to_sheet(tableUser);
 
                     // Add each worksheet to the workbook with a unique name
-                    XLSX.utils.book_append_sheet(wb, wsUser, "UserSheet");
+                    XLSX.utils.book_append_sheet(wb, wsAllLineChart, "AllLineChart");
+                    XLSX.utils.book_append_sheet(wb, wsSumLineChart, "SumLineChart");
+                    XLSX.utils.book_append_sheet(wb, wsPieChart, "PieChart")
+                    XLSX.utils.book_append_sheet(wb, wsUser, "UserSheet")
 
                     // Save the workbook as an Excel file
                     XLSX.writeFile(wb, 'tablesData.xlsx');
