@@ -202,267 +202,212 @@ $AuthLogin = new AuthenticatorController($redirect);
                             endif;
                     ?>
 
-                        <!--Daily User/Request chart-->
-                        <div class="container">
-                            <table id="AllLineChart">
-                                <tr>
-                                    <th>#</th>
-                                    <?php
-                                    foreach($totalUsersDayArr as $dayArray){
-                                        echo "<th>" . $dayArray['Registration_Date'] . "</th>";
-                                    }
-                                    echo  "<th>#</th>";
-                                
-                                    foreach($totalUsersWeekArr as $weekArray){
-                                        echo "<th>" . $weekArray['Week_Start_Date'] . "</th>";
-                                    }
-                                    echo  "<th>#</th>";
-                                    foreach($totalUsersMonthArr as $monthArray){
-                                        echo "<th>" . $monthArray['Month_Start_Date'] . "</th>";
-                                    }
-                                    ?>
-                                </tr>
-                                <tr>
-                                    <td>New User</td>
-                                    <?php
-                                    foreach($totalUsersDayArr as $NewUsers){
-                                        echo "<th>" . $NewUsers['Total_Users_Registered'] . "</th>";
-                                    }
-                                    echo  "<th>#</th>";
-                                
-                                    foreach($totalUsersWeekArr as $NewUsers){
-                                        echo "<th>" . $NewUsers['Total_Users_Registered'] . "</th>";
-                                    }
-                                    echo  "<th>#</th>";
-                                    foreach($totalUsersMonthArr as $NewUsers){
-                                        echo "<th>" . $NewUsers['Total_Users_Registered'] . "</th>";
-                                    }
-                                    ?>
-                                </tr>
-                                <tr>
-                                    <td>Requested Ads</td>
-                                    <?php
-                                    foreach($totalAdsDayArr as $ads){
-                                        echo "<th>" . $ads['Total_Ads_Requested'] . "</th>";
-                                    }
-                                    echo  "<th>#</th>";
-                                
-                                    foreach($totalAdsWeekArr as $ads){
-                                        echo "<th>" . $ads['Total_Ads_Requested'] . "</th>";
-                                    }
-                                    echo  "<th>#</th>";
-                                    foreach($totalAdsMonthArr as $ads){
-                                        echo "<th>" . $ads['Total_Ads_Requested'] . "</th>";
-                                    }
-                                    ?>
-                                </tr>
-                                <tr>
-                                    <th>#</th>
-                                </tr>
-                                <tr>
-                                    <td>Approved</td>
-                                    <?php
-                                    foreach($totalAdsDayArr as $ads){
-                                        echo "<th>" . $ads['Total_Ads_Approved'] . "</th>";
-                                    }
-                                    echo  "<th>#</th>";
-                                
-                                    foreach($totalAdsWeekArr as $ads){
-                                        echo "<th>" . $ads['Total_Ads_Approved'] . "</th>";
-                                    }
-                                    echo  "<th>#</th>";
-                                    foreach($totalAdsMonthArr as $ads){
-                                        echo "<th>" . $ads['Total_Ads_Approved'] . "</th>";
-                                    }
-                                    ?>
-                                </tr>
-                                <tr>
-                                    <td>Rejected</td>
-                                    <?php
-                                    foreach($totalAdsDayArr as $ads){
-                                        echo "<th>" . $ads['Total_Ads_Rejected'] . "</th>";
-                                    }
-                                    echo  "<th>#</th>";
-                                
-                                    foreach($totalAdsWeekArr as $ads){
-                                        echo "<th>" . $ads['Total_Ads_Rejected'] . "</th>";
-                                    }
-                                    echo  "<th>#</th>";
-                                    foreach($totalAdsMonthArr as $ads){
-                                        echo "<th>" . $ads['Total_Ads_Rejected'] . "</th>";
-                                    }
-                                    ?>
-                                </tr>
-                            </table>
-                        </div>
+                <!--Daily User/Request chart-->
+                <div class="container">
+                    <table id="AllLineChart">
+                        <tr>
+                            <th>Daily: </th>
+                            <?php
+                            foreach ($totalUsersDayArr as $dayArray) {
+                                echo "<th>" . $dayArray['Registration_Date'] . "</th>";
+                            }
+                            echo  "<th>Weekly: </th>";
+
+                            foreach ($totalUsersWeekArr as $weekArray) {
+                                echo "<th>" . $weekArray['Week_Start_Date'] . "</th>";
+                            }
+                            echo  "<th>Monthly: </th>";
+                            foreach ($totalUsersMonthArr as $monthArray) {
+                                echo "<th>" . $monthArray['Month_Start_Date'] . "</th>";
+                            }
+                            ?>
+                        </tr>
+                        <tr>
+                            <td>New User</td>
+                            <?php
+                            foreach ($totalUsersDayArr as $NewUsers) {
+                                echo "<th>" . $NewUsers['Total_Users_Registered'] . "</th>";
+                            }
+                            echo  "<th>#</th>";
+
+                            foreach ($totalUsersWeekArr as $NewUsers) {
+                                echo "<th>" . $NewUsers['Total_Users_Registered'] . "</th>";
+                            }
+                            echo  "<th>#</th>";
+                            foreach ($totalUsersMonthArr as $NewUsers) {
+                                echo "<th>" . $NewUsers['Total_Users_Registered'] . "</th>";
+                            }
+                            ?>
+                        </tr>
+                        <tr>
+                            <td>Requested Ads</td>
+                            <?php
+                            foreach ($totalAdsDayArr as $ads) {
+                                echo "<th>" . $ads['Total_Ads_Requested'] . "</th>";
+                            }
+                            echo  "<th>#</th>";
+
+                            foreach ($totalAdsWeekArr as $ads) {
+                                echo "<th>" . $ads['Total_Ads_Requested'] . "</th>";
+                            }
+                            echo  "<th>#</th>";
+                            foreach ($totalAdsMonthArr as $ads) {
+                                echo "<th>" . $ads['Total_Ads_Requested'] . "</th>";
+                            }
+                            ?>
+                        </tr>
+                        <tr>
+                            <th>#</th>
+                        </tr>
+                        <tr>
+                            <td>Approved</td>
+                            <?php
+                            foreach ($totalAdsDayArr as $ads) {
+                                echo "<th>" . $ads['Total_Ads_Approved'] . "</th>";
+                            }
+                            echo  "<th>#</th>";
+
+                            foreach ($totalAdsWeekArr as $ads) {
+                                echo "<th>" . $ads['Total_Ads_Approved'] . "</th>";
+                            }
+                            echo  "<th>#</th>";
+                            foreach ($totalAdsMonthArr as $ads) {
+                                echo "<th>" . $ads['Total_Ads_Approved'] . "</th>";
+                            }
+                            ?>
+                        </tr>
+                        <tr>
+                            <td>Rejected</td>
+                            <?php
+                            foreach ($totalAdsDayArr as $ads) {
+                                echo "<th>" . $ads['Total_Ads_Rejected'] . "</th>";
+                            }
+                            echo  "<th>#</th>";
+
+                            foreach ($totalAdsWeekArr as $ads) {
+                                echo "<th>" . $ads['Total_Ads_Rejected'] . "</th>";
+                            }
+                            echo  "<th>#</th>";
+                            foreach ($totalAdsMonthArr as $ads) {
+                                echo "<th>" . $ads['Total_Ads_Rejected'] . "</th>";
+                            }
+                            ?>
+                        </tr>
+                    </table>
+                </div>
 
 
-                        <div class="container">
-                            <table id="SumLineChart">
-                                <tr>
-                                    <th>#</th>
-                                    <th>SumDaily</th>
-                                    <th>#</th>
-                                    <th>SumWeekly</th>
-                                    <th>#</th>
-                                    <th>SumMonthly</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                                <tr>
-                                    <td>New User</td>
-                                    <td>=SUM(AllLineChart!$B$2:$H$2, A2)</td>
-                                    <td>#</td>
-                                    <td>=SUM(AllLineChart!$J$2:$M$2, A2)</td>
-                                    <td>#</td>
-                                    <td>=SUM(AllLineChart!$O$2:$Z$2, A2)</td>
-                                </tr>
-                                <tr>
-                                    <td>Requested Ads</td>
-                                    <td>=SUM(AllLineChart!$B$3:$H$3, A3)</td>
-                                    <td>#</td>
-                                    <td>=SUM(AllLineChart!$J$3:$M$3, A3)</td>
-                                    <td>#</td>
-                                    <td>=SUM(AllLineChart!$O$3:$Z$3, A3)</td>
-                                </tr>
-                                <tr>
-                                    <th>#</th>
-                                </tr>
-                                <tr>
-                                    <td>Approved</td>
-                                    <td>=SUM(AllLineChart!$B$5:$H$5, A5)</td>
-                                    <td>#</td>
-                                    <td>=SUM(AllLineChart!$J$5:$M$5, A5)</td>
-                                    <td>#</td>
-                                    <td>=SUM(AllLineChart!$O$5:$Z$5, A5)</td>
+                <div class="container">
+                    <table id="SumLineChart">
+                        <tr>
+                            <th>#</th>
+                            <th>SumDaily</th>
+                            <th>#</th>
+                            <th>SumWeekly</th>
+                            <th>#</th>
+                            <th>SumMonthly</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>New User</td>
+                            <td>=SUM(AllLineChart!$B$2:$H$2, A2)</td>
+                            <td>#</td>
+                            <td>=SUM(AllLineChart!$J$2:$M$2, A2)</td>
+                            <td>#</td>
+                            <td>=SUM(AllLineChart!$O$2:$Z$2, A2)</td>
+                        </tr>
+                        <tr>
+                            <td>Requested Ads</td>
+                            <td>=SUM(AllLineChart!$B$3:$H$3, A3)</td>
+                            <td>#</td>
+                            <td>=SUM(AllLineChart!$J$3:$M$3, A3)</td>
+                            <td>#</td>
+                            <td>=SUM(AllLineChart!$O$3:$Z$3, A3)</td>
+                        </tr>
+                        <tr>
+                            <th>#</th>
+                        </tr>
+                        <tr>
+                            <td>Approved</td>
+                            <td>=SUM(AllLineChart!$B$5:$H$5, A5)</td>
+                            <td>#</td>
+                            <td>=SUM(AllLineChart!$J$5:$M$5, A5)</td>
+                            <td>#</td>
+                            <td>=SUM(AllLineChart!$O$5:$Z$5, A5)</td>
 
-                                </tr>
-                                <tr>
-                                    <td>Rejected</td>
-                                    <td>=SUM(AllLineChart!$B$6:$H$6, A6)</td>
-                                    <td>#</td>
-                                    <td>=SUM(AllLineChart!$J$6:$M$6, A6)</td>
-                                    <td>#</td>
-                                    <td>=SUM(AllLineChart!$O$6:$Z$6, A6)</td>
+                        </tr>
+                        <tr>
+                            <td>Rejected</td>
+                            <td>=SUM(AllLineChart!$B$6:$H$6, A6)</td>
+                            <td>#</td>
+                            <td>=SUM(AllLineChart!$J$6:$M$6, A6)</td>
+                            <td>#</td>
+                            <td>=SUM(AllLineChart!$O$6:$Z$6, A6)</td>
 
-                                </tr>
-                            </table>
-                        </div>
-
-
-
-                        <div class="container">
-                            <table id="PieChart">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Notice</th>
-                                    <th>Properties</th>
-                                    <th>Jobs</th>
-                                    <th>Vehicles</th>
-                                    <th>Tuition</th>
-                                    <th>Home Service</th>
-                                    <th>Clean</th>
-                                </tr>
-                                <tr>
-                                    <td>Monday</td>
-                                </tr>
-                                <tr>
-                                    <td>TUES</td>
-                                </tr>
-                                <tr>
-                                    <td>WED</td>
-                                </tr>
-                                <tr>
-                                    <td>THURS</td>
-                                </tr>
-                                <tr>
-                                    <td>FRI</td>
-                                </tr>
-                                <tr>
-                                    <td>SAT</td>
-                                </tr>
-                                <tr>
-                                    <td>SUN</td>
-                                </tr>
-                                <tr>
-                                    <td>#</td>
-                                </tr>
-                                <tr>
-                                    <td>Week 1</td>
-                                </tr>
-                                <tr>
-                                    <td>Week 2</td>
-                                </tr>
-                                <tr>
-                                    <td>Week 3</td>
-                                </tr>
-                                <tr>
-                                    <td>Week 4</td>
-                                </tr>
-                                <tr>
-                                    <td>#</td>
-                                </tr>
-                                <tr>
-                                    <td>JAN</td>
-                                </tr>
-                                <tr>
-                                    <td>FEB</td>
-                                </tr>
-                                <tr>
-                                    <td>March</td>
-                                </tr>
-                                <tr>
-                                    <td>April</td>
-                                </tr>
-                                <tr>
-                                    <td>May</td>
-                                </tr>
-                                <tr>
-                                    <td>June</td>
-                                </tr>
-                                <tr>
-                                    <td>July</td>
-                                </tr>
-                                <tr>
-                                    <td>August</td>
-                                </tr>
-                                <tr>
-                                    <td>September</td>
-                                </tr>
-                                <tr>
-                                    <td>October</td>
-                                </tr>
-                                <tr>
-                                    <td>November</td>
-                                </tr>
-                                <tr>
-                                    <td>December</td>
-                                </tr>
-                                <tr>
-                                    <td>#</td>
-                                </tr>
-                                <tr>
-                                    <td>Sum Total:</td>
-                                    <td>=SUM(B2:B26)</td>
-                                    <td>=SUM(C2:C26)</td>
-                                    <td>=SUM(D2:D26)</td>
-                                    <td>=SUM(E2:E26)</td>
-                                    <td>=SUM(G2:G26)</td>
-                                    <td>=SUM(H2:H26)</td>
-                                    <td>=SUM(I2:I26)</td>
-                                    <td>=SUM(J2:J26)</td>
-                                    <td>Total: </td>
-                                    <td>=SUM(B27:J27)</td>
-                                </tr>
-
-                            </table>
-                        </div>
+                        </tr>
+                    </table>
+                </div>
 
 
 
-                    </div>
+                <div class="container">
+                    <table id="PieChart">
+                        <tr>
+                            <th>#</th>
+                            <th>Notice</th>
+                            <th>Properties</th>
+                            <th>Jobs</th>
+                            <th>Vehicles</th>
+                            <th>Tuition</th>
+                            <th>Home Service</th>
+                            <th>Clean</th>
+                        </tr>
+                        <tr>
+                            <td>Within 7 Days</td>
+                        </tr>
 
-        
+                        <tr>
+                            <td>#</td>
+                        </tr>
+                        <tr>
+                            <th>#</th>
+                            <th>Notice</th>
+                            <th>Properties</th>
+                            <th>Jobs</th>
+                            <th>Vehicles</th>
+                            <th>Tuition</th>
+                            <th>Home Service</th>
+                            <th>Clean</th>
+                        </tr>
+                        <tr>
+                            <td>Within 31 Days</td>
+                        </tr>
+                        <tr>
+                            <td>#</td>
+                        <tr>
+                            <th>#</th>
+                            <th>Notice</th>
+                            <th>Properties</th>
+                            <th>Jobs</th>
+                            <th>Vehicles</th>
+                            <th>Tuition</th>
+                            <th>Home Service</th>
+                            <th>Clean</th>
+                        </tr>
+                        </tr>
+                        <tr>
+                            <td>Within 12 Months</td>
+                        </tr>
+
+                    </table>
+                </div>
+
+
+
+            </div>
+
+
 
 
             <script>
@@ -618,11 +563,11 @@ $AuthLogin = new AuthenticatorController($redirect);
                                 $totalReqAdsArray = [];
                                 $totalApprovedArray = [];
                                 $totalRejectedArray = [];
-                                foreach($totalUsersWeek as $row ) {
+                                foreach ($totalUsersWeek as $row) {
                                     $weekArray[] = "'" . $row['Week_Start_Date'] . "'";
                                     $totalUsersArray[] = "'" . $row['Total_Users_Registered'] . "'";
                                 }
-                                foreach($totalAdsWeek as $row) {
+                                foreach ($totalAdsWeek as $row) {
                                     $totalReqAdsArray[] = "'" . $row['Total_Ads_Requested'] . "'";
                                     $totalApprovedArray[] = "'" . $row['Total_Ads_Approved'] . "'";
                                     $totalRejectedArray[] = "'" . $row['Total_Ads_Rejected'] . "'";
@@ -646,8 +591,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                             statusElement.textContent = 'Weekly Data Selected';
                             break;
                         case 'monthly':
-                            <?php 
-                            $totalCategory = $classified->getAdsCategoriesType(365);
+                            <?php
                             if (mysqli_num_rows($totalUsersMonth) > 0 && mysqli_num_rows($totalAdsMonth)) :
                                 $dayArray = [];
                                 $categoryArray = [];
@@ -786,6 +730,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                     XLSX.utils.book_append_sheet(wb, wsAllLineChart, "AllLineChart");
                     XLSX.utils.book_append_sheet(wb, wsSumLineChart, "SumLineChart");
                     XLSX.utils.book_append_sheet(wb, wsPieChart, "PieChart")
+                    XLSX.utils.book_append_sheet(wb, wsUser, "UserTable")
 
 
                     // Save the workbook as an Excel file
