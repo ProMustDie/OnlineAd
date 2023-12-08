@@ -1,4 +1,4 @@
-<?php 
+<?php
 include('includes/app.php');
 include_once('includes/Classified.php');
 $classified = new Classified;
@@ -41,9 +41,9 @@ $AuthLogin = new AuthenticatorController($redirect);
     ?>
 
     <!-- CHART PARAMS -->
-    
 
-    
+
+
     <nav class="navbar navbar-expand-lg bg-dark ">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -105,14 +105,13 @@ $AuthLogin = new AuthenticatorController($redirect);
 
             <!-- Data table-->
             <div class="row  mb-3 gy-2 gx-2 d-flex">
-            <div class="col-lg-6 bg-light">
-                <div class="table-responsive" style="height: 26rem;">
-                    <table class="table caption-top table-striped table-hover table-bordered border-secondary table-sm"
-                        id="UserTable">
-                        <caption class="text-dark">Recent Ads Requested (31 Days)</caption>
-                        <thead class="table-dark">
-                            <tr>
-                                <th scope="col">#</th>
+                <div class="col-lg-6 bg-light">
+                    <div class="table-responsive" style="height: 26rem;">
+                        <table class="table caption-top table-striped table-hover table-bordered border-secondary table-sm" id="UserTable">
+                            <caption class="text-dark">Recent Ads Requested (31 Days)</caption>
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">#</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">AdName</th>
                                     <th scope="col">AdCategory</th>
@@ -120,35 +119,37 @@ $AuthLogin = new AuthenticatorController($redirect);
                                     <th scope="col">AdStatus</th>
                                     <th scope="col">Request Date</th>
                                     <th scope="col">Approved Date</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider">
-                            <?php
-                            $result = $classified->getAds31days();
-                            if (mysqli_num_rows($result) > 0) :
-                                $counter = 1;
-                                while ($ads = $result->fetch_assoc()) {
-                            ?>
-                            <tr>
-                                <th scope="row"><?= $counter?></th>
-                                <td><?= $ads['UserName'] ?></td>
-                                <td><?= $ads['AdName'] ?></td>
-                                <td><?= $ads['AdCategory'] ?></td>
-                                <td><?= (empty($ads['Price']))?"Not Set":$ads['Price']; ?></td>
-                                <td><?= $ads['AdStatus'] ?></td>
-                                <td><?= $ads['AdRequestedDate'] ?></td>
-                                <td><?= (empty($ads['AdApprovedDate']))?"Not Yet Approved":$ads['AdApprovedDate']; ?></td>
-                            </tr>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                <?php
+                                $result = $classified->getAds31days();
+                                if (mysqli_num_rows($result) > 0) :
+                                    $counter = 1;
+                                    while ($ads = $result->fetch_assoc()) {
+                                ?>
+                                        <tr>
+                                            <th scope="row"><?= $counter ?></th>
+                                            <td><?= $ads['UserName'] ?></td>
+                                            <td><?= $ads['AdName'] ?></td>
+                                            <td><?= $ads['AdCategory'] ?></td>
+                                            <td><?= (empty($ads['Price'])) ? "Not Set" : $ads['Price']; ?></td>
+                                            <td><?= $ads['AdStatus'] ?></td>
+                                            <td><?= $ads['AdRequestedDate'] ?></td>
+                                            <td><?= (empty($ads['AdApprovedDate'])) ? "Not Yet Approved" : $ads['AdApprovedDate']; ?></td>
+                                        </tr>
 
-                            <?php $counter++; }endif;
-                            ?>
-                            
-                            
-                        </tbody>
+                                <?php $counter++;
+                                    }
+                                endif;
+                                ?>
 
-                    </table>
+
+                            </tbody>
+
+                        </table>
+                    </div>
                 </div>
-            </div>
 
             <div class="col-lg-6">
                 <div class="row m-0">
@@ -164,282 +165,284 @@ $AuthLogin = new AuthenticatorController($redirect);
         </div>
     
 
-    <script>
-        // Initiazer config for the line charts
-        var chartData1 = {
-            datasets: [{
-                    label: 'New Users',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 2,
-                    fill: false,
-                },
-                {
-                    label: 'Request Ads',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 2,
-                    fill: false,
-                },
-            ],
-        };
+            <script>
+                // Initiazer config for the line charts
+                var chartData1 = {
+                    datasets: [{
+                            label: 'New Users',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 2,
+                            fill: false,
+                        },
+                        {
+                            label: 'Request Ads',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 2,
+                            fill: false,
+                        },
+                    ],
+                };
 
-        var chartData2 = {
-            datasets: [{
-                    label: 'Approved Ads',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 2,
-                    fill: false,
-                },
-                {
-                    label: 'Rejected Requests',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 2,
-                    fill: false,
-                },
-            ],
-        };
+                var chartData2 = {
+                    datasets: [{
+                            label: 'Approved Ads',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 2,
+                            fill: false,
+                        },
+                        {
+                            label: 'Rejected Requests',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 2,
+                            fill: false,
+                        },
+                    ],
+                };
 
-        // Pie chart data
-        var pieData = {
-            datasets: [{
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.7)',
-                    'rgba(54, 162, 235, 0.7)',
-                    'rgba(255, 206, 86, 0.7)',
-                    'rgba(75, 192, 192, 0.7)',
-                    'rgba(153, 102, 255, 0.7)',
-                    'rgba(255, 159, 64, 0.7)',
-                ],
-            }],
-        };
+                // Pie chart data
+                var pieData = {
+                    datasets: [{
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(153, 102, 255, 0.7)',
+                            'rgba(255, 159, 64, 0.7)',
+                        ],
+                    }],
+                };
 
-        // Configuration options
-        var options = {
-            interaction: {
-                intersect: false,
-                mode: 'index',
-            },
-            scales: {
-                y: {
-                    beginAtZero: true,
-                },
-            },
-            plugins: {
-                legend: {
-                    position: 'bottom',
-                }
-            },
-        };
-
-        // Create line charts with initial data
-        var ctx1 = document.getElementById('UserReq').getContext('2d');
-        var myLineChart1 = new Chart(ctx1, {
-            type: 'line',
-            data: chartData1,
-            options: options,
-        });
-
-        var ctx2 = document.getElementById('AcceptRej').getContext('2d');
-        var myLineChart2 = new Chart(ctx2, {
-            type: 'line',
-            data: chartData2,
-            options: options,
-        });
-
-        // Create pie chart
-        var ctx3 = document.getElementById('Sales').getContext('2d');
-        var myPieChart = new Chart(ctx3, {
-            type: 'pie',
-            data: pieData,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
+                // Configuration options
+                var options = {
+                    interaction: {
+                        intersect: false,
+                        mode: 'index',
                     },
-                    title: {
-                        display: true
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                        },
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                        }
+                    },
+                };
+
+                // Create line charts with initial data
+                var ctx1 = document.getElementById('UserReq').getContext('2d');
+                var myLineChart1 = new Chart(ctx1, {
+                    type: 'line',
+                    data: chartData1,
+                    options: options,
+                });
+
+                var ctx2 = document.getElementById('AcceptRej').getContext('2d');
+                var myLineChart2 = new Chart(ctx2, {
+                    type: 'line',
+                    data: chartData2,
+                    options: options,
+                });
+
+                // Create pie chart
+                var ctx3 = document.getElementById('Sales').getContext('2d');
+                var myPieChart = new Chart(ctx3, {
+                    type: 'pie',
+                    data: pieData,
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                            },
+                            title: {
+                                display: true
+                            }
+                        }
+                    },
+                });
+
+                // Set the initial data to daily
+                changeData('daily');
+
+                // Function to change data based on the selected time range
+                function changeData(range) {
+                    switch (range) {
+                        case 'daily':
+                            <?php $totalUsers = $classified->getTotalUsers("day");
+                            $totalReqAds = $classified->getTotalReqAds("day");
+                            $totalCategory = $classified->getAdsCategoriesType(7);
+                            if (mysqli_num_rows($totalUsers) > 0 && mysqli_num_rows($totalReqAds)) :
+                                $dayArray = [];
+                                $categoryArray = [];
+                                $totalCategoryArray = [];
+                                $totalUsersArray = [];
+                                $totalReqAdsArray = [];
+                                $totalApprovedArray = [];
+                                $totalRejectedArray = [];
+                                while ($row = $totalUsers->fetch_assoc()) {
+                                    $dayArray[] = "'" . $row['Registration_Date'] . "'";
+                                    $totalUsersArray[] = "'" . $row['Total_Users_Registered'] . "'";
+                                }
+                                while ($row = $totalReqAds->fetch_assoc()) {
+                                    $totalReqAdsArray[] = "'" . $row['Total_Ads_Requested'] . "'";
+                                    $totalApprovedArray[] = "'" . $row['Total_Ads_Approved'] . "'";
+                                    $totalRejectedArray[] = "'" . $row['Total_Ads_Rejected'] . "'";
+                                }
+                                while ($row = $totalCategory->fetch_assoc()) {
+                                    $categoryArray[] = "'" . $row['category'] . "'";
+                                    $totalCategoryArray[] = "'" . $row['category_count'] . "'";
+                                }
+                            endif;
+                            ?>
+                            labelVariable = [<?= implode(",", $dayArray); ?>];
+                            pieLabel = "Last 7 Days";
+                            chartData1.datasets[0].data = [<?= implode(",", $totalUsersArray); ?>];
+                            chartData1.datasets[1].data = [<?= implode(",", $totalReqAdsArray); ?>];
+
+                            chartData2.datasets[0].data = [<?= implode(",", $totalApprovedArray); ?>];
+                            chartData2.datasets[1].data = [<?= implode(",", $totalRejectedArray); ?>];
+
+                            pieData.labels = [<?= implode(",", $categoryArray); ?>];
+                            pieData.datasets[0].data = [<?= implode(",", $totalCategoryArray); ?>];
+                            break;
+                        case 'weekly':
+                            <?php $totalUsers = $classified->getTotalUsers("week");
+                            $totalReqAds = $classified->getTotalReqAds("week");
+                            $totalCategory = $classified->getAdsCategoriesType(31);
+                            if (mysqli_num_rows($totalUsers) > 0 && mysqli_num_rows($totalReqAds)) :
+                                $dayArray = [];
+                                $categoryArray = [];
+                                $totalCategoryArray = [];
+                                $totalUsersArray = [];
+                                $totalReqAdsArray = [];
+                                $totalApprovedArray = [];
+                                $totalRejectedArray = [];
+                                while ($row = $totalUsers->fetch_assoc()) {
+                                    $weekArray[] = "'" . $row['Week_Start_Date'] . "'";
+                                    $totalUsersArray[] = "'" . $row['Total_Users_Registered'] . "'";
+                                }
+                                while ($row = $totalReqAds->fetch_assoc()) {
+                                    $totalReqAdsArray[] = "'" . $row['Total_Ads_Requested'] . "'";
+                                    $totalApprovedArray[] = "'" . $row['Total_Ads_Approved'] . "'";
+                                    $totalRejectedArray[] = "'" . $row['Total_Ads_Rejected'] . "'";
+                                }
+                                while ($row = $totalCategory->fetch_assoc()) {
+                                    $categoryArray[] = "'" . $row['category'] . "'";
+                                    $totalCategoryArray[] = "'" . $row['category_count'] . "'";
+                                }
+                            endif;
+                            ?>
+                            labelVariable = [<?= implode(",", $weekArray); ?>];
+                            pieLabel = "Last 31 Days";
+                            chartData1.datasets[0].data = [<?= implode(",", $totalUsersArray); ?>];
+                            chartData1.datasets[1].data = [<?= implode(",", $totalReqAdsArray); ?>];
+
+                            chartData2.datasets[0].data = [<?= implode(",", $totalApprovedArray); ?>];
+                            chartData2.datasets[1].data = [<?= implode(",", $totalRejectedArray); ?>];
+
+                            pieData.labels = [<?= implode(",", $categoryArray); ?>];
+                            pieData.datasets[0].data = [<?= implode(",", $totalCategoryArray); ?>];
+                            break;
+                        case 'monthly':
+                            <?php $totalUsers = $classified->getTotalUsers("month");
+                            $totalReqAds = $classified->getTotalReqAds("month");
+                            $totalCategory = $classified->getAdsCategoriesType(365);
+                            if (mysqli_num_rows($totalUsers) > 0 && mysqli_num_rows($totalReqAds)) :
+                                $dayArray = [];
+                                $categoryArray = [];
+                                $totalCategoryArray = [];
+                                $totalUsersArray = [];
+                                $totalReqAdsArray = [];
+                                $totalApprovedArray = [];
+                                $totalRejectedArray = [];
+                                while ($row = $totalUsers->fetch_assoc()) {
+                                    $monthArray[] = "'" . $row['Month_Start_Date'] . "'";
+                                    $totalUsersArray[] = "'" . $row['Total_Users_Registered'] . "'";
+                                }
+                                while ($row = $totalReqAds->fetch_assoc()) {
+                                    $totalReqAdsArray[] = "'" . $row['Total_Ads_Requested'] . "'";
+                                    $totalApprovedArray[] = "'" . $row['Total_Ads_Approved'] . "'";
+                                    $totalRejectedArray[] = "'" . $row['Total_Ads_Rejected'] . "'";
+                                }
+                                while ($row = $totalCategory->fetch_assoc()) {
+                                    $categoryArray[] = "'" . $row['category'] . "'";
+                                    $totalCategoryArray[] = "'" . $row['category_count'] . "'";
+                                }
+                            endif;
+                            ?>
+                            labelVariable = [<?= implode(",", $monthArray); ?>];
+                            pieLabel = "Last 12 Months";
+                            chartData1.datasets[0].data = [<?= implode(",", $totalUsersArray); ?>];
+                            chartData1.datasets[1].data = [<?= implode(",", $totalReqAdsArray); ?>];
+
+                            chartData2.datasets[0].data = [<?= implode(",", $totalApprovedArray); ?>];
+                            chartData2.datasets[1].data = [<?= implode(",", $totalRejectedArray); ?>];
+
+                            pieData.labels = [<?= implode(",", $categoryArray); ?>];
+                            pieData.datasets[0].data = [<?= implode(",", $totalCategoryArray); ?>];
+                            break;
+                        default:
+                            break;
                     }
+
+                    // Update chart data
+                    myLineChart1.data.labels = labelVariable;
+                    myLineChart1.data.datasets[0].data = chartData1.datasets[0].data;
+                    myLineChart1.data.datasets[1].data = chartData1.datasets[1].data;
+                    myLineChart1.update();
+
+                    myLineChart2.data.labels = labelVariable;
+                    myLineChart2.data.datasets[0].data = chartData2.datasets[0].data;
+                    myLineChart2.data.datasets[1].data = chartData2.datasets[1].data;
+                    myLineChart2.update();
+
+                    myPieChart.data.datasets[0].data = pieData.datasets[0].data;
+                    myPieChart.options.plugins.title.text = pieLabel;
+                    myPieChart.data.labels = pieData.labels;
+                    myPieChart.update();
                 }
-            },
-        });
 
-        // Set the initial data to daily
-        changeData('daily');
+                // Function to export line charts to PDF using jspdf
+                function exportLineChartsToPDF() {
+                    // Create a new jsPDF instance with a larger page (A2)
+                    var pdf = new jspdf.jsPDF({
+                        orientation: 'landscape',
+                        unit: 'mm',
+                        format: [594, 420], // A2 size in landscape
+                    });
 
-        // Function to change data based on the selected time range
-        function changeData(range) {
-            switch (range) {
-                case 'daily':
-                    <?php $totalUsers = $classified->getTotalUsers("day");
-                    $totalReqAds = $classified->getTotalReqAds("day");
-                    $totalCategory = $classified->getAdsCategoriesType(7);
-                        if (mysqli_num_rows($totalUsers) > 0 && mysqli_num_rows($totalReqAds)) :
-                            $dayArray = [];
-                            $categoryArray = [];
-                            $totalCategoryArray = [];
-                            $totalUsersArray=[];
-                            $totalReqAdsArray=[];
-                            $totalApprovedArray=[];
-                            $totalRejectedArray=[];
-                            while ($row = $totalUsers->fetch_assoc()) {
-                                $dayArray[] = "'".$row['Registration_Date']."'";
-                                $totalUsersArray[] = "'".$row['Total_Users_Registered']."'";
-                            }
-                            while ($row = $totalReqAds->fetch_assoc()) {
-                                $totalReqAdsArray[] = "'".$row['Total_Ads_Requested']."'";
-                                $totalApprovedArray[] = "'".$row['Total_Ads_Approved']."'";
-                                $totalRejectedArray[] = "'".$row['Total_Ads_Rejected']."'";
-                            }
-                            while ($row = $totalCategory->fetch_assoc()) {
-                                $categoryArray[] = "'".$row['category']."'";
-                                $totalCategoryArray[] = "'".$row['category_count']."'";
-                            }
-                        endif;
-                    ?>
-                    labelVariable = [<?= implode(",", $dayArray);?>];
-                    pieLabel = "Last 7 Days";
-                    chartData1.datasets[0].data = [<?= implode(",", $totalUsersArray);?>];
-                    chartData1.datasets[1].data = [<?= implode(",", $totalReqAdsArray);?>];
+                    // Get the canvas elements
+                    var canvas1 = document.getElementById('UserReq');
+                    var canvas2 = document.getElementById('AcceptRej');
+                    var canvas3 = document.getElementById('Sales');
 
-                    chartData2.datasets[0].data = [<?= implode(",", $totalApprovedArray);?>];
-                    chartData2.datasets[1].data = [<?= implode(",", $totalRejectedArray);?>];
-                    
-                    pieData.labels = [<?= implode(",", $categoryArray);?>];
-                    pieData.datasets[0].data = [<?= implode(",", $totalCategoryArray);?>];
-                    break;
-                case 'weekly':
-                    <?php $totalUsers = $classified->getTotalUsers("week");
-                    $totalReqAds = $classified->getTotalReqAds("week");
-                    $totalCategory = $classified->getAdsCategoriesType(31);
-                    if (mysqli_num_rows($totalUsers) > 0 && mysqli_num_rows($totalReqAds)) :
-                        $dayArray = [];
-                        $categoryArray = [];
-                            $totalCategoryArray = [];
-                        $totalUsersArray=[];
-                        $totalReqAdsArray=[];
-                        $totalApprovedArray=[];
-                        $totalRejectedArray=[];
-                            while ($row = $totalUsers->fetch_assoc()) {
-                                $weekArray[] = "'".$row['Week_Start_Date']."'";
-                                $totalUsersArray[] = "'".$row['Total_Users_Registered']."'";
-                            }
-                            while ($row = $totalReqAds->fetch_assoc()) {
-                                $totalReqAdsArray[] = "'".$row['Total_Ads_Requested']."'";
-                                $totalApprovedArray[] = "'".$row['Total_Ads_Approved']."'";
-                                $totalRejectedArray[] = "'".$row['Total_Ads_Rejected']."'";
-                            }while ($row = $totalCategory->fetch_assoc()) {
-                                $categoryArray[] = "'".$row['category']."'";
-                                $totalCategoryArray[] = "'".$row['category_count']."'";
-                            }
-                        endif;
-                    ?>
-                    labelVariable = [<?= implode(",", $weekArray);?>];
-                    pieLabel = "Last 31 Days";
-                    chartData1.datasets[0].data = [<?= implode(",", $totalUsersArray);?>];
-                    chartData1.datasets[1].data = [<?= implode(",", $totalReqAdsArray);?>];
+                    // Convert the canvases to images
+                    var imgData1 = canvas1.toDataURL('image/jpeg', 1.0);
+                    var imgData2 = canvas2.toDataURL('image/jpeg', 1.0);
+                    var imgData3 = canvas3.toDataURL('image/jpeg', 1.0);
 
-                    chartData2.datasets[0].data = [<?= implode(",", $totalApprovedArray);?>];
-                    chartData2.datasets[1].data = [<?= implode(",", $totalRejectedArray);?>];
+                    // Calculate the height as 30% of the PDF page
+                    var pageHeight = pdf.internal.pageSize.getHeight();
+                    var height = pageHeight * 0.3;
 
-                    pieData.labels = [<?= implode(",", $categoryArray);?>];
-                    pieData.datasets[0].data = [<?= implode(",", $totalCategoryArray);?>];
-                    break;
-                case 'monthly':
-                    <?php $totalUsers = $classified->getTotalUsers("month");
-                    $totalReqAds = $classified->getTotalReqAds("month");
-                    $totalCategory = $classified->getAdsCategoriesType(365);
-                    if (mysqli_num_rows($totalUsers) > 0 && mysqli_num_rows($totalReqAds)) :
-                        $dayArray = [];
-                        $categoryArray = [];
-                            $totalCategoryArray = [];
-                        $totalUsersArray=[];
-                        $totalReqAdsArray=[];
-                        $totalApprovedArray=[];
-                            $totalRejectedArray=[];
-                            while ($row = $totalUsers->fetch_assoc()) {
-                                $monthArray[] = "'".$row['Month_Start_Date']."'";
-                                $totalUsersArray[] = "'".$row['Total_Users_Registered']."'";
-                            }
-                            while ($row = $totalReqAds->fetch_assoc()) {
-                                $totalReqAdsArray[] = "'".$row['Total_Ads_Requested']."'";
-                                $totalApprovedArray[] = "'".$row['Total_Ads_Approved']."'";
-                                $totalRejectedArray[] = "'".$row['Total_Ads_Rejected']."'";
-                            }while ($row = $totalCategory->fetch_assoc()) {
-                                $categoryArray[] = "'".$row['category']."'";
-                                $totalCategoryArray[] = "'".$row['category_count']."'";
-                            }
-                        endif;
-                    ?>
-                    labelVariable = [<?= implode(",", $monthArray);?>];
-                    pieLabel = "Last 12 Months";
-                    chartData1.datasets[0].data = [<?= implode(",", $totalUsersArray);?>];
-                    chartData1.datasets[1].data = [<?= implode(",", $totalReqAdsArray);?>];
+                    // Add the images to the PDF side by side, filling up the entire width
+                    var padding = 10; // Adjust the padding value as needed
+                    var width = pdf.internal.pageSize.getWidth() / 2 - padding * 2;
 
-                    chartData2.datasets[0].data = [<?= implode(",", $totalApprovedArray);?>];
-                    chartData2.datasets[1].data = [<?= implode(",", $totalRejectedArray);?>];
+                    pdf.addImage(imgData1, 'JPEG', padding, padding, width, height);
+                    pdf.addImage(imgData2, 'JPEG', width + padding * 2, padding, width, height);
 
-                    pieData.labels = [<?= implode(",", $categoryArray);?>];
-                    pieData.datasets[0].data = [<?= implode(",", $totalCategoryArray);?>];
-                    break;
-                default:
-                    break;
-            }
+                    // Extra space for the pie chart
+                    var extraSpace = 10;
 
-            // Update chart data
-            myLineChart1.data.labels = labelVariable;
-            myLineChart1.data.datasets[0].data = chartData1.datasets[0].data;
-            myLineChart1.data.datasets[1].data = chartData1.datasets[1].data;
-            myLineChart1.update();
+                    // Add the pie chart to the PDF below the line charts
+                    pdf.addImage(imgData3, 'JPEG', padding, height + padding * 2 + extraSpace, pdf.internal.pageSize.getWidth() - padding * 2, height);
 
-            myLineChart2.data.labels = labelVariable;
-            myLineChart2.data.datasets[0].data = chartData2.datasets[0].data;
-            myLineChart2.data.datasets[1].data = chartData2.datasets[1].data;
-            myLineChart2.update();
-
-            myPieChart.data.datasets[0].data = pieData.datasets[0].data;
-            myPieChart.options.plugins.title.text = pieLabel;
-            myPieChart.data.labels = pieData.labels;
-            myPieChart.update();
-        }
-
-        // Function to export line charts to PDF using jspdf
-        function exportLineChartsToPDF() {
-            // Create a new jsPDF instance with a larger page (A2)
-            var pdf = new jspdf.jsPDF({
-                orientation: 'landscape',
-                unit: 'mm',
-                format: [594, 420], // A2 size in landscape
-            });
-
-            // Get the canvas elements
-            var canvas1 = document.getElementById('UserReq');
-            var canvas2 = document.getElementById('AcceptRej');
-            var canvas3 = document.getElementById('Sales');
-
-            // Convert the canvases to images
-            var imgData1 = canvas1.toDataURL('image/jpeg', 1.0);
-            var imgData2 = canvas2.toDataURL('image/jpeg', 1.0);
-            var imgData3 = canvas3.toDataURL('image/jpeg', 1.0);
-
-            // Calculate the height as 30% of the PDF page
-            var pageHeight = pdf.internal.pageSize.getHeight();
-            var height = pageHeight * 0.3;
-
-            // Add the images to the PDF side by side, filling up the entire width
-            var padding = 10; // Adjust the padding value as needed
-            var width = pdf.internal.pageSize.getWidth() / 2 - padding * 2;
-
-            pdf.addImage(imgData1, 'JPEG', padding, padding, width, height);
-            pdf.addImage(imgData2, 'JPEG', width + padding * 2, padding, width, height);
-
-            // Extra space for the pie chart
-            var extraSpace = 10;
-
-            // Add the pie chart to the PDF below the line charts
-            pdf.addImage(imgData3, 'JPEG', padding, height + padding * 2 + extraSpace, pdf.internal.pageSize.getWidth() - padding * 2, height);
-
-            // Display values below the line charts
-            var extraSpaceLineCharts = 20;
+                    // Display values below the line charts
+                    var extraSpaceLineCharts = 20;
 
             // Display values of each x label below the line charts
             var labels1 = labelVariable;
@@ -456,17 +459,17 @@ $AuthLogin = new AuthenticatorController($redirect);
                 pdf.text(`${labels2[j]}: Accept - ${values2_1[j]}, Reject - ${values2_2[j]}`, width + padding * 2 + j * (width / labels2.length), height + padding * 2 + extraSpaceLineCharts);
             }
 
-            // Save the PDF
-            pdf.save('lineCharts.pdf');
-        }
+                    // Save the PDF
+                    pdf.save('lineCharts.pdf');
+                }
 
         // Function to export Bootstrap table to Excel using xlsx
         function exportTablesToExcel() {
             // Get the Table elements
             var tableUser = document.getElementById('UserTable');
 
-            // Create a workbook
-            var wb = XLSX.utils.book_new();
+                    // Create a workbook
+                    var wb = XLSX.utils.book_new();
 
             // Convert each table to a worksheet
             var wsUser = XLSX.utils.table_to_sheet(tableUser);
@@ -474,12 +477,10 @@ $AuthLogin = new AuthenticatorController($redirect);
             // Add each worksheet to the workbook with a unique name
             XLSX.utils.book_append_sheet(wb, wsUser, "UserSheet");
 
-            // Save the workbook as an Excel file
-            XLSX.writeFile(wb, 'tablesData.xlsx');
-        }
-
-
-    </script>
+                    // Save the workbook as an Excel file
+                    XLSX.writeFile(wb, 'tablesData.xlsx');
+                }
+            </script>
 
 
 
