@@ -18,7 +18,7 @@
 
             if($key == NULL && $filter == NULL && $UserID == NULL && $stat == NULL){
                 //Constructor Method
-                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdRejectedDate, a.AdApprovedDate, a.AdRequestedDate, a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, " . $this->userTable . " as u
                         WHERE a.AdAuthorID = u.UserID
                         ORDER BY a.AdID DESC
@@ -29,7 +29,7 @@
                 return $result;
             }elseif($key == NULL && $filter == NULL && $UserID == NULL){
                 //Main Page without search and category (included with Approved) / Request Page without search and category but has status
-                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdRejectedDate, a.AdApprovedDate, a.AdRequestedDate, a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, " . $this->userTable . " as u
                         WHERE a.AdAuthorID = u.UserID
                         AND AdStatus IN (" . str_repeat('?, ', count($status) - 1) . '?)' . "
@@ -42,7 +42,7 @@
                 return $result;
             }elseif($key == NULL && $filter == NULL && $status == NULL && $UserID != NULL){
                 //History Page without search
-                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdRejectedDate, a.AdApprovedDate, a.AdRequestedDate, a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
                         WHERE a.AdAuthorID = u.UserID
                         AND a.AdAuthorID = ?
@@ -55,7 +55,7 @@
                 return $result;
             }elseif($key!= NULL && $filter == NULL && $status == NULL && $UserID != NULL){
                 //History page with serch
-                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime, a.AdStatus, u.UserID, u.UserName
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdRejectedDate, a.AdApprovedDate, a.AdRequestedDate,  a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
                         WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
                         AND a.AdAuthorID = u.UserID
@@ -71,7 +71,7 @@
                 return $result;
             }elseif($key!= NULL && $filter == NULL && $stat != NULL ){
                 //Request page with search and status, but without category / Main page with search, without category
-                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdRejectedDate, a.AdApprovedDate, a.AdRequestedDate, a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                 FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
                 WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
                 AND a.AdAuthorID = u.UserID
@@ -93,7 +93,7 @@
                     $categoryConditions[] = "FIND_IN_SET(?, a.AdCategory) > 0";
                 }
                 $categoryCondition = implode(' OR ', $categoryConditions);
-                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdRejectedDate, a.AdApprovedDate, a.AdRequestedDate, a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                 FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
                 WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
                 AND a.AdAuthorID = u.UserID
@@ -115,7 +115,7 @@
                     $categoryConditions[] = "FIND_IN_SET(?, a.AdCategory) > 0";
                 }
                 $categoryCondition = implode(' OR ', $categoryConditions);
-                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdRejectedDate, a.AdApprovedDate, a.AdRequestedDate, a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                 FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
                 WHERE a.AdAuthorID = u.UserID
                 AND ($categoryCondition)
@@ -129,7 +129,7 @@
                 return $result;
             }elseif($key!= NULL && $filter == NULL && $stat == NULL && $UserID == NULL){
                 //Main page with search without category / Request page with search without category and status
-                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
+                $sql = "SELECT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdRejectedDate, a.AdApprovedDate, a.AdRequestedDate, a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                 FROM " . $this->adsTable . " as a, ". $this->userTable . " as u
                 WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
                 AND a.AdAuthorID = u.UserID
@@ -151,7 +151,7 @@
             
                 $categoryCondition = implode(' OR ', $categoryConditions);
         
-                $sql = "SELECT DISTINCT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
+                $sql = "SELECT DISTINCT a.AdID, a.AdName, a.AdDescription, a.Price, a.AdAuthorID, a.AdPicture, a.AdCategory, a.AdPostedDateTime,a.AdRejectedDate, a.AdApprovedDate, a.AdRequestedDate, a.AdPaymentPicture, a.AdStatus, u.UserID, u.UserName
                         FROM " . $this->adsTable . " as a, " . $this->userTable . " as u
                         WHERE (a.AdName LIKE ? OR a.AdDescription LIKE ? OR u.UserName LIKE ?)
                         AND AdStatus IN (" . str_repeat('?, ', count($status) - 1) . '?)' . "
@@ -385,9 +385,18 @@
         }
 
         public function updateAd($AdID, $title, $desc, $status, $categories){
-            $updateAd_query = "UPDATE ads SET AdName = ?, AdDescription = ?, AdStatus = ?, AdCategory = ? WHERE AdID = ?";
+            $acceptedTime = ($status === "Approved") ? true : false;
+            $rejectedTime = ($status === "Rejected Request") ? true : false;
+            $updateAd_query = "UPDATE ads 
+            SET AdName = ?, 
+                AdDescription = ?, 
+                AdStatus = ?, 
+                AdCategory = ?, 
+                AdApprovedDate = IF(?, NOW(), NULL), 
+                AdRejectedDate = IF(?, NOW(), NULL) 
+            WHERE AdID = ?";
             $stmt = $this->conn->prepare($updateAd_query);
-            $stmt->bind_param("ssssi", $title, $desc, $status, $categories, $AdID);
+            $stmt->bind_param("ssssssi", $title, $desc, $status, $categories,$acceptedTime, $rejectedTime, $AdID);
             $result = $stmt->execute();
             echo $stmt->error;
             return $result;
