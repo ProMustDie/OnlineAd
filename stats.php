@@ -398,6 +398,70 @@ $AuthLogin = new AuthenticatorController($redirect);
                 </div>
 
 
+                <?php
+                $total_ads_per_page = 1000000000;
+                $offset = ($page_no - 1) * $total_ads_per_page;
+                $total_ads = $page_system->getTotalAds($key, $filter, $status, NULL);
+                $total_pages = ceil($total_ads / $total_ads_per_page);
+                $second_last = $total_pages - 1;
+
+                $classified->total_ads_per_page = $total_ads_per_page;
+                $classified->offset = 0;
+                $result = $classified->getAds($key, $filter, $status, NULL);
+                if (mysqli_num_rows($result) > 0) :
+                    while ($ads = $result->fetch_assoc()) {
+                        $datetime = new DateTime($ads['AdPostedDateTime']);
+                        $formattedDatetime = $datetime->format('h:iA d/m/Y');
+                ?>
+                        <div class="container">
+                            <table id="AllAds">
+                                <tr>
+                                    <th>AdID</th>
+                                    <th>AdName</th>
+                                    <th>AdDescription</th>
+                                    <th>AdPrice</th>
+                                    <th>AdStatus</th>
+                                    <th>AdCategory</th>
+                                    <th>AdRequestedDate</th>
+                                    <th>AdApprovedDate</th>
+                                    <th>AdRejectedDate</th>
+                                </tr>
+                                <tr>
+                                    <td><?= $ads['AdID'] ?></td>
+                                    <td><?= $ads['AdName'] ?></td>
+                                    <td><?= $ads['AdDescription'] ?></td>
+                                    <td><?= $ads['Price'] ?></td>
+                                    <td><?= $ads['AdStatus'] ?></td>
+                                    <td><?= $ads['AdCategory'] ?></td>
+                                    <td><?= $ads['AdRequestedDate'] ?></td>
+                                    <td><?= $ads['AdApprovedDate'] ?></td>
+                                    <td><?= $ads['AdRejectedDate'] ?></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                <?php }
+                endif;
+                ?>
+
+
+                <div class="container">
+                    <table id="AllUsers">
+                        <tr>
+                            <th>UserID</th>
+                            <th>UserName</th>
+                            <th>UserType</th>
+                            <th>RegDate</th>
+                        </tr>
+                        <tr>
+                            <td><?= $ads['AdID'] ?></td>
+                            <td><?= $ads['AdName'] ?></td>
+                            <td><?= $ads['AdDescription'] ?></td>
+                            <td><?= $ads['Price'] ?></td>
+                        </tr>
+                    </table>
+                </div>
+
 
             </div>
 
@@ -711,6 +775,8 @@ $AuthLogin = new AuthenticatorController($redirect);
                     var SumLineChart = document.getElementById('SumLineChart');
                     var PieChart = document.getElementById('PieChart');
                     var tableUser = document.getElementById('UserTable');
+                    var AllAds = document.getElementById('AllAds');
+                    var AllUsers = document.getElementById('AllUsers');
 
 
                     // Create a workbook
@@ -721,6 +787,9 @@ $AuthLogin = new AuthenticatorController($redirect);
                     var wsSumLineChart = XLSX.utils.table_to_sheet(SumLineChart);
                     var wsPieChart = XLSX.utils.table_to_sheet(PieChart);
                     var wsUser = XLSX.utils.table_to_sheet(tableUser);
+                    var wsAllAds = XLSX.utils.table_to_sheet(AllAds);
+                    var wsAllUsers = XLSX.utils.table_to_sheet(AllUsers);
+
 
 
                     // Add each worksheet to the workbook with a unique name
@@ -728,7 +797,8 @@ $AuthLogin = new AuthenticatorController($redirect);
                     XLSX.utils.book_append_sheet(wb, wsSumLineChart, "SumLineChart");
                     XLSX.utils.book_append_sheet(wb, wsPieChart, "PieChart")
                     XLSX.utils.book_append_sheet(wb, wsUser, "UserTable")
-
+                    XLSX.utils.book_append_sheet(wb, wsAllAds, "AllAds")
+                    XLSX.utils.book_append_sheet(wb, wsAllUsers, "AllUsers")
 
                     // Save the workbook as an Excel file
                     XLSX.writeFile(wb, 'tablesData.xlsx');
