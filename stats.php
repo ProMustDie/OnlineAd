@@ -160,41 +160,56 @@ $AuthLogin = new AuthenticatorController($redirect);
                 </div>
             </div>
 
-            <div class="container d-none">
-                <?php
-                $totalUsersDay = $classified->getTotalUsers("day");
-                $totalAdsDay = $classified->getTotalReqAds("day");
-                $totalUsersWeek = $classified->getTotalUsers("week");
-                $totalAdsWeek = $classified->getTotalReqAds("week");
-                $totalUsersMonth = $classified->getTotalUsers("month");
-                $totalAdsMonth = $classified->getTotalReqAds("month");
-                if (mysqli_num_rows($totalUsersDay) > 0 && mysqli_num_rows($totalAdsDay) && mysqli_num_rows($totalUsersWeek) && mysqli_num_rows($totalAdsWeek) && mysqli_num_rows($totalUsersMonth) && mysqli_num_rows($totalAdsMonth)) :
-                    $totalUsersDayArr = [];
-                    $totalAdsDayArr = [];
-                    $totalUsersWeekArr = [];
-                    $totalAdsWeekArr = [];
-                    $totalUsersMonthArr = [];
-                    $totalAdsMonthArr = [];
-                    while ($row = $totalUsersDay->fetch_assoc()) {
-                        $totalUsersDayArr[] = $row;
-                    }
-                    while ($row = $totalAdsDay->fetch_assoc()) {
-                        $totalAdsDayArr[] = $row;
-                    }
-                    while ($row = $totalUsersWeek->fetch_assoc()) {
-                        $totalUsersWeekArr[] = $row;
-                    }
-                    while ($row = $totalAdsWeek->fetch_assoc()) {
-                        $totalAdsWeekArr[] = $row;
-                    }
-                    while ($row = $totalUsersMonth->fetch_assoc()) {
-                        $totalUsersMonthArr[] = $row;
-                    }
-                    while ($row = $totalAdsMonth->fetch_assoc()) {
-                        $totalAdsMonthArr[] = $row;
-                    }
-                endif;
-                ?>
+                    <div class="container   ">
+                        <?php
+                            $totalUsersDay = $classified->getTotalUsers("day");
+                            $totalAdsDay = $classified->getTotalReqAds("day");
+                            $totalCategoryDay = $classified->getAdsCategoriesType(7);
+                            $totalUsersWeek = $classified->getTotalUsers("week");
+                            $totalAdsWeek = $classified->getTotalReqAds("week");
+                            $totalCategoryWeek = $classified->getAdsCategoriesType(31);
+                            $totalUsersMonth = $classified->getTotalUsers("month");
+                            $totalAdsMonth = $classified->getTotalReqAds("month");
+                            $totalCategoryMonth = $classified->getAdsCategoriesType(365);
+                            if (mysqli_num_rows($totalUsersDay) > 0 && mysqli_num_rows($totalAdsDay) && mysqli_num_rows($totalUsersWeek) && mysqli_num_rows($totalAdsWeek) && mysqli_num_rows($totalUsersMonth) && mysqli_num_rows($totalAdsMonth)) :
+                                $totalUsersDayArr = [];
+                                $totalAdsDayArr = [];
+                                $totalUsersWeekArr = [];
+                                $totalAdsWeekArr = [];
+                                $totalUsersMonthArr = [];
+                                $totalAdsMonthArr = [];
+                                $totalCategoryDayArr = [];
+                                $totalCategoryWeekArr = [];
+                                $totalCategoryMonthArr = [];    
+                                while ($row = $totalUsersDay->fetch_assoc()) {
+                                    $totalUsersDayArr[] = $row;
+                                }
+                                while ($row = $totalAdsDay->fetch_assoc()) {
+                                    $totalAdsDayArr[] = $row;
+                                }
+                                while ($row = $totalUsersWeek->fetch_assoc()) {
+                                    $totalUsersWeekArr[] = $row;
+                                }
+                                while ($row = $totalAdsWeek->fetch_assoc()) {
+                                    $totalAdsWeekArr[] = $row;
+                                }
+                                while ($row = $totalUsersMonth->fetch_assoc()) {
+                                    $totalUsersMonthArr[] = $row;
+                                }
+                                while ($row = $totalAdsMonth->fetch_assoc()) {
+                                    $totalAdsMonthArr[] = $row;
+                                }
+                                while ($row = $totalCategoryDay->fetch_assoc()) {
+                                    $totalCategoryDayArr[] = $row;
+                                }
+                                while ($row = $totalCategoryWeek->fetch_assoc()) {
+                                    $totalCategoryWeekArr[] = $row;
+                                }
+                                while ($row = $totalCategoryMonth->fetch_assoc()) {
+                                    $totalCategoryMonthArr[] = $row;
+                                }
+                            endif;
+                    ?>
 
                 <!--Daily User/Request chart-->
                 <div class="container">
@@ -349,16 +364,19 @@ $AuthLogin = new AuthenticatorController($redirect);
                     <table id="PieChart">
                         <tr>
                             <th>#</th>
-                            <th>Notice</th>
-                            <th>Properties</th>
-                            <th>Jobs</th>
-                            <th>Vehicles</th>
-                            <th>Tuition</th>
-                            <th>Home Service</th>
-                            <th>Clean</th>
+                            <?php
+                            foreach ($totalCategoryDayArr as $cat) {
+                                echo "<th>" . $cat['category'] . "</th>";
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>Within 7 Days</td>
+                            <?php
+                            foreach ($totalCategoryDayArr as $cat) {
+                                echo "<th>" . $cat['category_count'] . "</th>";
+                            }
+                            ?>
                         </tr>
 
                         <tr>
@@ -366,32 +384,38 @@ $AuthLogin = new AuthenticatorController($redirect);
                         </tr>
                         <tr>
                             <th>#</th>
-                            <th>Notice</th>
-                            <th>Properties</th>
-                            <th>Jobs</th>
-                            <th>Vehicles</th>
-                            <th>Tuition</th>
-                            <th>Home Service</th>
-                            <th>Clean</th>
+                            <?php
+                            foreach ($totalCategoryWeekArr as $cat) {
+                                echo "<th>" . $cat['category'] . "</th>";
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>Within 31 Days</td>
+                            <?php
+                            foreach ($totalCategoryWeekArr as $cat) {
+                                echo "<th>" . $cat['category_count'] . "</th>";
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>#</td>
                         <tr>
                             <th>#</th>
-                            <th>Notice</th>
-                            <th>Properties</th>
-                            <th>Jobs</th>
-                            <th>Vehicles</th>
-                            <th>Tuition</th>
-                            <th>Home Service</th>
-                            <th>Clean</th>
+                            <?php
+                            foreach ($totalCategoryMonthArr as $cat) {
+                                echo "<th>" . $cat['category'] . "</th>";
+                            }
+                            ?>
                         </tr>
                         </tr>
                         <tr>
                             <td>Within 12 Months</td>
+                            <?php
+                            foreach ($totalCategoryMonthArr as $cat) {
+                                echo "<th>" . $cat['category_count'] . "</th>";
+                            }
+                            ?>
                         </tr>
 
                     </table>
@@ -575,8 +599,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                     var statusElement = document.getElementById("TimeStatus");
                     switch (range) {
                         case 'daily':
-                            <?php
-                            $totalCategory = $classified->getAdsCategoriesType(7);
+                            <?php 
                             if (mysqli_num_rows($totalUsersDay) > 0 && mysqli_num_rows($totalAdsDay)) :
                                 $dayArray = [];
                                 $categoryArray = [];
@@ -585,16 +608,16 @@ $AuthLogin = new AuthenticatorController($redirect);
                                 $totalReqAdsArray = [];
                                 $totalApprovedArray = [];
                                 $totalRejectedArray = [];
-                                foreach ($totalUsersDay as $row) {
+                                foreach ($totalUsersDayArr as $row) {
                                     $dayArray[] = "'" . $row['Registration_Date'] . "'";
                                     $totalUsersArray[] = "'" . $row['Total_Users_Registered'] . "'";
                                 }
-                                foreach ($totalAdsDay as $row) {
+                                foreach ($totalAdsDayArr as $row) {
                                     $totalReqAdsArray[] = "'" . $row['Total_Ads_Requested'] . "'";
                                     $totalApprovedArray[] = "'" . $row['Total_Ads_Approved'] . "'";
                                     $totalRejectedArray[] = "'" . $row['Total_Ads_Rejected'] . "'";
                                 }
-                                while ($row = $totalCategory->fetch_assoc()) {
+                                foreach($totalCategoryDayArr as $row) {
                                     $categoryArray[] = "'" . $row['category'] . "'";
                                     $totalCategoryArray[] = "'" . $row['category_count'] . "'";
                                 }
@@ -613,26 +636,25 @@ $AuthLogin = new AuthenticatorController($redirect);
                             statusElement.textContent = 'Daily Data Selected';
                             break;
                         case 'weekly':
-                            <?php
-                            $totalCategory = $classified->getAdsCategoriesType(31);
+                            <?php 
                             if (mysqli_num_rows($totalUsersWeek) > 0 && mysqli_num_rows($totalAdsWeek)) :
-                                $dayArray = [];
+                                $weekArray = [];
                                 $categoryArray = [];
                                 $totalCategoryArray = [];
                                 $totalUsersArray = [];
                                 $totalReqAdsArray = [];
                                 $totalApprovedArray = [];
                                 $totalRejectedArray = [];
-                                foreach ($totalUsersWeek as $row) {
+                                foreach ($totalUsersWeekArr as $row) {
                                     $weekArray[] = "'" . $row['Week_Start_Date'] . "'";
                                     $totalUsersArray[] = "'" . $row['Total_Users_Registered'] . "'";
                                 }
-                                foreach ($totalAdsWeek as $row) {
+                                foreach ($totalAdsWeekArr as $row) {
                                     $totalReqAdsArray[] = "'" . $row['Total_Ads_Requested'] . "'";
                                     $totalApprovedArray[] = "'" . $row['Total_Ads_Approved'] . "'";
                                     $totalRejectedArray[] = "'" . $row['Total_Ads_Rejected'] . "'";
                                 }
-                                while ($row = $totalCategory->fetch_assoc()) {
+                                foreach ($totalCategoryWeekArr as $row) {
                                     $categoryArray[] = "'" . $row['category'] . "'";
                                     $totalCategoryArray[] = "'" . $row['category_count'] . "'";
                                 }
@@ -652,25 +674,24 @@ $AuthLogin = new AuthenticatorController($redirect);
                             break;
                         case 'monthly':
                             <?php
-                            $totalCategory = $classified->getAdsCategoriesType(365);
                             if (mysqli_num_rows($totalUsersMonth) > 0 && mysqli_num_rows($totalAdsMonth)) :
-                                $dayArray = [];
+                                $monthArray = [];
                                 $categoryArray = [];
                                 $totalCategoryArray = [];
                                 $totalUsersArray = [];
                                 $totalReqAdsArray = [];
                                 $totalApprovedArray = [];
                                 $totalRejectedArray = [];
-                                foreach ($totalUsersMonth as $row) {
+                                foreach ($totalUsersMonthArr as $row) {
                                     $monthArray[] = "'" . $row['Month_Start_Date'] . "'";
                                     $totalUsersArray[] = "'" . $row['Total_Users_Registered'] . "'";
                                 }
-                                foreach ($totalAdsMonth as $row) {
+                                foreach ($totalAdsMonthArr as $row) {
                                     $totalReqAdsArray[] = "'" . $row['Total_Ads_Requested'] . "'";
                                     $totalApprovedArray[] = "'" . $row['Total_Ads_Approved'] . "'";
                                     $totalRejectedArray[] = "'" . $row['Total_Ads_Rejected'] . "'";
                                 }
-                                while ($row = $totalCategory->fetch_assoc()) {
+                                foreach($totalCategoryMonthArr as $row) {
                                     $categoryArray[] = "'" . $row['category'] . "'";
                                     $totalCategoryArray[] = "'" . $row['category_count'] . "'";
                                 }
