@@ -54,30 +54,33 @@ $AuthLogin = new AuthenticatorController($redirect);
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#"><button type="button"
+                            <a class="nav-link active" aria-current="page"><button type="button"
                                     class="btn btn-outline-light" onclick="exportLineChartsToPDF()">Export Line
                                     Charts
                                     to PDF</button></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light"
+                            <a class="nav-link"><button type="button" class="btn btn-outline-light"
                                     onclick="exportTablesToExcel()">Export Table to
                                     Excel</button></a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                    <a class="nav-link text-danger" id="TimeStatus" ></a>
+                    </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"> <button type="button" class="btn btn-outline-light"
+                            <a class="nav-link"> <button type="button" class="btn btn-outline-light"
                                     onclick="changeData('daily')">Daily</button>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light"
+                            <a class="nav-link"><button type="button" class="btn btn-outline-light"
                                     onclick="changeData('weekly')">Weekly</button>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light"
+                            <a class="nav-link"><button type="button" class="btn btn-outline-light"
                                     onclick="changeData('monthly')">Monthly</button>
                             </a>
                         </li>
@@ -269,6 +272,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                 // Function to change data based on the selected time range
                 function changeData(range) {
+                    var statusElement = document.getElementById("TimeStatus");
                     switch (range) {
                         case 'daily':
                             <?php $totalUsers = $classified->getTotalUsers("day");
@@ -298,7 +302,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                             endif;
                             ?>
                             labelVariable = [<?= implode(",", $dayArray); ?>];
-                            pieLabel = "Last 7 Days";
+                            pieLabel = "Last 7 Days Total Categories";
                             chartData1.datasets[0].data = [<?= implode(",", $totalUsersArray); ?>];
                             chartData1.datasets[1].data = [<?= implode(",", $totalReqAdsArray); ?>];
 
@@ -307,6 +311,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                             pieData.labels = [<?= implode(",", $categoryArray); ?>];
                             pieData.datasets[0].data = [<?= implode(",", $totalCategoryArray); ?>];
+                            statusElement.textContent = 'Daily Data Selected';
                             break;
                         case 'weekly':
                             <?php $totalUsers = $classified->getTotalUsers("week");
@@ -336,7 +341,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                             endif;
                             ?>
                             labelVariable = [<?= implode(",", $weekArray); ?>];
-                            pieLabel = "Last 31 Days";
+                            pieLabel = "Last 31 Days Total Categories";
                             chartData1.datasets[0].data = [<?= implode(",", $totalUsersArray); ?>];
                             chartData1.datasets[1].data = [<?= implode(",", $totalReqAdsArray); ?>];
 
@@ -345,6 +350,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                             pieData.labels = [<?= implode(",", $categoryArray); ?>];
                             pieData.datasets[0].data = [<?= implode(",", $totalCategoryArray); ?>];
+                            statusElement.textContent = 'Weekly Data Selected';
                             break;
                         case 'monthly':
                             <?php $totalUsers = $classified->getTotalUsers("month");
@@ -374,7 +380,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                             endif;
                             ?>
                             labelVariable = [<?= implode(",", $monthArray); ?>];
-                            pieLabel = "Last 12 Months";
+                            pieLabel = "Last 12 Months Total Categories";
                             chartData1.datasets[0].data = [<?= implode(",", $totalUsersArray); ?>];
                             chartData1.datasets[1].data = [<?= implode(",", $totalReqAdsArray); ?>];
 
@@ -383,6 +389,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                             pieData.labels = [<?= implode(",", $categoryArray); ?>];
                             pieData.datasets[0].data = [<?= implode(",", $totalCategoryArray); ?>];
+                            statusElement.textContent = 'Monthly Data Selected';
                             break;
                         default:
                             break;
