@@ -199,6 +199,15 @@ $AuthLogin = new AuthenticatorController($redirect);
                                 while ($row = $totalAdsMonth->fetch_assoc()) {
                                     $totalAdsMonthArr[] = $row;
                                 }
+                                while ($row = $totalCategoryDay->fetch_assoc()) {
+                                    $totalCategoryDayArr[] = $row;
+                                }
+                                while ($row = $totalCategoryWeek->fetch_assoc()) {
+                                    $totalCategoryWeekArr[] = $row;
+                                }
+                                while ($row = $totalCategoryMonth->fetch_assoc()) {
+                                    $totalCategoryMonthArr[] = $row;
+                                }
                             endif;
                     ?>
 
@@ -355,16 +364,19 @@ $AuthLogin = new AuthenticatorController($redirect);
                     <table id="PieChart">
                         <tr>
                             <th>#</th>
-                            <th>Notice</th>
-                            <th>Properties</th>
-                            <th>Jobs</th>
-                            <th>Vehicles</th>
-                            <th>Tuition</th>
-                            <th>Home Service</th>
-                            <th>Clean</th>
+                            <?php
+                            foreach ($totalCategoryDayArr as $cat) {
+                                echo "<th>" . $cat['category'] . "</th>";
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>Within 7 Days</td>
+                            <?php
+                            foreach ($totalCategoryDayArr as $cat) {
+                                echo "<th>" . $cat['category_count'] . "</th>";
+                            }
+                            ?>
                         </tr>
 
                         <tr>
@@ -372,32 +384,38 @@ $AuthLogin = new AuthenticatorController($redirect);
                         </tr>
                         <tr>
                             <th>#</th>
-                            <th>Notice</th>
-                            <th>Properties</th>
-                            <th>Jobs</th>
-                            <th>Vehicles</th>
-                            <th>Tuition</th>
-                            <th>Home Service</th>
-                            <th>Clean</th>
+                            <?php
+                            foreach ($totalCategoryWeekArr as $cat) {
+                                echo "<th>" . $cat['category'] . "</th>";
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>Within 31 Days</td>
+                            <?php
+                            foreach ($totalCategoryWeekArr as $cat) {
+                                echo "<th>" . $cat['category_count'] . "</th>";
+                            }
+                            ?>
                         </tr>
                         <tr>
                             <td>#</td>
                         <tr>
                             <th>#</th>
-                            <th>Notice</th>
-                            <th>Properties</th>
-                            <th>Jobs</th>
-                            <th>Vehicles</th>
-                            <th>Tuition</th>
-                            <th>Home Service</th>
-                            <th>Clean</th>
+                            <?php
+                            foreach ($totalCategoryMonthArr as $cat) {
+                                echo "<th>" . $cat['category'] . "</th>";
+                            }
+                            ?>
                         </tr>
                         </tr>
                         <tr>
                             <td>Within 12 Months</td>
+                            <?php
+                            foreach ($totalCategoryMonthArr as $cat) {
+                                echo "<th>" . $cat['category_count'] . "</th>";
+                            }
+                            ?>
                         </tr>
 
                     </table>
