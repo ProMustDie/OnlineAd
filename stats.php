@@ -46,10 +46,10 @@ $AuthLogin = new AuthenticatorController($redirect);
 
     <nav class="navbar navbar-expand-lg bg-dark ">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler bg-warning" type="button" id="time" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" id="time"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page"><button type="button" class="btn btn-outline-light" onclick="exportLineChartsToPDF()">Export Line
@@ -61,11 +61,11 @@ $AuthLogin = new AuthenticatorController($redirect);
                                 Excel</button></a>
                     </li>
                 </ul>
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item">
-                    <a class="nav-link text-danger" id="TimeStatus" ></a>
+                        <a class="nav-link text-light fw-semibold fs-5" id="TimeStatus"></a>
                     </li>
-                        <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link"> <button type="button" class="btn btn-outline-light" onclick="changeData('daily')">Daily</button>
                         </a>
                     </li>
@@ -172,7 +172,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                     $datetime = new DateTime($ads['AdPostedDateTime']);
                     $formattedDatetime = $datetime->format('h:iA d/m/Y');
             ?>
-                    <div class="container">
+                    <div class="container d-none">
 
                         <!--Daily User/Request chart-->
                         <div class="container">
@@ -382,34 +382,106 @@ $AuthLogin = new AuthenticatorController($redirect);
                             <table id="PieChart">
                                 <tr>
                                     <th>#</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
+                                    <th>Notice</th>
+                                    <th>Properties</th>
+                                    <th>Jobs</th>
+                                    <th>Vehicles</th>
+                                    <th>Tuition</th>
+                                    <th>Home Service</th>
+                                    <th>Clean</th>
                                 </tr>
                                 <tr>
-                                    <td>1</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>Monday</td>
                                 </tr>
                                 <tr>
-                                    <td>2</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>TUES</td>
                                 </tr>
+                                <tr>
+                                    <td>WED</td>
+                                </tr>
+                                <tr>
+                                    <td>THURS</td>
+                                </tr>
+                                <tr>
+                                    <td>FRI</td>
+                                </tr>
+                                <tr>
+                                    <td>SAT</td>
+                                </tr>
+                                <tr>
+                                    <td>SUN</td>
+                                </tr>
+                                <tr>
+                                    <td>#</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 1</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 2</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 3</td>
+                                </tr>
+                                <tr>
+                                    <td>Week 4</td>
+                                </tr>
+                                <tr>
+                                    <td>#</td>
+                                </tr>
+                                <tr>
+                                    <td>JAN</td>
+                                </tr>
+                                <tr>
+                                    <td>FEB</td>
+                                </tr>
+                                <tr>
+                                    <td>March</td>
+                                </tr>
+                                <tr>
+                                    <td>April</td>
+                                </tr>
+                                <tr>
+                                    <td>May</td>
+                                </tr>
+                                <tr>
+                                    <td>June</td>
+                                </tr>
+                                <tr>
+                                    <td>July</td>
+                                </tr>
+                                <tr>
+                                    <td>August</td>
+                                </tr>
+                                <tr>
+                                    <td>September</td>
+                                </tr>
+                                <tr>
+                                    <td>October</td>
+                                </tr>
+                                <tr>
+                                    <td>November</td>
+                                </tr>
+                                <tr>
+                                    <td>December</td>
+                                </tr>
+                                <tr>
+                                    <td>#</td>
+                                </tr>
+                                <tr>
+                                    <td>Sum Total:</td>
+                                    <td>=SUM(B2:B26)</td>
+                                    <td>=SUM(C2:C26)</td>
+                                    <td>=SUM(D2:D26)</td>
+                                    <td>=SUM(E2:E26)</td>
+                                    <td>=SUM(G2:G26)</td>
+                                    <td>=SUM(H2:H26)</td>
+                                    <td>=SUM(I2:I26)</td>
+                                    <td>=SUM(J2:J26)</td>
+                                    <td>Total: </td>
+                                    <td>=SUM(B27:J27)</td>
+                                </tr>
+
                             </table>
                         </div>
 
@@ -736,6 +808,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                     var PieChart = document.getElementById('PieChart');
                     var tableUser = document.getElementById('UserTable');
 
+
                     // Create a workbook
                     var wb = XLSX.utils.book_new();
 
@@ -745,11 +818,12 @@ $AuthLogin = new AuthenticatorController($redirect);
                     var wsPieChart = XLSX.utils.table_to_sheet(PieChart);
                     var wsUser = XLSX.utils.table_to_sheet(tableUser);
 
+
                     // Add each worksheet to the workbook with a unique name
                     XLSX.utils.book_append_sheet(wb, wsAllLineChart, "AllLineChart");
                     XLSX.utils.book_append_sheet(wb, wsSumLineChart, "SumLineChart");
                     XLSX.utils.book_append_sheet(wb, wsPieChart, "PieChart")
-                    XLSX.utils.book_append_sheet(wb, wsUser, "UserSheet")
+
 
                     // Save the workbook as an Excel file
                     XLSX.writeFile(wb, 'tablesData.xlsx');
