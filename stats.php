@@ -160,165 +160,132 @@ $AuthLogin = new AuthenticatorController($redirect);
                 </div>
             </div>
 
-
-            <?php
-
-
-            $classified->total_ads_per_page = 1000000000;
-            $classified->offset = 0;
-            $result = $classified->getAds($key, $filter, $status, NULL);
-            if (mysqli_num_rows($result) > 0) :
-                while ($ads = $result->fetch_assoc()) {
-                    $datetime = new DateTime($ads['AdPostedDateTime']);
-                    $formattedDatetime = $datetime->format('h:iA d/m/Y');
-            ?>
                     <div class="container">
+                        <?php
+                            $totalUsersDay = $classified->getTotalUsers("day");
+                            $totalAdsDay = $classified->getTotalReqAds("day");
+                            $totalUsersWeek = $classified->getTotalUsers("week");
+                            $totalAdsWeek = $classified->getTotalReqAds("week");
+                            $totalUsersMonth = $classified->getTotalUsers("month");
+                            $totalAdsMonth = $classified->getTotalReqAds("month");
+                            if (mysqli_num_rows($totalUsersDay) > 0 && mysqli_num_rows($totalAdsDay) && mysqli_num_rows($totalUsersWeek) && mysqli_num_rows($totalAdsWeek) && mysqli_num_rows($totalUsersMonth) && mysqli_num_rows($totalAdsMonth)) :
+                                $totalUsersDayArr = [];
+                                $totalAdsDayArr = [];
+                                $totalUsersWeekArr = [];
+                                $totalAdsWeekArr = [];
+                                $totalUsersMonthArr = [];
+                                $totalAdsMonthArr = [];
+                                while ($row = $totalUsersDay->fetch_assoc()) {
+                                    $totalUsersDayArr[] = $row;
+                                }
+                                while ($row = $totalAdsDay->fetch_assoc()) {
+                                    $totalAdsDayArr[] = $row;
+                                }
+                                while ($row = $totalUsersWeek->fetch_assoc()) {
+                                    $totalUsersWeekArr[] = $row;
+                                }
+                                while ($row = $totalAdsWeek->fetch_assoc()) {
+                                    $totalAdsWeekArr[] = $row;
+                                }
+                                while ($row = $totalUsersMonth->fetch_assoc()) {
+                                    $totalUsersMonthArr[] = $row;
+                                }
+                                while ($row = $totalAdsMonth->fetch_assoc()) {
+                                    $totalAdsMonthArr[] = $row;
+                                }
+                            endif;
+                    ?>
 
                         <!--Daily User/Request chart-->
                         <div class="container">
                             <table id="AllLineChart">
                                 <tr>
                                     <th>#</th>
-                                    <th>Monday</th>
-                                    <th>TUES</th>
-                                    <th>WED</th>
-                                    <th>THURS</th>
-                                    <th>FRI</th>
-                                    <th>SAT</th>
-                                    <th>SUN</th>
-                                    <th>#</th>
-                                    <th>Week 1</th>
-                                    <th>Week 2</th>
-                                    <th>Week 3</th>
-                                    <th>Week 4</th>
-                                    <th>#</th>
-                                    <th>JAN</th>
-                                    <th>FEB</th>
-                                    <th>March</th>
-                                    <th>April</th>
-                                    <th>May</th>
-                                    <th>June</th>
-                                    <th>July</th>
-                                    <th>August</th>
-                                    <th>September</th>
-                                    <th>October</th>
-                                    <th>November</th>
-                                    <th>December</th>
+                                    <?php
+                                    foreach($totalUsersDayArr as $dayArray){
+                                        echo "<th>" . $dayArray['Registration_Date'] . "</th>";
+                                    }
+                                    echo  "<th>#</th>";
+                                
+                                    foreach($totalUsersWeekArr as $weekArray){
+                                        echo "<th>" . $weekArray['Week_Start_Date'] . "</th>";
+                                    }
+                                    echo  "<th>#</th>";
+                                    foreach($totalUsersMonthArr as $monthArray){
+                                        echo "<th>" . $monthArray['Month_Start_Date'] . "</th>";
+                                    }
+                                    ?>
                                 </tr>
                                 <tr>
                                     <td>New User</td>
-                                    <td>1</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>3</td>
-                                    <td>3</td>
-                                    <td>3</td>
-                                    <td>3</td>
-                                    <td>#</td>
-                                    <td>0</td>
-                                    <td>4</td>
-                                    <td>4</td>
-                                    <td>4</td>
-                                    <td>#</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
+                                    <?php
+                                    foreach($totalUsersDayArr as $NewUsers){
+                                        echo "<th>" . $NewUsers['Total_Users_Registered'] . "</th>";
+                                    }
+                                    echo  "<th>#</th>";
+                                
+                                    foreach($totalUsersWeekArr as $NewUsers){
+                                        echo "<th>" . $NewUsers['Total_Users_Registered'] . "</th>";
+                                    }
+                                    echo  "<th>#</th>";
+                                    foreach($totalUsersMonthArr as $NewUsers){
+                                        echo "<th>" . $NewUsers['Total_Users_Registered'] . "</th>";
+                                    }
+                                    ?>
                                 </tr>
                                 <tr>
                                     <td>Requested Ads</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>1</td>
-                                    <td>3</td>
-                                    <td>5</td>
-                                    <td>8</td>
-                                    <td>3</td>
-                                    <td>#</td>
-                                    <td>1</td>
-                                    <td>4</td>
-                                    <td>4</td>
-                                    <td>4</td>
-                                    <td>#</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
+                                    <?php
+                                    foreach($totalAdsDayArr as $ads){
+                                        echo "<th>" . $ads['Total_Ads_Requested'] . "</th>";
+                                    }
+                                    echo  "<th>#</th>";
+                                
+                                    foreach($totalAdsWeekArr as $ads){
+                                        echo "<th>" . $ads['Total_Ads_Requested'] . "</th>";
+                                    }
+                                    echo  "<th>#</th>";
+                                    foreach($totalAdsMonthArr as $ads){
+                                        echo "<th>" . $ads['Total_Ads_Requested'] . "</th>";
+                                    }
+                                    ?>
                                 </tr>
                                 <tr>
                                     <th>#</th>
                                 </tr>
                                 <tr>
                                     <td>Approved</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>#</td>
-                                    <td>4</td>
-                                    <td>2</td>
-                                    <td>4</td>
-                                    <td>4</td>
-                                    <td>#</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
+                                    <?php
+                                    foreach($totalAdsDayArr as $ads){
+                                        echo "<th>" . $ads['Total_Ads_Approved'] . "</th>";
+                                    }
+                                    echo  "<th>#</th>";
+                                
+                                    foreach($totalAdsWeekArr as $ads){
+                                        echo "<th>" . $ads['Total_Ads_Approved'] . "</th>";
+                                    }
+                                    echo  "<th>#</th>";
+                                    foreach($totalAdsMonthArr as $ads){
+                                        echo "<th>" . $ads['Total_Ads_Approved'] . "</th>";
+                                    }
+                                    ?>
                                 </tr>
                                 <tr>
                                     <td>Rejected</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>#</td>
-                                    <td>4</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>4</td>
-                                    <td>#</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
-                                    <td>7</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
+                                    <?php
+                                    foreach($totalAdsDayArr as $ads){
+                                        echo "<th>" . $ads['Total_Ads_Rejected'] . "</th>";
+                                    }
+                                    echo  "<th>#</th>";
+                                
+                                    foreach($totalAdsWeekArr as $ads){
+                                        echo "<th>" . $ads['Total_Ads_Rejected'] . "</th>";
+                                    }
+                                    echo  "<th>#</th>";
+                                    foreach($totalAdsMonthArr as $ads){
+                                        echo "<th>" . $ads['Total_Ads_Rejected'] . "</th>";
+                                    }
+                                    ?>
                                 </tr>
                             </table>
                         </div>
@@ -417,10 +384,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
                     </div>
 
-            <?php
-                }
-            endif;
-            ?>
+        
 
 
 
@@ -532,10 +496,9 @@ $AuthLogin = new AuthenticatorController($redirect);
                     var statusElement = document.getElementById("TimeStatus");
                     switch (range) {
                         case 'daily':
-                            <?php $totalUsers = $classified->getTotalUsers("day");
-                            $totalReqAds = $classified->getTotalReqAds("day");
+                            <?php 
                             $totalCategory = $classified->getAdsCategoriesType(7);
-                            if (mysqli_num_rows($totalUsers) > 0 && mysqli_num_rows($totalReqAds)) :
+                            if (mysqli_num_rows($totalUsersDay) > 0 && mysqli_num_rows($totalAdsDay)) :
                                 $dayArray = [];
                                 $categoryArray = [];
                                 $totalCategoryArray = [];
@@ -543,11 +506,11 @@ $AuthLogin = new AuthenticatorController($redirect);
                                 $totalReqAdsArray = [];
                                 $totalApprovedArray = [];
                                 $totalRejectedArray = [];
-                                while ($row = $totalUsers->fetch_assoc()) {
+                                foreach ($totalUsersDay as $row) {
                                     $dayArray[] = "'" . $row['Registration_Date'] . "'";
                                     $totalUsersArray[] = "'" . $row['Total_Users_Registered'] . "'";
                                 }
-                                while ($row = $totalReqAds->fetch_assoc()) {
+                                foreach ($totalAdsDay as $row) {
                                     $totalReqAdsArray[] = "'" . $row['Total_Ads_Requested'] . "'";
                                     $totalApprovedArray[] = "'" . $row['Total_Ads_Approved'] . "'";
                                     $totalRejectedArray[] = "'" . $row['Total_Ads_Rejected'] . "'";
@@ -571,10 +534,9 @@ $AuthLogin = new AuthenticatorController($redirect);
                             statusElement.textContent = 'Daily Data Selected';
                             break;
                         case 'weekly':
-                            <?php $totalUsers = $classified->getTotalUsers("week");
-                            $totalReqAds = $classified->getTotalReqAds("week");
+                            <?php 
                             $totalCategory = $classified->getAdsCategoriesType(31);
-                            if (mysqli_num_rows($totalUsers) > 0 && mysqli_num_rows($totalReqAds)) :
+                            if (mysqli_num_rows($totalUsersWeek) > 0 && mysqli_num_rows($totalAdsWeek)) :
                                 $dayArray = [];
                                 $categoryArray = [];
                                 $totalCategoryArray = [];
@@ -582,11 +544,11 @@ $AuthLogin = new AuthenticatorController($redirect);
                                 $totalReqAdsArray = [];
                                 $totalApprovedArray = [];
                                 $totalRejectedArray = [];
-                                while ($row = $totalUsers->fetch_assoc()) {
+                                foreach($totalUsersWeek as $row ) {
                                     $weekArray[] = "'" . $row['Week_Start_Date'] . "'";
                                     $totalUsersArray[] = "'" . $row['Total_Users_Registered'] . "'";
                                 }
-                                while ($row = $totalReqAds->fetch_assoc()) {
+                                foreach($totalAdsWeek as $row) {
                                     $totalReqAdsArray[] = "'" . $row['Total_Ads_Requested'] . "'";
                                     $totalApprovedArray[] = "'" . $row['Total_Ads_Approved'] . "'";
                                     $totalRejectedArray[] = "'" . $row['Total_Ads_Rejected'] . "'";
@@ -610,10 +572,9 @@ $AuthLogin = new AuthenticatorController($redirect);
                             statusElement.textContent = 'Weekly Data Selected';
                             break;
                         case 'monthly':
-                            <?php $totalUsers = $classified->getTotalUsers("month");
-                            $totalReqAds = $classified->getTotalReqAds("month");
+                            <?php 
                             $totalCategory = $classified->getAdsCategoriesType(365);
-                            if (mysqli_num_rows($totalUsers) > 0 && mysqli_num_rows($totalReqAds)) :
+                            if (mysqli_num_rows($totalUsersMonth) > 0 && mysqli_num_rows($totalAdsMonth)) :
                                 $dayArray = [];
                                 $categoryArray = [];
                                 $totalCategoryArray = [];
@@ -621,11 +582,11 @@ $AuthLogin = new AuthenticatorController($redirect);
                                 $totalReqAdsArray = [];
                                 $totalApprovedArray = [];
                                 $totalRejectedArray = [];
-                                while ($row = $totalUsers->fetch_assoc()) {
+                                foreach ($totalUsersMonth as $row) {
                                     $monthArray[] = "'" . $row['Month_Start_Date'] . "'";
                                     $totalUsersArray[] = "'" . $row['Total_Users_Registered'] . "'";
                                 }
-                                while ($row = $totalReqAds->fetch_assoc()) {
+                                foreach ($totalAdsMonth as $row) {
                                     $totalReqAdsArray[] = "'" . $row['Total_Ads_Requested'] . "'";
                                     $totalApprovedArray[] = "'" . $row['Total_Ads_Approved'] . "'";
                                     $totalRejectedArray[] = "'" . $row['Total_Ads_Rejected'] . "'";
