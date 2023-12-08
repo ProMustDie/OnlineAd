@@ -422,6 +422,19 @@ $AuthLogin = new AuthenticatorController($redirect);
                 </div>
 
 
+                <div class="container">
+                    <table id="AllAds">
+                        <tr>
+                            <th>AdID</th>
+                            <th>AdName</th>
+                            <th>AdDescription</th>
+                            <th>AdPrice</th>
+                            <th>AdStatus</th>
+                            <th>AdCategory</th>
+                            <th>AdRequestedDate</th>
+                            <th>AdApprovedDate</th>
+                            <th>AdRejectedDate</th>
+                        </tr>
                 <?php
                 $total_ads_per_page = 1000000000;
                 $offset = ($page_no - 1) * $total_ads_per_page;
@@ -435,36 +448,23 @@ $AuthLogin = new AuthenticatorController($redirect);
                 if (mysqli_num_rows($result) > 0) :
                     while ($ads = $result->fetch_assoc()) {
                 ?>
-                        <div class="container">
-                            <table id="AllAds">
-                                <tr>
-                                    <th>AdID</th>
-                                    <th>AdName</th>
-                                    <th>AdDescription</th>
-                                    <th>AdPrice</th>
-                                    <th>AdStatus</th>
-                                    <th>AdCategory</th>
-                                    <th>AdRequestedDate</th>
-                                    <th>AdApprovedDate</th>
-                                    <th>AdRejectedDate</th>
-                                </tr>
-                                <tr>
-                                    <td><?= $ads['AdID'] ?></td>
-                                    <td><?= $ads['AdName'] ?></td>
-                                    <td><?= $ads['AdDescription'] ?></td>
-                                    <td><?= $ads['Price'] ?></td>
-                                    <td><?= $ads['AdStatus'] ?></td>
-                                    <td><?= $ads['AdCategory'] ?></td>
-                                    <td><?= $ads['AdRequestedDate'] ?></td>
-                                    <td><?= $ads['AdApprovedDate'] ?></td>
-                                    <td><?= $ads['AdRejectedDate'] ?></td>
-                                </tr>
-                            </table>
-                        </div>
-
+                    <tr>
+                        <td><?= $ads['AdID'] ?></td>
+                        <td><?= $ads['AdName'] ?></td>
+                        <td><?= $ads['AdDescription'] ?></td>
+                        <td><?= $ads['Price'] ?></td>
+                        <td><?= $ads['AdStatus'] ?></td>
+                        <td><?= $ads['AdCategory'] ?></td>
+                        <td><?= $ads['AdRequestedDate'] ?></td>
+                        <td><?= $ads['AdApprovedDate'] ?></td>
+                        <td><?= $ads['AdRejectedDate'] ?></td>
+                    </tr>
+                        
                 <?php }
                 endif;
                 ?>
+                </table>
+                </div>
 
 
                 <div class="container">
