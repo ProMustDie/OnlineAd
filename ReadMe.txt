@@ -9,4 +9,6 @@ User Acc: ausca@gmail.com:asda
 
 
 TODO FOR REAL:
-add dashboard
+add image lazy loading
+add image compression
+change email before going live
