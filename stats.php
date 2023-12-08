@@ -434,8 +434,6 @@ $AuthLogin = new AuthenticatorController($redirect);
                 $result = $classified->getAds($key, $filter, $status, NULL);
                 if (mysqli_num_rows($result) > 0) :
                     while ($ads = $result->fetch_assoc()) {
-                        $datetime = new DateTime($ads['AdPostedDateTime']);
-                        $formattedDatetime = $datetime->format('h:iA d/m/Y');
                 ?>
                         <div class="container">
                             <table id="AllAds">
@@ -477,12 +475,20 @@ $AuthLogin = new AuthenticatorController($redirect);
                             <th>UserType</th>
                             <th>RegDate</th>
                         </tr>
-                        <tr>
-                            <td><?= $ads['AdID'] ?></td>
-                            <td><?= $ads['AdName'] ?></td>
-                            <td><?= $ads['AdDescription'] ?></td>
-                            <td><?= $ads['Price'] ?></td>
-                        </tr>
+
+                        <?php 
+                        $result = $classified->getUsersList(NULL);
+                        if (mysqli_num_rows($result) > 0) :
+                            while ($users = $result->fetch_assoc()) {
+                        ?>
+                            <tr>
+                            <td><?= $users['UserID'] ?></td>
+                            <td><?= $users['UserName'] ?></td>
+                            <td><?= $users['UserType'] ?></td>
+                            <td><?= $users['RegDate'] ?></td>
+                        
+                            </tr>
+                        <?php }endif;?>
                     </table>
                 </div>
 
