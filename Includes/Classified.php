@@ -303,7 +303,7 @@
 
         public function getUsersList($currentID) {
             $sqlQuery = "
-                SELECT u.UserName, u.UserID, u.UserEmail
+                SELECT u.UserName, u.UserID, u.UserEmail, u.UserType, u.RegDate
                 FROM " . $this->userTable . " as u
                 WHERE u.UserID != '$currentID'
                 ORDER BY u.UserName ASC";
