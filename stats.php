@@ -46,46 +46,39 @@ $AuthLogin = new AuthenticatorController($redirect);
 
 
     <nav class="navbar navbar-expand-lg bg-dark ">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#"><button type="button"
-                                    class="btn btn-outline-light" onclick="exportLineChartsToPDF()">Export Line
-                                    Charts
-                                    to PDF</button></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light"
-                                    onclick="exportTablesToExcel()">Export Table to
-                                    Excel</button></a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"> <button type="button" class="btn btn-outline-light"
-                                    onclick="changeData('daily')">Daily</button>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light"
-                                    onclick="changeData('weekly')">Weekly</button>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light"
-                                    onclick="changeData('monthly')">Monthly</button>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#"><button type="button" class="btn btn-outline-light" onclick="exportLineChartsToPDF()">Export Line
+                                Charts
+                                to PDF</button></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light" onclick="exportTablesToExcel()">Export Table to
+                                Excel</button></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"> <button type="button" class="btn btn-outline-light" onclick="changeData('daily')">Daily</button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light" onclick="changeData('weekly')">Weekly</button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light" onclick="changeData('monthly')">Monthly</button>
+                        </a>
+                    </li>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
     <!-- DATA & CHARTS -->
     <div class="container-fluid text-center ">
 
@@ -152,19 +145,149 @@ $AuthLogin = new AuthenticatorController($redirect);
                     </div>
                 </div>
 
-            <div class="col-lg-6">
-                <div class="row m-0">
-                    <div class="col-lg-7" style="height: 26rem;">
-                        <canvas id="Sales"></canvas>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="table-responsive" style="height: 26rem;">
+                <div class="col-lg-6">
+                    <div class="row m-0">
+                        <div class="col-lg-7" style="height: 26rem;">
+                            <canvas id="Sales"></canvas>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="table-responsive" style="height: 26rem;">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    
+
+
+            <?php
+
+
+            $classified->total_ads_per_page = 1000000000;
+            $classified->offset = 0;
+            $result = $classified->getAds($key, $filter, $status, NULL);
+            if (mysqli_num_rows($result) > 0) :
+                while ($ads = $result->fetch_assoc()) {
+                    $datetime = new DateTime($ads['AdPostedDateTime']);
+                    $formattedDatetime = $datetime->format('h:iA d/m/Y');
+            ?>
+                    <div class="container">
+
+                        <!--Daily User/Request chart-->
+                        <div class="container">
+                            <table id="NewUserRequest">
+                                <tr>
+                                    <th>#</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>New User</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Requested Ads</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="container">
+                            <table id="ApprovedRejected">
+                                <tr>
+                                    <th>#</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>Approved</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Rejected</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+                        <div class="container">
+                            <table id="PieChart">
+                                <tr>
+                                    <th>#</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+
+                    </div>
+
+            <?php
+                }
+            endif;
+            ?>
+
+
+
 
             <script>
                 // Initiazer config for the line charts
@@ -445,45 +568,43 @@ $AuthLogin = new AuthenticatorController($redirect);
                     // Display values below the line charts
                     var extraSpaceLineCharts = 20;
 
-            // Display values of each x label below the line charts
-            var labels1 = labelVariable;
-            var values1_1 = chartData1.datasets[0].data;
-            var values1_2 = chartData1.datasets[1].data;
-            for (var i = 0; i < labels1.length; i++) {
-                pdf.text(`${labels1[i]}: New User - ${values1_1[i]}, Request Ads - ${values1_2[i]}`, padding + i * (width / labels1.length), height + padding * 2 + extraSpaceLineCharts);
-            }
+                    // Display values of each x label below the line charts
+                    var labels1 = labelVariable;
+                    var values1_1 = chartData1.datasets[0].data;
+                    var values1_2 = chartData1.datasets[1].data;
+                    for (var i = 0; i < labels1.length; i++) {
+                        pdf.text(`${labels1[i]}: New User - ${values1_1[i]}, Request Ads - ${values1_2[i]}`, padding + i * (width / labels1.length), height + padding * 2 + extraSpaceLineCharts);
+                    }
 
-            var labels2 = labelVariable;
-            var values2_1 = chartData2.datasets[0].data;
-            var values2_2 = chartData2.datasets[1].data;
-            for (var j = 0; j < labels2.length; j++) {
-                pdf.text(`${labels2[j]}: Accept - ${values2_1[j]}, Reject - ${values2_2[j]}`, width + padding * 2 + j * (width / labels2.length), height + padding * 2 + extraSpaceLineCharts);
-            }
+                    var labels2 = labelVariable;
+                    var values2_1 = chartData2.datasets[0].data;
+                    var values2_2 = chartData2.datasets[1].data;
+                    for (var j = 0; j < labels2.length; j++) {
+                        pdf.text(`${labels2[j]}: Accept - ${values2_1[j]}, Reject - ${values2_2[j]}`, width + padding * 2 + j * (width / labels2.length), height + padding * 2 + extraSpaceLineCharts);
+                    }
 
                     // Save the PDF
                     pdf.save('lineCharts.pdf');
                 }
 
-        // Function to export Bootstrap table to Excel using xlsx
-        function exportTablesToExcel() {
-            // Get the Table elements
-            var tableUser = document.getElementById('UserTable');
+                // Function to export Bootstrap table to Excel using xlsx
+                function exportTablesToExcel() {
+                    // Get the Table elements
+                    var tableUser = document.getElementById('UserTable');
 
                     // Create a workbook
                     var wb = XLSX.utils.book_new();
 
-            // Convert each table to a worksheet
-            var wsUser = XLSX.utils.table_to_sheet(tableUser);
+                    // Convert each table to a worksheet
+                    var wsUser = XLSX.utils.table_to_sheet(tableUser);
 
-            // Add each worksheet to the workbook with a unique name
-            XLSX.utils.book_append_sheet(wb, wsUser, "UserSheet");
+                    // Add each worksheet to the workbook with a unique name
+                    XLSX.utils.book_append_sheet(wb, wsUser, "UserSheet");
 
                     // Save the workbook as an Excel file
                     XLSX.writeFile(wb, 'tablesData.xlsx');
                 }
             </script>
-
-
 
 </body>
 
