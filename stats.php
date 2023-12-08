@@ -495,8 +495,6 @@ $AuthLogin = new AuthenticatorController($redirect);
             ?>
 
 
-
-
             <script>
                 // Initiazer config for the line charts
                 var chartData1 = {
