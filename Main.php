@@ -130,7 +130,9 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item"></li>
                                                 <p class="card-text mb-1" id="TextTime"><small class="text-muted">
-                                                        <p class="card-text p-0 m-0" id="TextTime"><small class="text-muted"><?= $ads['UserName'] . " posted on " . $formattedDatetime ?></small></p>
+                                                        <div class="" style="height: 3rem;">
+                                                            <p class="card-text p-0 m-0" id="TextTime"><small class="text-muted"><?= $ads['UserName'] . " posted on " . $formattedDatetime ?></small></p>
+                                                        </div>
                                                     </small>
                                                     <?php
                                                     if (isset($_SESSION['auth_user']) && $_SESSION['auth_user']['user_type'] === "Admin") :

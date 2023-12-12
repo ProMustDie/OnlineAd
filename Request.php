@@ -42,6 +42,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                         <input type="hidden" name="UserID" value="<?= $_SESSION['auth_user']['user_id'] ?>">
                         <input type="hidden" name="redirect" value="<?= $redirect ?>">
 
+                        <div class="container text-start p-0 fw-semibold" style="width:75%;"><span class="text-danger"> *Maximum 3MB Image</span></div>
                         <input type="file" class="form-control m-auto mb-2" id="upload" name="fileUpload" style="width:75%;" required accept="image/png, image/jpeg, image/jpg, application/pdf">
 
                         <input type="text" class="form-control m-auto mb-2" id="validationCustom02" placeholder="Title" name="title" required style="width:75%;">
@@ -50,7 +51,7 @@ $AuthLogin = new AuthenticatorController($redirect);
 
 
                         <!--//! Need to use php to validate atleast 1 category is chosen -->
-                        <div class="container text-start p-0" style="width:75%;">
+                        <div class="container text-start p-0 fw-semibold" style="width:75%;">
 
                             <label>Categories</label><span class="text-danger"> *Choose Minimum 1</span>
 
