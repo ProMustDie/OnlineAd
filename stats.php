@@ -21,7 +21,6 @@ $AdminLogin = $AuthLogin->AdminPanel($redirect);
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
@@ -47,10 +46,10 @@ $AdminLogin = $AuthLogin->AdminPanel($redirect);
 
     <nav class="navbar navbar-expand-lg bg-dark ">
         <div class="container-fluid">
-            <button class="navbar-toggler bg-warning" type="button" id="time" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler bg-warning" type="button" id="time" data-bs-toggle="collapse" data-bs-target="#Stats" aria-controls="Stats" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon" id="time"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <div class="collapse navbar-collapse" id="Stats">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page"><button type="button" class="btn btn-outline-light" onclick="exportLineChartsToPDF()">Export Line
@@ -161,7 +160,7 @@ $AdminLogin = $AuthLogin->AdminPanel($redirect);
                 </div>
             </div>
 
-            <div class="container   ">
+            <div class="container d-none">
                 <?php
                 $totalUsersDay = $classified->getTotalUsers("day");
                 $totalAdsDay = $classified->getTotalReqAds("day");
@@ -436,35 +435,35 @@ $AdminLogin = $AuthLogin->AdminPanel($redirect);
                             <th>AdApprovedDate</th>
                             <th>AdRejectedDate</th>
                         </tr>
-                <?php
-                $total_ads_per_page = 1000000000;
-                $offset = ($page_no - 1) * $total_ads_per_page;
-                $total_ads = $page_system->getTotalAds($key, $filter, $status, NULL);
-                $total_pages = ceil($total_ads / $total_ads_per_page);
-                $second_last = $total_pages - 1;
+                        <?php
+                        $total_ads_per_page = 1000000000;
+                        $offset = ($page_no - 1) * $total_ads_per_page;
+                        $total_ads = $page_system->getTotalAds($key, $filter, $status, NULL);
+                        $total_pages = ceil($total_ads / $total_ads_per_page);
+                        $second_last = $total_pages - 1;
 
-                $classified->total_ads_per_page = $total_ads_per_page;
-                $classified->offset = 0;
-                $result = $classified->getAds($key, $filter, $status, NULL);
-                if (mysqli_num_rows($result) > 0) :
-                    while ($ads = $result->fetch_assoc()) {
-                ?>
-                    <tr>
-                        <td><?= $ads['AdID'] ?></td>
-                        <td><?= $ads['AdName'] ?></td>
-                        <td><?= $ads['AdDescription'] ?></td>
-                        <td><?= $ads['Price'] ?></td>
-                        <td><?= $ads['AdStatus'] ?></td>
-                        <td><?= $ads['AdCategory'] ?></td>
-                        <td><?= $ads['AdRequestedDate'] ?></td>
-                        <td><?= $ads['AdApprovedDate'] ?></td>
-                        <td><?= $ads['AdRejectedDate'] ?></td>
-                    </tr>
-                        
-                <?php }
-                endif;
-                ?>
-                </table>
+                        $classified->total_ads_per_page = $total_ads_per_page;
+                        $classified->offset = 0;
+                        $result = $classified->getAds($key, $filter, $status, NULL);
+                        if (mysqli_num_rows($result) > 0) :
+                            while ($ads = $result->fetch_assoc()) {
+                        ?>
+                                <tr>
+                                    <td><?= $ads['AdID'] ?></td>
+                                    <td><?= $ads['AdName'] ?></td>
+                                    <td><?= $ads['AdDescription'] ?></td>
+                                    <td><?= $ads['Price'] ?></td>
+                                    <td><?= $ads['AdStatus'] ?></td>
+                                    <td><?= $ads['AdCategory'] ?></td>
+                                    <td><?= $ads['AdRequestedDate'] ?></td>
+                                    <td><?= $ads['AdApprovedDate'] ?></td>
+                                    <td><?= $ads['AdRejectedDate'] ?></td>
+                                </tr>
+
+                        <?php }
+                        endif;
+                        ?>
+                    </table>
                 </div>
 
 
@@ -498,6 +497,10 @@ $AdminLogin = $AuthLogin->AdminPanel($redirect);
             </div>
 
 
+
+            <?php
+            include("Includes/footer.php");
+            ?>
 
 
             <script>
