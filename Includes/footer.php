@@ -1,7 +1,25 @@
 <footer class="footer bg-dark text-center text-white mt-auto">
     <!-- Grid container -->
     <div class="container py-2 mt-auto">
-        <!-- Section: Social media -->
+
+        <section>
+            <a class="btn text-light px-0 fs-5" href="https://thesun.my/">Home</a>
+            <span class="text-secondary fs-5">|</span>
+            <a class="btn text-light px-0 fs-5" href="https://thesun.my/services/contact-us">Contact Us</a>
+            <span class="text-secondary fs-5">|</span>
+            <a class="btn text-light px-0 fs-5" href="https://thesun.my/services/rss-the-sun">RSS</a>
+            <span class="text-secondary fs-5">|</span>
+            <a class="btn text-light px-0 fs-5" href="https://thesun.my/archive">Archive</a>
+            <span class="text-secondary fs-5">|</span>
+            <a class="btn text-light px-0 fs-5" href="https://thesun.my/services/advertise-with-us">Advertise With Us</a>
+            <span class="text-secondary fs-5">|</span>
+            <a class="btn text-light px-0 fs-5" href="https://thesun.my/services/privacy-policy">Privacy Policy</a>
+
+        </section>
+
+    </div>
+    <!-- Grid container -->
+    <div class="text-center p-1" style="background-color: rgba(0, 0, 0, 0.2);">
         <section>
             <!-- Facebook -->
             <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/thesundaily" role="button"><i class="bi bi-facebook"></i></a>
@@ -25,14 +43,17 @@
                 <img src="https://www.thesundaily.my/base-portlet/webrsrc/theme/5d54942b1f61e0b83545fbac4d992dab.png" class="bi" width="24" height="24" alt="Custom Image">
             </a>
         </section>
-        <!-- Section: Social media -->
-    </div>
-    <!-- Grid container -->
 
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-        © 2020 Copyright:
-        <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        <div class="w-50 m-auto">
+            <br>
+            SUN MEDIA CORPORATION SDN BHD (221220-K)
+            Level 4, Lot 6 Jalan 51/217,46050 Petaling Jaya, Selangor,Malaysia
+            <br><br>
+            Tel: +603-7784 6688 Fax: +603-7785 2624 / +603-7785 2625
+            <br>
+            Copyright © 2023 Sun Media Corporation Sdn. Bhd. All rights reserved.
+
+        </div>
     </div>
     <!-- Copyright -->
 </footer>
