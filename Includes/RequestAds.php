@@ -14,7 +14,22 @@ $id = empty($_POST['UserID']) ? false : $_POST['UserID'];
 $AdID = empty($_POST['AdID']) ? false : $_POST['AdID'];
 $categories = empty($_POST['category']) ? false : $_POST['category'];
 $request = isset($_GET['request']) ? $_GET['request'] : false;
+$image = isset($_FILES['fileUpload']) ? $_FILES['fileUpload'] : false;
 $redirect = empty($_POST['redirect']) ? "Main.php" : $_POST['redirect'];
+?>
+
+<script>
+    var input = $image;
+    var fileSize = input.files[0].size; // Size in bytes
+    var maxSize = 1 * 1024 * 1024; // 3MB in bytes
+
+    if (fileSize > maxSize) {
+        alert('Image size must be less than 3MB. Please choose a smaller image.');
+        header($redirect);
+    }
+</script>
+
+<?php
 
 if (($name === false || $id === false || $categories == false) && $request != "payment") {
     // Handle missing form fields

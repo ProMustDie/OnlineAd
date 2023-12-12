@@ -48,20 +48,3 @@ function process() {
         };
     };
 }
-
-
-function calcImageSize(base64Image) {
-    // Calculate the size of the base64 image
-    // This is a simplified method; you may need to implement a more accurate size calculation
-    const byteCharacters = atob(base64Image.split(',')[1]);
-    const byteNumbers = new Array(byteCharacters.length);
-
-    for (let i = 0; i < byteCharacters.length; i++) {
-        byteNumbers[i] = byteCharacters.charCodeAt(i);
-    }
-
-    const fileSizeInBytes = byteNumbers.length;
-    const fileSizeInKB = fileSizeInBytes / 1024;
-
-    return fileSizeInKB.toFixed(2);
-}
