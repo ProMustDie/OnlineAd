@@ -101,7 +101,7 @@ $AdminLogin = $AuthLogin->AdminPanel($redirect);
 
             <!-- Data table-->
             <div class="row  mb-3 gy-2 gx-2 d-flex">
-                <div class="col-lg-6 bg-light">
+                <div class="col-lg-8 bg-light">
                     <div class="table-responsive" style="height: 26rem;">
                         <table class="table caption-top table-striped table-hover table-bordered border-secondary table-sm" id="UserTable">
                             <caption class="text-dark">Recent Ads Requested (31 Days)</caption>
@@ -147,14 +147,10 @@ $AdminLogin = $AuthLogin->AdminPanel($redirect);
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <div class="row m-0">
-                        <div class="col-lg-7" style="height: 26rem;">
+                        <div class="col" style="height: 26rem;">
                             <canvas id="Sales"></canvas>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="table-responsive" style="height: 26rem;">
-                            </div>
                         </div>
                     </div>
                 </div>
