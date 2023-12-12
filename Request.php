@@ -802,7 +802,26 @@ $AuthLogin = new AuthenticatorController($redirect);
         ?>
     <?php endif; ?>
 
-    <script src="JS/imagesize.js"></script>
+    <script>
+        const image_input = document.querySelector("#upload");
+
+        image_input.addEventListener("change", function(event) {
+            var input = document.getElementById("upload");
+            var fileSize = input.files[0].size; // Size in bytes
+            var maxSize = 3 * 1024 * 1024; // 3MB in bytes
+
+            if (fileSize > maxSize) {
+                alert('Image size must be less than 3MB. Please choose a smaller image.');
+                event.preventDefault(); // Prevent the default action (e.g., form submission)
+                // Update the redirect URL if needed
+                window.location = "<?php echo $redirect; ?>";
+            }
+        });
+    </script>
+
+
+
+
     <!--footer-->
     <?php
     include("Includes/footer.php");

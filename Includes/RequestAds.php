@@ -19,13 +19,12 @@ $redirect = empty($_POST['redirect']) ? "Main.php" : $_POST['redirect'];
 ?>
 
 <script>
-    var input = $image;
-    var fileSize = input.files[0].size; // Size in bytes
+    var fileSize = <?= $image ?>.files[0].size; // Size in bytes
     var maxSize = 1 * 1024 * 1024; // 3MB in bytes
 
     if (fileSize > maxSize) {
         alert('Image size must be less than 3MB. Please choose a smaller image.');
-        header($redirect);
+        window.location = "../' . $redirect . '";
     }
 </script>
 
