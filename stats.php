@@ -100,9 +100,9 @@ $AdminLogin = $AuthLogin->AdminPanel($redirect);
         <div class="row mt-3">
 
             <!-- Data table-->
-            <div class="row  mb-3 gy-2 gx-2 d-flex">
-                <div class="col-lg-8 bg-light">
-                    <div class="table-responsive" style="height: 26rem;">
+            <div class="row mb-3 gy-2 gx-2 d-flex">
+                <div class="col-lg-8 ">
+                    <div class="table-responsive px-3" style="height: 26rem;">
                         <table class="table caption-top table-striped table-hover table-bordered border-secondary table-sm" id="UserTable">
                             <caption class="text-dark">Recent Ads Requested (31 Days)</caption>
                             <thead class="table-dark">
