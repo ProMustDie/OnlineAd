@@ -8,6 +8,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
     $redirect .= '?' . $_SERVER['QUERY_STRING'];
 }
 $AuthLogin = new AuthenticatorController($redirect);
+$AdminLogin = $AuthLogin->AdminPanel($redirect);
 ?>
 
 <!DOCTYPE html>
