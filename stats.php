@@ -747,7 +747,7 @@ $AdminLogin = $AuthLogin->AdminPanel($redirect);
                     var pdf = new jspdf.jsPDF({
                         orientation: 'landscape',
                         unit: 'mm',
-                        format: [594, 420], // A2 size in landscape
+                        format: [620, 900], // A2 size in landscape with increased height
                     });
 
                     // Get the canvas elements
@@ -760,9 +760,9 @@ $AdminLogin = $AuthLogin->AdminPanel($redirect);
                     var imgData2 = canvas2.toDataURL('image/jpeg', 1.0);
                     var imgData3 = canvas3.toDataURL('image/jpeg', 1.0);
 
-                    // Calculate the height as 30% of the PDF page
+                    // Calculate the height as a certain percentage of the PDF page
                     var pageHeight = pdf.internal.pageSize.getHeight();
-                    var height = pageHeight * 0.3;
+                    var height = pageHeight * 0.4;
 
                     // Add the images to the PDF side by side, filling up the entire width
                     var padding = 10; // Adjust the padding value as needed
@@ -771,33 +771,24 @@ $AdminLogin = $AuthLogin->AdminPanel($redirect);
                     pdf.addImage(imgData1, 'JPEG', padding, padding, width, height);
                     pdf.addImage(imgData2, 'JPEG', width + padding * 2, padding, width, height);
 
-                    // Extra space for the pie chart
-                    var extraSpace = 10;
+                    // Ensure the pie chart has the same width as the line charts
+                    var pieChartWidth = width;
+
+                    // Adjust the height of the pie chart as needed
+                    var pieChartHeight = pageHeight - height - (padding * 4); // Adjust as needed
 
                     // Add the pie chart to the PDF below the line charts
-                    pdf.addImage(imgData3, 'JPEG', padding, height + padding * 2 + extraSpace, pdf.internal.pageSize.getWidth() - padding * 2, height);
+                    var extraSpace = 10;
+                    pdf.addImage(imgData3, 'JPEG', padding, height + padding * 2 + extraSpace, pieChartWidth, pieChartHeight);
 
                     // Display values below the line charts
                     var extraSpaceLineCharts = 20;
 
-                    // Display values of each x label below the line charts
-                    var labels1 = labelVariable;
-                    var values1_1 = chartData1.datasets[0].data;
-                    var values1_2 = chartData1.datasets[1].data;
-                    for (var i = 0; i < labels1.length; i++) {
-                        pdf.text(`${labels1[i]}: New User - ${values1_1[i]}, Request Ads - ${values1_2[i]}`, padding + i * (width / labels1.length), height + padding * 2 + extraSpaceLineCharts);
-                    }
-
-                    var labels2 = labelVariable;
-                    var values2_1 = chartData2.datasets[0].data;
-                    var values2_2 = chartData2.datasets[1].data;
-                    for (var j = 0; j < labels2.length; j++) {
-                        pdf.text(`${labels2[j]}: Accept - ${values2_1[j]}, Reject - ${values2_2[j]}`, width + padding * 2 + j * (width / labels2.length), height + padding * 2 + extraSpaceLineCharts);
-                    }
-
                     // Save the PDF
                     pdf.save('lineCharts.pdf');
                 }
+
+
 
 
                 // Function to export Bootstrap table to Excel using xlsx
