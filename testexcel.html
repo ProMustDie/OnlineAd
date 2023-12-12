@@ -1,116 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fake Data Table to Excel</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
 </head>
 
 <body>
 
-    <button onclick="exportToExcel()">Export to Excel</button>
+    <main>
+        <input type="file" id="upload" accept=".jpg, .jpeg, .png">
+        <button onclick="process()">Process</button>
 
-    <table id="fakeDataTable" border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Author</th>
-                <th>Status</th>
-                <th>Picture</th>
-                <th>Payment</th>
-                <th>Category</th>
-                <th>Posted Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Fake data will be generated and inserted here -->
-        </tbody>
-    </table>
+        <div class="container-fluid">
+            <img id="input">
+        </div>
+        <div class="container-fluid"><img id="output"></div>
+    </main>
 
 
 
-    <table id="DataTable" border="1">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Category</th>
-                <th>Sum</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>Notice</td>
-                <td>=COUNTIF($I$2:$I:$I,I2)</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Tuition</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Jobs</td>
-                <td></td>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Fake data will be generated and inserted here -->
-        </tbody>
-    </table>
-
-    <script>
-        function generateFakeData(rowCount) {
-            const statusChoices = ['Pending Review', 'Pending Payment', 'Checking Payment', 'Rejected Payment',
-                'Rejected Request', 'Cancelled', 'Expired', 'Approved'
-            ];
-            const categoryChoices = ['Notice', 'Properties', 'Jobs', 'Vehicles', 'Tuition', 'Home Service'];
-
-            const fakeData = [];
-            for (let i = 0; i < rowCount; i++) {
-                fakeData.push([
-                    i + 1,
-                    `Product ${i + 1}`,
-                    `Description for Product ${i + 1}`,
-                    Math.floor(Math.random() * 91) + 10, // Random price between 10 and 100
-                    `Author ${i + 1}`,
-                    statusChoices[Math.floor(Math.random() * statusChoices.length)],
-                    'https://placekitten.com/200/300', // Example image URL
-                    ['Credit Card', 'PayPal', 'Bank Transfer'][Math.floor(Math.random() * 3)],
-                    categoryChoices[Math.floor(Math.random() * categoryChoices.length)],
-                    new Date(Date.now() - Math.floor(Math.random() * 365) * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // Random dates within the last year
-                ]);
-            }
-
-            return fakeData;
-        }
-
-
-        function exportToExcel() {
-            const fakeData = generateFakeData(100);
-            const wsFake = XLSX.utils.aoa_to_sheet([
-                ['ID', 'Name', 'Description', 'Price', 'Author', 'Status', 'Picture', 'Payment', 'Category', 'Posted Date'], ...fakeData
-            ]);
-
-            const wsDataTable = XLSX.utils.table_to_sheet(document.getElementById('DataTable'));
-
-            // Merge both datasets into a single sheet
-            const mergedData = [...XLSX.utils.sheet_to_json(wsFake, { header: 1 }), ...XLSX.utils.sheet_to_json(wsDataTable, { header: 1 })];
-            const wsMerged = XLSX.utils.aoa_to_sheet(mergedData);
-
-            const wb = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(wb, wsMerged, 'MergedData');
-            XLSX.writeFile(wb, 'exported_data.xlsx');
-        }
-
-        // Render fake data and DataTable when the page loads
-        renderFakeData('fakeDataTable', 100);
-        renderFakeData('DataTable', 3); // Assuming 3 rows for DataTable
-    </script>
-
+    <script src="JS/test.js"></script>
 </body>
 
 </html>
