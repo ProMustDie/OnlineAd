@@ -151,10 +151,10 @@ if (!empty($_GET['status'])) {
                         </li>
 
                         <?php if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] == "Admin") : ?>
-                        <li class="nav-item">
-                            <a class="nav-link fs-4" href="stats.php">Analytics</a>
-                        </li>
-                        <?php endif?>
+                            <li class="nav-item">
+                                <a class="nav-link fs-4" href="stats.php">Analytics</a>
+                            </li>
+                        <?php endif ?>
                         <?php if (isset($_SESSION["authenticated"]) && $_SESSION["authenticated"] == true && $_SESSION['auth_user']['user_type'] != "Admin") : ?>
                             <li class="nav-item">
                                 <a class="nav-link fs-4" href="history.php" id="History">History</a>

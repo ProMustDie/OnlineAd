@@ -21,7 +21,16 @@ if (!empty($_SERVER['QUERY_STRING'])) {
     <?php
     include("Includes/navbar.php");
     ?>
+
     <!--navbar-->
+
+    <!--Ads-->
+    <div class="container-fluid bg-warning text-center">
+        <div class="container bg-info big" id="AdContainerA">
+            B
+        </div>
+    </div>
+    <!--Ads-->
 
     <!--Main Body-->
 
@@ -232,21 +241,31 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
                                 <?php endif; ?>
 
-
+                                <!--Ads-->
+                                <div class="container-fluid bg-warning text-center">
+                                    <div class="container bg-info big" id="AdContainerB">
+                                        B
+                                    </div>
+                                </div>
+                                <!--Ads-->
 
                                 <!--//!Images-->
                                 </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
         <!--Main Body-->
+
 
         <!--footer-->
         <?php
         include("Includes/pagination.php");
         include("Includes/footer.php");
         ?>
+        <script src="JS/ads.js"></script>
         <!--footer-->
 
 

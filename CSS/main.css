@@ -228,3 +228,23 @@ input[type="submit"]#request {
   transition: 0.2s ease-in;
   cursor: pointer;
 }
+
+#AdContainerA.bigAd {
+  width: 728px;
+  height: 90px;
+}
+
+#AdContainerA.smallAd {
+  width: 320px;
+  height: 100px;
+}
+
+#AdContainerB.bigAd {
+  width: 728px;
+  height: 90px;
+}
+
+#AdContainerB.smallAd {
+  width: 320px;
+  height: 100px;
+}
