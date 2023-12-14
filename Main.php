@@ -25,9 +25,9 @@ if (!empty($_SERVER['QUERY_STRING'])) {
     <!--navbar-->
 
     <!--Ads-->
-    <div class="container-fluid bg-warning text-center">
+    <div class="container-fluid text-center">
         <div class="container bg-info" id="AdContainerA">
-            B
+
         </div>
     </div>
     <!--Ads-->
