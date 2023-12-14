@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2023 at 06:41 AM
+-- Generation Time: Dec 14, 2023 at 10:06 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -49,9 +49,24 @@ CREATE TABLE `ads` (
 
 INSERT INTO `ads` (`AdID`, `AdName`, `AdDescription`, `Price`, `AdAuthorID`, `AdStatus`, `AdPicture`, `AdPaymentPicture`, `AdCategory`, `AdPostedDateTime`, `AdRequestedDate`, `AdRejectedDate`, `AdApprovedDate`) VALUES
 (1, 'Category Initializer', 'DO NOT DELETE INTIALIZER', NULL, 1, 'Expired', '', NULL, 'Job,House,Land,Car', '2023-10-27 05:01:18', '2023-10-26', NULL, NULL),
-(5, 'Test34', 'tettetet', 121, 2, 'Approved', '', NULL, 'Car', '2023-11-27 10:02:40', '2023-11-26', NULL, NULL),
-(6, 'testtt', 'teetetet', 121, 2, 'Approved', '', NULL, 'Land', '2023-11-28 16:48:38', '2023-12-27', NULL, NULL),
-(7, 'test', 'asdkjnasodi', NULL, 2, 'Rejected Request', 'img/classifiedIMG/4f65d2f1aed64b10f078f6fbe682f7ed.png', NULL, 'Car', '2023-12-04 10:19:07', '2023-12-03', '2023-12-07', NULL);
+(5, 'Test34', 'tettetet', 121, 2, 'Approved', '', NULL, 'Car', '2023-11-27 10:02:40', '2023-11-26', NULL, '2023-12-08'),
+(6, 'testtt', 'teetetet', 121, 2, 'Approved', '', NULL, 'Land,House', '2023-11-28 16:48:38', '2023-12-01', NULL, '2023-12-08'),
+(7, 'test', 'asdkjnasodi', NULL, 2, 'Rejected Request', 'img/classifiedIMG/4f65d2f1aed64b10f078f6fbe682f7ed.png', NULL, 'Car,House', '2023-12-04 10:19:07', '2023-12-03', '2023-12-07', NULL),
+(8, '1', '1', NULL, 2, 'Approved', 'img/classifiedIMG/ab2a9f989ed08d2f09c8fd57dffbd45e.jpg', NULL, 'Car,House', '2023-12-14 09:15:47', '2023-12-14', NULL, '2023-12-14'),
+(9, '2', '2', NULL, 2, 'Approved', 'img/classifiedIMG/fc4200f84c2c17c028e76865953e4949.jpg', NULL, 'Car,Job', '2023-12-14 09:15:57', '2023-12-14', NULL, '2023-12-14'),
+(10, '3', '3', NULL, 2, 'Approved', 'img/classifiedIMG/41853dfed2ea97ab4c0c346f9a134344.jpg', NULL, 'Job', '2023-12-14 09:16:10', '2023-12-14', NULL, '2023-12-14'),
+(11, '4', '4', NULL, 2, 'Approved', 'img/classifiedIMG/39e3a0bcc4d8fd47370fb00aa8e771fb.jpg', NULL, 'Job', '2023-12-14 09:16:18', '2023-12-14', NULL, '2023-12-14'),
+(12, '5', '5', NULL, 2, 'Approved', 'img/classifiedIMG/f5d79c2c2b775fb76a04775ba231b96c.jpg', NULL, 'Job', '2023-12-14 09:16:27', '2023-12-14', NULL, '2023-12-14'),
+(13, '6', '6', NULL, 2, 'Approved', 'img/classifiedIMG/045d50481bfaeddf22ce52ed90ea52d6.jpg', NULL, 'House', '2023-12-14 09:16:35', '2023-12-14', NULL, '2023-12-14'),
+(14, '7', '7', NULL, 2, 'Approved', 'img/classifiedIMG/8e9170cd46dc809c3e5585824f36b555.jpg', NULL, 'Job,Land', '2023-12-14 09:16:50', '2023-12-14', NULL, '2023-12-14'),
+(15, '8', '8', NULL, 2, 'Approved', 'img/classifiedIMG/b690fce3de2333848eea9ad9f0526777.jpg', NULL, 'House', '2023-12-14 09:16:59', '2023-12-14', NULL, '2023-12-14'),
+(16, '9', '9', NULL, 2, 'Approved', 'img/classifiedIMG/e0d9671dc1e762ef4e3f2ff4e83b7deb.jpg', NULL, 'Land', '2023-12-14 09:17:08', '2023-12-14', NULL, '2023-12-14'),
+(17, '10', '10', NULL, 2, 'Approved', 'img/classifiedIMG/958de73e20dcf1af8bed27dfb14c1a5a.jpg', NULL, 'Car,Land', '2023-12-14 09:17:21', '2023-12-14', NULL, '2023-12-14'),
+(18, '11', '11', NULL, 2, 'Approved', 'img/classifiedIMG/3f687f041a43a4e81e0bb542278fd826.jpg', NULL, 'Job', '2023-12-14 09:17:31', '2023-12-14', NULL, '2023-12-14'),
+(19, '12', '12', NULL, 2, 'Approved', 'img/classifiedIMG/093df5003460d6519059f7a42812c46f.jpg', NULL, 'Car,Job', '2023-12-14 09:17:39', '2023-12-14', NULL, '2023-12-14'),
+(20, '13', '13', NULL, 2, 'Approved', 'img/classifiedIMG/31c8dc3fad9281f3480a1594308875cc.jpg', NULL, 'Car', '2023-12-14 09:17:48', '2023-12-14', NULL, '2023-12-14'),
+(21, '14', '14', NULL, 2, 'Approved', 'img/classifiedIMG/ffe4487afdef19849f286e828ea7246a.jpg', NULL, 'Land', '2023-12-14 09:18:00', '2023-12-14', NULL, '2023-12-14'),
+(22, '15', '15', 12629.69, 2, 'Approved', 'img/classifiedIMG/f9ead937fe77f95668d3b430b73286fb.jpg', NULL, 'Car,Land', '2023-12-14 09:18:10', '2023-12-14', NULL, '2023-12-14');
 
 -- --------------------------------------------------------
 
@@ -123,7 +138,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `ads`
 --
 ALTER TABLE `ads`
-  MODIFY `AdID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `AdID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `pwdreset`
