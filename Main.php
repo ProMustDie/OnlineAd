@@ -242,7 +242,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                         <!--Ads-->
                                             <div class="container-fluid bg-warning text-center">
                                                 <div class="container bg-info big" id="AdContainerB">
-                                                    RAHHH
+                                                    Looped AD every 8 Ads
                                                 </div>
                                             </div>
                                         <!--Ads-->   
