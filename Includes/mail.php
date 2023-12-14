@@ -17,15 +17,15 @@ function send_mail($recipient, $name, $subject, $message)
   $mail->SMTPAuth   = TRUE;
   $mail->SMTPSecure = "tls";
   $mail->Port       = 587;
-  $mail->Host       = "smtp.gmail.com";
-  //$mail->Host       = "smtp.mail.yahoo.com";
-  $mail->Username   = "ausca33@gmail.com";
-  $mail->Password   = "owxhhoyfnaflsnhy";
+  $mail->Host       = ""; //Change to your SMTP email server
+  //example: smtp.mail.yahoo.com 
+  $mail->Username   = ""; //Change to Sender's Email
+  $mail->Password   = ""; //Sender's Password
 
   $mail->IsHTML(true);
   $mail->CharSet = "utf-8";
   $mail->AddAddress($recipient, $name);
-  $mail->SetFrom("ausca33@gmail.com", "TheSun");
+  $mail->SetFrom("CHANGE TO SENDER'S EMAIL HERE", "TheSun");
   //$mail->AddReplyTo("reply-to-email", "reply-to-name");
   //$mail->AddCC("cc-recipient-email", "cc-recipient-name");
   $mail->Subject = $subject;
