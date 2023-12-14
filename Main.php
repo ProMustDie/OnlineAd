@@ -236,23 +236,12 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
 
 
-                                        <?php
-                                        if ($loopCount % 8 === 0) {
-                                        ?>
-                                            <!--Ads-->
-                                            <div class="container-fluid bg-warning text-center">
-                                                <div class="container bg-info big" id="AdContainerB">
-                                                    Looped AD every 8 Ads
-                                                    <br><br><br><br><br><br>Ad Sized Type B<br>
-                                                </div>
-                                            </div>
-                                            <!--Ads-->
+
 
                                     <?php
-                                        }
-                                        $loopCount++;
-                                    }
-                                else :
+
+                                }
+                            else :
                                     ?>
                                     <span class="h2 text-center text-secondary mt-5">No Advertisement Request or Post was found!</span>
 
