@@ -638,13 +638,19 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                     <form action="Includes/authActions.php?request=EditAd" method="POST">
 
                                                         <div class="row g-2 mb-3">
-                                                            <div class="col-md-4">
+                                                            <div class="col-md-2">
                                                                 <div class="form-floating mb-2">
                                                                     <input type="text" class="form-control" id="floatingInputDisabled" name="AdID" placeholder="ID" value="<?= $ads['AdID'] ?>" disabled>
                                                                     <label for="floatingInputDisabled">ID</label>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-8">
+                                                            <div class="col-md-4">
+                                                                <div class="form-floating mb-2">
+                                                                    <input type="text" class="form-control" id="floatingInput" name="Price" placeholder="Price" value="<?= $ads['Price'] ?>">
+                                                                    <label for="floatingInputDisabled">Price</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
                                                                 <div class="form-floating">
                                                                     <select class="form-select" id="floatingSelectGrid" name="status">
                                                                         <option selected><?= $ads['AdStatus'] ?></option>
