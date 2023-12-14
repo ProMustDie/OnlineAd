@@ -27,7 +27,8 @@ if (!empty($_SERVER['QUERY_STRING'])) {
     <!--Ads-->
     <div class="container-fluid text-center">
         <div class="container bg-info" id="AdContainerA">
-
+            Top Ad Type Size B
+            <br><br><br><br><br><br>Ad Sized Type B<br>
         </div>
     </div>
     <!--Ads-->
@@ -243,7 +244,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                             <div class="container-fluid bg-warning text-center">
                                                 <div class="container bg-info big" id="AdContainerB">
                                                     Looped AD every 8 Ads
-                                                    <br><br><br><br><br><br>lol<br>
+                                                    <br><br><br><br><br><br>Ad Sized Type B<br>
                                                 </div>
                                             </div>
                                             <!--Ads-->
