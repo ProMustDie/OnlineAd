@@ -9,4 +9,3 @@ User Acc: ausca@gmail.com:asda
 
 
 TODO FOR REAL:
-editing ads needs price field       

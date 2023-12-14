@@ -384,7 +384,7 @@
             }   
         }
 
-        public function updateAd($AdID, $title, $desc, $status, $categories){
+        public function updateAd($AdID, $title, $desc, $status, $categories, $price){
             $acceptedTime = ($status === "Approved") ? true : false;
             $rejectedTime = ($status === "Rejected Request") ? true : false;
             $updateAd_query = "UPDATE ads 
@@ -393,10 +393,11 @@
                 AdStatus = ?, 
                 AdCategory = ?, 
                 AdApprovedDate = IF(?, NOW(), NULL), 
-                AdRejectedDate = IF(?, NOW(), NULL) 
+                AdRejectedDate = IF(?, NOW(), NULL),
+                Price = ?
             WHERE AdID = ?";
             $stmt = $this->conn->prepare($updateAd_query);
-            $stmt->bind_param("ssssssi", $title, $desc, $status, $categories,$acceptedTime, $rejectedTime, $AdID);
+            $stmt->bind_param("ssssssdi", $title, $desc, $status, $categories,$acceptedTime, $rejectedTime, $price, $AdID);
             $result = $stmt->execute();
             echo $stmt->error;
             return $result;

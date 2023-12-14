@@ -126,8 +126,9 @@ if ($_SESSION['auth_user']['user_type'] == "Admin") {
         $desc = $_POST['description'];
         $status = $_POST['status'];
         $categories = $_POST['categories'];
+        $price = $_POST['Price'];
 
-        if ($classified->updateAd($AdID, $title, $desc, $status, $categories)) {
+        if ($classified->updateAd($AdID, $title, $desc, $status, $categories, $price)) {
             header("Location: ../$redirect");
         }
     }

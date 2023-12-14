@@ -646,8 +646,8 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                             </div>
                                                             <div class="col-md-4">
                                                                 <div class="form-floating mb-2">
-                                                                    <input type="text" class="form-control" id="floatingInput" name="Price" placeholder="Price" value="<?= $ads['Price'] ?>">
-                                                                    <label for="floatingInputDisabled">Price</label>
+                                                                    <input input type="number" step="0.01" class="form-control" id="floatingInput" name="Price" placeholder="Price" value="<?= $ads['Price'] ?>">
+                                                                    <label for="floatingInput">Price</label>
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-6">
@@ -688,7 +688,6 @@ $AuthLogin = new AuthenticatorController($redirect);
                                                             <input type="hidden" value="edit-<?= $ads['AdID'] ?>" name="modalID">
                                                             <input type="submit" class="btn btn-outline-primary mx-2 px-4" value="Yes">
                                                             <button type="button" class="btn btn-outline-danger px-4" data-bs-target="#modalEdit-<?= $ads['AdID'] ?>" data-bs-toggle="modal">No</button>
-                                                            <input type="reset" class="btn btn-outline-secondary mx-2 px-4" value="Reset">
                                                         </div>
 
                                                     </form>
