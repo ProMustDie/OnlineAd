@@ -245,7 +245,14 @@ $AuthLogin = new AuthenticatorController($redirect);
                                         <input type="hidden" name="redirect" value="<?= $redirect ?>">
                                         <input type="file" class="form-control m-auto mb-2" id="formFile" name="fileUpload" required accept="image/png, image/jpeg, image/jpg, application/pdf">
                                     </div>
+                                    
+                                    <div class="container-fluid">
+                                   <span class="mb-1 fw-semibold">Account Details Maybank: xxx-xxxx-xxxx</span><br>
+                                   <span class="mb-1 fw-semibold">Name: xxxx-xxx-xxx</span><br>
+                                   <span class="mb-1 fw-semibold">Contact: xxx-xxx-xxx</span><br>
+
                                     <input type="submit" class="btn btn-outline-success float-end" value="Submit" id="paymentButton-<?= $ads['AdID'] ?>">
+                                    </div>
                                 </form>
 
 
