@@ -117,6 +117,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
                         $classified->total_ads_per_page = $total_ads_per_page;
                         $classified->offset = $offset;
+                        $loopCount = 1;
                         $result = $classified->getAds($key, $filter, array("Approved"), NULL);
                         if (mysqli_num_rows($result) > 0) :
                             while ($ads = $result->fetch_assoc()) {
@@ -234,20 +235,29 @@ if (!empty($_SERVER['QUERY_STRING'])) {
                                         </div>
 
 
-                                    <?php }
-                            else :
-                                    ?>
+
+                                    <?php
+                                    if ($loopCount % 8 === 0) {
+                                        ?>
+                                        <!--Ads-->
+                                            <div class="container-fluid bg-warning text-center">
+                                                <div class="container bg-info big" id="AdContainerB">
+                                                    RAHHH
+                                                </div>
+                                            </div>
+                                        <!--Ads-->   
+    
+                                        <?php
+                                        }
+                                    $loopCount++;
+                                }
+                                else :
+                                ?>
                                     <span class="h2 text-center text-secondary mt-5">No Advertisement Request or Post was found!</span>
 
                                 <?php endif; ?>
 
-                                <!--Ads-->
-                                <div class="container-fluid bg-warning text-center">
-                                    <div class="container bg-info big" id="AdContainerB">
-                                        B
-                                    </div>
-                                </div>
-                                <!--Ads-->
+                                
 
                                 <!--//!Images-->
                                 </div>
@@ -265,7 +275,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
         include("Includes/pagination.php");
         include("Includes/footer.php");
         ?>
-        <script src="JS/ads.js"></script>
+
         <!--footer-->
 
 
