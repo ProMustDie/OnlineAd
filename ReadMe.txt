@@ -9,4 +9,4 @@ User Acc: ausca@gmail.com:asda
 
 
 TODO FOR REAL:
-add image lazy loading
+editing ads needs price field       
