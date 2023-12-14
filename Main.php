@@ -26,9 +26,8 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
     <!--Ads-->
     <div class="container-fluid text-center">
-        <div class="container bg-info" id="AdContainerA">
-            Top Ad Type Size B
-            <br><br><br><br><br><br>Ad Sized Type B<br>
+        <div class="container bg-info  p-0" id="AdContainerA">
+            <img class="imgSize" src="https://static.criteo.net/design/dt/87966/230516/540d81f631a0403f902c0cc282a1f1b2_image_ad_970x250.png">
         </div>
     </div>
     <!--Ads-->
