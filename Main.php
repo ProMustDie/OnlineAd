@@ -241,13 +241,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
                                 <?php endif; ?>
 
-                                <!--Ads-->
-                                <div class="container-fluid bg-warning text-center">
-                                    <div class="container bg-info big" id="AdContainerB">
-                                        B
-                                    </div>
-                                </div>
-                                <!--Ads-->
+                             
 
                                 <!--//!Images-->
                                 </div>
