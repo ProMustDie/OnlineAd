@@ -52,6 +52,8 @@
             Tel: +603-7784 6688 Fax: +603-7785 2624 / +603-7785 2625
             <br>
             Copyright © 2023 Sun Media Corporation Sdn. Bhd. All rights reserved.
+            <br>
+            <span class=" " style="font-size:10px;">By Teoh & Ausca</span>
 
         </div>
     </div>
