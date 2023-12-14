@@ -27,7 +27,8 @@ if (!empty($_SERVER['QUERY_STRING'])) {
     <!--Ads-->
     <div class="container-fluid bg-warning text-center">
         <div class="container bg-info" id="AdContainerA">
-        Ad Sized Type B
+            Top Ad Type Size B
+            <br><br><br><br><br><br>Ad Sized Type B<br>
         </div>
     </div>
     <!--Ads-->
