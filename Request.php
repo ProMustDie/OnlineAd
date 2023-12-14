@@ -42,7 +42,7 @@ $AuthLogin = new AuthenticatorController($redirect);
                         <input type="hidden" name="UserID" value="<?= $_SESSION['auth_user']['user_id'] ?>">
                         <input type="hidden" name="redirect" value="<?= $redirect ?>">
 
-                        <div class="container text-start p-0 fw-semibold" style="width:75%;"><span class="text-danger"> *Maximum 3MB Image</span></div>
+                        <div class="container text-start p-0 fw-semibold" style="width:75%;"><span class="text-danger"> *Maximum 2MB Image</span></div>
                         <input type="file" class="form-control m-auto mb-2" id="upload" name="fileUpload" style="width:75%;" required accept="image/png, image/jpeg, image/jpg, application/pdf">
 
                         <input type="text" class="form-control m-auto mb-2" id="validationCustom02" placeholder="Title" name="title" required style="width:75%;">
@@ -814,7 +814,7 @@ $AuthLogin = new AuthenticatorController($redirect);
         image_input.addEventListener("change", function(event) {
             var input = document.getElementById("upload");
             var fileSize = input.files[0].size; // Size in bytes
-            var maxSize = 3 * 1024 * 1024; // 3MB in bytes
+            var maxSize = 2 * 1024 * 1024; // 2MB in bytes
 
             if (fileSize > maxSize) {
                 alert('Image size must be less than 3MB. Please choose a smaller image.');
