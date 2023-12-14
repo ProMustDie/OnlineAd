@@ -238,13 +238,3 @@ input[type="submit"]#request {
   width: 320px;
   height: 100px;
 }
-
-#AdContainerB.bigAd {
-  width: 728px;
-  height: 90px;
-}
-
-#AdContainerB.smallAd {
-  width: 320px;
-  height: 100px;
-}

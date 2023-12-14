@@ -26,7 +26,7 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
     <!--Ads-->
     <div class="container-fluid bg-warning text-center">
-        <div class="container bg-info big" id="AdContainerA">
+        <div class="container bg-info" id="AdContainerA">
             B
         </div>
     </div>
@@ -236,28 +236,29 @@ if (!empty($_SERVER['QUERY_STRING'])) {
 
 
 
-                                    <?php
-                                    if ($loopCount % 8 === 0) {
+                                        <?php
+                                        if ($loopCount % 8 === 0) {
                                         ?>
-                                        <!--Ads-->
+                                            <!--Ads-->
                                             <div class="container-fluid bg-warning text-center">
                                                 <div class="container bg-info big" id="AdContainerB">
                                                     RAHHH
                                                 </div>
                                             </div>
-                                        <!--Ads-->   
-    
-                                        <?php
+                                            <!--Ads-->
+
+                                    <?php
                                         }
-                                    $loopCount++;
-                                }
+                                        $loopCount++;
+                                    }
                                 else :
-                                ?>
+                                    ?>
                                     <span class="h2 text-center text-secondary mt-5">No Advertisement Request or Post was found!</span>
 
                                 <?php endif; ?>
 
-                                
+                                <!--Ads-->
+                                <!--Ads-->
 
                                 <!--//!Images-->
                                 </div>
@@ -268,7 +269,6 @@ if (!empty($_SERVER['QUERY_STRING'])) {
             </div>
         </div>
         <!--Main Body-->
-
 
         <!--footer-->
         <?php
