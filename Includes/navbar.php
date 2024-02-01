@@ -81,7 +81,7 @@ if (!empty($_GET['status'])) {
 
         <!--TOP NAV-->
         <nav class="navbar bg-light m-0 p-0" id="topnav">
-            <div class="container-fluid">
+            <div class="d-flex justify-content-between">
 
                 <div style="width:8rem; height:4.5rem;">
                     <a class="navbar-brand w-auto h-auto" href="main.php">
@@ -89,7 +89,14 @@ if (!empty($_GET['status'])) {
                     </a>
                 </div>
 
-                <div class="ms-auto d-inline">
+                <div style="width:8rem; height:4.5rem;">
+                    <a class="navbar-brand w-auto h-auto" href="main.php">
+                        <img src="img/logo(2).jpg" alt="Logo" class="d-inline-block align-text-top m-auto p-0 img-fluid">
+                    </a>
+                </div>
+
+
+                <div class="my-auto d-inline">
                     <?php
                     date_default_timezone_set('Asia/Kuala_Lumpur');
                     $currentDate = date('D, M j, Y');
